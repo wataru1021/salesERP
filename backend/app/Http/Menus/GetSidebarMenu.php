@@ -19,43 +19,47 @@ class GetSidebarMenu implements MenuInterface{
         $this->mb = new MenuBuilder();
     }
 
-    private function getMenuFromDB($menuName, $role){
+    private function getMenuFromDB($menuId, $menuName){
         $this->menu = Menus::join('menu_role', 'menus.id', '=', 'menu_role.menus_id')
-            ->join('menulist', 'menulist.id', '=', 'menus.menu_id')
             ->select('menus.*')
-            ->where('menulist.name', '=', $menuName)
-            ->where('menu_role.role_name', '=', $role)
+            ->where('menus.menu_id', '=', $menuId)
+            ->where('menu_role.role_name', '=', $menuName)
             ->orderBy('menus.sequence', 'asc')->get();       
     }
 
-    private function getGuestMenu($menuName){
-        $this->getMenuFromDB($menuName, 'guest');
+    private function getGuestMenu( $menuId ){
+        $this->getMenuFromDB($menuId, 'guest');
     }
 
-    private function getUserMenu($menuName){
-        $this->getMenuFromDB($menuName, 'user');
+    private function getUserMenu( $menuId ){
+        $this->getMenuFromDB($menuId, 'user');
     }
 
-    private function getAdminMenu($menuName){
-        $this->getMenuFromDB($menuName, 'admin');
+    private function getAdminMenu( $menuId ){
+        $this->getMenuFromDB($menuId, 'admin');
     }
 
-    public function get($roles, $menuName = 'sidebar menu'){
+    public function get($role, $menuId=2){
+        $this->getMenuFromDB($menuId, $role);
+        $rfd = new RenderFromDatabaseData;
+        return $rfd->render($this->menu);
+        /*
         $roles = explode(',', $roles);
         if(empty($roles)){
-            $this->getGuestMenu($menuName);
+            $this->getGuestMenu( $menuId );
         }elseif(in_array('admin', $roles)){
-            $this->getAdminMenu($menuName);
+            $this->getAdminMenu( $menuId );
         }elseif(in_array('user', $roles)){
-            $this->getUserMenu($menuName);
+            $this->getUserMenu( $menuId );
         }else{
-            $this->getGuestMenu($menuName);
+            $this->getGuestMenu( $menuId );
         }
         $rfd = new RenderFromDatabaseData;
         return $rfd->render($this->menu);
+        */
     }
 
-    public function getAll( $menuId = 1 ){
+    public function getAll( $menuId=2 ){
         $this->menu = Menus::select('menus.*')
             ->where('menus.menu_id', '=', $menuId)
             ->orderBy('menus.sequence', 'asc')->get();  

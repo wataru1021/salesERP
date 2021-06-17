@@ -23,14 +23,9 @@ class UsersAndNotesSeeder extends Seeder
         $numberOfNotes = 100;
         $usersIds = array();
         $statusIds = array();
-        $userStatus = array(
-            'Active',
-            'Inactive',
-            'Pending',
-            'Banned'
-        );
+        $faker = Faker::create();
         /* Create roles */
-        $adminRole = $roleAdmin = Role::create(['name' => 'admin']);
+        $adminRole = Role::create(['name' => 'admin']); 
         RoleHierarchy::create([
             'role_id' => $adminRole->id,
             'hierarchy' => 1,
@@ -45,27 +40,26 @@ class UsersAndNotesSeeder extends Seeder
             'role_id' => $guestRole->id,
             'hierarchy' => 3,
         ]);
-
-        $faker = Faker::create();
+        
         /*  insert status  */
         DB::table('status')->insert([
             'name' => 'ongoing',
-            'class' => 'primary',
+            'class' => 'badge badge-pill badge-primary',
         ]);
         array_push($statusIds, DB::getPdo()->lastInsertId());
         DB::table('status')->insert([
             'name' => 'stopped',
-            'class' => 'secondary',
+            'class' => 'badge badge-pill badge-secondary',
         ]);
         array_push($statusIds, DB::getPdo()->lastInsertId());
         DB::table('status')->insert([
             'name' => 'completed',
-            'class' => 'success',
+            'class' => 'badge badge-pill badge-success',
         ]);
         array_push($statusIds, DB::getPdo()->lastInsertId());
         DB::table('status')->insert([
             'name' => 'expired',
-            'class' => 'warning',
+            'class' => 'badge badge-pill badge-warning',
         ]);
         array_push($statusIds, DB::getPdo()->lastInsertId());
         /*  insert users   */
@@ -75,20 +69,18 @@ class UsersAndNotesSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
-            'menuroles' => 'user,admin',
-            'status' => 'Active'
+            'menuroles' => 'user,admin' 
         ]);
+        $user->assignRole('admin');
         $user->assignRole('user');
-        $user->assignRole($roleAdmin);
         for($i = 0; $i<$numberOfUsers; $i++){
-            $user = User::create([
+            $user = User::create([ 
                 'name' => $faker->name(),
                 'email' => $faker->unique()->safeEmail(),
                 'email_verified_at' => now(),
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
-                'menuroles' => 'user',
-                'status' => $userStatus[ random_int(0,count($userStatus) - 1) ]
+                'menuroles' => 'user'
             ]);
             $user->assignRole('user');
             array_push($usersIds, $user->id);

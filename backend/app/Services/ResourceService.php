@@ -83,7 +83,7 @@ class ResourceService{
             }
         }
         foreach($relations as $relation){
-            $result['relation_' . $relation['thisTableColumn']] = DB::table($relation['table'])->select('id AS value', $relation['column'] . ' AS label')->get();
+            $result['relation_' . $relation['thisTableColumn']] = DB::table($relation['table'])->select('id', $relation['column'] . ' AS name')->get();
         }
         return $result;
     }
@@ -116,14 +116,9 @@ class ResourceService{
             }
         }
         $datas = $table->paginate( $form->pagination );   /* CHANGE PAGINATE * */
-
-        //var_dump($form->pagination);
-        //var_dump($datas->links());
-        //var_dump( $datas->lastPage() );
-
         $result = array(
             'data' => array(),
-            'pagination' => $datas->lastPage(),
+            'pagination' => $datas->links(),
             'enableButtons' => array(
                 'read' => $form->read,
                 'edit' => $form->edit,

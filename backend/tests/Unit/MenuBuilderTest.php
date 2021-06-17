@@ -24,9 +24,10 @@ class MenuBuilderTest extends TestCase
             'hasIcon' => true,
             'icon' => 'icon',
             'iconType' => 'not_core_ui',
+            'sequence' => 4
         ));
         $mb = new MenuBuilder();
-        $mb->addLink(1, 'name', '/href', 'icon', 'not_core_ui');
+        $mb->addLink(1, 'name', '/href', 'icon', 'not_core_ui', 4);
         $result = $mb->getResult();
         $this->assertSame($provided, $result);
     }
@@ -45,6 +46,7 @@ class MenuBuilderTest extends TestCase
             'hasIcon' => true,
             'icon' => 'icon',
             'iconType' => 'coreui',
+            'sequence' => 0
         ));
         $mb = new MenuBuilder();
         $mb->addLink(1, 'name', '/href', 'icon');
@@ -63,7 +65,8 @@ class MenuBuilderTest extends TestCase
             'slug' => 'link',
             'name' => 'name',
             'href' => '/href',
-            'hasIcon' => false
+            'hasIcon' => false,
+            'sequence' => 0
         ));
         $mb = new MenuBuilder();
         $mb->addLink(1, 'name', '/href');
@@ -82,19 +85,22 @@ class MenuBuilderTest extends TestCase
             'slug' => 'link',
             'name' => 'nameOne',
             'href' => '/hrefOne',
-            'hasIcon' => false
+            'hasIcon' => false,
+            'sequence' => 0
         ),array(
             'id' => 2,
             'slug' => 'link',
             'name' => 'nameTwo',
             'href' => '/hrefTwo',
-            'hasIcon' => false
+            'hasIcon' => false,
+            'sequence' => 0
         ),array(
             'id' => 3,
             'slug' => 'link',
             'name' => 'nameThree',
             'href' => '/hrefThree',
-            'hasIcon' => false
+            'hasIcon' => false,
+            'sequence' => 0
         ));
         $mb = new MenuBuilder();
         $mb->addLink(1, 'nameOne', '/hrefOne');
@@ -116,9 +122,10 @@ class MenuBuilderTest extends TestCase
             'hasIcon' => true,
             'icon' => 'icon',
             'iconType' => 'not_core_ui',
+            'sequence' => 4
         ));
         $mb = new MenuBuilder();
-        $mb->addTitle(1, 'name', 'icon', 'not_core_ui');
+        $mb->addTitle(1, 'name', 'icon', 'not_core_ui', 4);
         $result = $mb->getResult();
         $this->assertSame($provided, $result);
     }
@@ -135,6 +142,7 @@ class MenuBuilderTest extends TestCase
             'hasIcon' => true,
             'icon' => 'icon',
             'iconType' => 'coreui',
+            'sequence' => 0
         ));
         $mb = new MenuBuilder();
         $mb->addTitle(1, 'name', 'icon');
@@ -151,7 +159,8 @@ class MenuBuilderTest extends TestCase
             'id' => 1,
             'slug' => 'title',
             'name' => 'name',
-            'hasIcon' => false
+            'hasIcon' => false,
+            'sequence' => 0
         ));
         $mb = new MenuBuilder();
         $mb->addTitle(1, 'name');
@@ -168,17 +177,20 @@ class MenuBuilderTest extends TestCase
             'id' => 1,
             'slug' => 'title',
             'name' => 'nameOne',
-            'hasIcon' => false
+            'hasIcon' => false,
+            'sequence' => 0
         ),array(
             'id' => 2,
             'slug' => 'title',
             'name' => 'nameTwo',
-            'hasIcon' => false
+            'hasIcon' => false,
+            'sequence' => 0
         ),array(
             'id' => 3,
             'slug' => 'title',
             'name' => 'nameThree',
-            'hasIcon' => false
+            'hasIcon' => false,
+            'sequence' => 0
         ));
         $mb = new MenuBuilder();
         $mb->addTitle(1, 'nameOne');
@@ -201,10 +213,10 @@ class MenuBuilderTest extends TestCase
             'icon' => 'icon',
             'iconType' => 'not_core_ui',
             'elements' => array(),
-            'href' => '/href',
+            'sequence' => 4
         ));
         $mb = new MenuBuilder();
-        $mb->beginDropdown(1, '/href', 'name', 'icon', 'not_core_ui');
+        $mb->beginDropdown(1, 'name', 'icon', 'not_core_ui', 4);
         $result = $mb->getResult();
         $this->assertSame($provided, $result);
     }
@@ -222,10 +234,10 @@ class MenuBuilderTest extends TestCase
             'icon' => 'icon',
             'iconType' => 'coreui',
             'elements' => array(),
-            'href' => '/href',
+            'sequence' => 0
         ));
         $mb = new MenuBuilder();
-        $mb->beginDropdown(1, '/href', 'name', 'icon');
+        $mb->beginDropdown(1, 'name', 'icon');
         $result = $mb->getResult();
         $this->assertSame($provided, $result);
     }
@@ -241,10 +253,10 @@ class MenuBuilderTest extends TestCase
             'name' => 'name',
             'hasIcon' => false,
             'elements' => array(),
-            'href' => '/href',
+            'sequence' => 0
         ));
         $mb = new MenuBuilder();
-        $mb->beginDropdown(1, '/href', 'name');
+        $mb->beginDropdown(1, 'name');
         $result = $mb->getResult();
         $this->assertSame($provided, $result);
     }
@@ -260,28 +272,28 @@ class MenuBuilderTest extends TestCase
             'name' => 'nameOne',
             'hasIcon' => false,
             'elements' => array(),
-            'href' => '/href',
+            'sequence' => 0
         ),array(
             'id' => 2,
             'slug' => 'dropdown',
             'name' => 'nameTwo',
             'hasIcon' => false,
             'elements' => array(),
-            'href' => '/href',
+            'sequence' => 0
         ),array(
             'id' => 3,
             'slug' => 'dropdown',
             'name' => 'nameThree',
             'hasIcon' => false,
             'elements' => array(),
-            'href' => '/href',
+            'sequence' => 0
         ));
         $mb = new MenuBuilder();
-        $mb->beginDropdown(1, '/href', 'nameOne');
+        $mb->beginDropdown(1, 'nameOne');
         $mb->endDropdown();
-        $mb->beginDropdown(2, '/href', 'nameTwo');
+        $mb->beginDropdown(2, 'nameTwo');
         $mb->endDropdown();
-        $mb->beginDropdown(3, '/href', 'nameThree');
+        $mb->beginDropdown(3, 'nameThree');
         $mb->endDropdown();
         $result = $mb->getResult();
         $this->assertSame($provided, $result);
@@ -303,20 +315,22 @@ class MenuBuilderTest extends TestCase
                     'slug' => 'link',
                     'name' => 'nameOne',
                     'href' => '/href',
-                    'hasIcon' => false
+                    'hasIcon' => false,
+                    'sequence' => 0
                 ),
                 array(
                     'id' => 3,
                     'slug' => 'link',
                     'name' => 'nameTwo',
                     'href' => '/href',
-                    'hasIcon' => false
+                    'hasIcon' => false,
+                    'sequence' => 0
                 )
             ),
-            'href' => '/href',
+            'sequence' => 0
         ));
         $mb = new MenuBuilder();
-        $mb->beginDropdown(1, '/href', 'name');
+        $mb->beginDropdown(1, 'name');
         $mb->addLink(2, 'nameOne', '/href');
         $mb->addLink(3, 'nameTwo', '/href');
         $mb->endDropdown();
@@ -340,15 +354,16 @@ class MenuBuilderTest extends TestCase
                     'slug' => 'link',
                     'name' => 'nameTwo',
                     'href' => '/href',
-                    'hasIcon' => false
+                    'hasIcon' => false,
+                    'sequence' => 0
                 )),
-                'href' => '/href',
+                'sequence' => 0
             )),
-            'href' => '/href',
+            'sequence' => 0
         ));
         $mb = new MenuBuilder();
-        $mb->beginDropdown(1, '/href', 'name');
-        $mb->beginDropdown(2, '/href', 'nameOne');
+        $mb->beginDropdown(1, 'name');
+        $mb->beginDropdown(2, 'nameOne');
         $mb->addLink(3, 'nameTwo', '/href');
         $mb->endDropdown();
         $mb->endDropdown();
@@ -362,7 +377,8 @@ class MenuBuilderTest extends TestCase
                 'id' => 1,
                 'slug' => 'title',
                 'name' => 'name',
-                'hasIcon' => false
+                'hasIcon' => false,
+                'sequence' => 0
             ),
             array(
             'id' => 2,
@@ -375,14 +391,16 @@ class MenuBuilderTest extends TestCase
                     'slug' => 'link',
                     'name' => 'nameTwo',
                     'href' => '/href',
-                    'hasIcon' => false
+                    'hasIcon' => false,
+                    'sequence' => 0
                 ),
                 array(
                     'id' => 4,
                     'slug' => 'link',
                     'name' => 'nameTwo',
                     'href' => '/href',
-                    'hasIcon' => false
+                    'hasIcon' => false,
+                    'sequence' => 0
                 ),
                 array(
                 'id' => 5,
@@ -394,34 +412,37 @@ class MenuBuilderTest extends TestCase
                     'slug' => 'link',
                     'name' => 'nameTwo',
                     'href' => '/href',
-                    'hasIcon' => false
+                    'hasIcon' => false,
+                    'sequence' => 0
                 )),
-                'href' => '/href',
+                'sequence' => 0
                 ),
                 array(
                     'id' => 7,
                     'slug' => 'link',
                     'name' => 'nameTwo',
                     'href' => '/href',
-                    'hasIcon' => false
+                    'hasIcon' => false,
+                    'sequence' => 0
                 )
             ),
-            'href' => '/href',
+            'sequence' => 0
             ),
             array(
                 'id' => 8,
                 'slug' => 'link',
                 'name' => 'nameTwo',
                 'href' => '/href',
-                'hasIcon' => false
+                'hasIcon' => false,
+                'sequence' => 0
             ) 
         );
         $mb = new MenuBuilder();
         $mb->addTitle(1, 'name');
-        $mb->beginDropdown(2, '/href', 'nameOne');
+        $mb->beginDropdown(2, 'nameOne');
         $mb->addLink(3, 'nameTwo', '/href');
         $mb->addLink(4, 'nameTwo', '/href');
-        $mb->beginDropdown(5, '/href', 'nameOne');
+        $mb->beginDropdown(5, 'nameOne');
         $mb->addLink(6, 'nameTwo', '/href');
 
         $mb->endDropdown();

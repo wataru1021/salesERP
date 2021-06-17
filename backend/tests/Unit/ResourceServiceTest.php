@@ -128,7 +128,7 @@ class ResourceServiceTest extends TestCase
         $temp = $resourceService->getRelations( $columns );
         $result = array();
         foreach($temp['relation_test_2'] as $t){
-            array_push($result, $t->label);
+            array_push($result, $t->name);
         }
         $expected = array('Lorem ipsum dolor', 'Lorem ipsum dolor');
         $this->assertSame($expected, $result);

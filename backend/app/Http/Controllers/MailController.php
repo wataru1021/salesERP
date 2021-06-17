@@ -15,8 +15,18 @@ class MailController extends Controller
      */
     public function index()
     {
-        $emailTemplates = EmailTemplate::all('id', 'name', 'subject');
-        return response()->json( $emailTemplates );
+        $emailTemplates = EmailTemplate::paginate( 20 );
+        return view('dashboard.email.index', ['emailTemplates' => $emailTemplates]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('dashboard.email.create');
     }
 
     /**
@@ -37,7 +47,8 @@ class MailController extends Controller
         $template->subject = $request->input('subject');
         $template->content = $request->input('content');
         $template->save();
-        return response()->json( ['status' => 'success'] );
+        $request->session()->flash('message', 'Successfully created Email Template');
+        return redirect()->route('mail.index');
     }
 
     /**
@@ -48,7 +59,8 @@ class MailController extends Controller
      */
     public function show($id)
     {
-        return response()->json( [ 'template' => EmailTemplate::find($id) ] );
+        $template = EmailTemplate::find($id);
+        return view('dashboard.email.show', [ 'template' => $template ]);
     }
 
     /**
@@ -59,7 +71,8 @@ class MailController extends Controller
      */
     public function edit($id)
     {
-        return response()->json( [ 'template' => EmailTemplate::find($id) ] );
+        $template = EmailTemplate::find($id);
+        return view('dashboard.email.edit', [ 'template' => $template ]);
     }
 
     /**
@@ -81,7 +94,8 @@ class MailController extends Controller
         $template->subject = $request->input('subject');
         $template->content = $request->input('content');
         $template->save();
-        return response()->json( ['status' => 'success'] );
+        $request->session()->flash('message', 'Successfully updated Email Template');
+        return redirect()->route('mail.index');
     }
 
     /**
@@ -96,17 +110,16 @@ class MailController extends Controller
         if($template){
             $template->delete();
         }
-        return response()->json( ['status' => 'success'] );
+        $request->session()->flash('message', 'Successfully deleted Email Template');
+        return redirect()->route('mail.index');
     }
 
     public function prepareSend($id){
-        return response()->json( [ 'template' => EmailTemplate::find($id) ] );
+        $template = EmailTemplate::find($id);
+        return view('dashboard.email.send', [ 'template' => $template ]);
     }
 
     public function send($id, Request $request){
-        $validatedData = $request->validate([
-            'email'    => 'required|email',
-        ]);
         $template = EmailTemplate::find($id);
         Mail::send([], [], function ($message) use ($request, $template)
         {
@@ -114,6 +127,7 @@ class MailController extends Controller
             $message->subject($template->subject);
             $message->setBody($template->content,'text/html');
         });
-        return response()->json( ['status' => 'success'] );
+        $request->session()->flash('message', 'Successfully sended Email');
+        return redirect()->route('mail.index');
     }
 }

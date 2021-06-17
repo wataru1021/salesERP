@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -16,7 +15,8 @@ class UsersController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     /**
@@ -26,12 +26,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $you = auth()->user()->id;
-        $users = DB::table('users')
-        ->select('users.id', 'users.name', 'users.email', 'users.menuroles as roles', 'users.status', 'users.email_verified_at as registered')
-        ->whereNull('deleted_at')
-        ->get();
-        return response()->json( compact('users', 'you') );
+        $you = auth()->user();
+        $users = User::all();
+        return view('dashboard.admin.usersList', compact('users', 'you'));
     }
 
     /**
@@ -42,11 +39,8 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = DB::table('users')
-        ->select('users.id', 'users.name', 'users.email', 'users.menuroles as roles', 'users.status', 'users.email_verified_at as registered')
-        ->where('users.id', '=', $id)
-        ->first();
-        return response()->json( $user );
+        $user = User::find($id);
+        return view('dashboard.admin.userShow', compact( 'user' ));
     }
 
     /**
@@ -57,11 +51,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = DB::table('users')
-        ->select('users.id', 'users.name', 'users.email', 'users.menuroles as roles', 'users.status')
-        ->where('users.id', '=', $id)
-        ->first();
-        return response()->json( $user );
+        $user = User::find($id);
+        return view('dashboard.admin.userEditForm', compact('user'));
     }
 
     /**
@@ -81,8 +72,8 @@ class UsersController extends Controller
         $user->name       = $request->input('name');
         $user->email      = $request->input('email');
         $user->save();
-        //$request->session()->flash('message', 'Successfully updated user');
-        return response()->json( ['status' => 'success'] );
+        $request->session()->flash('message', 'Successfully updated user');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -97,6 +88,6 @@ class UsersController extends Controller
         if($user){
             $user->delete();
         }
-        return response()->json( ['status' => 'success'] );
+        return redirect()->route('users.index');
     }
 }

@@ -35,6 +35,7 @@ class RenderFromDatabaseDataTest extends TestCase
             'hasIcon' => true,
             'icon' => 'cui-speedometer',
             'iconType' => 'coreui',
+            'sequence' => '1'
         ));        
         $rfd = new RenderFromDatabaseData();
         $result = $rfd->render($input);
@@ -61,7 +62,7 @@ class RenderFromDatabaseDataTest extends TestCase
             array(
                 'id' => '7',
                 'name' => 'Base',
-                'href' => '/base',
+                'href' => NULL,
                 'icon' => 'cui-puzzle',
                 'slug' => 'dropdown',
                 'parent_id' => NULL,
@@ -87,6 +88,7 @@ class RenderFromDatabaseDataTest extends TestCase
             'hasIcon' => true,
             'icon' => 'cui-speedometer',
             'iconType' => 'coreui',
+            'sequence' => '1'
         ),
         array(
             'id' => '7',
@@ -102,9 +104,10 @@ class RenderFromDatabaseDataTest extends TestCase
                     'name' => 'Breadcrumb',
                     'href' => '/base/breadcrumb',
                     'hasIcon' => false,
+                    'sequence' => '8'
                 )
             ),
-            'href' => '/base',
+            'sequence' => '7'
         ));        
         $rfd = new RenderFromDatabaseData();
         $result = $rfd->render($input);

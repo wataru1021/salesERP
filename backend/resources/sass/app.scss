@@ -1,15 +1,14 @@
 // Fonts
-//@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+@import "node_modules/font-awesome/scss/font-awesome.scss";
+
+
 
 // Variables
-//@import 'variables';
+@import 'variables';
 
 // Bootstrap
-//@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap';
 
-// Fonts
-//@import "../../../coreui/node_modules/font-awesome/scss/font-awesome"; // Font Awesome
-//@import "../../../coreui/node_modules/simple-line-icons/scss/simple-line-icons"; // Simple Line Icons
 
-// CoreUI Style
-@import "../../../frontend/src/assets/scss/style";

@@ -5,10 +5,12 @@ namespace Tests\Unit;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
+
 use App\Models\User;
 use App\Models\Notes;
-use App\Models\Status;
+
 
 class NotesTest extends TestCase
 {
@@ -20,15 +22,15 @@ class NotesTest extends TestCase
     public function testCanReadListOfNotes()
     {
         $user = User::factory()->create();
+        $roleUser = Role::create(['name' => 'user']);
+        $user->assignRole($roleUser);
         $noteOne = Notes::factory()->create();
         $noteTwo = Notes::factory()->create();
-        $response = $this->actingAs($user, 'api')->get('/api/notes');
-        $response->assertStatus(200)->assertJson([
-            [
-            'title' => $noteOne->title,
-            'content' => $noteOne->content,
-            ]
-        ]);
+        $response = $this->actingAs($user)->get('/notes');
+        $response->assertSee($noteOne->title)
+        ->assertSee($noteOne->content)
+        ->assertSee($noteTwo->title)
+        ->assertSee($noteTwo->content);
     }
 
     /**
@@ -36,14 +38,12 @@ class NotesTest extends TestCase
      */
     public function testCanReadSingleNote()
     {
-        $userOne = User::factory()->create();
+        $user = User::factory()->create();
+        $roleUser = Role::create(['name' => 'user']);
+        $user->assignRole($roleUser);
         $note = Notes::factory()->create();
-        $noteTwo = Notes::factory()->create();
-        $response = $this->actingAs($userOne, 'api')->get('/api/notes/' . $note->id );
-        $response->assertStatus(200)->assertJson([
-            'title' => $note->title,
-            'content' => $note->content,
-        ]);
+        $response = $this->actingAs($user)->get('/notes/' . $note->id );
+        $response->assertSee($note->title)->assertSee($note->content);
     }
 
     /**
@@ -52,14 +52,11 @@ class NotesTest extends TestCase
     public function testCanOpenNoteCreateForm()
     {
         $user = User::factory()->create();
-        $status = Status::factory()->create();
-        $response = $this->actingAs($user, 'api')->get('/api/notes/create');
-        $response->assertStatus(200)->assertJson([
-            [
-                'value' => $status->id,
-                'label' => $status->name,
-            ]
-        ]);
+        $roleUser = Role::create(['name' => 'user']);
+        $user->assignRole($roleUser);
+        $note = Notes::factory()->create();
+        $response = $this->actingAs($user)->get('/notes/create');
+        $response->assertSee('Create Note');
     }
 
     /**
@@ -68,8 +65,10 @@ class NotesTest extends TestCase
     public function testCanCreateNewNote()
     {
         $user = User::factory()->create();
+        $roleUser = Role::create(['name' => 'user']);
+        $user->assignRole($roleUser);
         $note = Notes::factory()->create();
-        $response = $this->actingAs($user)->post('/api/notes',  $note->toArray());
+        $response = $this->actingAs($user)->post('/notes',  $note->toArray());
         $this->assertDatabaseHas('notes',['title' => $note->title, 'content' => $note->content]);
     }
 
@@ -79,12 +78,11 @@ class NotesTest extends TestCase
     public function testCanOpenNoteEdition()
     {
         $user = User::factory()->create();
+        $roleUser = Role::create(['name' => 'user']);
+        $user->assignRole($roleUser);
         $note = Notes::factory()->create();
-        $response = $this->actingAs($user)->get('/api/notes/'.$note->id . '/edit');
-        $response->assertStatus(200)->assertJson([ 'note' => [
-            'title' => $note->title,
-            'content' => $note->content,
-        ]]);
+        $response = $this->actingAs($user)->get('/notes/'.$note->id . '/edit');
+        $response->assertSee($note->title)->assertSee($note->content);
     }
 
     /**
@@ -93,10 +91,12 @@ class NotesTest extends TestCase
     public function testCanEditNote()
     {
         $user = User::factory()->create();
+        $roleUser = Role::create(['name' => 'user']);
+        $user->assignRole($roleUser);
         $note = Notes::factory()->create();
         $note->title = 'Updated title';
         $note->content = 'Updated content';
-        $this->actingAs($user)->put('/api/notes/'.$user->id, $note->toArray());
+        $this->actingAs($user)->put('/notes/'.$user->id, $note->toArray());
         $this->assertDatabaseHas('notes',['id'=> $note->id , 'title' => 'Updated title', 'content' => 'Updated content']);
     }
 
@@ -106,10 +106,11 @@ class NotesTest extends TestCase
     public function testCanDeleteNote()
     {
         $user = User::factory()->create();
+        $roleUser = Role::create(['name' => 'user']);
+        $user->assignRole($roleUser);
         $note = Notes::factory()->create();
         $this->actingAs( $user );
-        $this->delete('/api/notes/'.$note->id);
+        $this->delete('/notes/'.$note->id);
         $this->assertDatabaseMissing('notes',['id'=> $note->id]);
     }
-
 }

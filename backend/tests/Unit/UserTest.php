@@ -13,13 +13,19 @@ class UserTest extends TestCase
 {
     use DatabaseMigrations;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
+    }
+
     /**
      * @return void
      */
     public function testRegularUserCantSeeListOfUsers(){
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('/api/users');
-        $response->assertStatus(401);
+        $response = $this->actingAs($user)->get('/users');
+        $response->assertStatus(403);
     }
 
     /**
@@ -27,8 +33,8 @@ class UserTest extends TestCase
      */
     public function testRegularUserCantSeeSingleUser(){
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('/api/users/' . $user->id );
-        $response->assertStatus(401);
+        $response = $this->actingAs($user)->get('/users/' . $user->id );
+        $response->assertStatus(403);
     }
 
     /**
@@ -36,8 +42,8 @@ class UserTest extends TestCase
      */
     public function testRegularUserCantOpenEditUserForm(){
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('/api/users/'.$user->id . '/edit');
-        $response->assertStatus(401);
+        $response = $this->actingAs($user)->get('/users/'.$user->id . '/edit');
+        $response->assertStatus(403);
     }
 
     /**
@@ -45,8 +51,8 @@ class UserTest extends TestCase
      */
     public function testRegularUserCantEditUser(){
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->put('/api/users/'.$user->id, $user->toArray());
-        $response->assertStatus(401);
+        $response = $this->actingAs($user)->put('/users/'.$user->id, $user->toArray());
+        $response->assertStatus(403);
     }
 
     /**
@@ -54,8 +60,8 @@ class UserTest extends TestCase
      */
     public function testRegularUserCantDeleteUser(){
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->delete('/api/users/'.$user->id);
-        $response->assertStatus(401);
+        $response = $this->actingAs($user)->delete('/users/'.$user->id);
+        $response->assertStatus(403);
     }
 
     /**
@@ -64,23 +70,14 @@ class UserTest extends TestCase
     public function testCanReadListOfUsers()
     {
         $userOne = User::factory()->admin()->create();
-        $roleAdmin = Role::create(['name' => 'admin']);
-        $userOne->assignRole($roleAdmin);
+        $adminRole = Role::create(['name' => 'admin']);
+        $userOne->assignRole($adminRole);
         $userTwo = User::factory()->create();
-        $response = $this->actingAs($userOne, 'api')->get('/api/users');
-        $response->assertStatus(200)->assertJson([
-            'users' => [
-                [
-                    'name' => $userOne->name,
-                    'email' => $userOne->email,
-                ],
-                [
-                    'name' => $userTwo->name,
-                    'email'=> $userTwo->email
-                ]
-                ],
-            'you' => $userOne->id
-        ]);
+        $response = $this->actingAs($userOne)->get('/users');
+        $response->assertSee($userOne->name)
+        ->assertSee($userOne->email)
+        ->assertSee($userTwo->name)
+        ->assertSee($userTwo->email);
     }
 
     /**
@@ -89,15 +86,11 @@ class UserTest extends TestCase
     public function testCanReadSingleUsers()
     {
         $userOne = User::factory()->admin()->create();
-        $roleAdmin = Role::create(['name' => 'admin']);
-        $userOne->assignRole($roleAdmin);
+        $adminRole = Role::create(['name' => 'admin']);
+        $userOne->assignRole($adminRole);
         $userTwo = User::factory()->create();
-        $response = $this->actingAs($userOne, 'api')->get('/api/users/' . $userTwo->id );
+        $response = $this->actingAs($userOne)->get('/users/' . $userTwo->id );
         $response->assertSee($userTwo->name)->assertSee($userTwo->email);
-        $response->assertStatus(200)->assertJson([
-            'name' => $userTwo->name,
-            'email' => $userTwo->email,  
-        ]);
     }
 
     /**
@@ -106,13 +99,10 @@ class UserTest extends TestCase
     public function testCanOpenUserEdition()
     {
         $user = User::factory()->admin()->create();
-        $roleAdmin = Role::create(['name' => 'admin']);
-        $user->assignRole($roleAdmin);
-        $response = $this->actingAs($user, 'api')->get('/api/users/'.$user->id . '/edit');
-        $response->assertStatus(200)->assertJson([
-            'name' => $user->name,
-            'email' => $user->email,  
-        ]);
+        $adminRole = Role::create(['name' => 'admin']);
+        $user->assignRole($adminRole);
+        $response = $this->actingAs($user)->get('/users/'.$user->id . '/edit');
+        $response->assertSee($user->name)->assertSee($user->email);
     }
 
     /**
@@ -121,12 +111,11 @@ class UserTest extends TestCase
     public function testCanEditUser()
     {
         $user = User::factory()->admin()->create();
-        $roleAdmin = Role::create(['name' => 'admin']);
-        $user->assignRole($roleAdmin);
         $user->name = 'Updated name';
         $user->email = 'updated@email.com';
-        $response = $this->actingAs($user, 'api')->put('/api/users/'.$user->id, $user->toArray());
-        $response->assertStatus(200);
+        $adminRole = Role::create(['name' => 'admin']);
+        $user->assignRole($adminRole);
+        $this->actingAs($user)->put('/users/'.$user->id, $user->toArray());
         $this->assertDatabaseHas('users',['id'=> $user->id , 'name' => 'Updated name', 'email' => 'updated@email.com']);
     }
 
@@ -136,12 +125,10 @@ class UserTest extends TestCase
     public function testCanDeleteUser()
     {
         $user = User::factory()->admin()->create();
-        $roleAdmin = Role::create(['name' => 'admin']);
-        $user->assignRole($roleAdmin);
+        $adminRole = Role::create(['name' => 'admin']);
+        $user->assignRole($adminRole);
         $this->actingAs( $user );
-        $response = $this->delete('/api/users/'.$user->id);
-        $response->assertStatus(200);
+        $this->delete('/users/'.$user->id);
         $this->assertSoftDeleted('users',['id'=> $user->id]);
     }
-
 }

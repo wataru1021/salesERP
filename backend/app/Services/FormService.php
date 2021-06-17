@@ -152,7 +152,6 @@ class FormService{
             }
         }
         $this->givePermissions( $form->id, $request );
-        return $form->id;
     }
 
     public function getBreadRoles( $formId ){
