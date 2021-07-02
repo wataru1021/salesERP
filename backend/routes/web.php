@@ -11,13 +11,19 @@
 |
 */
 
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
+
 
 Route::prefix('/admin')->group(function () {
     Route::get('/login',[App\Http\Controllers\Admin\UsersController::class, 'index'])->name('admin.login');
     Route::post('/login',[App\Http\Controllers\Admin\UsersController::class, 'login'])->name('admin.login');
     Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Admin\UsersController::class, 'forgotPassword'])->name('admin.forgot');
     Route::get('/logout', [App\Http\Controllers\Admin\UsersController::class, 'logout'])->name('admin.logout');
+});
+
+Route::middleware([Admin::class])->prefix('/admin')->group(function () {
     Route::get('/',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
 });
 

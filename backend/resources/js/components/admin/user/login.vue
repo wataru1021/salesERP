@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <div class="card-group">
                     <div class="card p-4">
                         <div class="card-body">
@@ -75,18 +75,19 @@
                                     >
                                         {{ messageText }}
                                     </div>
-                                    <div class="col-12 text-center">
+                                    <div class="col-xs-12 col-sm-6">
                                         <button
                                             class="btn btn-primary px-5 mt-3"
                                         >
                                             ログイン
                                         </button>
                                     </div>
+
+                                    <div class="col-sm-6 col-sx-12 text-right">
+                                        <a v-bind:href="forgotPasswordUrl" class="btn btn-link px-0 mt-3">パスワードを忘れた方へ</a>
+                                    </div>
                                 </div>
                             </form>
-                            <div class="col-6 text-right">
-                                <a v-bind:href="forgot-password-url" class="btn btn-link px-0">パスワードを忘れた方へ</a>
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -19,7 +19,7 @@ class UsersController extends Controller
    
 
     public function index(Request $request) {
-        if (Auth::guard('web')->check()) {
+        if (Auth::guard('admin')->check()) {
             return redirect(route('admin.home'));
         }
         return view('admin.users.login');
@@ -27,17 +27,19 @@ class UsersController extends Controller
 
     public function login(Request $request)
     {
-            $credentials = $request->only('email', 'password');
-            $credentials['role_id'] = RoleStateType::MANAGERMENT;
-            
-            $message = '';
-            if (Auth::guard('web')->attempt($credentials)) {
-                return redirect(route('admin.home'));
-            } else {
-                $message = '入力したメールアドレスとパスワードをご確認ください';
-            }
+        $credentials = $request->only('email', 'password');
+        $credentials['role_id'] = RoleStateType::MANAGERMENT;
+        
+        $message = '';
+        if (Auth::guard('admin')->attempt($credentials)) {
+            return redirect(route('admin.home'));
+        } else {
+            $message = '入力したメールアドレスとパスワードをご確認ください';
+        }
 
-        return view('admin.users.login');
+        return view('admin.users.login', [
+            'message' => $message,
+        ]);
     }
 
     public function forgotPassword(Request $request) {
@@ -45,7 +47,7 @@ class UsersController extends Controller
     }
     
     public function logout(Request $request) {
-        Auth::guard('web')->logout();
+        Auth::guard('admin')->logout();
         return redirect(route('admin.login'));
     }
 
