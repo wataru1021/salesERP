@@ -15,7 +15,7 @@ class User extends Authenticatable
     use SoftDeletes;
     use HasRoles;
     use HasFactory;
-    
+
     protected $table = 'users';
 
     /**
@@ -24,7 +24,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'role_id',
+        'company_id',
+        'email',
+        'password',
+        'tel',
+        'status',
+        'last_login_at',
+        'reset_password_token',
+        'reset_password_token_expire',
+        'remember_token',
     ];
 
     /**
@@ -49,7 +59,7 @@ class User extends Authenticatable
         'deleted_at'
     ];
 
-    protected $attributes = [ 
+    protected $attributes = [
         'menuroles' => 'user',
     ];
 }
