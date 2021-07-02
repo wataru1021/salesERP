@@ -84,6 +84,9 @@
                                     </div>
                                 </div>
                             </form>
+                            <div class="col-6 text-right">
+                                <a v-bind:href="forgot-password-url" class="btn btn-link px-0">パスワードを忘れた方へ</a>
+                            </div>
                         </div>
                     </div>
                 </div>

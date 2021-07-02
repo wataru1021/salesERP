@@ -32,11 +32,10 @@
 					<div class="c-avatar"><img class="c-avatar-img" src="{{ url('/assets/img/avatars/avatar.png') }}" alt="user@email.com"></div>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right pt-0">
-					<a class="dropdown-item" href="#">
+					<a class="dropdown-item" href="{{ route('admin.logout') }}">
 						<svg class="c-icon mr-2">
 							<use xlink:href="{{ url('/icons/sprites/free.svg#cil-account-logout') }}"></use>
-						</svg>
-						<form action="{{ url('/logout') }}" method="POST"> @csrf <button type="submit" class="btn btn-ghost-dark btn-block">Logout</button></form>
+						</svg>ログアウト
 					</a>
 				</div>
 			</li>

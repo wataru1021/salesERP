@@ -13,13 +13,17 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group([
-    'prefix' => '/admin',
-    'namespace' => 'Admin',
-    'as' => 'admin.',
-], function () {
-    // Route::get('/login', 'UsersController@index')->name('login');
-    // Route::post('/login', 'UsersController@login')->name('login');
-    Route::get('/login', [App\Http\Controllers\Admin\UsersController::class, 'index'])->name('login');
+Route::prefix('/admin')->group(function () {
+    Route::get('/login',[App\Http\Controllers\Admin\UsersController::class, 'index'])->name('admin.login');
+    Route::post('/login',[App\Http\Controllers\Admin\UsersController::class, 'login'])->name('admin.login');
+    Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Admin\UsersController::class, 'forgotPassword'])->name('admin.forgot');
+    Route::get('/logout', [App\Http\Controllers\Admin\UsersController::class, 'logout'])->name('admin.logout');
+    Route::get('/',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
+});
 
+Route::prefix('/')->group(function () {
+    Route::get('/login',[App\Http\Controllers\Sales\UsersController::class, 'index'])->name('login');
+    Route::post('/login',[App\Http\Controllers\Sales\UsersController::class, 'login'])->name('login');
+
+    Route::get('/',[App\Http\Controllers\Sales\HomeController::class, 'index'])->name('home');
 });
