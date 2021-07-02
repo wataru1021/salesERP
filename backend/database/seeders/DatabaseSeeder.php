@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-//use database\seeds\UsersAndNotesSeeder;
-//use database\seeds\MenusTableSeeder;
-
+use App\Enums\RoleStateType;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use Carbon\Carbon;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,24 +16,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //$this->call(MenusTableSeeder::class);
-        //$this->call(UsersAndNotesSeeder::class);
-        /*
-        $this->call('UsersAndNotesSeeder');
-        $this->call('MenusTableSeeder');
-        $this->call('FolderTableSeeder');
-        $this->call('ExampleSeeder');
-        $this->call('BREADSeeder');
-        $this->call('EmailSeeder');
-        */
+        $this->insertUsers();
+    }
 
-        $this->call([
-            UsersAndNotesSeeder::class,
-            MenusTableSeeder::class,
-            FolderTableSeeder::class,
-            ExampleSeeder::class,
-            BREADSeeder::class,
-            EmailSeeder::class,
+    private function insertUsers()
+    {
+        User::insert([
+            'name' => 'manager',
+            'email' => 'manager@gmail.com',
+            'role' => RoleStateType::MANAGERMENT,
+            'password' => Hash::make('pass'),
+            'created_at' => Carbon::now()->toDateTimeString(),
+        ]);
+        User::insert([
+            'name' => 'saler',
+            'email' => 'saler@gmail.com',
+            'role' => RoleStateType::SALER,
+            'password' => Hash::make('pass'),
+            'created_at' => Carbon::now()->toDateTimeString(),
         ]);
     }
 }

@@ -20,7 +20,10 @@ const mix = require('laravel-mix');
 mix.copy('node_modules/@coreui/chartjs/dist/css/coreui-chartjs.css', 'public/css');
 mix.copy('node_modules/cropperjs/dist/cropper.css', 'public/css');
 //main css
+mix.js('resources/js/app.js', 'public/js').vue();
+mix.sass('resources/sass/app.scss', 'public/css');
 mix.sass('resources/sass/style.scss', 'public/css');
+
 
 //************** SCRIPTS ****************** 
 // general scripts
