@@ -103,21 +103,9 @@ export default {
   },
   props: ["data", "topUrl"],
   mounted() {
-    console.log(this.data);
   },
   methods: {
-    // register: function (e) {
-    //   e.preventDefault();
-    //   let that = this;
-    //   this.$validator.validateAll().then((valid) => {
-    //     if (valid) {
-    //       that.$refs.registerForm.submit();
-    //     }
-    //   });
-    // },
-    // changeInput() {
-    //   this.messageText = "";
-    // },
+    
   },
 };
 </script>

@@ -3,7 +3,9 @@
     <div class="row">
       <div class="col-md-6">
         <div class="card">
-          <div class="card-header border-bottom-0"><h3>2021年12月30日(土)の日報</h3></div>
+          <div class="card-header border-bottom-0">
+            <h3>2021年12月30日(土)の日報</h3>
+          </div>
           <div class="card-body">
             <form
               class="form-horizontal"
@@ -26,6 +28,7 @@
                     type="text"
                     placeholder="333"
                     v-validate="'required|numeric'"
+                    @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
                     {{ errors.first("ping_pong_num") }}
@@ -44,6 +47,7 @@
                     type="text"
                     placeholder="80"
                     v-validate="'required|numeric'"
+                    @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
                     {{ errors.first("meet_num") }}
@@ -62,6 +66,7 @@
                     type="text"
                     placeholder="30"
                     v-validate="'required|numeric'"
+                    @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
                     {{ errors.first("deal_num") }}
@@ -80,6 +85,7 @@
                     type="text"
                     placeholder="20"
                     v-validate="'required|numeric'"
+                    @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
                     {{ errors.first("acquisitions_num") }}
@@ -98,6 +104,7 @@
                     type="text"
                     placeholder="10.5"
                     v-validate="'required'"
+                    @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
                     {{ errors.first("sale_time") }}
@@ -192,7 +199,6 @@ export default {
   data() {
     return {
       csrfToken: Laravel.csrfToken,
-      //   loginIdValue: this.loginId,
       messageText: this.message,
     };
   },
@@ -208,9 +214,9 @@ export default {
         }
       });
     },
-    // changeInput() {
-    //   this.messageText = "";
-    // },
+    changeInput() {
+      this.messageText = "";
+    },
   },
 };
 </script>
