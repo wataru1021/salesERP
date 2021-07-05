@@ -34,4 +34,5 @@ Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Sales\Use
 
 Route::middleware([Sale::class])->prefix('/')->group(function () {
     Route::get('/',[App\Http\Controllers\Sales\HomeController::class, 'index'])->name('home');
+    Route::get('daily-report/create',[App\Http\Controllers\Sales\DailyReportController::class, 'create'])->name('daily-report.create');
 });
