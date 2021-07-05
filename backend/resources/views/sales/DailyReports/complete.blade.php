@@ -1,11 +1,9 @@
 @extends('layouts.sales.base')
 
 @section('content')
-    <daily-report-create
-    :form-url="{{ json_encode(route('daily-report.store')) }}"
-    :message="{{ json_encode(isset($message) ? $message : '') }}"
-    >
-    </daily-report-create>
+    <daily-report-complete
+    :data="{{ json_encode(isset($data) ? $data : '') }}"
+    ></daily-report-complete>
 @endsection
 
 @section('javascript')

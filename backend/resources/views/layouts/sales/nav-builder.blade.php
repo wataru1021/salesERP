@@ -22,6 +22,12 @@
             営業マン管理
         </a>
     </li>
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link" href="{{ route('daily-report.create') }}">
+            <i class="cil-calculator c-sidebar-nav-icon"></i>
+            日報新規追加
+        </a>
+    </li>
 </ul>
 <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
 </div>

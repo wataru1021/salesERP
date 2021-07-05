@@ -3,6 +3,8 @@ import VeeValidate from "vee-validate";
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 import SalesLogin from "./components/sales/user/login.vue"
+import DailyReportCreate from "./components/sales/dailyReport/create.vue"
+import DailyReportComplete from "./components/sales/dailyReport/complete.vue"
 
 Vue.use(VueAxios, axios);
 Vue.use(VeeValidate, {
@@ -14,7 +16,9 @@ new Vue({
     },
     el: "#app",
     components: {
-        SalesLogin
+        SalesLogin,
+        DailyReportCreate,
+        DailyReportComplete
     },
     methods: {},
     mounted() {}
