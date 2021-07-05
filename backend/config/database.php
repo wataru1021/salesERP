@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Str;
+use Illuminate\Database\DBAL\TimestampType;
+
 
 return [
 
@@ -116,6 +118,11 @@ return [
     | such as APC or Memcached. Laravel makes it easy to dig right in.
     |
     */
+    'dbal' => [
+        'types' => [
+            'timestamp' => TimestampType::class,
+        ],
+    ],
 
     'redis' => [
 
