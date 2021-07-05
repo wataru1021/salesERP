@@ -3,6 +3,7 @@ import VeeValidate from "vee-validate";
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 import SalesLogin from "./components/sales/user/login.vue"
+import SalesForgotPassword from "./components/sales/user/password/forgot.vue"
 
 Vue.use(VueAxios, axios);
 Vue.use(VeeValidate, {
@@ -10,11 +11,11 @@ Vue.use(VeeValidate, {
 });
 
 new Vue({
-    created() {
-    },
+    created() {},
     el: "#app",
     components: {
-        SalesLogin
+        SalesLogin,
+        SalesForgotPassword
     },
     methods: {},
     mounted() {}

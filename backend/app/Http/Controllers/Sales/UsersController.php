@@ -43,6 +43,6 @@ class UsersController extends Controller
     }
 
     public function forgotPassword(Request $request) {
-
+        return view('sales.users.password.forgot');
     }
 }
