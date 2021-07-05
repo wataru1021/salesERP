@@ -34,4 +34,6 @@ Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Sales\Use
 
 Route::middleware([Sale::class])->prefix('/')->group(function () {
     Route::get('/',[App\Http\Controllers\Sales\HomeController::class, 'index'])->name('home');
+    Route::get('top', [App\Http\Controllers\Sales\TopController::class, 'index']);
+    Route::get('sales_management', [App\Http\Controllers\Sales\TopController::class, 'salesManagement']);
 });
