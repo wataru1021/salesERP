@@ -83,7 +83,7 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="input5"></label>
           <div class="col-md-9 text-center">
-            <a href="">TOPに戻る</a>
+            <a v-bind:href="topUrl">TOPに戻る</a>
           </div>
         </div>
       </div>
@@ -101,7 +101,7 @@ export default {
       data: this.data,
     };
   },
-  props: ["data"],
+  props: ["data", "topUrl"],
   mounted() {
     console.log(this.data);
   },

@@ -3,6 +3,7 @@
 @section('content')
     <daily-report-complete
     :data="{{ json_encode(isset($data) ? $data : '') }}"
+    :top-url="{{ json_encode(route('home')) }}"
     ></daily-report-complete>
 @endsection
 

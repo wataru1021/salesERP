@@ -4,6 +4,7 @@
     <daily-report-create
     :form-url="{{ json_encode(route('daily-report.store')) }}"
     :message="{{ json_encode(isset($message) ? $message : '') }}"
+    :top-url="{{ json_encode(route('home')) }}"
     >
     </daily-report-create>
 @endsection

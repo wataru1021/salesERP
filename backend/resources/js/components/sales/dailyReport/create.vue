@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="card">
-          <div class="card-header"><h3>2021年12月30日(土)の日報</h3></div>
+          <div class="card-header border-bottom-0"><h3>2021年12月30日(土)の日報</h3></div>
           <div class="card-body">
             <form
               class="form-horizontal"
@@ -149,7 +149,7 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="input5"></label>
           <div class="col-md-9 text-center">
-            <a href="">TOPに戻る</a>
+            <a v-bind:href="topUrl">TOPに戻る</a>
           </div>
         </div>
       </div>
@@ -196,7 +196,7 @@ export default {
       messageText: this.message,
     };
   },
-  props: ["formUrl", "message"],
+  props: ["formUrl", "message", "topUrl"],
   mounted() {},
   methods: {
     register: function (e) {
