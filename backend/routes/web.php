@@ -30,6 +30,8 @@ Route::middleware([Admin::class])->prefix('/admin')->group(function () {
 
 Route::get('/login',[App\Http\Controllers\Sales\UsersController::class, 'index'])->name('login');
 Route::post('/login',[App\Http\Controllers\Sales\UsersController::class, 'login'])->name('login');
+Route::get('/register',[App\Http\Controllers\Sales\UsersController::class, 'register'])->name('register');
+Route::post('/register',[App\Http\Controllers\Sales\UsersController::class, 'registerPost'])->name('register.post');
 Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Sales\UsersController::class, 'forgotPassword'])->name('forgot');
 
 Route::middleware([Sale::class])->prefix('/')->group(function () {

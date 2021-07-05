@@ -45,4 +45,12 @@ class UsersController extends Controller
     public function forgotPassword(Request $request) {
 
     }
+
+    public function register(Request $request) {
+        return view('sales.users.register');
+    }
+
+    public function registerPost(Request $request) {
+    }
+
 }
