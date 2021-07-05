@@ -25,7 +25,7 @@ module.exports = [{
             // babel: "@babel/polyfill",
             app: "./resources/js/app.js",
             adminApp: "./resources/js/adminApp.js",
-            // systemApp: "./resources/js/systemApp.js",
+            salesApp: "./resources/js/salesApp.js",
         },
         output: {
             path: __dirname + "/public/js",
@@ -94,8 +94,8 @@ module.exports = [{
     {
         entry: {
             app: "./resources/sass/app.scss",
-            // admin: "./resources/sass/admin.scss",
-            // user: "./resources/sass/user.scss",
+            admin: "./resources/sass/admin.scss",
+            user: "./resources/sass/sales.scss",
             // system: "./resources/sass/system.scss",
         },
         output: {

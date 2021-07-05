@@ -23,12 +23,20 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+    <script type="text/javascript">
+        window.Laravel = {!!json_encode([
+            'csrfToken' => csrf_token(),
+            ], JSON_UNESCAPED_UNICODE)!!};
+        var baseUrl = '{{url('')}}';
+        var _csrfToken = '{{csrf_token()}}';
+    </script>
 	<!-- Icons-->
 	<link href="{{ asset('css/free.min.css') }}" rel="stylesheet"> <!-- icons -->
 	<link href="{{ asset('css/flag-icon.min.css') }}" rel="stylesheet"> <!-- icons -->
 	<!-- Main styles for this application-->
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
+	<link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 	@yield('css')
 
 	<!-- Global site tag (gtag.js) - Google Analytics-->
