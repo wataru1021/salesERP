@@ -19,25 +19,46 @@ class DailyReportController extends Controller
     public function store(DailyReportStoreRequest $request)
     {
         try {
-            $dailyReport = SaleDailyReport::create([
-                'user_id' => Auth::guard('sales')->user()->id,
-                'report_date' => Carbon::now()->format('Y-m-d'),
-                'ping_pong_num' => $request->ping_pong_num,
-                'meet_num' => $request->meet_num,
-                'deal_num' => $request->deal_num,
-                'acquisitions_num' => $request->acquisitions_num,
-                'sale_time' => $request->sale_time,
-                'conscious_point' => $request->conscious_point
-            ]);
+            $data = SaleDailyReport::where('user_id', Auth::guard('sales')->user()->id)->whereDate('report_date', Carbon::now()->format('Y-m-d'))->first();
             $message = '';
-            if ($dailyReport) {
-                return redirect()->route('daily-report.complete', $dailyReport->id);
+            if ($data) {
+                $dailyReport = SaleDailyReport::where('id', $data->id)
+                    ->update([
+                        'ping_pong_num' => $request->ping_pong_num,
+                        'meet_num' => $request->meet_num,
+                        'deal_num' => $request->deal_num,
+                        'acquisitions_num' => $request->acquisitions_num,
+                        'sale_time' => $request->sale_time,
+                        'conscious_point' => $request->conscious_point
+                    ]);
+                if ($dailyReport) {
+                    return redirect()->route('dailyReport.complete', $data->id);
+                } else {
+                    $message = '日報新規追加は失敗しました';
+                }
+                return view('sales.DailyReports.create', [
+                    'message' => $message,
+                ]);
             } else {
-                $message = '日報新規追加は失敗しました';
+                $dailyReport = SaleDailyReport::create([
+                    'user_id' => Auth::guard('sales')->user()->id,
+                    'report_date' => Carbon::now()->format('Y-m-d'),
+                    'ping_pong_num' => $request->ping_pong_num,
+                    'meet_num' => $request->meet_num,
+                    'deal_num' => $request->deal_num,
+                    'acquisitions_num' => $request->acquisitions_num,
+                    'sale_time' => $request->sale_time,
+                    'conscious_point' => $request->conscious_point
+                ]);
+                if ($dailyReport) {
+                    return redirect()->route('dailyReport.complete', $dailyReport->id);
+                } else {
+                    $message = '日報新規追加は失敗しました';
+                }
+                return view('sales.DailyReports.create', [
+                    'message' => $message,
+                ]);
             }
-            return view('sales.DailyReports.create', [
-                'message' => $message,
-            ]);
         } catch (\Exception $e) {
             return $e->getMessage();
         }

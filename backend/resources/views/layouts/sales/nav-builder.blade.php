@@ -23,7 +23,7 @@
         </a>
     </li>
     <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" href="{{ route('daily-report.create') }}">
+        <a class="c-sidebar-nav-link" href="{{ route('dailyReport.create') }}">
             <i class="cil-calculator c-sidebar-nav-icon"></i>
             日報新規追加
         </a>

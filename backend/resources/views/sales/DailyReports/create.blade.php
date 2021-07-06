@@ -1,10 +1,11 @@
 @extends('layouts.sales.base')
-
 @section('content')
     <daily-report-create
-    :form-url="{{ json_encode(route('daily-report.store')) }}"
+    :form-url="{{ json_encode(route('dailyReport.store')) }}"
     :message="{{ json_encode(isset($message) ? $message : '') }}"
     :top-url="{{ json_encode(route('home')) }}"
+    :date = "{{ json_encode(Carbon\Carbon::now()->format('Y 年 m 月 d 日')) }}"
+    :th = "{{ json_encode(App\Enums\DayOffWeek::getThJp(Carbon\Carbon::now()->format('l'))) }}"
     >
     </daily-report-create>
 @endsection

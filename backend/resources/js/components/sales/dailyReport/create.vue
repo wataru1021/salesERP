@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <div class="card">
           <div class="card-header border-bottom-0">
-            <h3>2021年12月30日(土)の日報</h3>
+            <h3>{{ date }}({{ th }})の日報</h3>
           </div>
           <div class="card-body">
             <form
@@ -25,7 +25,7 @@
                     class="form-control"
                     id="ping_pong_num"
                     name="ping_pong_num"
-                    type="text"
+                    type="number"
                     placeholder="333"
                     v-validate="'required|numeric'"
                     @input="changeInput()"
@@ -44,7 +44,7 @@
                     class="form-control"
                     id="meet_num"
                     name="meet_num"
-                    type="text"
+                    type="number"
                     placeholder="80"
                     v-validate="'required|numeric'"
                     @input="changeInput()"
@@ -63,7 +63,7 @@
                     class="form-control"
                     id="deal_num"
                     name="deal_num"
-                    type="text"
+                    type="number"
                     placeholder="30"
                     v-validate="'required|numeric'"
                     @input="changeInput()"
@@ -82,7 +82,7 @@
                     class="form-control"
                     id="acquisitions_num"
                     name="acquisitions_num"
-                    type="text"
+                    type="number"
                     placeholder="20"
                     v-validate="'required|numeric'"
                     @input="changeInput()"
@@ -101,9 +101,10 @@
                     class="form-control"
                     id="sale_time"
                     name="sale_time"
-                    type="text"
+                    type="number"
                     placeholder="10.5"
                     v-validate="'required'"
+                    step="0.5"
                     @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
@@ -147,14 +148,12 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="input5"></label>
+        <div class="form-group row mb-1">
           <div class="col-md-9 text-center">
             <a href="">営業管理に戻る</a>
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="input5"></label>
           <div class="col-md-9 text-center">
             <a v-bind:href="topUrl">TOPに戻る</a>
           </div>
@@ -202,7 +201,7 @@ export default {
       messageText: this.message,
     };
   },
-  props: ["formUrl", "message", "topUrl"],
+  props: ["formUrl", "message", "topUrl", "date", 'th'],
   mounted() {},
   methods: {
     register: function (e) {
