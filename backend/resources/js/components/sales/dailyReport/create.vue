@@ -3,10 +3,12 @@
     <div class="row">
       <div class="col-md-6">
         <div class="card">
-          <div class="card-header border-bottom-0">
-            <h4 class="font-weight-bold">{{ date }}({{ th }})の日報</h4>
-          </div>
           <div class="card-body">
+            <div class="form-group row mb-0">
+              <div class="col-md-9">
+                <h4>{{ date }}({{ th }})の日報</h4>
+              </div>
+            </div>
             <form
               class="form-horizontal"
               method="POST"
@@ -16,7 +18,7 @@
               autocomplete="off"
             >
               <input type="hidden" :value="csrfToken" name="_token" />
-              <div class="form-group row">
+              <div class="form-group row mb-2">
                 <label class="col-md-3 col-form-label" for="ping_pong_num"
                   >ピンポン数（訪問件数）</label
                 >
@@ -35,7 +37,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row mb-2">
                 <label class="col-md-3 col-form-label" for="meet_num"
                   >対面数</label
                 >
@@ -54,7 +56,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row mb-2">
                 <label class="col-md-3 col-form-label" for="deal_num"
                   >商談数</label
                 >
@@ -73,7 +75,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row mb-2">
                 <label class="col-md-3 col-form-label" for="acquisitions_num"
                   >獲得数</label
                 >
@@ -92,7 +94,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row mb-2">
                 <label class="col-md-3 col-form-label" for="sale_time"
                   >稼働時間（時間）※休憩時間は含まない</label
                 >
@@ -113,7 +115,7 @@
                 </div>
               </div>
 
-              <div class="form-group row">
+              <div class="form-group row mb-2">
                 <label class="col-md-3 col-form-label" for="conscious_point"
                   >今日意識した点</label
                 >
@@ -148,7 +150,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="form-group row mb-1">
+        <div class="form-group row">
           <div class="col-md-9 text-center">
             <a href="">営業管理に戻る</a>
           </div>
@@ -163,7 +165,16 @@
     </div>
   </div>
 </template>
-
+<style scoped>
+h4 {
+  font-size: 24px;
+  color: #000000;
+}
+label {
+  color: #768192;
+  font-size: 14px;
+}
+</style>
 <script>
 export default {
   created: function () {
@@ -201,7 +212,7 @@ export default {
       messageText: this.message,
     };
   },
-  props: ["formUrl", "message", "topUrl", "date", 'th'],
+  props: ["formUrl", "message", "topUrl", "date", "th"],
   mounted() {},
   methods: {
     register: function (e) {

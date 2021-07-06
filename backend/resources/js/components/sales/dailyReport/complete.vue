@@ -10,7 +10,7 @@
                 for="ping_pong_num"
               ></label>
               <div class="col-md-9">
-                <h5>{{ date }}({{ th }})の日報を</h5>
+                <p class="header">{{ date }}({{ th }})の日報を</p>
               </div>
               <div class="col-md-9 mt-2">
                 <h3 class="text-success text-center font-weight-bold">報告完了しました</h3>
@@ -74,7 +74,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="form-group row mb-1">
+        <div class="form-group row">
           <div class="col-md-9 text-center">
             <a href="">営業管理に戻る</a>
           </div>
@@ -95,6 +95,10 @@ p {
 }
 h5 {
   color: #768192;
+}
+.header {
+  color: #000000;
+  font-size: 16px;
 }
 </style>>
 <script>
