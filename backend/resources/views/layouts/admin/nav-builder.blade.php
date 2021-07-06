@@ -17,7 +17,7 @@
         </a>
     </li>
     <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" href="">
+        <a class="c-sidebar-nav-link" href="{{route('admin.user.list')}}">
             <i class="cil-calculator c-sidebar-nav-icon"></i>
             営業マン管理
         </a>
