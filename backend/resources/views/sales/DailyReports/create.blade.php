@@ -4,7 +4,7 @@
     :form-url="{{ json_encode(route('dailyReport.store')) }}"
     :message="{{ json_encode(isset($message) ? $message : '') }}"
     :top-url="{{ json_encode(route('home')) }}"
-    :date = "{{ json_encode(Carbon\Carbon::now()->format('Y 年 m 月 d 日')) }}"
+    :date = "{{ json_encode(Carbon\Carbon::now()->format('Y年m月d日')) }}"
     :th = "{{ json_encode(App\Enums\DayOffWeek::getThJp(Carbon\Carbon::now()->format('l'))) }}"
     >
     </daily-report-create>

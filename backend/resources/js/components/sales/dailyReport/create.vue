@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <div class="card">
           <div class="card-header border-bottom-0">
-            <h3>{{ date }}({{ th }})の日報</h3>
+            <h4 class="font-weight-bold">{{ date }}({{ th }})の日報</h4>
           </div>
           <div class="card-body">
             <form
