@@ -30,6 +30,7 @@
                     type="number"
                     placeholder="333"
                     v-validate="'required|numeric'"
+                    v-model="data.ping_pong_num"
                     @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
@@ -49,6 +50,7 @@
                     type="number"
                     placeholder="80"
                     v-validate="'required|numeric'"
+                    v-model="data.meet_num"
                     @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
@@ -68,6 +70,7 @@
                     type="number"
                     placeholder="30"
                     v-validate="'required|numeric'"
+                    v-model="data.deal_num"
                     @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
@@ -87,6 +90,7 @@
                     type="number"
                     placeholder="20"
                     v-validate="'required|numeric'"
+                    v-model="data.acquisitions_num"
                     @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
@@ -106,6 +110,7 @@
                     type="number"
                     placeholder="10.5"
                     v-validate="'required'"
+                    v-model="data.sale_time"
                     step="0.5"
                     @input="changeInput()"
                   />
@@ -126,6 +131,7 @@
                     name="conscious_point"
                     rows="4"
                     placeholder="商談から獲得に確実に繋がるよう、商談場所を意識した。"
+                    v-model="data.conscious_point"
                     v-validate="'required'"
                   ></textarea>
                   <div class="input-group is-danger" role="alert">
@@ -210,10 +216,13 @@ export default {
     return {
       csrfToken: Laravel.csrfToken,
       messageText: this.message,
+      data: this.data,
     };
   },
-  props: ["formUrl", "message", "topUrl", "date", "th"],
-  mounted() {},
+  props: ["formUrl", "message", "topUrl", "date", "th", "data"],
+  mounted() {
+    console.log(this.data);
+  },
   methods: {
     register: function (e) {
       e.preventDefault();

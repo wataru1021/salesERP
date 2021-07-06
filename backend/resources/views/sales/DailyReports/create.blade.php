@@ -6,6 +6,7 @@
     :top-url="{{ json_encode(route('home')) }}"
     :date = "{{ json_encode(Carbon\Carbon::now()->format('Y年m月d日')) }}"
     :th = "{{ json_encode(App\Enums\DayOffWeek::getThJp(Carbon\Carbon::now()->format('l'))) }}"
+    :data="{{ json_encode(isset($data) ? $data : '') }}"
     >
     </daily-report-create>
 @endsection

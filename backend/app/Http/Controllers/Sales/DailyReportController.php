@@ -13,7 +13,10 @@ class DailyReportController extends Controller
 {
     public function create()
     {
-        return view('sales.DailyReports.create');
+        $data = SaleDailyReport::where('user_id', Auth::guard('sales')->user()->id)->whereDate('report_date', Carbon::now()->format('Y-m-d'))->first();
+        return view('sales.DailyReports.create', [
+            'data' => $data
+        ]);
     }
 
     public function store(DailyReportStoreRequest $request)
