@@ -5,6 +5,7 @@
     <admin-user-list
             :data="{{json_encode([
         'urlGetData' => route('admin.user.getUserlist'),
+        'flag-show' => false
     ])}}"
 
     ></admin-user-list>
