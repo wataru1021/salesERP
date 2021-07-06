@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+<div class="container">
     <div class="list-group">
         <div class="border border-primary rounded text-center mb-4">
             <a class="list-group-item list-group-item-action" :href="reportRegistrationUrl">
@@ -11,16 +11,28 @@
         <div class="border border-primary rounded text-center mb-4">
             <a class="list-group-item list-group-item-action" :href="checkPastResultsUrl">
                 <h2 class="text-primary mb-0">
-                    過去の成績を確認する
+                    過去の成績<br v-if="screenWidth <= 320">を確認する
                 </h2>
             </a>
         </div>
+    </div>
+    <div class="button text-center">
+        <a class="btn btn-link" :href="topPageUrl">
+            <span class="text-primary">
+                TOPに戻る
+            </span>
+        </a>
     </div>
 </div>
 </template>
 
 <script>
 export default {
-    props: ["reportRegistrationUrl", "checkPastResultsUrl"],
+    data() {
+        return {
+            screenWidth: screen.width
+        };
+    },
+    props: ["reportRegistrationUrl", "checkPastResultsUrl", "topPageUrl"]
 };
 </script>
