@@ -32,10 +32,15 @@ class SaleDailyReportHistoryController extends Controller
     {   
         // return response()->json($request->startDate);
         $startDate = Carbon::parse($request->startDate);
-        // $startDate = Carbon::now();
-        $endDate = $request->endDate;
-        // return response()->json($request->startDate);
-        $saleDailyReports = SaleDailyReport::whereDate('created_at', '>=', $startDate)
+        $endDate = Carbon::parse($request->endDate);
+        $saleDailyReports = SaleDailyReport::where(function ($q) use ($startDate, $endDate) {
+            if ($startDate) {
+                $q->whereDate('created_at', '>=', $startDate);
+            }
+            if ($endDate) {
+                $q->whereDate('created_at', '<=', $endDate);
+            }
+        })
             ->selectRaw('sum(ping_pong_num) as ping_pong_num')
             ->selectRaw('sum(meet_num) as meet_num')
             ->selectRaw('sum(deal_num) as deal_num')
