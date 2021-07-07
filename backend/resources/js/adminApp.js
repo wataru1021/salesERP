@@ -3,6 +3,7 @@ import VeeValidate from "vee-validate";
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 import AdminLogin from "./components/admin/user/login.vue"
+import SaleDailyReportHistories from "./components/admin/saleDailyreportHistory/index.vue"
 
 Vue.use(VueAxios, axios);
 Vue.use(VeeValidate, {
@@ -15,7 +16,8 @@ new Vue({
     el: "#app",
     components: {
         
-        AdminLogin
+        AdminLogin,
+        SaleDailyReportHistories
     },
     methods: {},
     mounted() {}

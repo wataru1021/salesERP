@@ -63,7 +63,7 @@
 		@include('layouts.admin.nav-builder')
 		@include('layouts.admin.header')
 		<div class="c-body">
-			<main class="c-main">
+			<main class="c-main" id="app">
 				@yield('content')
 			</main>
 		</div>

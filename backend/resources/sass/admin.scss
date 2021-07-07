@@ -1,0 +1,39 @@
+.sale-daily-report-histories {
+    .row {
+        &:last-child {
+            margin-top: -10px;
+        }
+    }
+
+    .card-item {
+        padding: 10px 10px 0;
+
+        p {
+            font-size : 14px;
+            display   : block;
+            margin    : auto;
+            text-align: center;
+        }
+
+        .card-header {
+            padding: 5px;
+        }
+
+        .card {
+            height: 180px;
+        }
+
+        .text-center {
+            display        : flex;
+            justify-content: center;
+            align-items    : center;
+            padding-top    : 15%;
+            font-weight: 400;
+            span {
+                font-size: 14px;
+                padding  : 12px 0 0 8px;
+            }
+        }
+
+    }
+}
