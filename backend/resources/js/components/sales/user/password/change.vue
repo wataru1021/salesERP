@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <div class="card-group">
           <div class="card p-4">
-            <div class="card-body">
+            <div>
               <form
                 method="POST"
                 ref="changePasswordForm"
@@ -18,15 +18,13 @@
                   :value="token"
                   name="reset_password_token"
                 />
-                <h4>パスワードリマインダー</h4>
+                <h1>パスワードリマインダー</h1>
                 <p class="text-muted">パスワードをリセットリンクを発行します</p>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <svg class="c-icon">
-                        <use
-                          xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-user"
-                        ></use>
+                         <use xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-lock-locked"></use>
                       </svg>
                     </span>
                   </div>
@@ -49,9 +47,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <svg class="c-icon">
-                        <use
-                          xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-user"
-                        ></use>
+                         <use xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-lock-locked"></use>
                       </svg>
                     </span>
                   </div>
@@ -77,7 +73,7 @@
                   </div>
 
                   <div class="col-sm-6 col-sx-12 w55 text-right">
-                    <a v-bind:href="formLogin" class="btn btn-link px-0 mt-3"
+                    <a v-bind:href="formLogin" class="btn btn-link px-0 mt-4"
                       >ログインはこちら</a
                     >
 

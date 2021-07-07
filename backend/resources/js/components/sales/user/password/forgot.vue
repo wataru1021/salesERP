@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <div class="card-group">
           <div class="card p-4">
-            <div class="card-body">
+            <div>
               <form
                 method="POST"
                 ref="loginForm"
@@ -13,7 +13,7 @@
                 autocomplete="off"
               >
                 <input type="hidden" :value="csrfToken" name="_token" />
-                <h3>パスワードリセット</h3>
+                <h1>パスワードリセット</h1>
                 <p class="text-muted">パスワードをリセットリンクを発行します</p>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -53,7 +53,7 @@
                   </div>
 
                   <div class="col-sm-6 col-sx-12 w55 text-right">
-                    <a v-bind:href="formLogin" class="btn btn-link px-0 mt-3"
+                    <a v-bind:href="formLogin" class="btn btn-link px-0 mt-4"
                       >ログインはこちら</a
                     >
                     <a href="" class="btn btn-link px-0">新規登録はこちら</a>

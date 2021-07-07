@@ -66,22 +66,31 @@ class UsersController extends Controller
     public function setToken(ForgotRequest $request)
     {
         $message = '';
+        $messageSuccess = '';
+
         $token = bin2hex(random_bytes(64));
         $time = Carbon::now()->addDays(LimitTimeForgot::TIMEFORGOT);
 
         $user = User::where('email', $request->email_address)->first();
-        $user->reset_password_token = $token;
-        $user->reset_password_token_expire =  $time;
-        $flag = $user->save();
-        $messageSuccess = '';
-        if ($flag) {
-            Mail::send('sales.mail.resetPassword', ['token' => $token], function ($message) use ($request) {
-                $message->to($request->email_address);
-            });
-            $messageSuccess = 'リクエストは正常に送信されました';
+
+        if ($user) {
+            $user->reset_password_token = $token;
+            $user->reset_password_token_expire =  $time;
+            $flag = $user->save();
+
+            if ($flag) {
+                Mail::send('sales.mail.resetPassword', ['token' => $token], function ($message) use ($request) {
+                    $message->to($request->email_address);
+                });
+                $messageSuccess = 'リクエストは正常に送信されました';
+            }
+        } else {
+            $message = 'メールは存在しません';
         }
+  
         return view('sales.users.password.forgot', [
             'messageSuccess' => $messageSuccess,
+            'message' => $message,
         ]);
     }
 
