@@ -36,4 +36,5 @@ Route::middleware([Sale::class])->prefix('/')->group(function () {
     Route::get('/',[App\Http\Controllers\Sales\HomeController::class, 'index'])->name('home');
     Route::get('top', [App\Http\Controllers\Sales\TopController::class, 'index']);
     Route::get('sales_management', [App\Http\Controllers\Sales\TopController::class, 'salesManagement']);
+    Route::get('report_histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'index']);
 });

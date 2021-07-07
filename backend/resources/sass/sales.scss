@@ -1,0 +1,29 @@
+.report-histories {
+    .mx-datepicker-range {
+        width: 100%;
+    }
+    .mx-input {
+        height: 45px;
+        font-size: 16px;
+    }
+    .mx-icon-calendar {
+        font-size: 20px;
+    }
+    .h-45 {
+        height: 45px;
+    }
+    .w-100.text-center {
+        table-layout: fixed;
+    }
+    .table {
+        border: 1px solid #768192;
+        color: #768192;
+        th,
+        td {
+            padding: 0.5rem;
+        }
+        tr:first-child td:first-child {
+            border: 1px solid #768192;
+        }
+    }
+}

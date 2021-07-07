@@ -4,7 +4,8 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 import SalesLogin from "./components/sales/user/login.vue";
 import SalesTop from "./components/sales/user/top/top.vue";
-import SalesManagement from "./components/sales/user/salesmanagement.vue"
+import SalesManagement from "./components/sales/user/salesmanagement.vue";
+import SalesReportHistories from './components/sales/user/reporthistories.vue'
 
 Vue.use(VueAxios, axios);
 Vue.use(VeeValidate, {
@@ -12,13 +13,13 @@ Vue.use(VeeValidate, {
 });
 
 new Vue({
-    created() {
-    },
+    created() {},
     el: "#app",
     components: {
         SalesLogin,
         SalesTop,
-        SalesManagement
+        SalesManagement,
+        SalesReportHistories
     },
     methods: {},
     mounted() {}
