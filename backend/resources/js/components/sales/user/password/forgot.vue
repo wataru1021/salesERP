@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container forgot-password">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card-group">
@@ -9,7 +9,7 @@
                 method="POST"
                 ref="loginForm"
                 :action="formUrl"
-                @submit.prevent="login"
+                @submit.prevent="sendMail"
                 autocomplete="off"
               >
                 <input type="hidden" :value="csrfToken" name="_token" />
@@ -28,33 +28,35 @@
                   <input
                     type="text"
                     class="form-control"
-                    name="email"
+                    name="email_address"
                     placeholder="メールアドレス"
-                    v-validate="'required'"
-                    v-model="loginIdValue"
+                    v-validate="'required|email|max:255'"
+                    v-model="email_address"
                     @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
-                    {{ errors.first("email") }}
+                    {{ errors.first("email_address") }}
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-12 text-center is-danger" v-if="messageText">
                     {{ messageText }}
                   </div>
+                  <div
+                    class="col-12 text-center is-success"
+                    v-if="messageSuccess"
+                  >
+                    {{ messageSuccess }}
+                  </div>
                   <div class="col-xs-12 col-sm-6 w45">
                     <button class="btn btn-primary px-4 mt-2">送信</button>
                   </div>
 
                   <div class="col-sm-6 col-sx-12 w55 text-right">
-                    <a
-                      v-bind:href="forgotPasswordUrl"
-                      class="btn btn-link px-0 mt-3"
+                    <a v-bind:href="formLogin" class="btn btn-link px-0 mt-3"
                       >ログインはこちら</a
                     >
-                    <a v-bind:href="forgotPasswordUrl" class="btn btn-link px-0"
-                      >新規登録はこちら</a
-                    >
+                    <a href="" class="btn btn-link px-0">新規登録はこちら</a>
                   </div>
                 </div>
               </form>
@@ -65,14 +67,20 @@
     </div>
   </div>
 </template>
-
+<style scoped>
+.is-success {
+  color: green;
+}
+</style>>
 <script>
 export default {
   created: function () {
     let messError = {
       custom: {
-        email: {
+        email_address: {
           required: "メールアドレスを入力してください",
+          max: "メールアドレスは255文字以内で入力してください。",
+          email: "メールアドレス形式は正しくありません。",
         },
       },
     };
@@ -80,26 +88,29 @@ export default {
   },
   data() {
     return {
-      // csrfToken: Laravel.csrfToken,
-      // loginIdValue: this.loginId,
-      // messageText: this.message
+      csrfToken: Laravel.csrfToken,
+      messageText: this.message,
+      messageSuccess: this.messageSuccess,
     };
   },
-  // props: ["formUrl", "forgotPasswordUrl", "message", "loginId"],
-  mounted() {},
+  props: ["formUrl", "message", "formLogin", "messageSuccess"],
+  mounted() {
+    console.log(this.messageSuccess);
+  },
   methods: {
-    // login: function(e) {
-    //     e.preventDefault();
-    //     let that = this;
-    //     this.$validator.validateAll().then(valid => {
-    //         if (valid) {
-    //             that.$refs.loginForm.submit();
-    //         }
-    //     });
-    // },
-    // changeInput() {
-    //     this.messageText = "";
-    // }
+    sendMail: function (e) {
+      e.preventDefault();
+      let that = this;
+      this.$validator.validateAll().then((valid) => {
+        if (valid) {
+          that.$refs.loginForm.submit();
+        }
+      });
+    },
+    changeInput() {
+      this.messageText = "";
+      this.messageSuccess = "";
+    },
   },
 };
 </script>

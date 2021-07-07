@@ -4,6 +4,8 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 import SalesLogin from "./components/sales/user/login.vue"
 import SalesForgotPassword from "./components/sales/user/password/forgot.vue"
+import SalesChangePassword from "./components/sales/user/password/change.vue"
+import SalesSuccessPassword from "./components/sales/user/password/success.vue"
 
 Vue.use(VueAxios, axios);
 Vue.use(VeeValidate, {
@@ -15,7 +17,9 @@ new Vue({
     el: "#app",
     components: {
         SalesLogin,
-        SalesForgotPassword
+        SalesForgotPassword,
+        SalesChangePassword,
+        SalesSuccessPassword
     },
     methods: {},
     mounted() {}
