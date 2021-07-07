@@ -23,4 +23,8 @@ class SaleDailyReport extends Model
         'sale_time',
         'conscious_point',
     ];
+
+    public function users(){
+        return $this->hasMany( User::class);
+    }
 }

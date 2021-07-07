@@ -32,6 +32,8 @@ Route::middleware([Admin::class])->prefix('/admin')->group(function () {
     Route::resource('sales-chart', 'Admin\SalesChartController', [
         'as' => 'admin'
     ]);
+    Route::get('/sales-chart/get-chart-data', [\App\Http\Controllers\Admin\UsersController::class, 'show'])->name('admin.user.getChartData');
+
 });
 
 Route::get('/login',[App\Http\Controllers\Sales\UsersController::class, 'index'])->name('login');
