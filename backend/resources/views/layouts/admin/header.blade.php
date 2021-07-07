@@ -24,7 +24,7 @@
 		</ul>
 		<ul class="c-header-nav d-md-down-none">
 			<li class="c-header-nav-item dropdown px-3">
-				<a class="c-header-nav-link" href="#">営業マン管理</a>
+				<a class="c-header-nav-link" href="{{route('admin.user.list')}}">営業マン管理</a>
 			</li>
 		</ul>
 		<ul class="c-header-nav ml-auto mr-4">
@@ -41,8 +41,19 @@
 			</li>
 		</ul>
 		<div class="c-subheader px-3">
+			<!-- Breadcrumb-->
 			<ol class="breadcrumb border-0 m-0">
-				<li class="breadcrumb-item"><a href="/">Top</a></li>
+			<li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Top</a></li>
+			@if (isset($breadcrumbs))
+				@foreach ($breadcrumbs as $key => $breadcrumb)
+					@if ($key != count($breadcrumbs) - 1)
+						<li class="breadcrumb-item"><a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['name'] }}</a></li>
+					@else
+						<li class="breadcrumb-item">{{ $breadcrumb }}</li>
+					@endif
+				@endforeach
+			@endif
+			<!-- Breadcrumb Menu-->
 			</ol>
 		</div>
 	</header>

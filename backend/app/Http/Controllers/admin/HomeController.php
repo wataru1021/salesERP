@@ -24,6 +24,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.homepage');
+        $breadcrumbs = [
+            [
+                'name' => '管理者一覧',
+                'url' => route('login')
+
+            ], '請求書・領収書発行（株式会社）'
+        ];
+        return view('admin.homepage', [
+            'breadcrumbs' => $breadcrumbs
+        ]);
     }
 }

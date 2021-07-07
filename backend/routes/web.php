@@ -26,6 +26,10 @@ Route::prefix('/admin')->group(function () {
 
 Route::middleware([Admin::class])->prefix('/admin')->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
+    Route::get('/',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
+    Route::get('/users', [\App\Http\Controllers\Admin\UsersController::class, 'list'])->name('admin.user.list');
+    Route::get('/userList', [\App\Http\Controllers\Admin\UsersController::class, 'getUserlist'])->name('admin.user.getUserlist');
+    Route::get('/users/{id}/delete', [\App\Http\Controllers\Admin\UsersController::class, 'destroy'])->name('admin.user.destroy');
 });
 
 Route::get('/login', [App\Http\Controllers\Sales\UsersController::class, 'index'])->name('login');
@@ -40,4 +44,10 @@ Route::get('/successPassword', [App\Http\Controllers\Sales\UsersController::clas
 
 Route::middleware([Sale::class])->prefix('/')->group(function () {
     Route::get('/', [App\Http\Controllers\Sales\HomeController::class, 'index'])->name('home');
+    Route::get('/',[App\Http\Controllers\Sales\HomeController::class, 'index'])->name('home');
+    Route::get('daily-report/create',[App\Http\Controllers\Sales\DailyReportController::class, 'create'])->name('dailyReport.create');
+    Route::post('daily-report/create',[App\Http\Controllers\Sales\DailyReportController::class, 'store'])->name('dailyReport.store');
+    Route::get('daily-report/complete/{id}',[App\Http\Controllers\Sales\DailyReportController::class, 'complete'])->name('dailyReport.complete');
+    Route::get('top', [App\Http\Controllers\Sales\TopController::class, 'index']);
+    Route::get('sales_management', [App\Http\Controllers\Sales\TopController::class, 'salesManagement']);
 });

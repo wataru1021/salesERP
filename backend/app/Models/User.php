@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -62,4 +63,11 @@ class User extends Authenticatable
     protected $attributes = [
         'menuroles' => 'user',
     ];
+
+    public function getCreatedAtFormatAttribute()
+    {
+        return Carbon::parse($this->created_at)->format('Y-m-d H:i:s');
+    }
+
+    protected $appends = ['created_at_format'];
 }
