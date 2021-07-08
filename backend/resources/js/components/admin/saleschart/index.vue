@@ -342,7 +342,7 @@ export default {
           break;
         case contractRate:
           this.salesChartDatas = this.salesChartObjectDatas.map(
-                  (a) => a.contractRate
+                  (a) => a.contract_rate
           );
           break;
         case acquisitionsNum:
@@ -377,6 +377,7 @@ export default {
           this.salesChartObjectDatas = response.data.data.arr;
           that.updateChartData();
           this.timeLineText = response.data.data.timeLineText;
+          console.log(response.data.data);
         })
         .catch((error) => {
           alert(error);
