@@ -11,7 +11,7 @@
         </a>
     </li>
     <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" href="">
+        <a class="c-sidebar-nav-link" href="{{ URL::to('admin/report_management') }}">
             <i class="cil-calculator c-sidebar-nav-icon"></i>
             全営業マンの報告管理
         </a>

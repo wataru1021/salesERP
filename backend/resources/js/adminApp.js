@@ -6,6 +6,7 @@ import AdminLogin from "./components/admin/user/login.vue"
 import AdminUserList from "./components/admin/user/list.vue"
 import DataTable from 'laravel-vue-datatable';
 import VueSweetalert2 from 'vue-sweetalert2';
+import ReportManagement from './components/admin/reportmanagement'
 
 import 'sweetalert2/dist/sweetalert2.min.css';
 
@@ -18,13 +19,13 @@ Vue.use(VeeValidate, {
 Vue.use(DataTable);
 
 new Vue({
-    created() {
-    },
+    created() {},
     el: "#app",
     components: {
-        
+
         AdminLogin,
-        AdminUserList
+        AdminUserList,
+        ReportManagement
     },
     methods: {},
     mounted() {}
