@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SaleDailyReport;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ReportHistoriesController extends Controller
 {
     public function index()
     {
         // $saleDailyReport = SaleDailyReport::sum('ping_pong_num')->sum('meet_num');
-        $saleDailyReport = SaleDailyReport::selectRaw('sum(ping_pong_num) as ping_pong_num')
+        $saleDailyReport = SaleDailyReport::where('user_id', Auth::guard('sales')->user()->id)
+        ->selectRaw('sum(ping_pong_num) as ping_pong_num')
         ->selectRaw('sum(meet_num) as meet_num')
         ->selectRaw('sum(deal_num) as deal_num')
         ->selectRaw('sum(acquisitions_num) as acquisitions_num')
@@ -23,7 +25,8 @@ class ReportHistoriesController extends Controller
 
     public function reportHistories(Request $request)
     {
-        $saleDailyReport = SaleDailyReport::whereDate('report_date', '>=', Carbon::parse($request->start_date))
+        $saleDailyReport = SaleDailyReport::where('user_id', Auth::guard('sales')->user()->id)
+        ->whereDate('report_date', '>=', Carbon::parse($request->start_date))
         ->whereDate('report_date', '<=', Carbon::parse($request->end_date))
         ->selectRaw('sum(ping_pong_num) as ping_pong_num')
         ->selectRaw('sum(meet_num) as meet_num')
