@@ -71,7 +71,7 @@
                                                 <td>ピンポン数</td>
                                             </tr>
                                             <tr>
-                                                <td>{{ fomatNumber(dataReport[0].ping_pong_num) }}</td>
+                                                <td>{{ dataReport[0].ping_pong_num != null ? fomatNumber(dataReport[0].ping_pong_num) : '---' }}</td>
                                             </tr>
                                             <tr>
                                                 <td>件</td>
@@ -84,7 +84,7 @@
                                                 <td>対面数</td>
                                             </tr>
                                             <tr>
-                                                <td>{{ fomatNumber(dataReport[0].meet_num) }}</td>
+                                                <td>{{ dataReport[0].meet_num != null ? fomatNumber(dataReport[0].meet_num) : '---' }}</td>
                                             </tr>
                                             <tr>
                                                 <td>件</td>
@@ -97,7 +97,7 @@
                                                 <td>商談数</td>
                                             </tr>
                                             <tr>
-                                                <td>{{ fomatNumber(dataReport[0].deal_num) }}</td>
+                                                <td>{{dataReport[0].deal_num != null ? fomatNumber(dataReport[0].deal_num) : '---' }}</td>
                                             </tr>
                                             <tr>
                                                 <td>件</td>
@@ -112,7 +112,7 @@
                                                 <td>獲得数</td>
                                             </tr>
                                             <tr>
-                                                <td>{{ fomatNumber(dataReport[0].acquisitions_num) }}</td>
+                                                <td>{{ dataReport[0].acquisitions_num != null ? fomatNumber(dataReport[0].acquisitions_num) : '---' }}</td>
                                             </tr>
                                             <tr>
                                                 <td>件</td>
@@ -125,7 +125,7 @@
                                                 <td>稼働時間</td>
                                             </tr>
                                             <tr>
-                                                <td>{{ fomatNumber(dataReport[0].sale_time) }}</td>
+                                                <td>{{ dataReport[0].sale_time != null ? fomatNumber(dataReport[0].sale_time) : '---' }}</td>
                                             </tr>
                                             <tr>
                                                 <td>時間</td>
@@ -142,7 +142,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="form-group row">
+            <div class="form-group row mb-2">
                 <div class="col-md-9 text-center">
                     <a :href="salesManagementUrl">営業管理に戻る</a>
                 </div>
@@ -168,23 +168,22 @@ export default {
     },
     data() {
         return {
-            time: [],
-            isActive: "",
+            time: [new Date(), new Date()],
+            isActive: "now",
             activeClass: 'active',
             getDate: null,
             getMonth: null,
             getFullYear: null,
-            dataReport: this.data
+            dataReport: []
         };
     },
-    props: ["data","salesManagementUrl" , "topPageUrl"],
+    props: ["salesManagementUrl", "topPageUrl"],
     mounted() {
         var date = new Date();
         this.getDate = date.getDate();
         this.getMonth = date.getMonth();
         this.getFullYear = date.getFullYear();
-        var firstDay = new Date(this.getFullYear, this.getMonth - 1, this.getDate);
-        this.time = [firstDay, new Date()];
+        this.getData();
     },
     methods: {
         fomatNumber(number) {
@@ -205,7 +204,7 @@ export default {
                     },
                 })
                 .then((res) => {
-                    this.dataReport = res.data;
+                    this.dataReport = res.data.data;
                 })
                 .catch((err) => {});
         },
