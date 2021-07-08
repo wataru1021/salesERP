@@ -5,7 +5,7 @@
 </div>
 <ul class="c-sidebar-nav">
     <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" href="">
+        <a class="c-sidebar-nav-link" href="{{URL::to('/top')}}">
             <i class="cil-speedometer c-sidebar-nav-icon"></i>
             Top
         </a>
