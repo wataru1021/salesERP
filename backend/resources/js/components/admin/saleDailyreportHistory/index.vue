@@ -22,21 +22,29 @@
             <div class="card-body">
               <p>簡易検索</p>
               <div>
-                <button class="btn btn-outline-primary">今日</button>
-                <button class="btn btn-outline-primary">昨日</button>
-                <button class="btn btn-outline-primary">直近7日間</button>
-                <button class="btn btn-outline-primary">直近30日間</button>
+                <button class="btn btn-outline-primary" @click="getData(1)">今日</button>
+                <button class="btn btn-outline-primary" @click="getData(2)">昨日</button>
+                <button class="btn btn-outline-primary" @click="getData(8)">直近7日間</button>
+                <button class="btn btn-outline-primary" @click="getData(31)">直近30日間</button>
               </div>
               <p class="mt-2">期間で絞り込み</p>
               <div>
-                <date-picker v-model="time" :format="'YYYY年MM月DD日'" range></date-picker>
+                <date-picker
+                  v-model="time"
+                  :format="'YYYY年MM月DD日'"
+                  range
+                ></date-picker>
               </div>
-              <button class="btn btn-primary mt-2">検索</button>
+              <button class="btn btn-primary mt-2" @click="getData(0)">
+                検索
+              </button>
             </div>
           </div>
           <div class="card">
             <div class="card-header">
-              <p class="mb-0">2020年6月14日～2021年6月30日</p>
+              <p class="mb-0">
+                {{ time[0] | formatDate }}～{{ time[1] | formatDate }}
+              </p>
             </div>
             <div class="card-body pt-2">
               <div class="row">
@@ -46,7 +54,9 @@
                       <p>ピンポン数</p>
                     </div>
                     <div class="card-body">
-                      <h2 class="text-center">{{ saleDailyHisries.ping_pong_num }}<span>件</span></h2>
+                      <h2 class="text-center">
+                        {{ saleDailyHisries.ping_pong_num }}<span>件</span>
+                      </h2>
                     </div>
                   </div>
                 </div>
@@ -56,7 +66,9 @@
                       <p>総獲得数</p>
                     </div>
                     <div class="card-body">
-                      <h2 class="text-center">{{ saleDailyHisries.acquisitions_num }}<span>件</span></h2>
+                      <h2 class="text-center">
+                        {{ saleDailyHisries.acquisitions_num }}<span>件</span>
+                      </h2>
                     </div>
                   </div>
                 </div>
@@ -161,7 +173,7 @@ export default {
     return {
       time: [],
       saleDailyHisries: {},
-      startDate:"",
+      startDate: "",
       endDate: "",
     };
   },
@@ -173,26 +185,33 @@ export default {
       d = date.getDate();
     var startDate = new Date(y, m - 1, d);
     var endDate = new Date(y, m, d);
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.time = [this.startDate, this.endDate ];
-    this.getData()
-    console.log(this.endDate)
+    this.time = [startDate, endDate];
+    this.getData(0);
   },
   methods: {
-    getData() {
+    getData(value) {
       let that = this;
+      if (value != 0) {
+        var date = new Date(),
+          y = date.getFullYear(),
+          m = date.getMonth(),
+          d = date.getDate();
+        var startDate = new Date(y, m, d - value + 1);
+        var endDate = new Date(y, m, d);
+        this.time = [startDate, endDate];
+      }
+      console.log(this.time)
       axios
         .post(this.urlGetData, {
           _token: Laravel.csrfToken,
-          startDate: this.startDate,
-          endDate: this.endDate,
+          startDate: this.time[0],
+          endDate: this.time[1],
         })
         .then(function (response) {
-            that.saleDailyHisries = response.data[0]
+          that.saleDailyHisries = response.data[0];
         })
-        .catch(error => {});
-    }
-  }
+        .catch((error) => {});
+    },
+  },
 };
 </script>
