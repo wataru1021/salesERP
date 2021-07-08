@@ -27,7 +27,7 @@
             display        : flex;
             justify-content: center;
             align-items    : center;
-            padding-top    : 15%;
+            padding-top    : 10%;
             font-weight: 400;
             span {
                 font-size: 14px;
@@ -35,5 +35,8 @@
             }
         }
 
+    }
+    .sale-name-list {
+        overflow-x: hidden;
     }
 }

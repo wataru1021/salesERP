@@ -62,4 +62,8 @@ class User extends Authenticatable
     protected $attributes = [
         'menuroles' => 'user',
     ];
+
+    public function saleDailyReports() {
+        return $this->hasMany('App\Models\SaleDailyReport', 'user_id', 'id');
+    }
 }
