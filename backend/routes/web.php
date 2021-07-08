@@ -22,6 +22,11 @@ Route::prefix('/admin')->group(function () {
     Route::post('/login',[App\Http\Controllers\Admin\UsersController::class, 'login'])->name('admin.login');
     Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Admin\UsersController::class, 'forgotPassword'])->name('admin.forgot');
     Route::get('/logout', [App\Http\Controllers\Admin\UsersController::class, 'logout'])->name('admin.logout');
+
+    Route::post('/setToken', [App\Http\Controllers\Admin\UsersController::class, 'setToken'])->name('setToken');
+    Route::get('/getToken/{token}',  [App\Http\Controllers\Admin\UsersController::class, 'getToken'])->name('getToken');
+    Route::post('/resetPassword', [App\Http\Controllers\Admin\UsersController::class, 'resetPassword'])->name('resetPassword');
+    Route::get('/successPassword', [App\Http\Controllers\Admin\UsersController::class, 'successPassword'])->name('success');
 });
 
 Route::middleware([Admin::class])->prefix('/admin')->group(function () {

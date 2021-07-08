@@ -4,6 +4,7 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 import AdminLogin from "./components/admin/user/login.vue"
 import AdminUserList from "./components/admin/user/list.vue"
+import AdminForgotPassword from "./components/admin/user/password/forgot.vue"
 import DataTable from 'laravel-vue-datatable';
 import VueSweetalert2 from 'vue-sweetalert2';
 
@@ -18,13 +19,13 @@ Vue.use(VeeValidate, {
 Vue.use(DataTable);
 
 new Vue({
-    created() {
-    },
+    created() {},
     el: "#app",
     components: {
-        
+
         AdminLogin,
-        AdminUserList
+        AdminUserList,
+        AdminForgotPassword
     },
     methods: {},
     mounted() {}

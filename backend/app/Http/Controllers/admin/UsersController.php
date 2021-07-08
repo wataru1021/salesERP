@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\LimitTimeForgot;
 use App\Enums\StatusCode;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminLoginRequest;
 use App\Enums\RoleStateType;
 use App\Enums\MaxPageSize;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class UsersController extends Controller
@@ -47,7 +50,36 @@ class UsersController extends Controller
     }
 
     public function forgotPassword(Request $request) {
+        return view('admin.users.password.forgot');
+    }
 
+    public function setToken(ForgotRequest $request)
+    {
+        $message = '';
+
+        $token = bin2hex(random_bytes(64));
+        $time = Carbon::now()->addDays(LimitTimeForgot::TIMEFORGOT);
+
+        $user = User::where('email', $request->email_address)->first();
+
+        if ($user) {
+            $user->reset_password_token = $token;
+            $user->reset_password_token_expire =  $time;
+            $flag = $user->save();
+
+            if ($flag) {
+                Mail::send('admin.mail.resetPassword', ['token' => $token], function ($message) use ($request) {
+                    $message->to($request->email_address);
+                });
+                $messageSuccess = 'リクエストは正常に送信されました';
+            }
+        } else {
+            $message = 'メールは存在しません';
+        }
+  
+        return view('sales.users.password.forgot', [
+            'message' => $message,
+        ]);
     }
     
     public function logout(Request $request) {
