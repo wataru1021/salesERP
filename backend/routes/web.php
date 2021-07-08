@@ -23,10 +23,11 @@ Route::prefix('/admin')->group(function () {
     Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Admin\UsersController::class, 'forgotPassword'])->name('admin.forgot');
     Route::get('/logout', [App\Http\Controllers\Admin\UsersController::class, 'logout'])->name('admin.logout');
 
-    Route::post('/setToken', [App\Http\Controllers\Admin\UsersController::class, 'setToken'])->name('setToken');
-    Route::get('/getToken/{token}',  [App\Http\Controllers\Admin\UsersController::class, 'getToken'])->name('getToken');
-    Route::post('/resetPassword', [App\Http\Controllers\Admin\UsersController::class, 'resetPassword'])->name('resetPassword');
-    Route::get('/successPassword', [App\Http\Controllers\Admin\UsersController::class, 'successPassword'])->name('success');
+    Route::post('/setToken', [App\Http\Controllers\Admin\UsersController::class, 'setToken'])->name('admin.setToken');
+    Route::get('/getToken/{token}',  [App\Http\Controllers\Admin\UsersController::class, 'getToken'])->name('admin.getToken');
+    Route::post('/resetPassword', [App\Http\Controllers\Admin\UsersController::class, 'resetPassword'])->name('admin.resetPassword');
+    Route::get('/successPassword', [App\Http\Controllers\Admin\UsersController::class, 'successPassword'])->name('admin.successPassword');
+    Route::get('/successEmail', [App\Http\Controllers\Admin\UsersController::class, 'successEmail'])->name('admin.successEmail');
 });
 
 Route::middleware([Admin::class])->prefix('/admin')->group(function () {

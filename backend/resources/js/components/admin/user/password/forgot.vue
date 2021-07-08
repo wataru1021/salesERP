@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <div class="card-group">
           <div class="card p-4">
-            <div>
+            <div class="card-body">
               <form
                 method="POST"
                 ref="loginForm"
@@ -38,12 +38,13 @@
                     {{ errors.first("email_address") }}
                   </div>
                 </div>
+
                 <div class="row">
                   <div class="col-12 text-center is-danger" v-if="messageText">
                     {{ messageText }}
                   </div>
                   <div class="col-xs-12 col-sm-6 w45">
-                    <button class="btn btn-primary px-4 mt-2">送信</button>
+                    <button class="btn btn-primary px-4 mt-1">送信</button>
                   </div>
                 </div>
               </form>

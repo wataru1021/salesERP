@@ -1,5 +1,66 @@
 @import "common/loader";
-
 .laravel-vue-datatable-th {
-  font-weight: 200;
+    font-weight: 200;
+}
+
+.forgot-password,
+.change-password,
+.success-email,
+.success-password {
+    .p-4 {
+        height: 322px;
+        h1 {
+            font-size: 31px;
+        }
+        .btn:not(:disabled):not(.disabled) {
+            padding: 0 !important;
+        }
+        .text-muted {
+            font-size: 14px;
+            padding: 0px;
+        }
+        .w45 {
+            width: 45%;
+            button {
+                width: 84px;
+                height: 37px;
+            }
+        }
+        .w55 {
+            width: 55%;
+            a {
+                margin-top: 0 !important;
+            }
+        }
+    }
+}
+
+.login-password {
+    .p-4 {
+        height: 322px;
+        h1 {
+            font-size: 31px;
+        }
+        .btn:not(:disabled):not(.disabled) {
+            padding: 0 !important;
+        }
+        .text-muted {
+            font-size: 14px;
+            padding: 0px;
+        }
+        .w45 {
+            width: 45%;
+            button {
+                width: 84px;
+                height: 37px;
+            }
+        }
+        .w55 {
+            width: 55%;
+            a {
+                margin-top: 29px !important;
+                width: 160px !important;
+            }
+        }
+    }
 }

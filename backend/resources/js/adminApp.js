@@ -5,6 +5,9 @@ import axios from 'axios';
 import AdminLogin from "./components/admin/user/login.vue"
 import AdminUserList from "./components/admin/user/list.vue"
 import AdminForgotPassword from "./components/admin/user/password/forgot.vue"
+import AdminChangePassword from "./components/admin/user/password/change.vue"
+import AdminSuccessPassword from "./components/admin/user/password/success.vue"
+import AdminSuccessEmail from "./components/admin/user/password/successemail.vue"
 import DataTable from 'laravel-vue-datatable';
 import VueSweetalert2 from 'vue-sweetalert2';
 
@@ -25,7 +28,10 @@ new Vue({
 
         AdminLogin,
         AdminUserList,
-        AdminForgotPassword
+        AdminForgotPassword,
+        AdminChangePassword,
+        AdminSuccessPassword,
+        AdminSuccessEmail
     },
     methods: {},
     mounted() {}
