@@ -21,17 +21,26 @@ class SaleDailyReportHistoryController extends Controller
 
             ], '営業マン毎の営業成績'
         ];
+        $users = User::where('role_id', RoleStateType::SALER)->get();
+        $userResponse = [];
+        foreach ($users as $item) {
+            $userResponse[] = [
+                "name" => $item->name,
+                "user_id" => $item->id
+            ];
+        }
         return view('admin.SaleDailyReportHistories.index', [
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
+            'userResponse' => $userResponse
         ]);
     }
 
     public function getData(Request $request)
-    {   
-        // return response()->json($request->startDate);
+    {
         $startDate = Carbon::parse($request->startDate);
         $endDate = Carbon::parse($request->endDate);
-        $saleDailyReports = SaleDailyReport::where(function ($q) use ($startDate, $endDate) {
+        $user_id = $request->user_id;
+        $saleDailyReports = SaleDailyReport::where('user_id', $user_id)->where(function ($q) use ($startDate, $endDate) {
             if ($startDate) {
                 $q->whereDate('created_at', '>=', $startDate);
             }
@@ -48,14 +57,7 @@ class SaleDailyReportHistoryController extends Controller
             ->selectRaw('sum(deal_num) / sum(ping_pong_num) * 100  as deal_rate')
             ->selectRaw('sum(ping_pong_num) / sum(sale_time) * 100  as ping_pong_num_one_hour')
             ->get();
-
         
-            $users = User::where('role_id', RoleStateType::SALER)->get();
-            $userName = [];
-            foreach($users as $item) {
-                $userName[] = $item->name;
-            }
-            $userName = array_unique($userName);
-            return response()->json([$saleDailyReports, $userName]);
+        return response()->json([$saleDailyReports]);
     }
 }

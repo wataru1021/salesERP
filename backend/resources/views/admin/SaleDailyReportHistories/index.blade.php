@@ -3,8 +3,7 @@
 @section('content')
     <sale-daily-report-histories
     :url-get-data="{{ json_encode(route('admin.saleReportHistory.getData')) }}"
-    {{-- :start-date = "{{ json_encode(Carbon\Carbon::now()->format('Y年m月d日')) }}"
-    :end-date = "{{ json_encode(Carbon\Carbon::now()->format('Y年m月d日')) }}" --}}
+    :user-response = "{{ json_encode(isset($userResponse) ? $userResponse : '') }}"
     ></sale-daily-report-histories>
     
 @endsection
