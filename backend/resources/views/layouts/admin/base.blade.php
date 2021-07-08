@@ -59,7 +59,7 @@
 </head>
 
 <body class="c-app">
-	<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+	<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" >
 		@include('layouts.admin.nav-builder')
 		@include('layouts.admin.header')
 		<div class="c-body">

@@ -71,4 +71,8 @@
     &:last-child {
         display: none;
     }
+@import "common/loader";
+
+.laravel-vue-datatable-th {
+  font-weight: 200;
 }

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\StatusCode;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminLoginRequest;
 use App\Enums\RoleStateType;
+use App\Enums\MaxPageSize;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class UsersController extends Controller
 {
@@ -82,4 +86,43 @@ class UsersController extends Controller
 
     }
 
+    public function list(Request $request) {
+        if (!Auth::guard('admin')->check()) return view('admin.users.login');
+        $breadcrumbs = [
+           '営業マン管理'
+        ];
+        return view('admin.users.List', [
+            'breadcrumbs' => $breadcrumbs,
+        ]);
+    }
+
+    public function getUserlist(Request $request) {
+        if (!Auth::guard('admin')->check()) return view('admin.users.login');
+        $orderBy = $request->input('column');
+        $orderBy = ($orderBy == "created_at_format") ? "created_at" : $orderBy;
+        $orderByDir = $request->input('dir', 'asc');
+        $usersQuery = User::query()->where(['role_id' => RoleStateType::SALER]);
+        switch ($orderByDir){
+            case 'asc' :
+                $usersQuery->orderBy($orderBy);
+                break;
+            case 'desc' :
+                $usersQuery->orderByDesc($orderBy);
+                break;
+        }
+        return new DataTableCollectionResource($usersQuery->paginate(MaxPageSize::MAX_PAGE_SIZE, ['*'], 'page', $request->page));
+    }
+
+    public function destroy($id) {
+        DB::beginTransaction();
+        try {
+            $user = User::find($id);
+            $user->delete();
+            DB::commit();
+            return response()->json([], StatusCode::OK);
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
+        return response()->json([], StatusCode::INTERNAL_ERR);
+    }
 }
