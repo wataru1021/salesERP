@@ -63,15 +63,19 @@ class UsersController extends Controller
         return view('sales.users.password.success');
     }
 
+    public function successEmail(Request $request)
+    {
+        return view('sales.users.password.successemail');
+    }
+
     public function setToken(ForgotRequest $request)
     {
         $message = '';
-        $messageSuccess = '';
 
         $token = bin2hex(random_bytes(64));
         $time = Carbon::now()->addDays(LimitTimeForgot::TIMEFORGOT);
 
-        $user = User::where('email', $request->email_address)->first();
+        $user = User::where('email', $request->email_address)->where('role_id', RoleStateType::SALER)->first();
 
         if ($user) {
             $user->reset_password_token = $token;
@@ -82,14 +86,13 @@ class UsersController extends Controller
                 Mail::send('sales.mail.resetPassword', ['token' => $token], function ($message) use ($request) {
                     $message->to($request->email_address);
                 });
-                $messageSuccess = 'リクエストは正常に送信されました';
+                return redirect('/successEmail');
             }
         } else {
             $message = 'メールは存在しません';
         }
-  
+
         return view('sales.users.password.forgot', [
-            'messageSuccess' => $messageSuccess,
             'message' => $message,
         ]);
     }

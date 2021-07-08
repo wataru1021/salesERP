@@ -42,12 +42,6 @@
                   <div class="col-12 text-center is-danger" v-if="messageText">
                     {{ messageText }}
                   </div>
-                  <div
-                    class="col-12 text-center is-success"
-                    v-if="messageSuccess"
-                  >
-                    {{ messageSuccess }}
-                  </div>
                   <div class="col-xs-12 col-sm-6 w45">
                     <button class="btn btn-primary px-4 mt-2">送信</button>
                   </div>
@@ -67,11 +61,7 @@
     </div>
   </div>
 </template>
-<style scoped>
-.is-success {
-  color: green;
-}
-</style>>
+
 <script>
 export default {
   created: function () {
@@ -90,13 +80,10 @@ export default {
     return {
       csrfToken: Laravel.csrfToken,
       messageText: this.message,
-      messageSuccess: this.messageSuccess,
     };
   },
-  props: ["formUrl", "message", "formLogin", "messageSuccess"],
-  mounted() {
-    console.log(this.messageSuccess);
-  },
+  props: ["formUrl", "message", "formLogin"],
+  mounted() {},
   methods: {
     sendMail: function (e) {
       e.preventDefault();
@@ -109,7 +96,6 @@ export default {
     },
     changeInput() {
       this.messageText = "";
-      this.messageSuccess = "";
     },
   },
 };
