@@ -9,6 +9,15 @@
               <div class="row align-items-center col-8">
                 <div class="mb-3 mb-xl-0">
                   <button
+                    class="btn btn-block btn-outline-primary btn-sc-type"
+                    type="button"
+                    v-if="showChartTypeComputed !== pinPont"
+                    v-on:click="switchShowType(pinPont)"
+                  >
+                    ピンポン数
+                  </button>
+                  <button
+                    v-if="showChartTypeComputed === pinPont"
                     class="btn btn-block btn-primary btn-sc-type"
                     type="button"
                   >
@@ -19,6 +28,15 @@
                   <button
                     class="btn btn-block btn-outline-primary btn-sc-type"
                     type="button"
+                    v-if="showChartTypeComputed !== contractRate"
+                    v-on:click="switchShowType(contractRate)"
+                  >
+                    成約率
+                  </button>
+                  <button
+                    v-if="showChartTypeComputed === contractRate"
+                    class="btn btn-block btn-primary btn-sc-type"
+                    type="button"
                   >
                     成約率
                   </button>
@@ -27,14 +45,35 @@
                   <button
                     class="btn btn-block btn-outline-primary btn-sc-type"
                     type="button"
+                    v-if="showChartTypeComputed !== acquisitionsNum"
+                    v-on:click="switchShowType(acquisitionsNum)"
+                  >
+                    総獲得数
+                  </button>
+                  <button
+                          v-if="showChartTypeComputed === acquisitionsNum"
+                          class="btn btn-block btn-primary btn-sc-type"
+                          type="button"
                   >
                     総獲得数
                   </button>
                 </div>
                 <div class="sc-type-item mb-3 mb-xl-0">
+
                   <button
-                    class="btn btn-block btn-outline-primary btn-sc-type"
-                    type="button"
+                          class="btn btn-block btn-outline-primary btn-sc-type"
+                          type="button"
+                          v-if="showChartTypeComputed !== productivity"
+                          v-on:click="switchShowType(productivity)"
+                  >
+                    生産性
+                  </button>
+
+
+                  <button
+                          v-if="showChartTypeComputed === productivity"
+                          class="btn btn-block btn-primary btn-sc-type"
+                          type="button"
                   >
                     生産性
                   </button>
@@ -51,65 +90,123 @@
               <div class="sales-chart-title">簡易検索</div>
               <div class="row align-items-center col-8">
                 <div class="mb-3 mb-xl-0">
+
+
+
+
+
                   <button
-                    class="btn btn-block btn-primary btn-sc-type"
-                    type="button"
+                          class="btn btn-block btn-outline-primary btn-sc-type"
+                          type="button"
+                          v-if="showTimeLineComputed !== today"
+                          v-on:click="switchTimeLine(today)"
                   >
                     今日
                   </button>
+
+
+                  <button
+                          v-if="showTimeLineComputed === today"
+                          class="btn btn-block btn-primary btn-sc-type"
+                          type="button"
+                  >
+                    今日
+                  </button>
+
                 </div>
                 <div class="sc-type-item mb-3 mb-xl-0">
                   <button
-                    class="btn btn-block btn-outline-primary btn-sc-type"
-                    type="button"
+                          class="btn btn-block btn-outline-primary btn-sc-type"
+                          type="button"
+                          v-if="showTimeLineComputed !== yesterDay"
+                          v-on:click="switchTimeLine(yesterDay)"
                   >
                     昨日
                   </button>
+
+
+                  <button
+                          v-if="showTimeLineComputed === yesterDay"
+                          class="btn btn-block btn-primary btn-sc-type"
+                          type="button"
+                  >
+                    昨日
+                  </button>
+
                 </div>
                 <div class="sc-type-item mb-3 mb-xl-0">
+
                   <button
-                    class="btn btn-block btn-outline-primary btn-sc-type"
-                    type="button"
+                          class="btn btn-block btn-outline-primary btn-sc-type"
+                          type="button"
+                          v-if="showTimeLineComputed !== last7Days"
+                          v-on:click="switchTimeLine(last7Days)"
                   >
                     直近7日間
                   </button>
+
+
+                  <button
+                          v-if="showTimeLineComputed === last7Days"
+                          class="btn btn-block btn-primary btn-sc-type"
+                          type="button"
+                  >
+                    直近7日間
+                  </button>
+
                 </div>
                 <div class="sc-type-item mb-3 mb-xl-0">
+
+
                   <button
-                    class="btn btn-block btn-outline-primary btn-sc-type"
-                    type="button"
+                          class="btn btn-block btn-outline-primary btn-sc-type"
+                          type="button"
+                          v-if="showTimeLineComputed !== last30Days"
+                          v-on:click="switchTimeLine(last30Days)"
+                  >
+                    直近30日間
+                  </button>
+
+
+                  <button
+                          v-if="showTimeLineComputed === last30Days"
+                          class="btn btn-block btn-primary btn-sc-type"
+                          type="button"
                   >
                     直近30日間
                   </button>
                 </div>
               </div>
               <div class="mb-3"></div>
-              <div class="sales-chart-title">簡易検索</div>
+              <div class="sales-chart-title">期間で絞り込み</div>
               <div class="row align-items-center col-8">
                 <div class="pl-0 form-group col-4">
-                  <div class="input-group ig-date">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <svg class="c-icon">
-                          <use
-                            xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-calendar"
-                          ></use>
-                        </svg>
-                      </span>
+
+                  <date-picker @change="clearTimeLine()" v-model="valueDateRange" type="date" :clearable="false"	 range
+                  >
+                    <div slot="input" class="input-group ig-date">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <svg class="c-icon">
+                            <use xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-calendar">
+
+                            </use>
+                          </svg>
+                        </span>
+                      </div>
+                      <input id="datefilter" type="text" name="datefilter" :placeholder="[[placeHolderComputed]]" class="form-control">
                     </div>
-                    <input
-                      class="form-control"
-                      id="datefilter"
-                      type="text"
-                      name="datefilter"
-                      placeholder="2020年6月14日～2021年6月30日"
-                      autocomplete="username"
-                    />
-                  </div>
+                    <span slot="icon-calendar">
+
+                    </span>
+                  </date-picker>
+
+
+
                 </div>
               </div>
               <div class="form-group form-actions">
-                <button class="btn pl-4 pr-4 btn-primary" type="submit">
+                <button class="btn pl-4 pr-4 btn-primary" type="submit" v-on:click="getChartData()">
                   検索
                 </button>
               </div>
@@ -121,34 +218,41 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <div class="sales-chart-title">2020年6月14日～2021年6月30日</div>
+              <div class="sales-chart-title">{{timeLineTextComputed}}</div>
               <CChartBar
                 style="height: 300px"
-                :labels="['', 'Italy', 'France', 'Spain']"
+                :labels="salesChartLabels"
                 :datasets="[
                   {
-                    data: [0, 10, 22, 33],
+                    data: salesChartDatas,
                     backgroundColor: '#F5F5F5',
                   },
                 ]"
                 :options="{
+                animation : {
+                duration : 0
+                },
+
                   maintainAspectRatio: false,
                   legend: false,
                   scales: {
                     xAxes: [
                       {
+                        gridLines: {
+                          display: false,
+                        },
                         ticks: {
                           reverse: true,
                         },
                       },
                     ],
-                                        yAxes: [
+                    yAxes: [
                       {
                         ticks: {
                           display: false,
                         },
                       },
-                    ]
+                    ],
                   },
                 }"
               />
@@ -166,6 +270,16 @@
 import axios from "axios";
 import Loader from "./../../common/loader";
 
+const pinPont = 1;
+const contractRate = 2;
+const acquisitionsNum = 3;
+const productivity = 4;
+
+const  handMadeTimeLine = 0;
+const today = 1;
+const yesterDay = 2;
+const last7Days = 3;
+const last30Days = 4;
 export default {
   created: function () {},
   components: {
@@ -175,57 +289,119 @@ export default {
     return {
       csrfToken: Laravel.csrfToken,
       flagShowLoader: false,
-
+      salesChartLabels: [],
+      showDataType: pinPont,
+      salesChartDatas: [],
+      salesChartObjectDatas: [],
+      pinPont,
+      acquisitionsNum,
+      contractRate,
+      productivity,
+      showTimeLine : today,
+      today,
+      last7Days,
+      yesterDay,
+      last30Days,
+      handMadeTimeLine,
+      timeLineText: '',
+      valueDateRange: [new Date(), new Date()],
+      placeholderText: ''
     };
   },
   props: ["data"],
   mounted() {
-    this.getChartData()
+    this.getChartData();
+  },
+  computed: {
+    showChartTypeComputed: function () {
+      return this.showDataType;
+    },
+    showTimeLineComputed: function () {
+      return this.showTimeLine;
+    },
+    timeLineTextComputed: function () {
+      return this.timeLineText;
+    },
+    placeHolderComputed: function () {
+      var startDay = this.valueDateRange[0].toLocaleString('ja',{month:'long',day:'numeric', year:'numeric'});
+      var endDay = this.valueDateRange[1].toLocaleString('ja',{month:'long',day:'numeric', year:'numeric'});
+      return startDay + '～' + endDay;
+    }
   },
   methods: {
+    updateChartData() {
+      this.salesChartLabels = this.salesChartObjectDatas.map(
+              (a) => a.user.name
+      );
+      this.salesChartLabels.unshift("");
+      switch (this.showDataType) {
+        case pinPont:
+          this.salesChartDatas = this.salesChartObjectDatas.map(
+                  (a) => a.ping_pong_num
+          );
+          break;
+        case contractRate:
+          this.salesChartDatas = this.salesChartObjectDatas.map(
+                  (a) => a.contractRate
+          );
+          break;
+        case acquisitionsNum:
+          this.salesChartDatas = this.salesChartObjectDatas.map(
+                  (a) => a.acquisitions_num
+          );
+          break;
+        case productivity:
+          this.salesChartDatas = this.salesChartObjectDatas.map(
+                  (a) => a.productivity
+          );
+          break;
+      }
+      this.salesChartDatas.unshift(0);
+    },
+    clearTimeLine(){
+      this.showTimeLine = handMadeTimeLine;
+    },
     getChartData() {
       let that = this;
       that.flagShowLoader = true;
       axios
-              .get("sales-chart/get-chart-data")
-              .then((response) => {
-                that.flagShowLoader = false;
-              })
-              .catch((error) => {
-                alert(error);
-              });
-
+        .get("sales-chart/get-chart-data", {
+          params: {
+            timeLine : this.showTimeLine,
+            startDate : this.valueDateRange[0],
+            endDate : this.valueDateRange[1]
+          }
+        })
+        .then((response) => {
+          that.flagShowLoader = false;
+          this.salesChartObjectDatas = response.data.data.arr;
+          that.updateChartData();
+          this.timeLineText = response.data.data.timeLineText;
+        })
+        .catch((error) => {
+          alert(error);
+        });
     },
-    handleDelete(id) {
-      let that = this;
-      this.$swal({
-        title: "ユーザーを削除しますか？",
-        icon: "warning",
-        showCancelButton: true,
-        cancelButtonText: "キャンセル",
-        confirmButtonText: "削除",
-      }).then((result) => {
-        if (result.value) {
-          that.flagShowLoader = true;
-          axios
-            .get("users/" + id + "/delete")
-            .then((response) => {
-              this.$swal({
-                title: "ユーザーが削除されました。",
-                icon: "success",
-                confirmButtonText: "OK",
-              }).then(function (confirm) {});
-              that.updateTable();
-              that.flagShowLoader = false;
-            })
-            .catch((error) => {
-              alert(error);
-            });
-        }
-      });
+    switchShowType(type) {
+      this.showDataType = type;
+      this.updateChartData()
     },
-    updateTable() {
-      this.$refs.userList.getData();
+    switchTimeLine(type) {
+      this.showTimeLine = type;
+      switch (type) {
+        case today:
+          this.valueDateRange = [new Date(), new Date()];
+          break;
+        case yesterDay:
+          this.valueDateRange = [new Date((new Date()).valueOf() - 1000*60*60*24), new Date((new Date()).valueOf() - 1000*60*60*24)];
+          break;
+        case last7Days:
+          this.valueDateRange = [ new Date((new Date()).valueOf() - 7*1000*60*60*24), new Date()];
+          break;
+          case last30Days:
+          this.valueDateRange = [ new Date((new Date()).valueOf() - 30*1000*60*60*24), new Date()];
+          break;
+      }
     },
   },
   created() {},

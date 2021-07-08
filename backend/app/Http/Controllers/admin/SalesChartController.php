@@ -3,11 +3,14 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Enums\StatusCode;
+use App\Enums\TimeLine;
 use App\Http\Controllers\Controller;
 use App\Models\SaleDailyReport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 
 class SalesChartController extends Controller
 {
@@ -29,8 +32,46 @@ class SalesChartController extends Controller
     public function show(Request $request) {
 
         if (!Auth::guard('admin')->check()) return response()->json([], StatusCode::FORBIDDEN);
-        $sdr = SaleDailyReport::with('users')->whereDate('report_date', '=', Carbon::today()->toDateString())->get();
-        $a = 0;
+        $startFilterDay = $endFilterDay = Carbon::now();
+        if ($request->timeLine != TimeLine::HandMadeTimeLine) {
+            switch ($request->timeLine)
+            {
+                case TimeLine::Today:
+                    $startFilterDay = $endFilterDay = Carbon::now();
+                    break;
+                case TimeLine::Yesterday:
+                    $startFilterDay = $endFilterDay = Carbon::yesterday();
+                    break;
+                case TimeLine::Last7Days:
+                    $startFilterDay = Carbon::now()->subDays(7);
+                    $endFilterDay = Carbon::now();
+                    break;
+                case TimeLine::Last30Days:
+                    $startFilterDay = Carbon::now()->subDays(30);
+                    $endFilterDay = Carbon::now();
+                    break;
+            }
+        }
+        else {
+            $startFilterDay =  new Carbon($request->startDate);
+            $endFilterDay = new Carbon($request->endDate);
+        }
 
+        $sdrs = SaleDailyReport::with('user')
+                ->whereHas('user', function($q) {
+                    $q->where('company_id',  Auth::guard('admin')->user()->company_id);
+                })
+                ->whereBetween('report_date', [$startFilterDay->format('Y-m-d 00:00:00'), $endFilterDay->format('Y-m-d 23:59:59')])
+                ->join('users', 'sale_daily_reports.user_id', '=', 'users.id')
+                ->groupBy('user_id')
+                ->selectRaw('user_id, sum(acquisitions_num) as acquisitions_num, sum(ping_pong_num) as ping_pong_num, sum(sale_time) / 24 as sale_time, sum(acquisitions_num) / sum(ping_pong_num) * 100 as contract_rate, sum(acquisitions_num) / sum(sale_time)  as productivity')
+                ->get();
+
+        return response()->json([
+            'data' => [
+                'arr' => $sdrs->toArray(),
+                'timeLineText' => $startFilterDay->format('Y年m月d日') . '～' . $endFilterDay->format('Y年m月d日')
+            ]
+        ], StatusCode::OK);
     }
 }

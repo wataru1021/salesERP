@@ -24,7 +24,7 @@ class SaleDailyReport extends Model
         'conscious_point',
     ];
 
-    public function users(){
-        return $this->hasMany( User::class);
+    public function user(){
+        return $this->belongsTo( User::class);
     }
 }
