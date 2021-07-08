@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Enums\RoleStateType;
 use App\Http\Controllers\Controller;
 use App\Models\SaleDailyReport;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -14,11 +15,6 @@ class SaleDailyReportHistoryController extends Controller
     public function index()
     {
         $breadcrumbs = [
-            [
-                'name' => 'TOP',
-                'url' => ''
-
-            ],
             [
                 'name' => '全営業マンの報告管理',
                 'url' => ''
@@ -54,21 +50,10 @@ class SaleDailyReportHistoryController extends Controller
             ->get();
 
         
-            $dataUser = SaleDailyReport::where(function ($q) use ($startDate, $endDate) {
-                if ($startDate) {
-                    $q->whereDate('created_at', '>=', $startDate);
-                }
-                if ($endDate) {
-                    $q->whereDate('created_at', '<=', $endDate);
-                }
-            })
-            ->whereHas('user', function (Builder $query) {
-                $query->where('role_id', RoleStateType::SALER);
-            })
-                ->get();
+            $users = User::where('role_id', RoleStateType::SALER)->get();
             $userName = [];
-            foreach($dataUser as $item) {
-                $userName[] = $item->user->name;
+            foreach($users as $item) {
+                $userName[] = $item->name;
             }
             $userName = array_unique($userName);
             return response()->json([$saleDailyReports, $userName]);

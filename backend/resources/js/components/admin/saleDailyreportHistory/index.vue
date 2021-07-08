@@ -21,12 +21,13 @@
                 <button class="btn btn-outline-primary" @click="getData(31)">直近30日間</button>
               </div>
               <p class="mt-2 mb-2">期間で絞り込み</p>
-              <div>
+              <div class="search-date-time">
                 <date-picker
                   v-model="time"
                   :format="'YYYY年MM月DD日'"
                   range
                 ></date-picker>
+                <img class="icon-calendar" src="/image/iconCalendar.png" alt="" srcset="">
               </div>
               <button class="btn btn-primary mt-2" @click="getData(0)">
                 検索
@@ -48,7 +49,7 @@
                     </div>
                     <div class="card-body">
                       <h2 class="text-center">
-                        {{ saleDailyHisries.ping_pong_num }}<span>件</span>
+                        {{ saleDailyHisries.ping_pong_num ? saleDailyHisries.ping_pong_num : '---' }}<span>件</span>
                       </h2>
                     </div>
                   </div>
@@ -60,7 +61,7 @@
                     </div>
                     <div class="card-body">
                       <h2 class="text-center">
-                        {{ saleDailyHisries.acquisitions_num }}<span>件</span>
+                        {{ saleDailyHisries.acquisitions_num ? saleDailyHisries.acquisitions_num : '---' }}<span>件</span>
                       </h2>
                     </div>
                   </div>
@@ -71,7 +72,7 @@
                       <p>成約率</p>
                     </div>
                     <div class="card-body">
-                      <h2 class="text-center">{{ parseFloat(saleDailyHisries.contract_rate).toFixed(1) }}<span>％</span></h2>
+                      <h2 class="text-center">{{ parseFloat(saleDailyHisries.contract_rate).toFixed(1) != 'NaN' ? parseFloat(saleDailyHisries.contract_rate).toFixed(1):'---' }}<span>％</span></h2>
                     </div>
                   </div>
                 </div>
@@ -81,7 +82,7 @@
                       <p>生産性</p>
                     </div>
                     <div class="card-body">
-                      <h2 class="text-center">{{ parseFloat(saleDailyHisries.productivity).toFixed(1) }}<span>件/時間</span></h2>
+                      <h2 class="text-center">{{ parseFloat(saleDailyHisries.productivity).toFixed(1) != 'NaN' ? parseFloat(saleDailyHisries.productivity).toFixed(1) : '---' }}<span>件/時間</span></h2>
                     </div>
                   </div>
                 </div>
@@ -91,7 +92,7 @@
                       <p>対面率</p>
                     </div>
                     <div class="card-body">
-                      <h2 class="text-center">{{ parseFloat(saleDailyHisries.meet_rate).toFixed(1) }}<span>％</span></h2>
+                      <h2 class="text-center">{{ parseFloat(saleDailyHisries.meet_rate).toFixed(1) != 'NaN' ? parseFloat(saleDailyHisries.meet_rate).toFixed(1) : '---' }}<span>％</span></h2>
                     </div>
                   </div>
                 </div>
@@ -103,7 +104,7 @@
                       <p>商談率</p>
                     </div>
                     <div class="card-body">
-                      <h2 class="text-center">{{ parseFloat(saleDailyHisries.deal_rate).toFixed(1) }}<span>％</span></h2>
+                      <h2 class="text-center">{{ parseFloat(saleDailyHisries.deal_rate).toFixed(1) != 'NaN' ? parseFloat(saleDailyHisries.deal_rate).toFixed(1) : '---' }}<span>％</span></h2>
                     </div>
                   </div>
                 </div>
@@ -123,7 +124,7 @@
                       <p>1時間の平均ピンポン数</p>
                     </div>
                     <div class="card-body">
-                      <h2 class="text-center">{{ parseFloat(saleDailyHisries.ping_pong_num_one_hour).toFixed(1) }}<span>件/時間</span></h2>
+                      <h2 class="text-center">{{ parseFloat(saleDailyHisries.ping_pong_num_one_hour).toFixed(1) != 'NaN' ? parseFloat(saleDailyHisries.ping_pong_num_one_hour).toFixed(1) : '---' }}<span>件/時間</span></h2>
                     </div>
                   </div>
                 </div>
@@ -143,7 +144,7 @@
                       <p>稼働日数</p>
                     </div>
                     <div class="card-body">
-                      <h2 class="text-center">{{ parseFloat(saleDailyHisries.sale_time).toFixed(1) }}<span>日</span></h2>
+                      <h2 class="text-center">{{ parseFloat(saleDailyHisries.sale_time).toFixed(1) != 'NaN' ? parseFloat(saleDailyHisries.sale_time).toFixed(1) : '---' }}<span>日</span></h2>
                     </div>
                   </div>
                 </div>
@@ -193,6 +194,7 @@ export default {
         var startDate = new Date(y, m, d - value + 1);
         var endDate = new Date(y, m, d);
         this.time = [startDate, endDate];
+        console.log(this.time)
       }
       axios
         .post(this.urlGetData, {
