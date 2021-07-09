@@ -11,7 +11,7 @@
         </a>
     </li>
     <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" href="{{route('admin.user.reportManagement')}}">
+        <a class="c-sidebar-nav-link" href="{{route('admin.reportManagement')}}">
             <i class="cil-calculator c-sidebar-nav-icon"></i>
             全営業マンの報告管理
         </a>

@@ -14,7 +14,6 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue2-datepicker/index.css';
 import Vuex from 'vuex';
 
-
 Vue.use(Vuex);
 Vue.use(VueSweetalert2);
 Vue.use(DatePicker);
@@ -27,7 +26,6 @@ Vue.component('CChartBar', CChartBar);
 const store = new Vuex.Store({
     state: {
         ctype: '',
-        count: 0
     },
     getters: {
         getCType : state => {
@@ -35,20 +33,12 @@ const store = new Vuex.Store({
         }
     },
     mutations: {
-        setCType (contact, ctype) {
-            contact.ctype = ctype
+        setCType (state, ctype) {
+            state.ctype = ctype;
+            localStorage.setItem('ctypeStorage', JSON.stringify(ctype))
         },
-        increment (context, count) {
-            context.count = count
-        }
     },
     actions: {
-        setCTypeAction(context, ctype) {
-            context.commit('setCType', ctype);
-        },
-        setIncrementAction(context, ctype) {
-            context.commit('increment', ctype);
-        }
     },
 });
 Vue.use(DataTable);

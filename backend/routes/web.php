@@ -33,7 +33,7 @@ Route::middleware([Admin::class])->prefix('/admin')->group(function () {
         'as' => 'admin'
     ]);
     Route::get('/sales-chart/get-chart-data', [\App\Http\Controllers\Admin\UsersController::class, 'show'])->name('admin.user.getChartData');
-    Route::get('/report-management', [\App\Http\Controllers\Admin\ReportManagementController::class, 'index'])->name('admin.user.reportManagement');
+    Route::get('/report-management', [\App\Http\Controllers\Admin\ReportManagementController::class, 'index'])->name('admin.reportManagement');
     Route::get('/get-data-report-management', [\App\Http\Controllers\Admin\ReportManagementController::class, 'getData'])->name('admin.user.getDataReport');
 });
 

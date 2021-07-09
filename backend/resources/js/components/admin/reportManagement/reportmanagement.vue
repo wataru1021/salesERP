@@ -80,7 +80,6 @@ const pinPont = 'pinPont';
 const contractRate = 'contractRate';
 const acquisitionsNum = 'acquisitionsNum';
 const productivity = 'productivity';
-import router from '../router'
 
 export default {
     created: function () {},
@@ -140,7 +139,7 @@ export default {
                 },
                 {
                     label: "生産性（件/時間）",
-                    name: "created_at_format",
+                    name: "productivity",
                     orderable: true
                 },
                 {
@@ -186,25 +185,13 @@ export default {
         };
     },
     props: ["data"],
-    mounted() {},
+    mounted() {
+
+    },
     methods: {
         redirect(ctype) {
-            this.$store.dispatch('setCTypeAction', ctype);
-            router.push('/admin/sales-chart');
-            console.log(this.$store.state.ctype) // -> 1
-/*
+            this.$store.commit('setCType', ctype);
             window.location.href = '/admin/sales-chart';
-*/
-            // this.$store.commit('setCType', 'abc');
-
-            /*
-                        this.$store.dispatch('setCTypeAction', ctype);
-            */
-            // console.log(this.$store.getters.getCType)
-/*
-            window.location.href = '/admin/sales-chart';
-*/
-
         },
         getDayData(date) {
             switch (date.getDay()) {
@@ -238,6 +225,7 @@ export default {
             this.$refs.reportList.getData();
         },
     },
-    created() {},
+    created() {
+    },
 }
 </script>

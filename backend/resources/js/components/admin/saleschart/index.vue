@@ -287,7 +287,7 @@ export default {
       csrfToken: Laravel.csrfToken,
       flagShowLoader: false,
       salesChartLabels: [],
-      showDataType: this.$store.state.ctype,
+      showDataType: null,
       salesChartDatas: [],
       salesChartObjectDatas: [],
       pinPont,
@@ -308,9 +308,8 @@ export default {
   },
   props: ["data"],
   mounted() {
-    console.log('abc')
-    console.log(this.$store.state.ctype) // -> 1
-    console.log('abc')
+    var ctypeStorage = JSON.parse(localStorage.getItem('ctypeStorage'));
+    this.showDataType = ctypeStorage;
     this.getChartData();
   },
   computed: {
@@ -334,7 +333,6 @@ export default {
       this.showTimeLine = handMadeTimeLine;
     },
     getChartData() {
-      console.log(this.showDataType)
       let that = this;
       that.flagShowLoader = true;
       axios
