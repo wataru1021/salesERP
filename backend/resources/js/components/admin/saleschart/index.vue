@@ -187,7 +187,7 @@
                     <div slot="input" class="input-group ig-date">
                       <div class="input-group-prepend">
                         <div class="input-group-text">
-                          <div class="c-icon">
+                          <div class="c-icon icon-sales-chart">
                           </div>
                         </div>
                       </div>
