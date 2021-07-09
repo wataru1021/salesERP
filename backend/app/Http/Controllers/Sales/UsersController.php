@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
@@ -55,52 +56,75 @@ class UsersController extends Controller
 
     public function forgotPassword(Request $request)
     {
-        return view('sales.users.password.forgot');
+        if ($request->isMethod('get')) {
+            return view('sales.users.password.forgot');
+        }
+
+        if ($request->isMethod('post')) {
+            $message = '';
+            $token = bin2hex(random_bytes(64));
+            $time = Carbon::now()->addDays(LimitTimeForgot::TIMEFORGOT);
+
+            $user = User::where('email', $request->email_address)->where('role_id', RoleStateType::SALER)->first();
+
+            if ($user) {
+                $user->reset_password_token = $token;
+                $user->reset_password_token_expire =  $time;
+                $flag = $user->save();
+
+                if ($flag) {
+                    Mail::send('sales.mail.resetPassword', ['token' => $token, 'email' => $request->email_address], function ($message) use ($request) {
+                        $message->to($request->email_address);
+                    });
+                    return redirect('/forgot-password-complete');
+                }
+            } else {
+                $message = 'メールは存在しません';
+            }
+
+            return view('sales.users.password.forgot', [
+                'message' => $message,
+            ]);
+        }
     }
 
-    public function successPassword(Request $request)
+    public function change_password_complete(Request $request)
     {
         return view('sales.users.password.success');
     }
 
-    public function successEmail(Request $request)
+    public function forgot_password_complete(Request $request)
     {
         return view('sales.users.password.successemail');
     }
 
-    public function setToken(ForgotRequest $request)
-    {
-        $message = '';
-
-        $token = bin2hex(random_bytes(64));
-        $time = Carbon::now()->addDays(LimitTimeForgot::TIMEFORGOT);
-
-        $user = User::where('email', $request->email_address)->where('role_id', RoleStateType::SALER)->first();
-
-        if ($user) {
-            $user->reset_password_token = $token;
-            $user->reset_password_token_expire =  $time;
-            $flag = $user->save();
-
-            if ($flag) {
-                Mail::send('sales.mail.resetPassword', ['token' => $token], function ($message) use ($request) {
-                    $message->to($request->email_address);
-                });
-                return redirect('/successEmail');
-            }
-        } else {
-            $message = 'メールは存在しません';
-        }
-
-        return view('sales.users.password.forgot', [
-            'message' => $message,
-        ]);
-    }
-
-
     public function getToken(Request $request)
     {
-        $token = explode("/", url()->current())[4];
+        $email = explode("/", url()->current())[4];
+        $token = explode("/", url()->current())[5];
+        $message = [
+            'email' => '',
+            'token' => '',
+            'expired' => ''
+        ];
+
+        $user = User::where('email', $email)->first();
+        if (!$user) {
+            $message = 'Incorrect email address';
+            return view('sales.users.password.forgot', [
+                'message' => $message,
+            ]);
+        } elseif ($user->reset_password_token != $token) {
+            $message = 'Incorrect Tokens';
+            return view('sales.users.password.forgot', [
+                'message' => $message,
+            ]);
+        } elseif (Carbon::parse($user->reset_password_token_expire)->lessThanOrEqualTo(Carbon::now())) {
+            $message = 'Expired Tokens';
+            return view('sales.users.password.forgot', [
+                'message' => $message,
+            ]);
+        }
         return view('sales.users.password.change', [
             'token' => $token
         ]);
@@ -112,8 +136,15 @@ class UsersController extends Controller
 
         if ($user) {
             $user->password = Hash::make($request->password_confirm);
-            $user->save();
-            return redirect('/successPassword');
+            $flag = $user->save();
+            if ($flag) {
+                return redirect('/change-password-complete');
+            } else {
+                $message = 'パスワードの変更に失敗しました';
+                return view('sales.users.password.forgot', [
+                    'message' => $message,
+                ]);
+            }
         } else {
             $message = 'ログインセッションの有効期限が切れました。再入力してください';
             return view('sales.users.password.forgot', [

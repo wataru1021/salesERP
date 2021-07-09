@@ -36,11 +36,10 @@ Route::get('/login', [App\Http\Controllers\Sales\UsersController::class, 'index'
 Route::post('/login', [App\Http\Controllers\Sales\UsersController::class, 'login'])->name('login');
 Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Sales\UsersController::class, 'forgotPassword'])->name('forgot');
 
-Route::post('/setToken', [App\Http\Controllers\Sales\UsersController::class, 'setToken'])->name('setToken');
-Route::get('/getToken/{token}',  [App\Http\Controllers\Sales\UsersController::class, 'getToken'])->name('getToken');
+Route::get('/reset-password/{email}/{token}',  [App\Http\Controllers\Sales\UsersController::class, 'getToken'])->name('getToken');
 Route::post('/resetPassword', [App\Http\Controllers\Sales\UsersController::class, 'resetPassword'])->name('resetPassword');
-Route::get('/successPassword', [App\Http\Controllers\Sales\UsersController::class, 'successPassword'])->name('successPassword');
-Route::get('/successEmail', [App\Http\Controllers\Sales\UsersController::class, 'successEmail'])->name('successEmail');
+Route::get('/change-password-complete', [App\Http\Controllers\Sales\UsersController::class, 'change_password_complete'])->name('changePasswordComplete');
+Route::get('/forgot-password-complete', [App\Http\Controllers\Sales\UsersController::class, 'forgot_password_complete'])->name('forgotPasswordComplete');
 
 
 Route::middleware([Sale::class])->prefix('/')->group(function () {
