@@ -101,7 +101,7 @@ class UsersController extends Controller
     public function getToken(Request $request)
     {
         $email = explode("/", url()->current())[4];
-        $token = explode("/", url()->current())[5];
+        $tokenUrl = explode("/", url()->current())[5];
         $message = [
             'email' => '',
             'token' => '',
@@ -114,7 +114,7 @@ class UsersController extends Controller
             return view('sales.users.password.forgot', [
                 'message' => $message,
             ]);
-        } elseif ($user->reset_password_token != $token) {
+        } elseif ($user->reset_password_token != $tokenUrl) {
             $message = 'Incorrect Tokens';
             return view('sales.users.password.forgot', [
                 'message' => $message,
@@ -126,7 +126,7 @@ class UsersController extends Controller
             ]);
         }
         return view('sales.users.password.change', [
-            'token' => $token
+            'tokenUrl' => $tokenUrl
         ]);
     }
 
