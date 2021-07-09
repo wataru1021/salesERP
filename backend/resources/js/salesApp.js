@@ -7,6 +7,7 @@ import DailyReportCreate from "./components/sales/dailyReport/create.vue"
 import DailyReportComplete from "./components/sales/dailyReport/complete.vue"
 import SalesTop from "./components/sales/user/top/top.vue";
 import SalesManagement from "./components/sales/user/salesmanagement.vue"
+import SalesReportHistories from './components/sales/repothistories'
 
 Vue.use(VueAxios, axios);
 Vue.use(VeeValidate, {
@@ -14,15 +15,15 @@ Vue.use(VeeValidate, {
 });
 
 new Vue({
-    created() {
-    },
+    created() {},
     el: "#app",
     components: {
         SalesLogin,
         DailyReportCreate,
         DailyReportComplete,
         SalesTop,
-        SalesManagement
+        SalesManagement,
+        SalesReportHistories
     },
     methods: {},
     mounted() {}

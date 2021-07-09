@@ -23,11 +23,10 @@ Vue.component('CChartBar', CChartBar)
 Vue.use(DataTable);
 
 new Vue({
-    created() {
-    },
+    created() {},
     el: "#app",
     components: {
-        
+
         AdminLogin,
         AdminUserList,
         AdminSalesChartIndex
