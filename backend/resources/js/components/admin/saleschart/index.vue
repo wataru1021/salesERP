@@ -329,10 +329,35 @@ export default {
     }
   },
   methods: {
-    updateChartData() {
+    clearTimeLine(){
+      this.showTimeLine = handMadeTimeLine;
+    },
+    getChartData() {
+      let that = this;
+      that.flagShowLoader = true;
+      axios
+        .get("sales-chart/get-chart-data", {
+          params: {
+            timeLine : this.showTimeLine,
+            startDate : this.valueDateRange[0],
+            endDate : this.valueDateRange[1]
+          }
+        })
+        .then((response) => {
+          that.flagShowLoader = false;
+          this.salesChartObjectDatas = response.data.data.arr;
+          this.timeLineText = response.data.data.timeLineText;
+          that.updateChartData(response.data.data.names);
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    },
+    updateChartData(names) {
       this.salesChartLabels = this.salesChartObjectDatas.map(
               (a) => a.user.name
       );
+      this.salesChartLabels = names.concat(this.salesChartLabels);
       this.salesChartLabels.unshift("");
       switch (this.showDataType) {
         case pinPont:
@@ -356,32 +381,8 @@ export default {
           );
           break;
       }
+      this.salesChartDatas = Array(names.length).fill(0).concat(this.salesChartDatas);
       this.salesChartDatas.unshift(0);
-    },
-    clearTimeLine(){
-      this.showTimeLine = handMadeTimeLine;
-    },
-    getChartData() {
-      let that = this;
-      that.flagShowLoader = true;
-      axios
-        .get("sales-chart/get-chart-data", {
-          params: {
-            timeLine : this.showTimeLine,
-            startDate : this.valueDateRange[0],
-            endDate : this.valueDateRange[1]
-          }
-        })
-        .then((response) => {
-          that.flagShowLoader = false;
-          this.salesChartObjectDatas = response.data.data.arr;
-          that.updateChartData();
-          this.timeLineText = response.data.data.timeLineText;
-          console.log(response.data.data);
-        })
-        .catch((error) => {
-          alert(error);
-        });
     },
     switchShowType(type) {
       this.showDataType = type;

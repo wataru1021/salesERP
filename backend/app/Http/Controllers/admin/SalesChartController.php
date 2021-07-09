@@ -2,11 +2,13 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Enums\RoleStateType;
 use App\Enums\StatusCode;
 use App\Enums\TimeLine;
 use App\Http\Controllers\Controller;
 use App\Models\SaleDailyReport;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
@@ -70,7 +72,14 @@ class SalesChartController extends Controller
         return response()->json([
             'data' => [
                 'arr' => $sdrs->toArray(),
-                'timeLineText' => $startFilterDay->format('Y年m月d日') . '～' . $endFilterDay->format('Y年m月d日')
+                'names' => array_map(function ($obj) {
+                    return $obj['name'];
+                }, User::query()->whereNotIn('id', array_map(function ($o) {
+                    return $o['user_id'];
+                }, $sdrs->toArray()))->where(['role_id' => RoleStateType::SALER])->where('company_id',  Auth::guard('admin')->user()->company_id)->get()->toArray()),
+                'timeLineText' => $startFilterDay->year . '年' . $startFilterDay->month . '月' . $startFilterDay->day . '日'
+                    . '～' .
+                    $endFilterDay->year . '年' . $endFilterDay->month . '月' . $endFilterDay->day . '日'
             ]
         ], StatusCode::OK);
     }
