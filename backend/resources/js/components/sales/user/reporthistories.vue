@@ -46,8 +46,8 @@
                         <div class="col-md-9">
                             <form v-on:submit.prevent="getData">
                                 <div class="form-group">
-                                    <div class="search-date-time" @click="isActive = ''">
-                                        <date-picker v-model="time" :format="'YYYY年MM月DD日'" range></date-picker>
+                                    <div class="search-date-time">
+                                        <date-picker v-model="time" :format="'YYYY年MM月DD日'"  @change="isActive = ''" range></date-picker>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary h-45">
@@ -71,7 +71,7 @@
                                                 <td>ピンポン数</td>
                                             </tr>
                                             <tr>
-                                                <td>{{ dataReport[0].ping_pong_num != null ? fomatNumber(dataReport[0].ping_pong_num) : '---' }}</td>
+                                                <td>{{ dataReport.ping_pong_num != null ? fomatNumber(dataReport.ping_pong_num) : '---' }}</td>
                                             </tr>
                                             <tr>
                                                 <td>件</td>
@@ -84,7 +84,7 @@
                                                 <td>対面数</td>
                                             </tr>
                                             <tr>
-                                                <td>{{ dataReport[0].meet_num != null ? fomatNumber(dataReport[0].meet_num) : '---' }}</td>
+                                                <td>{{ dataReport.meet_num != null ? fomatNumber(dataReport.meet_num) : '---' }}</td>
                                             </tr>
                                             <tr>
                                                 <td>件</td>
@@ -97,7 +97,7 @@
                                                 <td>商談数</td>
                                             </tr>
                                             <tr>
-                                                <td>{{dataReport[0].deal_num != null ? fomatNumber(dataReport[0].deal_num) : '---' }}</td>
+                                                <td>{{dataReport.deal_num != null ? fomatNumber(dataReport.deal_num) : '---' }}</td>
                                             </tr>
                                             <tr>
                                                 <td>件</td>
@@ -112,7 +112,7 @@
                                                 <td>獲得数</td>
                                             </tr>
                                             <tr>
-                                                <td>{{ dataReport[0].acquisitions_num != null ? fomatNumber(dataReport[0].acquisitions_num) : '---' }}</td>
+                                                <td>{{ dataReport.acquisitions_num != null ? fomatNumber(dataReport.acquisitions_num) : '---' }}</td>
                                             </tr>
                                             <tr>
                                                 <td>件</td>
@@ -125,7 +125,7 @@
                                                 <td>稼働時間</td>
                                             </tr>
                                             <tr>
-                                                <td>{{ dataReport[0].sale_time != null ? fomatNumber(dataReport[0].sale_time) : '---' }}</td>
+                                                <td>{{ dataReport.sale_time != null ? fomatNumber(dataReport.sale_time) : '---' }}</td>
                                             </tr>
                                             <tr>
                                                 <td>時間</td>
@@ -192,19 +192,20 @@ export default {
             }).format(number);
         },
         getData() {
+            let that = this;
             let formData = new FormData();
             var start_date = this.time[0].getFullYear() + '-' + (this.time[0].getMonth() + 1) + '-' + this.time[0].getDate();
             var end_date = this.time[1].getFullYear() + '-' + (this.time[1].getMonth() + 1) + '-' + this.time[1].getDate();
             formData.append("start_date", start_date);
             formData.append("end_date", end_date);
             axios
-                .post(`report_histories`, formData, {
+                .post(`get_data_report_histories`, formData, {
                     header: {
                         "Content-Type": "multipart/form-data",
                     },
                 })
                 .then((res) => {
-                    this.dataReport = res.data.data;
+                    that.dataReport = res.data.data[0];
                 })
                 .catch((err) => {});
         },
