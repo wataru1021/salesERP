@@ -8,7 +8,7 @@
                         limited to one day. <br> Please click the
                         below link to change your password.</div>
                     <div class="card-body">
-                        <a href="http://127.0.0.1:8000/admin/getToken/{{ $token }}">Click Here</a>.
+                        <a href="http://127.0.0.1:8000/admin/reset-password/{{$email}}/{{ $token }}">Click Here</a>.
                     </div>
                 </div>
             </div>
