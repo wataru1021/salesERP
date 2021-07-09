@@ -21,3 +21,12 @@
 .ig-date{
   width: 297px;
 }
+
+.mx-range-wrapper > div:last-child {
+  display: none;
+}
+
+.c-icon {
+  background-image: url(/image/iconAdminCalendar.png);
+  background-position: center;
+  background-size: 1rem;}

@@ -186,13 +186,10 @@
                   >
                     <div slot="input" class="input-group ig-date">
                       <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <svg class="c-icon">
-                            <use xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-calendar">
-
-                            </use>
-                          </svg>
-                        </span>
+                        <div class="input-group-text">
+                          <div class="c-icon">
+                          </div>
+                        </div>
                       </div>
                       <input id="datefilter" type="text" name="datefilter" :placeholder="[[placeHolderComputed]]" class="form-control">
                     </div>
@@ -305,7 +302,8 @@ export default {
       handMadeTimeLine,
       timeLineText: '',
       valueDateRange: [new Date(), new Date()],
-      placeholderText: ''
+      placeholderText: '',
+      namesUserNoData: []
     };
   },
   props: ["data"],
@@ -347,17 +345,18 @@ export default {
           that.flagShowLoader = false;
           this.salesChartObjectDatas = response.data.data.arr;
           this.timeLineText = response.data.data.timeLineText;
-          that.updateChartData(response.data.data.names);
+          this.namesUserNoData = response.data.data.names;
+          that.updateChartData();
         })
         .catch((error) => {
           alert(error);
         });
     },
-    updateChartData(names) {
+    updateChartData() {
       this.salesChartLabels = this.salesChartObjectDatas.map(
               (a) => a.user.name
       );
-      this.salesChartLabels = names.concat(this.salesChartLabels);
+      this.salesChartLabels = this.namesUserNoData.concat(this.salesChartLabels);
       this.salesChartLabels.unshift("");
       switch (this.showDataType) {
         case pinPont:
@@ -381,7 +380,7 @@ export default {
           );
           break;
       }
-      this.salesChartDatas = Array(names.length).fill(0).concat(this.salesChartDatas);
+      this.salesChartDatas = Array(this.namesUserNoData.length).fill(0).concat(this.salesChartDatas);
       this.salesChartDatas.unshift(0);
     },
     switchShowType(type) {
