@@ -80,6 +80,7 @@ export default {
     return {
       csrfToken: Laravel.csrfToken,
       messageText: this.message,
+      email_address: '',
     };
   },
   props: ["formUrl", "message", "formLogin"],
