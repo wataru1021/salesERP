@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\RoleStateType;
 use App\Enums\StatusCode;
+use  Exception;
 use App\Enums\TimeLine;
 use App\Http\Controllers\Controller;
 use App\Models\SaleDailyReport;
@@ -80,7 +81,7 @@ class SalesChartController extends Controller
                 . '～' .
                 $endFilterDay->year . '年' . $endFilterDay->month . '月' . $endFilterDay->day . '日';
         }
-        catch (\Exception $exception) {
+        catch (Exception $exception) {
             return response()->json([
                 'message' => 'エラーが発生しました'
             ], StatusCode::INTERNAL_ERR);
