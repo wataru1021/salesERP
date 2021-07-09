@@ -9,6 +9,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SaleDailyReportHistoryController extends Controller
 {
@@ -22,16 +23,9 @@ class SaleDailyReportHistoryController extends Controller
             ], '営業マン毎の営業成績'
         ];
         $users = User::where('role_id', RoleStateType::SALER)->get();
-        $userResponse = [];
-        foreach ($users as $item) {
-            $userResponse[] = [
-                "name" => $item->name,
-                "user_id" => $item->id
-            ];
-        }
         return view('admin.SaleDailyReportHistories.index', [
             'breadcrumbs' => $breadcrumbs,
-            'userResponse' => $userResponse
+            'userResponse' => $users
         ]);
     }
 
@@ -57,7 +51,10 @@ class SaleDailyReportHistoryController extends Controller
             ->selectRaw('sum(deal_num) / sum(ping_pong_num) * 100  as deal_rate')
             ->selectRaw('sum(ping_pong_num) / sum(sale_time) * 100  as ping_pong_num_one_hour')
             ->get();
+
+
         
+
         return response()->json([$saleDailyReports]);
     }
 }

@@ -8,11 +8,11 @@
               <p class="mb-2">営業マン ※報告数順</p>
               <div class="sale-name-list">
                 <button
-                  @click="changeUserId(user.user_id)"
+                  @click="changeUserId(user.id)"
                   v-for="(user, index) in users"
                   :key="index"
-                  class="btn btn-outline-primary ml-1"
-                  v-bind:class="{ 'is-active': userId == user.user_id }"
+                  class="btn btn-outline-primary ml-1 mt-1"
+                  v-bind:class="{ 'is-active': userId == user.id }"
                 >
                   {{ user.name }}
                 </button>
@@ -249,7 +249,7 @@ export default {
     var startDate = new Date(y, m, d);
     var endDate = new Date(y, m, d);
     this.time = [startDate, endDate];
-    this.userId = this.userResponse[0].user_id;
+    this.userId = this.userResponse[0].id;
     this.getData();
     (this.users = this.userResponse), (this.valueSearch = 1);
   },
