@@ -59,9 +59,10 @@ class SalesChartController extends Controller
             $endFilterDay = new Carbon($request->endDate);
         }
 
-        $sdrs = SaleDailyReport::with('user')
-                ->whereHas('user', function($q) {
-                    $q->where('company_id',  Auth::guard('admin')->user()->company_id);
+        try {
+            $sdrs = SaleDailyReport::with('user')
+                ->whereHas('user', function ($q) {
+                    $q->where('company_id', Auth::guard('admin')->user()->company_id);
                 })
                 ->whereBetween('report_date', [$startFilterDay->format('Y-m-d 00:00:00'), $endFilterDay->format('Y-m-d 23:59:59')])
                 ->join('users', 'sale_daily_reports.user_id', '=', 'users.id')
@@ -69,17 +70,27 @@ class SalesChartController extends Controller
                 ->selectRaw('user_id, sum(acquisitions_num) as acquisitions_num, sum(ping_pong_num) as ping_pong_num, sum(sale_time) / 24 as sale_time, sum(acquisitions_num) / sum(ping_pong_num) * 100 as contract_rate, sum(acquisitions_num) / sum(sale_time)  as productivity')
                 ->get();
 
+            $userNamesHasNoReport = array_map(function ($obj) {
+                return $obj['name'];
+            }, User::query()->whereNotIn('id', array_map(function ($o) {
+                return $o['user_id'];
+            }, $sdrs->toArray()))->where(['role_id' => RoleStateType::SALER])->where('company_id', Auth::guard('admin')->user()->company_id)->get()->toArray());
+
+            $timLineText = $startFilterDay->year . '年' . $startFilterDay->month . '月' . $startFilterDay->day . '日'
+                . '～' .
+                $endFilterDay->year . '年' . $endFilterDay->month . '月' . $endFilterDay->day . '日';
+        }
+        catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'エラーが発生しました'
+            ], StatusCode::INTERNAL_ERR);
+        }
+
         return response()->json([
             'data' => [
                 'arr' => $sdrs->toArray(),
-                'names' => array_map(function ($obj) {
-                    return $obj['name'];
-                }, User::query()->whereNotIn('id', array_map(function ($o) {
-                    return $o['user_id'];
-                }, $sdrs->toArray()))->where(['role_id' => RoleStateType::SALER])->where('company_id',  Auth::guard('admin')->user()->company_id)->get()->toArray()),
-                'timeLineText' => $startFilterDay->year . '年' . $startFilterDay->month . '月' . $startFilterDay->day . '日'
-                    . '～' .
-                    $endFilterDay->year . '年' . $endFilterDay->month . '月' . $endFilterDay->day . '日'
+                'names' => $userNamesHasNoReport,
+                'timeLineText' => $timLineText
             ]
         ], StatusCode::OK);
     }
