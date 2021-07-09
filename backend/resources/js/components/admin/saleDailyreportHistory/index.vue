@@ -211,6 +211,7 @@
         </div>
       </div>
     </div>
+    <loader :flag-show="flagShowLoader"></loader>
   </div>
 </template>
 <style scoped>
@@ -226,18 +227,22 @@
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
 import axios from "axios";
+import Loader from "./../../common/loader";
+
 
 export default {
-  components: { DatePicker },
+  components: { DatePicker,Loader },
   data() {
     return {
       time: [],
-      saleDailyHisries: {},
+      saleDailyHisries: [],
       startDate: "",
       endDate: "",
       users: [],
       userId: null,
       valueSearch: null,
+      data: [],
+      flagShowLoader: false,
     };
   },
   props: ["urlGetData", "userResponse"],
@@ -256,23 +261,39 @@ export default {
   methods: {
     getData() {
       let that = this;
+      this.userId = this.userResponse[0].id;
+      this.saleDailyHisries=[];
+      this.flagShowLoader = true
       axios
         .post(this.urlGetData, {
           _token: Laravel.csrfToken,
           startDate: this.time[0],
           endDate: this.time[1],
-          user_id: this.userId,
         })
         .then(function (response) {
-          that.saleDailyHisries = response.data[0][0];
+          that.data = response.data[0];
+          for(let i = 0; i< response.data[0].length; i++) {
+            if(that.userId == response.data[0][i].user_id) {
+              that.saleDailyHisries = response.data[0][i]
+            }
+          }
+          that.flagShowLoader = false
         })
         .catch((error) => {});
     },
     changeUserId(id) {
       this.userId = id;
+      this.saleDailyHisries = []
+
+      for(let i = 0; i< this.data.length; i++) {
+            if(this.data[i].user_id === id) {
+              this.saleDailyHisries = this.data[i]
+            }
+      }
     },
     changeDate(value) {
       this.valueSearch = value;
+      this.time = []
       if (value != 0) {
         var date = new Date(),
           y = date.getFullYear(),

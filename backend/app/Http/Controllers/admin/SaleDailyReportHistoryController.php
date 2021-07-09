@@ -33,8 +33,8 @@ class SaleDailyReportHistoryController extends Controller
     {
         $startDate = Carbon::parse($request->startDate);
         $endDate = Carbon::parse($request->endDate);
-        $user_id = $request->user_id;
-        $saleDailyReports = SaleDailyReport::where('user_id', $user_id)->where(function ($q) use ($startDate, $endDate) {
+        $saleDailyReports = DB::table('sale_daily_reports')
+        ->where(function ($q) use ($startDate, $endDate) {
             if ($startDate) {
                 $q->whereDate('created_at', '>=', $startDate);
             }
@@ -42,15 +42,16 @@ class SaleDailyReportHistoryController extends Controller
                 $q->whereDate('created_at', '<=', $endDate);
             }
         })
-            ->selectRaw('sum(ping_pong_num) as ping_pong_num')
-            ->selectRaw('sum(acquisitions_num) as acquisitions_num')
-            ->selectRaw('sum(sale_time) / 24 as sale_time')
-            ->selectRaw('sum(acquisitions_num) / sum(ping_pong_num) * 100  as contract_rate')
-            ->selectRaw('sum(acquisitions_num) / sum(sale_time)  as productivity')
-            ->selectRaw('sum(meet_num) / sum(ping_pong_num) * 100  as meet_rate')
-            ->selectRaw('sum(deal_num) / sum(ping_pong_num) * 100  as deal_rate')
-            ->selectRaw('sum(ping_pong_num) / sum(sale_time) * 100  as ping_pong_num_one_hour')
-            ->get();
+        ->select('user_id', DB::raw('SUM(ping_pong_num) as ping_pong_num,
+                                     SUM(acquisitions_num) as acquisitions_num, SUM(sale_time) / 24 as sale_time,
+                                     SUM(acquisitions_num) / SUM(ping_pong_num) * 100  as contract_rate,
+                                     SUM(acquisitions_num) / SUM(sale_time)  as productivity,
+                                     SUM(meet_num) / SUM(ping_pong_num) * 100  as meet_rate,
+                                     SUM(deal_num) / SUM(ping_pong_num) * 100  as deal_rate,
+                                     SUM(ping_pong_num) / SUM(sale_time) * 100  as ping_pong_num_one_hour'
+                                     ))
+        ->groupBy('user_id')
+        ->get();
 
 
         
