@@ -31,3 +31,18 @@
   background-position: center;
   background-size: 1rem;
 }
+
+.report-management {
+    .table th,
+    .table td {
+        padding: 0.3rem;
+    }
+    a.active {
+        background: #321FDB;
+        color: #ffffff !important;
+    }
+    a.active:hover {
+        background: #321FDB;
+        color: #ffffff !important;
+    }
+}

@@ -34,6 +34,8 @@ Route::middleware([Admin::class])->prefix('/admin')->group(function () {
     ]);
     Route::get('/sales-chart/get-chart-data', [\App\Http\Controllers\Admin\UsersController::class, 'show'])->name('admin.user.getChartData');
     Route::get('/report_management', [\App\Http\Controllers\Admin\ReportManagementController::class, 'report'])->name('admin.user.reportManagement');
+    Route::get('/report_management', [\App\Http\Controllers\Admin\ReportManagementController::class, 'index'])->name('admin.user.reportManagement');
+    Route::get('/get_data_report_management', [\App\Http\Controllers\Admin\ReportManagementController::class, 'getData'])->name('admin.user.getDataReport');
 });
 
 Route::get('/login',[App\Http\Controllers\Sales\UsersController::class, 'index'])->name('login');
