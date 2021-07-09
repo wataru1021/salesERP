@@ -23,4 +23,9 @@ class SaleDailyReport extends Model
         'sale_time',
         'conscious_point',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    }
 }

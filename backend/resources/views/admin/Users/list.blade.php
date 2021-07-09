@@ -7,7 +7,6 @@
         'urlGetData' => route('admin.user.getUserlist'),
         'flag-show' => false
     ])}}"
-
     ></admin-user-list>
 @endsection
 

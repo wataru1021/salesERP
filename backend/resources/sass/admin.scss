@@ -1,5 +1,19 @@
 @import "common/loader";
-
 .laravel-vue-datatable-th {
-  font-weight: 200;
+    font-weight: 200;
+}
+
+.report-management {
+    .table th,
+    .table td {
+        padding: 0.3rem;
+    }
+    a.active {
+        background: #321FDB;
+        color: #ffffff !important;
+    }
+    a.active:hover {
+        background: #321FDB;
+        color: #ffffff !important;
+    }
 }

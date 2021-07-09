@@ -1,13 +1,13 @@
 @extends('layouts.admin.base')
 
 @section('content')
-<report-management>
+<report-management
+:data="{{json_encode([
+        'urlGetData' => route('admin.user.getDataReport'),
+        'flag-show' => false
+    ])}}">
 </report-management>
 @endsection
 
 @section('javascript')
-
-<script src="{{ asset('js/Chart.min.js') }}"></script>
-<script src="{{ asset('js/coreui-chartjs.bundle.js') }}"></script>
-<script src="{{ asset('js/main.js') }}" defer></script>
 @endsection
