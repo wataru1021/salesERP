@@ -31,8 +31,7 @@ Vue.filter('formatDate', function(value) {
 Vue.use(DataTable);
 
 new Vue({
-    created() {
-    },
+    created() {},
     el: "#app",
     components: {
         AdminLogin,
