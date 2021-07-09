@@ -261,7 +261,9 @@ export default {
   methods: {
     getData() {
       let that = this;
-      this.userId = this.userResponse[0].id;
+      if( this.userId == null){
+        this.userId = this.userResponse[0].id;
+      }
       this.saleDailyHisries=[];
       this.flagShowLoader = true
       axios
