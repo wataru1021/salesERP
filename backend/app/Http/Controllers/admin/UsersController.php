@@ -101,7 +101,10 @@ class UsersController extends Controller
         $orderBy = $request->input('column');
         $orderBy = ($orderBy == "created_at_format") ? "created_at" : $orderBy;
         $orderByDir = $request->input('dir', 'asc');
-        $usersQuery = User::query()->where(['role_id' => RoleStateType::SALER]);
+        $usersQuery = User::query()->where([
+            'role_id' => RoleStateType::SALER,
+            'company_id' =>  Auth::guard('admin')->user()->company_id
+        ]);
         switch ($orderByDir){
             case 'asc' :
                 $usersQuery->orderBy($orderBy);
