@@ -55,11 +55,18 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <h5>指標毎の営業マン成績</h5>
-            <button class="btn btn-outline-primary" type="button">ピンポン数</button>
-            <button class="btn btn-outline-primary ml-2" type="button">成約率</button>
-            <button class="btn btn-outline-primary ml-2" type="button">総獲得数</button>
-            <button class="btn btn-outline-primary ml-2" type="button">生産性</button>
+            <div class="card">
+                <div class="card-header border-0 pb-0">
+                    <div class="sales-chart-title pb-0">期間で絞り込み</div>
+                </div>
+                <div class="card-body pt-0">
+                    <button v-on:click="redirect(pinPont)" class="btn btn-outline-primary" type="button">ピンポン数</button>
+                    <button v-on:click="redirect(contractRate)" class="btn btn-outline-primary ml-2" type="button">成約率</button>
+                    <button v-on:click="redirect(acquisitionsNum)" class="btn btn-outline-primary ml-2" type="button">総獲得数</button>
+                    <button v-on:click="redirect(productivity)" class="btn btn-outline-primary ml-2" type="button">生産性</button>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
@@ -67,7 +74,13 @@
 
 <script>
 import axios from "axios";
-import Loader from "./../common/loader";
+import Loader from "../../common/loader";
+
+const pinPont = 'pinPont';
+const contractRate = 'contractRate';
+const acquisitionsNum = 'acquisitionsNum';
+const productivity = 'productivity';
+import router from '../router'
 
 export default {
     created: function () {},
@@ -76,6 +89,10 @@ export default {
     },
     data() {
         return {
+            pinPont,
+            acquisitionsNum,
+            contractRate,
+            productivity,
             csrfToken: Laravel.csrfToken,
             flagShowLoader: false,
             urlGetData: this.data.urlGetData,
@@ -171,6 +188,24 @@ export default {
     props: ["data"],
     mounted() {},
     methods: {
+        redirect(ctype) {
+            this.$store.dispatch('setCTypeAction', ctype);
+            router.push('/admin/sales-chart');
+            console.log(this.$store.state.ctype) // -> 1
+/*
+            window.location.href = '/admin/sales-chart';
+*/
+            // this.$store.commit('setCType', 'abc');
+
+            /*
+                        this.$store.dispatch('setCTypeAction', ctype);
+            */
+            // console.log(this.$store.getters.getCType)
+/*
+            window.location.href = '/admin/sales-chart';
+*/
+
+        },
         getDayData(date) {
             switch (date.getDay()) {
                 case 0:
