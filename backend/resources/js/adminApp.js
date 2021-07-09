@@ -3,6 +3,9 @@ import VeeValidate from "vee-validate";
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 import AdminLogin from "./components/admin/user/login.vue"
+import SaleDailyReportHistories from "./components/admin/saleDailyreportHistory/index.vue"
+import moment from 'moment-timezone'
+
 import AdminUserList from "./components/admin/user/list.vue"
 import AdminSalesChartIndex from "./components/admin/saleschart/index"
 import DataTable from 'laravel-vue-datatable';
@@ -20,6 +23,11 @@ Vue.use(VeeValidate, {
 });
 Vue.component('CChartBar', CChartBar)
 
+Vue.filter('formatDate', function(value) {
+    if (value) {
+        return moment(String(value)).tz('Asia/Tokyo').format('YYYY年MM月DD日')
+    }
+});
 Vue.use(DataTable);
 
 new Vue({
@@ -27,10 +35,11 @@ new Vue({
     },
     el: "#app",
     components: {
-        
         AdminLogin,
         AdminUserList,
-        AdminSalesChartIndex
+        AdminSalesChartIndex,
+        SaleDailyReportHistories,
+        AdminUserList
     },
     methods: {},
     mounted() {}

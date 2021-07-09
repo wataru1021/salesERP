@@ -18,13 +18,18 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('/admin')->group(function () {
-    Route::get('/login',[App\Http\Controllers\Admin\UsersController::class, 'index'])->name('admin.login');
-    Route::post('/login',[App\Http\Controllers\Admin\UsersController::class, 'login'])->name('admin.login');
+    Route::get('/login', [App\Http\Controllers\Admin\UsersController::class, 'index'])->name('admin.login');
+    Route::post('/login', [App\Http\Controllers\Admin\UsersController::class, 'login'])->name('admin.login');
     Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Admin\UsersController::class, 'forgotPassword'])->name('admin.forgot');
     Route::get('/logout', [App\Http\Controllers\Admin\UsersController::class, 'logout'])->name('admin.logout');
 });
 
 Route::middleware([Admin::class])->prefix('/admin')->group(function () {
+    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
+    Route::prefix('/sale-report-histories')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\SaleDailyReportHistoryController::class, 'index'])->name('admin.saleReportHistory.index');
+        Route::post('/getData', [App\Http\Controllers\Admin\SaleDailyReportHistoryController::class, 'getData'])->name('admin.saleReportHistory.getData');
+    });
     Route::get('/',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
     Route::get('/users', [\App\Http\Controllers\Admin\UsersController::class, 'list'])->name('admin.user.list');
     Route::get('/user-list', [\App\Http\Controllers\Admin\UsersController::class, 'getUserlist'])->name('admin.user.getUserlist');
@@ -36,15 +41,15 @@ Route::middleware([Admin::class])->prefix('/admin')->group(function () {
 
 });
 
-Route::get('/login',[App\Http\Controllers\Sales\UsersController::class, 'index'])->name('login');
-Route::post('/login',[App\Http\Controllers\Sales\UsersController::class, 'login'])->name('login');
+Route::get('/login', [App\Http\Controllers\Sales\UsersController::class, 'index'])->name('login');
+Route::post('/login', [App\Http\Controllers\Sales\UsersController::class, 'login'])->name('login');
 Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Sales\UsersController::class, 'forgotPassword'])->name('forgot');
 
 Route::middleware([Sale::class])->prefix('/')->group(function () {
-    Route::get('/',[App\Http\Controllers\Sales\HomeController::class, 'index'])->name('home');
-    Route::get('daily-report/create',[App\Http\Controllers\Sales\DailyReportController::class, 'create'])->name('dailyReport.create');
-    Route::post('daily-report/create',[App\Http\Controllers\Sales\DailyReportController::class, 'store'])->name('dailyReport.store');
-    Route::get('daily-report/complete/{id}',[App\Http\Controllers\Sales\DailyReportController::class, 'complete'])->name('dailyReport.complete');
+    Route::get('/', [App\Http\Controllers\Sales\HomeController::class, 'index'])->name('home');
+    Route::get('daily-report/create', [App\Http\Controllers\Sales\DailyReportController::class, 'create'])->name('dailyReport.create');
+    Route::post('daily-report/create', [App\Http\Controllers\Sales\DailyReportController::class, 'store'])->name('dailyReport.store');
+    Route::get('daily-report/complete/{id}', [App\Http\Controllers\Sales\DailyReportController::class, 'complete'])->name('dailyReport.complete');
     Route::get('top', [App\Http\Controllers\Sales\TopController::class, 'index']);
     Route::get('sales_management', [App\Http\Controllers\Sales\TopController::class, 'salesManagement']);
 });
