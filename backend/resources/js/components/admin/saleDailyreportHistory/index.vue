@@ -271,10 +271,10 @@ export default {
           endDate: this.time[1],
         })
         .then(function (response) {
-          that.data = response.data[0];
-          for(let i = 0; i< response.data[0].length; i++) {
-            if(that.userId == response.data[0][i].user_id) {
-              that.saleDailyHisries = response.data[0][i]
+          that.data = response.data;
+          for(let i = 0; i< response.data.length; i++) {
+            if(that.userId == response.data[i].user_id) {
+              that.saleDailyHisries = response.data[i]
             }
           }
           that.flagShowLoader = false
