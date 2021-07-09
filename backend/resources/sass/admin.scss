@@ -64,3 +64,31 @@
         }
     }
 }
+
+.sales-chart-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.btn-sc-type {
+    width: fit-content;
+    white-space: nowrap;
+}
+
+.sc-type-item {
+    margin-left: 8px;
+}
+
+.ig-date {
+    width: 297px;
+}
+
+.mx-range-wrapper>div:last-child {
+    display: none;
+}
+
+.icon-sales-chart {
+    background-image: url(/image/iconAdminCalendar.png);
+    background-position: center;
+    background-size: 1rem;
+}

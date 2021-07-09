@@ -32,8 +32,13 @@ Route::prefix('/admin')->group(function () {
 Route::middleware([Admin::class])->prefix('/admin')->group(function () {
     Route::get('/',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
     Route::get('/users', [\App\Http\Controllers\Admin\UsersController::class, 'list'])->name('admin.user.list');
-    Route::get('/userList', [\App\Http\Controllers\Admin\UsersController::class, 'getUserlist'])->name('admin.user.getUserlist');
+    Route::get('/user-list', [\App\Http\Controllers\Admin\UsersController::class, 'getUserlist'])->name('admin.user.getUserlist');
     Route::get('/users/{id}/delete', [\App\Http\Controllers\Admin\UsersController::class, 'destroy'])->name('admin.user.destroy');
+    Route::resource('sales-chart', 'Admin\SalesChartController', [
+        'as' => 'admin'
+    ]);
+    Route::get('/sales-chart/get-chart-data', [\App\Http\Controllers\Admin\UsersController::class, 'show'])->name('admin.user.getChartData');
+
 });
 
 Route::get('/login',[App\Http\Controllers\Sales\UsersController::class, 'index'])->name('login');

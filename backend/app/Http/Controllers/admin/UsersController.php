@@ -100,10 +100,10 @@ class UsersController extends Controller
     public function getToken(Request $request)
     {
         $email = explode("/", url()->current())[5];
-        $token = explode("/", url()->current())[6];
+        $tokenUrl = explode("/", url()->current())[6];
         $message = [
             'email' => '',
-            'token' => '',
+            'tokenUrl' => '',
             'expired' => ''
         ];
 
@@ -113,7 +113,7 @@ class UsersController extends Controller
             return view('admin.users.password.forgot', [
                 'message' => $message,
             ]);
-        } elseif ($user->reset_password_token != $token) {
+        } elseif ($user->reset_password_token != $tokenUrl) {
             $message = 'Incorrect Tokens';
             return view('admin.users.password.forgot', [
                 'message' => $message,
@@ -125,12 +125,13 @@ class UsersController extends Controller
             ]);
         }
         return view('admin.users.password.change', [
-            'token' => $token
+            'tokenUrl' => $tokenUrl
         ]);
     }
 
     public function resetPassword(ChangeRequest $request)
     {
+       
         $user = User::where('reset_password_token', $request->reset_password_token)->whereDate('reset_password_token_expire', '>', Carbon::now())->first();
         if ($user) {
             $user->password = Hash::make($request->password_confirm);
@@ -205,9 +206,12 @@ class UsersController extends Controller
         $orderBy = $request->input('column');
         $orderBy = ($orderBy == "created_at_format") ? "created_at" : $orderBy;
         $orderByDir = $request->input('dir', 'asc');
-        $usersQuery = User::query()->where(['role_id' => RoleStateType::SALER]);
-        switch ($orderByDir) {
-            case 'asc':
+        $usersQuery = User::query()->where([
+            'role_id' => RoleStateType::SALER,
+            'company_id' =>  Auth::guard('admin')->user()->company_id
+        ]);
+        switch ($orderByDir){
+            case 'asc' :
                 $usersQuery->orderBy($orderBy);
                 break;
             case 'desc':

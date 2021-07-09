@@ -109,11 +109,13 @@ export default {
       messageText: this.message,
       password: "",
       password_confirm: "",
-      token: this.token,
+      token: this.tokenUrl,
     };
   },
-  props: ["formUrl", "token", "message", "formLogin"],
-  mounted() {},
+  props: ["formUrl", "tokenUrl", "message", "formLogin"],
+  mounted() {
+    console.log(this.tokenUrl)
+  },
   methods: {
     changePassword(e) {
       e.preventDefault();
