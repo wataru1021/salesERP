@@ -4,7 +4,14 @@
       <div class="col-md-6">
         <div class="card-group">
           <div class="card p-4">
-            <div>
+            <div v-if="messageText">
+              <h1>{{ messageText }}</h1>
+              <a v-bind:href="formLogin">ログインページに戻る</a> <br />
+
+              <a v-bind:href="formForgot">パスワードを忘れたページに戻る</a>
+            </div>
+
+            <div v-else>
               <form
                 method="POST"
                 ref="changePasswordForm"
@@ -24,7 +31,9 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <svg class="c-icon">
-                         <use xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-lock-locked"></use>
+                        <use
+                          xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-lock-locked"
+                        ></use>
                       </svg>
                     </span>
                   </div>
@@ -47,7 +56,9 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <svg class="c-icon">
-                         <use xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-lock-locked"></use>
+                        <use
+                          xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-lock-locked"
+                        ></use>
                       </svg>
                     </span>
                   </div>
@@ -65,8 +76,8 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-12 text-center is-danger" v-if="messageText">
-                    {{ messageText }}
+                  <div class="col-12 text-center is-danger" v-if="messageText2">
+                    {{ messageText2 }}
                   </div>
                   <div class="col-xs-12 col-sm-6 w45">
                     <button class="btn btn-primary mt-2">リセット</button>
@@ -77,7 +88,9 @@
                       >ログインはこちら</a
                     >
 
-                    <a href="" class="btn btn-link px-0">新規登録はこちら</a>
+                    <a v-bind:href="formForgot" class="btn btn-link px-0"
+                      >新規登録はこちら</a
+                    >
                   </div>
                 </div>
               </form>
@@ -113,12 +126,20 @@ export default {
     return {
       csrfToken: Laravel.csrfToken,
       messageText: this.message,
+      messageText2: this.message2,
       password: "",
       password_confirm: "",
       token: this.tokenUrl,
     };
   },
-  props: ["formUrl", "tokenUrl", "message", "formLogin"],
+  props: [
+    "formUrl",
+    "tokenUrl",
+    "message",
+    "message2",
+    "formLogin",
+    "formForgot",
+  ],
   mounted() {},
   methods: {
     changePassword(e) {

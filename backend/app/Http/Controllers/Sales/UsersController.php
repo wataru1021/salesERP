@@ -102,54 +102,40 @@ class UsersController extends Controller
     {
         $email = explode("/", url()->current())[4];
         $tokenUrl = explode("/", url()->current())[5];
-        $message = [
-            'email' => '',
-            'token' => '',
-            'expired' => ''
-        ];
 
+        $message = '';
         $user = User::where('email', $email)->first();
         if (!$user) {
             $message = 'Incorrect email address';
-            return view('sales.users.password.forgot', [
-                'message' => $message,
-            ]);
         } elseif ($user->reset_password_token != $tokenUrl) {
             $message = 'Incorrect Tokens';
-            return view('sales.users.password.forgot', [
-                'message' => $message,
-            ]);
         } elseif (Carbon::parse($user->reset_password_token_expire)->lessThanOrEqualTo(Carbon::now())) {
             $message = 'Expired Tokens';
-            return view('sales.users.password.forgot', [
-                'message' => $message,
-            ]);
         }
+
         return view('sales.users.password.change', [
-            'tokenUrl' => $tokenUrl
+            'tokenUrl' => $tokenUrl,
+            'message' => $message,
         ]);
     }
 
     public function resetPassword(ChangeRequest $request)
     {
+        $message2 = '';
         $user = User::where('reset_password_token', $request->reset_password_token)->whereDate('reset_password_token_expire', '>', Carbon::now())->first();
-
         if ($user) {
             $user->password = Hash::make($request->password_confirm);
             $flag = $user->save();
             if ($flag) {
                 return redirect('/change-password-complete');
             } else {
-                $message = 'パスワードの変更に失敗しました';
-                return view('sales.users.password.forgot', [
-                    'message' => $message,
-                ]);
+                $message2 = 'パスワードの変更に失敗しました';
             }
         } else {
-            $message = 'ログインセッションの有効期限が切れました。再入力してください';
-            return view('sales.users.password.forgot', [
-                'message' => $message,
-            ]);
+            $message2 = 'ログインセッションの有効期限が切れました。再入力してください';
         }
+        return view('sales.users.password.forgot', [
+            'message2' => $message2,
+        ]);
     }
 }

@@ -42,6 +42,9 @@
                   <div class="col-12 text-center is-danger" v-if="messageText">
                     {{ messageText }}
                   </div>
+                  <div class="col-12 text-center is-danger" v-if="messageText2">
+                    {{ messageText2 }}
+                  </div>
                   <div class="col-xs-12 col-sm-6 w45">
                     <button class="btn btn-primary px-4 mt-2">送信</button>
                   </div>
@@ -80,10 +83,11 @@ export default {
     return {
       csrfToken: Laravel.csrfToken,
       messageText: this.message,
-      email_address: '',
+      messageText2: this.message2,
+      email_address: "",
     };
   },
-  props: ["formUrl", "message", "formLogin"],
+  props: ["formUrl", "message", "formLogin", "message2"],
   mounted() {},
   methods: {
     sendMail: function (e) {
