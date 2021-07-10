@@ -10,7 +10,7 @@
                 for="ping_pong_num"
               ></label>
               <div class="col-md-9">
-                <h1>リセット完了</h1>
+                <h2 class="mg-left-20">リセット完了</h2>
               </div>
               <div class="col-md-9 text-center mt-4">
                 <img src="/image/changePasswordComplete.png" class="w-23" />
