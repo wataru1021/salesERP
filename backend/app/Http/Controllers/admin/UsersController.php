@@ -101,55 +101,40 @@ class UsersController extends Controller
     {
         $email = explode("/", url()->current())[5];
         $tokenUrl = explode("/", url()->current())[6];
-        $message = [
-            'email' => '',
-            'tokenUrl' => '',
-            'expired' => ''
-        ];
+        $message = '';
 
         $user = User::where('email', $email)->first();
         if (!$user) {
             $message = 'Incorrect email address';
-            return view('admin.users.password.forgot', [
-                'message' => $message,
-            ]);
         } elseif ($user->reset_password_token != $tokenUrl) {
             $message = 'Incorrect Tokens';
-            return view('admin.users.password.forgot', [
-                'message' => $message,
-            ]);
         } elseif (Carbon::parse($user->reset_password_token_expire)->lessThanOrEqualTo(Carbon::now())) {
             $message = 'Expired Tokens';
-            return view('admin.users.password.forgot', [
-                'message' => $message,
-            ]);
         }
         return view('admin.users.password.change', [
-            'tokenUrl' => $tokenUrl
+            'tokenUrl' => $tokenUrl,
+            'message' => $message,
         ]);
     }
 
     public function resetPassword(ChangeRequest $request)
     {
-       
+        $message2 = '';
         $user = User::where('reset_password_token', $request->reset_password_token)->whereDate('reset_password_token_expire', '>', Carbon::now())->first();
         if ($user) {
             $user->password = Hash::make($request->password_confirm);
             $flag = $user->save();
-            if ($flag) {
+            if (!$flag) {
                 return redirect('/admin/change-password-complete');
             } else {
-                $message = 'パスワードの変更に失敗しました';
-                return view('admin.users.password.forgot', [
-                    'message' => $message,
-                ]);
+                $message2 = 'パスワードの変更に失敗しました';
             }
         } else {
-            $message = 'ログインセッションの有効期限が切れました。再入力してください';
-            return view('admin.users.password.forgot', [
-                'message' => $message,
-            ]);
+            $message2 = 'ログインセッションの有効期限が切れました。再入力してください';
         }
+        return view('admin.users.password.forgot', [
+            'message2' => $message2,
+        ]);
     }
 
     public function logout(Request $request)
@@ -210,8 +195,8 @@ class UsersController extends Controller
             'role_id' => RoleStateType::SALER,
             'company_id' =>  Auth::guard('admin')->user()->company_id
         ]);
-        switch ($orderByDir){
-            case 'asc' :
+        switch ($orderByDir) {
+            case 'asc':
                 $usersQuery->orderBy($orderBy);
                 break;
             case 'desc':

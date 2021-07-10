@@ -4,7 +4,13 @@
       <div class="col-md-6">
         <div class="card-group">
           <div class="card p-4">
-            <div class="card-body">
+            <div class="card-body" v-if="messageText">
+              <h1>{{ messageText }}</h1>
+              <a v-bind:href="formLogin">ログインページに戻る</a> <br />
+
+              <a v-bind:href="formForgot">パスワードを忘れたページに戻る</a>
+            </div>
+            <div class="card-body" v-else>
               <form
                 method="POST"
                 ref="changePasswordForm"
@@ -68,8 +74,8 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-12 text-center is-danger" v-if="messageText">
-                    {{ messageText }}
+                  <div class="col-12 text-center is-danger" v-if="messageText2">
+                    {{ messageText2 }}
                   </div>
                   <div class="col-xs-12 col-sm-6 w45">
                     <button class="btn btn-primary mt-3">リセット</button>
@@ -107,15 +113,21 @@ export default {
     return {
       csrfToken: Laravel.csrfToken,
       messageText: this.message,
+      messageText2: this.message2,
       password: "",
       password_confirm: "",
       token: this.tokenUrl,
     };
   },
-  props: ["formUrl", "tokenUrl", "message", "formLogin"],
-  mounted() {
-    console.log(this.tokenUrl)
-  },
+  props: [
+    "formUrl",
+    "tokenUrl",
+    "message",
+    "message2",
+    "formLogin",
+    "formForgot",
+  ],
+  mounted() {},
   methods: {
     changePassword(e) {
       e.preventDefault();
