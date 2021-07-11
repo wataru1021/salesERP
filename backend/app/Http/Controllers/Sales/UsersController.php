@@ -138,4 +138,10 @@ class UsersController extends Controller
             'message2' => $message2,
         ]);
     }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('sales')->logout();
+        return redirect(route('login'));
+    }
 }
