@@ -124,7 +124,7 @@ class UsersController extends Controller
         if ($user) {
             $user->password = Hash::make($request->password_confirm);
             $flag = $user->save();
-            if (!$flag) {
+            if ($flag) {
                 return redirect('/admin/change-password-complete');
             } else {
                 $message2 = 'パスワードの変更に失敗しました';
