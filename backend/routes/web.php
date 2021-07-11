@@ -45,6 +45,12 @@ Route::get('/login', [App\Http\Controllers\Sales\UsersController::class, 'index'
 Route::post('/login', [App\Http\Controllers\Sales\UsersController::class, 'login'])->name('login');
 Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Sales\UsersController::class, 'forgotPassword'])->name('forgot');
 
+Route::get('/reset-password/{email}/{token}',  [App\Http\Controllers\Sales\UsersController::class, 'getToken'])->name('getToken');
+Route::post('/resetPassword', [App\Http\Controllers\Sales\UsersController::class, 'resetPassword'])->name('resetPassword');
+Route::get('/change-password-complete', [App\Http\Controllers\Sales\UsersController::class, 'change_password_complete'])->name('changePasswordComplete');
+Route::get('/forgot-password-complete', [App\Http\Controllers\Sales\UsersController::class, 'forgot_password_complete'])->name('forgotPasswordComplete');
+
+
 Route::middleware([Sale::class])->prefix('/')->group(function () {
     Route::get('/', [App\Http\Controllers\Sales\HomeController::class, 'index'])->name('home');
     Route::get('daily-report/create', [App\Http\Controllers\Sales\DailyReportController::class, 'create'])->name('dailyReport.create');

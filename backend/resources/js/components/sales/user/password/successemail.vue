@@ -1,0 +1,41 @@
+<template>
+  <div class="container success-email">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div>
+            <div class="form-group row">
+              <label
+                class="col-md-3 col-form-label"
+                for="ping_pong_num"
+              ></label>
+              <div class="col-md-9">
+                <h2 class="mg-left-20">電子メールを正常に送信</h2>
+              </div>
+              <div class="col-md-9 text-center mt-4">
+                <img src="/image/changePasswordComplete.png" class="w-23" />
+              </div>
+              <div class="col-md-9 text-center mt-4">
+                <a v-bind:href="formLogin" class="btn btn-link px-0 mt-3"
+                  >ログイン画面へ</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  created: function () {},
+  data() {
+    return {};
+  },
+  props: ["formLogin"],
+  mounted() {},
+  methods: {},
+};
+</script>
