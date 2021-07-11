@@ -1,5 +1,5 @@
 <template>
-  <div class="container login-password">
+  <div class="container forgot-password">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card-group">
@@ -9,12 +9,12 @@
                 method="POST"
                 ref="loginForm"
                 :action="formUrl"
-                @submit.prevent="login"
+                @submit.prevent="sendMail"
                 autocomplete="off"
               >
                 <input type="hidden" :value="csrfToken" name="_token" />
-                <h1>ログイン</h1>
-                <p class="text-muted">アカウントを入力してください。</p>
+                <h1>パスワードリセット</h1>
+                <p class="text-muted">パスワードをリセットリンクを発行します</p>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -28,52 +28,26 @@
                   <input
                     type="text"
                     class="form-control"
-                    name="email"
+                    name="email_address"
                     placeholder="メールアドレス"
-                    v-validate="'required'"
-                    v-model="loginIdValue"
+                    v-validate="'required|email|max:255'"
+                    v-model="email_address"
                     @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
-                    {{ errors.first("email") }}
+                    {{ errors.first("email_address") }}
                   </div>
                 </div>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <svg class="c-icon">
-                        <use
-                          xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-lock-locked"
-                        ></use>
-                      </svg>
-                    </span>
-                  </div>
-                  <input
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    placeholder="パスワード"
-                    v-validate="'required'"
-                    @input="changeInput()"
-                  />
-                  <div class="input-group is-danger" role="alert">
-                    {{ errors.first("password") }}
-                  </div>
-                </div>
+
                 <div class="row">
                   <div class="col-12 text-center is-danger" v-if="messageText">
                     {{ messageText }}
                   </div>
-                  <div class="col-xs-12 col-sm-6 w45">
-                    <button class="btn btn-primary px-5 mt-3">ログイン</button>
+                  <div class="col-12 text-center is-danger" v-if="messageText2">
+                    {{ messageText2 }}
                   </div>
-
-                  <div class="col-sm-6 col-sx-12 w55 text-right">
-                    <a
-                      v-bind:href="forgotPasswordUrl"
-                      class="btn btn-link px-0 mt-3"
-                      >パスワードを忘れた方へ</a
-                    >
+                  <div class="col-xs-12 col-sm-6 w45">
+                    <button class="btn btn-primary px-4 mt-1">送信</button>
                   </div>
                 </div>
               </form>
@@ -90,11 +64,10 @@ export default {
   created: function () {
     let messError = {
       custom: {
-        email: {
+        email_address: {
           required: "メールアドレスを入力してください",
-        },
-        password: {
-          required: "パスワードを入力してください",
+          max: "メールアドレスは255文字以内で入力してください。",
+          email: "メールアドレス形式は正しくありません。",
         },
       },
     };
@@ -103,16 +76,16 @@ export default {
   data() {
     return {
       csrfToken: Laravel.csrfToken,
-      loginIdValue: this.loginId,
       messageText: this.message,
+      messageText2: this.message2,
+      email_address: "",
     };
   },
-  props: ["formUrl", "forgotPasswordUrl", "message", "loginId"],
+  props: ["formUrl", "message", "message2", "formLogin"],
   mounted() {},
   methods: {
-    login: function (e) {
+    sendMail: function (e) {
       e.preventDefault();
-
       let that = this;
       this.$validator.validateAll().then((valid) => {
         if (valid) {

@@ -7,6 +7,10 @@ import SaleDailyReportHistories from "./components/admin/saleDailyreportHistory/
 import moment from 'moment-timezone'
 
 import AdminUserList from "./components/admin/user/list.vue"
+import AdminForgotPassword from "./components/admin/user/password/forgot.vue"
+import AdminChangePassword from "./components/admin/user/password/change.vue"
+import AdminSuccessPassword from "./components/admin/user/password/success.vue"
+import AdminSuccessEmail from "./components/admin/user/password/successemail.vue"
 import AdminSalesChartIndex from "./components/admin/saleschart/index"
 import DataTable from 'laravel-vue-datatable';
 import VueSweetalert2 from 'vue-sweetalert2';
@@ -38,7 +42,11 @@ new Vue({
         AdminUserList,
         AdminSalesChartIndex,
         SaleDailyReportHistories,
-        AdminUserList
+        AdminUserList,
+        AdminForgotPassword,
+        AdminChangePassword,
+        AdminSuccessPassword,
+        AdminSuccessEmail
     },
     methods: {},
     mounted() {}
