@@ -29,19 +29,54 @@
                                     <td :key="column.name" v-for="column in columns">
                                         <data-table-cell :value="item" :name="column.name" :meta="column.meta" :comp="column.component" :classes="column.classes">
                                         </data-table-cell>
-                                        <slot v-if="column.name == 'account_name'">
+<!--                                        <slot v-if="column.name == 'account_name'">
                                             {{ item.user.name }}
-                                        </slot>
+                                        </slot>-->
                                         <slot v-if="column.name == 'action'">
-                                            <button class="btn btn-danger" @click="handleDelete(item.id)">
-                                                削除
-                                            </button>
+                                            <span>{{item.sales_daily_reports.length > 0 ? "〇" : ""}} </span>
+                                            <svg class="c-icon">
+                                                <use xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-external-link"></use>
+                                                <a href=""></a>
+                                            </svg>
+
                                         </slot>
+                                        <slot v-if="column.name == 'ping_pong_num'">
+
+                                            {{item.sales_daily_reports.length > 0 ? item.sales_daily_reports[0].ping_pong_num : "---"}}
+                                        </slot>
+                                        <slot v-if="column.name == 'meet_num'">
+
+                                            {{item.sales_daily_reports.length > 0 ? item.sales_daily_reports[0].meet_num : "---"}}
+                                        </slot>
+
+                                        <slot v-if="column.name == 'sale_time'">
+
+                                            {{item.sales_daily_reports.length > 0 ? item.sales_daily_reports[0].sale_time : "---"}}
+                                        </slot>
+
+                                        <slot v-if="column.name == 'acquisitions_num'">
+
+                                            {{item.sales_daily_reports.length > 0 ? item.sales_daily_reports[0].acquisitions_num : "---"}}
+                                        </slot>
+
+                                        <slot v-if="column.name == 'conscious_point'">
+
+                                            {{item.sales_daily_reports.length > 0 ? item.sales_daily_reports[0].conscious_point : "---"}}
+                                        </slot>
+                                        <slot v-if="column.name == 'report_date'">
+
+                                            {{item.sales_daily_reports.length > 0 ? item.sales_daily_reports[0].report_date : "---"}}
+                                        </slot>
+
+                                        <slot v-if="column.name == 'productivity'">
+                                            {{item.sales_daily_reports.length > 0 ? item.sales_daily_reports[0].acquisitions_num / item.sales_daily_reports[0].sale_time : "---"}}
+                                        </slot>
+
                                         <slot v-if="column.name == 'opportunity_rate'">
-                                            {{ item.deal_num / item.ping_pong_num * 100 }}
+                                            {{item.sales_daily_reports.length > 0 ? item.sales_daily_reports[0].deal_num / item.sales_daily_reports[0].ping_pong_num * 100 : "---"}}
                                         </slot>
                                         <slot v-if="column.name == 'contract_rate'">
-                                            {{ item.acquisitions_num / item.ping_pong_num * 100 }}
+                                            {{ item.sales_daily_reports.length > 0 ? item.sales_daily_reports[0].acquisitions_num / item.sales_daily_reports[0].ping_pong_num * 100 : "---"}}
                                         </slot>
                                     </td>
                                 </tr>
@@ -99,7 +134,7 @@ export default {
             date: new Date(),
             columns: [{
                     label: "アカウント名",
-                    name: "account_name",
+                    name: "name",
                     orderable: true
                 },
                 {

@@ -51,4 +51,10 @@
   .a-btn-text {
     color: #321fdb;
   }
+
+  .c-icon:not(.c-icon-c-s):not(.c-icon-custom-size) {
+    width: 12px;
+    height: 12px;
+    margin-bottom: 10px;
+  }
 }

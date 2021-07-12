@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Enums\MaxPageSize;
+use App\Enums\RoleStateType;
 use App\Http\Controllers\Controller;
 use App\Models\SaleDailyReport;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use App\Enums\StatusCode;
@@ -30,6 +32,24 @@ class ReportManagementController extends Controller
         if (!Auth::guard('admin')->check()) return view('admin.users.login');
         $orderBy = $request->input('column'); //Index
         $orderByDir = $request->input('dir', 'asc');
+        $builder = User::with(['salesDailyReports' => function ($q) use ($request) {
+            $q->whereDate('report_date', Carbon::parse($request->input('date')));
+        }])->where([
+            'role_id' => RoleStateType::SALER,
+            'company_id' => Auth::guard('admin')->user()->company_id
+        ]);/*->where('salesDailyReports', function($q) use ($request){
+            $q->whereDate('report_date', Carbon::parse($request->input('date')));
+        });*/
+        switch ($orderByDir) {
+            case 'asc':
+                $builder->orderBy($orderBy);
+                break;
+            case 'desc':
+                $builder->orderByDesc($orderBy);
+                break;
+        }
+        $a = new DataTableCollectionResource($builder->paginate(MaxPageSize::MAX_PAGE_SIZE, ['*'], 'page', $request->page));
+        return new DataTableCollectionResource($builder->paginate(MaxPageSize::MAX_PAGE_SIZE, ['*'], 'page', $request->page));
         $userBuilder = SaleDailyReport::whereDate('report_date', Carbon::parse($request->input('date')))->with('user');
         switch ($orderByDir) {
             case 'asc':

@@ -70,4 +70,9 @@ class User extends Authenticatable
     }
 
     protected $appends = ['created_at_format'];
+
+    public function salesDailyReports()
+    {
+        return $this->hasMany('App\Models\SaleDailyReport', 'user_id', 'id');
+    }
 }
