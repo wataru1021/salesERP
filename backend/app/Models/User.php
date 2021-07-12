@@ -64,6 +64,9 @@ class User extends Authenticatable
         'menuroles' => 'user',
     ];
 
+    public function saleDailyReports() {
+        return $this->hasMany('App\Models\SaleDailyReport', 'user_id', 'id');
+    }
     public function getCreatedAtFormatAttribute()
     {
         return Carbon::parse($this->created_at)->format('Y-m-d H:i:s');
