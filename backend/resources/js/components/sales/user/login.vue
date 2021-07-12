@@ -17,7 +17,7 @@
                                     :value="csrfToken"
                                     name="_token"
                                 />
-                                <h1>ログイン</h1>
+                                <h2>ログイン</h2>
                                 <p class="text-muted">
                                     アカウントを入力してください。
                                 </p>

@@ -13,7 +13,7 @@
                 autocomplete="off"
               >
                 <input type="hidden" :value="csrfToken" name="_token" />
-                <h1>パスワードリセット</h1>
+                <h2>パスワードリセット</h2>
                 <p class="text-muted">パスワードをリセットリンクを発行します</p>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
