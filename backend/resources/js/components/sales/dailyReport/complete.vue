@@ -16,7 +16,7 @@
                 <h3 class="text-success text-center font-weight-bold">報告完了しました</h3>
               </div>
               <div class="col-md-9 text-center mt-3">
-                <img src="/image/dailyReportComplete.png" class="w-25" />
+                <img src="/image/changePasswordComplete.png" class="w-25" />
               </div>
               <div class="col-md-9 mt-3">
                 <p>
