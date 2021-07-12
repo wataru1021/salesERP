@@ -38,8 +38,13 @@ Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Sales\Use
 
 Route::get('/reset-password/{email}/{token}',  [App\Http\Controllers\Sales\UsersController::class, 'getToken'])->name('getToken');
 Route::post('/resetPassword', [App\Http\Controllers\Sales\UsersController::class, 'resetPassword'])->name('resetPassword');
+
 Route::get('/change-password-complete', [App\Http\Controllers\Sales\UsersController::class, 'change_password_complete'])->name('changePasswordComplete');
+Route::get('/change-password-error', [App\Http\Controllers\Sales\UsersController::class, 'change_password_error'])->name('changePasswordError');
+
 Route::get('/forgot-password-complete', [App\Http\Controllers\Sales\UsersController::class, 'forgot_password_complete'])->name('forgotPasswordComplete');
+Route::get('/forgot-password-error', [App\Http\Controllers\Sales\UsersController::class, 'forgot_password_error'])->name('forgotPasswordError');
+
 
 
 Route::middleware([Sale::class])->prefix('/')->group(function () {

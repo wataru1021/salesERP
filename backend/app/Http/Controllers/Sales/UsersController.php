@@ -79,12 +79,8 @@ class UsersController extends Controller
                     return redirect('/forgot-password-complete');
                 }
             } else {
-                $message = 'メールは存在しません';
+                return redirect('/forgot-password-error');
             }
-
-            return view('sales.users.password.forgot', [
-                'message' => $message,
-            ]);
         }
     }
 
@@ -93,9 +89,19 @@ class UsersController extends Controller
         return view('sales.users.password.success');
     }
 
+    public function change_password_error(Request $request)
+    {
+        return view('sales.users.password.error');
+    }
+
     public function forgot_password_complete(Request $request)
     {
         return view('sales.users.password.successemail');
+    }
+
+    public function forgot_password_error(Request $request)
+    {
+        return view('sales.users.password.erroremail');
     }
 
     public function getToken(Request $request)
@@ -134,7 +140,7 @@ class UsersController extends Controller
         } else {
             $message2 = 'ログインセッションの有効期限が切れました。再入力してください';
         }
-        return view('sales.users.password.forgot', [
+        return view('sales.users.password.erroremail', [
             'message2' => $message2,
         ]);
     }

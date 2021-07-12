@@ -6,7 +6,9 @@ import SalesLogin from "./components/sales/user/login.vue"
 import SalesForgotPassword from "./components/sales/user/password/forgot.vue"
 import SalesChangePassword from "./components/sales/user/password/change.vue"
 import SalesSuccessPassword from "./components/sales/user/password/success.vue"
+import SalesErrorPassword from "./components/sales/user/password/error.vue"
 import SalesSuccessEmail from "./components/sales/user/password/successemail.vue"
+import SalesErrorEmail from "./components/sales/user/password/erroremail.vue"
 import DailyReportCreate from "./components/sales/dailyReport/create.vue"
 import DailyReportComplete from "./components/sales/dailyReport/complete.vue"
 import SalesTop from "./components/sales/user/top/top.vue";
@@ -25,7 +27,9 @@ new Vue({
         SalesForgotPassword,
         SalesChangePassword,
         SalesSuccessPassword,
+        SalesErrorPassword,
         SalesSuccessEmail,
+        SalesErrorEmail,
         DailyReportCreate,
         DailyReportComplete,
         SalesTop,
