@@ -113,7 +113,7 @@
                     name="sale_time"
                     type="number"
                     placeholder="10.5"
-                    v-validate="'decimal:1'"
+                    v-validate="'decimal:1|required'"
                     step="0.5"
                     v-model="saleDailyReport.sale_time"
                     @input="changeInput()"
@@ -207,7 +207,7 @@ export default {
           numeric: "数字で入力してください。",
         },
         sale_time: {
-          // required: "稼働時間を入力してください",
+          required: "稼働時間を入力してください",
           decimal:"数字で入力してください。"
         },
         conscious_point: {
@@ -226,7 +226,7 @@ export default {
   },
   props: ["formUrl", "message", "topUrl", "date", "th", "data", "saleManagementUrl"],
   mounted() {
-    this.saleDailyReport = this.data
+    this.saleDailyReport = this.data || {}
   },
   methods: {
     register: function (e) {
