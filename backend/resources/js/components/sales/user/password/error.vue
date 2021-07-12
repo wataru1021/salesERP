@@ -32,9 +32,11 @@
 export default {
   created: function () {},
   data() {
-    return {};
+    return {
+      messageText2: this.message2,
+    };
   },
-  props: ["formLogin"],
+  props: ["formLogin", "message2"],
   mounted() {},
   methods: {},
 };
