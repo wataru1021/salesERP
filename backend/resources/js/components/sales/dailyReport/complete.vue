@@ -76,7 +76,7 @@
       <div class="col-md-6">
         <div class="form-group row">
           <div class="col-md-9 text-center">
-            <a href="">営業管理に戻る</a>
+            <a v-bind:href="saleManagementUrl">営業管理に戻る</a>
           </div>
         </div>
         <div class="form-group row">
@@ -110,7 +110,7 @@ export default {
       data: this.data,
     };
   },
-  props: ["data", "topUrl", "date", "th"],
+  props: ["data", "topUrl", "date", "th", "saleManagementUrl"],
   mounted() {
   },
   methods: {

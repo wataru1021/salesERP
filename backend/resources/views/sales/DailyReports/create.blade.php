@@ -3,7 +3,8 @@
     <daily-report-create
     :form-url="{{ json_encode(route('dailyReport.store')) }}"
     :message="{{ json_encode(isset($message) ? $message : '') }}"
-    :top-url="{{ json_encode(route('home')) }}"
+    :top-url="{{ json_encode(route('top')) }}"
+    :sale-management-url="{{ json_encode(route('salesManagement')) }}"
     :date = "{{ json_encode(Carbon\Carbon::now()->format('Y年m月d日')) }}"
     :th = "{{ json_encode(App\Enums\DayOffWeek::getThJp(Carbon\Carbon::now()->format('l'))) }}"
     :data="{{ json_encode(isset($data) ? $data : '') }}"
