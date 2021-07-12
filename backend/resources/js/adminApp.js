@@ -16,37 +16,60 @@ import DataTable from 'laravel-vue-datatable';
 import VueSweetalert2 from 'vue-sweetalert2';
 import { CChartBar } from '@coreui/vue-chartjs'
 import DatePicker from 'vue2-datepicker'
+import ReportManagement from './components/admin/reportManagement/reportmanagement'
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue2-datepicker/index.css';
+import Vuex from 'vuex';
 
+Vue.use(Vuex);
 Vue.use(VueSweetalert2);
 Vue.use(DatePicker);
 Vue.use(VueAxios, axios);
 Vue.use(VeeValidate, {
     locale: "ja"
 });
-Vue.component('CChartBar', CChartBar)
+Vue.component('CChartBar', CChartBar);
 
 Vue.filter('formatDate', function(value) {
     if (value) {
         return moment(String(value)).tz('Asia/Tokyo').format('YYYY年MM月DD日')
     }
 });
+const store = new Vuex.Store({
+    state: {
+        ctype: '',
+        userIdSRH: null
+    },
+    getters: {
+    },
+    mutations: {
+        setCType (state, ctype) {
+            state.ctype = ctype;
+            localStorage.setItem('ctypeStorage', JSON.stringify(ctype))
+        },
+        setUserIdSRH (state, userId) {
+            state.userIdSRH = userId;
+            localStorage.setItem('userIdSRHStorage', JSON.stringify(userId))
+        }
+    },
+    actions: {
+    },
+});
 Vue.use(DataTable);
-
 new Vue({
     created() {},
     el: "#app",
+    store,
     components: {
         AdminLogin,
         AdminUserList,
         AdminSalesChartIndex,
         SaleDailyReportHistories,
-        AdminUserList,
         AdminForgotPassword,
         AdminChangePassword,
         AdminSuccessPassword,
-        AdminSuccessEmail
+        AdminSuccessEmail,
+        ReportManagement
     },
     methods: {},
     mounted() {}
