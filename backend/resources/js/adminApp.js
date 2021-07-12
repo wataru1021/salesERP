@@ -35,7 +35,13 @@ Vue.filter('formatDate', function(value) {
 Vue.use(DataTable);
 
 new Vue({
-    created() {},
+    created() {
+        this.$validator.extend("email_format", {
+            validate: function(value) {
+                return /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/i.test(value);
+            }
+        });
+    },
     el: "#app",
     components: {
         AdminLogin,

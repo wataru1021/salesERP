@@ -34,7 +34,7 @@
                                         class="form-control"
                                         name="email"
                                         placeholder="メールアドレス"
-                                        v-validate="'required'"
+                                        v-validate="'required|email_format'"
                                         v-model="loginIdValue"
                                         @input="changeInput()"
                                     />
@@ -102,7 +102,8 @@ export default {
         let messError = {
             custom: {
                 email: {
-                    required: "メールアドレスを入力してください"
+                    required: "メールアドレスを入力してください",
+                    email_format: "メールアドレス形式は正しくありません。"
                 },
                 password: {
                     required: "パスワードを入力してください"
