@@ -13,10 +13,10 @@
 			<li class="c-header-nav-item dropdown px-3">
 				<a class="c-header-nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">全営業マンの報告管理</a>
 				<div class="dropdown-menu">
-					<a class="c-header-nav-link dropdown-item" href="http://localhost/">
+					<a class="c-header-nav-link dropdown-item" href="{{route('admin.saleReportHistory.index')}}">
 						<span class="c-header-nav-icon"></span>営業マン毎の営業成績
 					</a>
-					<a class="c-header-nav-link dropdown-item" href="http://localhost/">
+					<a class="c-header-nav-link dropdown-item" href="{{route('admin.sales-chart.index')}}">
 						<span class="c-header-nav-icon"></span>指標毎の営業マン成績
 					</a>
 				</div>
