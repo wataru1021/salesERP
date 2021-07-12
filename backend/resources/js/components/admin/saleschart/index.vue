@@ -309,7 +309,9 @@ export default {
   props: ["data"],
   mounted() {
     var ctypeStorage = JSON.parse(localStorage.getItem('ctypeStorage'));
+    ctypeStorage = ctypeStorage == null ? pinPont : ctypeStorage;
     this.showDataType = ctypeStorage;
+    localStorage.removeItem('ctypeStorage');
     this.getChartData();
   },
   computed: {

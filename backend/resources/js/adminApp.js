@@ -38,17 +38,19 @@ Vue.filter('formatDate', function(value) {
 const store = new Vuex.Store({
     state: {
         ctype: '',
+        userIdSRH: null
     },
     getters: {
-        getCType : state => {
-            return state.ctype;
-        }
     },
     mutations: {
         setCType (state, ctype) {
             state.ctype = ctype;
             localStorage.setItem('ctypeStorage', JSON.stringify(ctype))
         },
+        setUserIdSRH (state, userId) {
+            state.userIdSRH = userId;
+            localStorage.setItem('userIdSRHStorage', JSON.stringify(userId))
+        }
     },
     actions: {
     },

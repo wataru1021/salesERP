@@ -222,7 +222,6 @@
 }
 </style>>
   
-</style>
 <script>
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
@@ -254,7 +253,11 @@ export default {
     var startDate = new Date(y, m, d);
     var endDate = new Date(y, m, d);
     this.time = [startDate, endDate];
-    this.userId = this.userResponse[0].id;
+    var userIdSRHStorage = JSON.parse(localStorage.getItem('userIdSRHStorage'));
+    userIdSRHStorage = userIdSRHStorage == null ? this.userResponse[0].id : userIdSRHStorage;
+    this.userId = userIdSRHStorage;
+    console.log(this.userId)
+    localStorage.removeItem('userIdSRHStorage');
     this.getData();
     (this.users = this.userResponse), (this.valueSearch = 1);
   },

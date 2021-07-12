@@ -32,33 +32,30 @@ class ReportManagementController extends Controller
         if (!Auth::guard('admin')->check()) return view('admin.users.login');
         $orderBy = $request->input('column'); //Index
         $orderByDir = $request->input('dir', 'asc');
-        $builder = User::with(['salesDailyReports' => function ($q) use ($request) {
-            $q->whereDate('report_date', Carbon::parse($request->input('date')));
-        }])->where([
+        $builder = User::query()->leftJoin('sale_daily_reports', function ($join) use ($request) {
+            $join->on('users.id', '=', 'sale_daily_reports.user_id')
+                ->whereDate('report_date', Carbon::parse($request->input('date')));
+        })->where([
             'role_id' => RoleStateType::SALER,
             'company_id' => Auth::guard('admin')->user()->company_id
-        ]);/*->where('salesDailyReports', function($q) use ($request){
-            $q->whereDate('report_date', Carbon::parse($request->input('date')));
-        });*/
-        switch ($orderByDir) {
-            case 'asc':
-                $builder->orderBy($orderBy);
+        ]);
+        switch ($orderBy) {
+            case 'id':
+                $orderBy = 'users.id';
                 break;
-            case 'desc':
-                $builder->orderByDesc($orderBy);
+            case 'has_report':
+                $orderBy = 'reportId';
                 break;
         }
-        $a = new DataTableCollectionResource($builder->paginate(MaxPageSize::MAX_PAGE_SIZE, ['*'], 'page', $request->page));
+        $builder->selectRaw('name,
+         sale_daily_reports.id as reportId, 
+         sale_daily_reports.*, 
+         users.id as userId, 
+         deal_num / ping_pong_num * 100 as opportunity_rate,
+         acquisitions_num / ping_pong_num *100 as contract_rate, 
+         acquisitions_num / sale_time * 100 as productivity')
+            ->orderBy($orderBy, $orderByDir);
+
         return new DataTableCollectionResource($builder->paginate(MaxPageSize::MAX_PAGE_SIZE, ['*'], 'page', $request->page));
-        $userBuilder = SaleDailyReport::whereDate('report_date', Carbon::parse($request->input('date')))->with('user');
-        switch ($orderByDir) {
-            case 'asc':
-                $userBuilder->orderBy($orderBy);
-                break;
-            case 'desc':
-                $userBuilder->orderByDesc($orderBy);
-                break;
-        }
-        return new DataTableCollectionResource($userBuilder->paginate(MaxPageSize::MAX_PAGE_SIZE, ['*'], 'page', $request->page));
     }
 }
