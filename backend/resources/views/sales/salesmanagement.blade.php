@@ -3,8 +3,8 @@
 @section('content')
     <sales-management
         :report-registration-url="{{ json_encode(URL::to('/daily-report/create')) }}"
-        :check-past-results-url="{{ json_encode(URL::to('/check_past_results')) }}"
-        :top-page-url="{{ json_encode(URL::to('/top')) }}"
+        :check-past-results-url="{{ json_encode(URL::to('/report_histories')) }}"
+        :top-page-url="{{ json_encode(URL::to('/')) }}"
     ></sales-management>
 @endsection
 

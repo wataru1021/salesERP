@@ -4,80 +4,78 @@
       <div class="col-md-6">
         <div class="card-group">
           <div class="card p-4">
-            <div class="card-body">
-              <form
-                method="POST"
-                ref="loginForm"
-                :action="formUrl"
-                @submit.prevent="login"
-                autocomplete="off"
-              >
-                <input type="hidden" :value="csrfToken" name="_token" />
-                <h1>ログイン</h1>
-                <p class="text-muted">アカウントを入力してください。</p>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <svg class="c-icon">
-                        <use
-                          xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-user"
-                        ></use>
-                      </svg>
-                    </span>
-                  </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="email"
-                    placeholder="メールアドレス"
-                    v-validate="'required'"
-                    v-model="loginIdValue"
-                    @input="changeInput()"
-                  />
-                  <div class="input-group is-danger" role="alert">
-                    {{ errors.first("email") }}
-                  </div>
+            <form
+              method="POST"
+              ref="loginForm"
+              :action="formUrl"
+              @submit.prevent="login"
+              autocomplete="off"
+            >
+              <input type="hidden" :value="csrfToken" name="_token" />
+              <h1>ログイン</h1>
+              <p class="text-muted">アカウントを入力してください。</p>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <svg class="c-icon">
+                      <use
+                        xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-user"
+                      ></use>
+                    </svg>
+                  </span>
                 </div>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <svg class="c-icon">
-                        <use
-                          xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-lock-locked"
-                        ></use>
-                      </svg>
-                    </span>
-                  </div>
-                  <input
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    placeholder="パスワード"
-                    v-validate="'required'"
-                    @input="changeInput()"
-                  />
-                  <div class="input-group is-danger" role="alert">
-                    {{ errors.first("password") }}
-                  </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="email"
+                  placeholder="メールアドレス"
+                  v-validate="'required'"
+                  v-model="loginIdValue"
+                  @input="changeInput()"
+                />
+                <div class="input-group is-danger" role="alert">
+                  {{ errors.first("email") }}
                 </div>
-                <div class="row">
-                  <div class="col-12 text-center is-danger" v-if="messageText">
-                    {{ messageText }}
-                  </div>
-                  <div class="col-xs-12 col-sm-6 w45">
-                    <button class="btn btn-primary px-5 mt-3">ログイン</button>
-                  </div>
+              </div>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <svg class="c-icon">
+                      <use
+                        xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-lock-locked"
+                      ></use>
+                    </svg>
+                  </span>
+                </div>
+                <input
+                  type="password"
+                  class="form-control"
+                  name="password"
+                  placeholder="パスワード"
+                  v-validate="'required'"
+                  @input="changeInput()"
+                />
+                <div class="input-group is-danger" role="alert">
+                  {{ errors.first("password") }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 text-center is-danger" v-if="messageText">
+                  {{ messageText }}
+                </div>
+                <div class="col-xs-12 col-sm-6 w45">
+                  <button class="btn btn-primary px-5 mt-3">ログイン</button>
+                </div>
 
-                  <div class="col-sm-6 col-sx-12 w55 text-right">
-                    <a
-                      v-bind:href="forgotPasswordUrl"
-                      class="btn btn-link px-0 mt-3"
-                      >パスワードを忘れた方へ</a
-                    >
-                  </div>
+                <div class="col-sm-6 col-sx-12 w55 text-right">
+                  <a
+                    v-bind:href="forgotPasswordUrl"
+                    class="btn btn-link px-0 mt-3"
+                    >パスワードを忘れた方へ</a
+                  >
                 </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

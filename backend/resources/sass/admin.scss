@@ -1,3 +1,79 @@
+.sale-daily-report-histories {
+    .row {
+        &:last-child {
+            margin-top: -10px;
+        }
+    }
+
+    .card-item {
+        padding: 10px 10px 0;
+
+        p {
+            font-size : 14px;
+            display   : block;
+            margin    : auto;
+            text-align: center;
+        }
+
+        .card-header {
+            padding: 5px;
+        }
+
+        .card {
+            height: 180px;
+        }
+
+        .text-center {
+            display        : flex;
+            justify-content: center;
+            align-items    : center;
+            padding-top    : 10%;
+            font-weight: 400;
+            span {
+                font-size: 14px;
+                padding  : 12px 0 0 8px;
+            }
+        }
+
+    }
+    .sale-name-list {
+        // white-space: nowrap;
+        // overflow-x: scroll;
+        // overflow-x: scroll;
+        // text-overflow: ellipsis;
+        // display: -webkit-box;
+        // -webkit-line-clamp: 1; /* number of lines to show */
+        // -webkit-box-orient: vertical;
+    }
+    .search-date-time {
+        position: relative;
+        .icon-calendar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            border: 1px solid #ccc;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+    }
+    .mx-datepicker-range {
+        width: 300px;
+        .mx-icon-calendar {
+            display: none;
+        }
+        .mx-input {
+            padding-left: 45px;
+        }
+    }
+    
+
+}
+.mx-calendar {
+    &:last-child {
+        display: none;
+    }
+}
 @import "common/loader";
 .laravel-vue-datatable-th {
     font-weight: 200;

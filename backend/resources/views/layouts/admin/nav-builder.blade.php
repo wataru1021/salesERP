@@ -10,11 +10,24 @@
             Top
         </a>
     </li>
-    <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" href="{{route('admin.sales-chart.index')}}">
+
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="cil-calculator c-sidebar-nav-icon"></i>
             全営業マンの報告管理
         </a>
+        <ul class="c-sidebar-nav-dropdown-items">
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{route('admin.saleReportHistory.index')}}">
+                    営業マン毎の営業成績
+                </a>
+            </li>
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{route('admin.sales-chart.index')}}">
+                    指標毎の営業マン成績
+                </a>
+            </li>
+        </ul>
     </li>
     <li class="c-sidebar-nav-item">
         <a class="c-sidebar-nav-link" href="{{route('admin.user.list')}}">
