@@ -26,7 +26,9 @@ Route::prefix('/admin')->group(function () {
     Route::get('/reset-password/{email}/{token}',  [App\Http\Controllers\Admin\UsersController::class, 'getToken'])->name('admin.getToken');
     Route::post('/resetPassword', [App\Http\Controllers\Admin\UsersController::class, 'resetPassword'])->name('admin.resetPassword');
     Route::get('/change-password-complete', [App\Http\Controllers\Admin\UsersController::class, 'change_password_complete'])->name('admin.changePasswordComplete');
+    Route::get('/change-password-error', [App\Http\Controllers\Admin\UsersController::class, 'change_password_error'])->name('admin.changePasswordError');
     Route::get('/forgot-password-complete', [App\Http\Controllers\Admin\UsersController::class, 'forgot_password_complete'])->name('admin.forgotPasswordComplete');
+    Route::get('/forgot-password-error', [App\Http\Controllers\Admin\UsersController::class, 'forgot_password_error'])->name('admin.forgotPasswordError');
 });
 
 Route::middleware([Admin::class])->prefix('/admin')->group(function () {

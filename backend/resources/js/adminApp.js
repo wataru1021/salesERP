@@ -7,7 +7,9 @@ import AdminUserList from "./components/admin/user/list.vue"
 import AdminForgotPassword from "./components/admin/user/password/forgot.vue"
 import AdminChangePassword from "./components/admin/user/password/change.vue"
 import AdminSuccessPassword from "./components/admin/user/password/success.vue"
+import AdminErrorPassword from "./components/admin/user/password/error.vue"
 import AdminSuccessEmail from "./components/admin/user/password/successemail.vue"
+import AdminErrorEmail from "./components/admin/user/password/erroremail.vue"
 import AdminSalesChartIndex from "./components/admin/saleschart/index"
 import DataTable from 'laravel-vue-datatable';
 import VueSweetalert2 from 'vue-sweetalert2';
@@ -36,7 +38,9 @@ new Vue({
         AdminForgotPassword,
         AdminChangePassword,
         AdminSuccessPassword,
+        AdminErrorPassword,
         AdminSuccessEmail,
+        AdminErrorEmail,
         AdminSalesChartIndex
     },
     methods: {},

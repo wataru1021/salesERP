@@ -58,9 +58,19 @@ class UsersController extends Controller
         return view('admin.users.password.success');
     }
 
+    public function change_password_error(Request $request)
+    {
+        return view('admin.users.password.error');
+    }
+
     public function forgot_password_complete(Request $request)
     {
         return view('admin.users.password.successemail');
+    }
+
+    public function forgot_password_error(Request $request)
+    {
+        return view('admin.users.password.erroremail');
     }
 
     public function forgotPassword(Request $request)
@@ -88,12 +98,8 @@ class UsersController extends Controller
                     return redirect('admin/forgot-password-complete');
                 }
             } else {
-                $message = 'メールは存在しません';
+                return redirect('admin/forgot-password-error');
             }
-
-            return view('admin.users.password.forgot', [
-                'message' => $message,
-            ]);
         }
     }
 
@@ -124,7 +130,7 @@ class UsersController extends Controller
         if ($user) {
             $user->password = Hash::make($request->password_confirm);
             $flag = $user->save();
-            if (!$flag) {
+            if ($flag) {
                 return redirect('/admin/change-password-complete');
             } else {
                 $message2 = 'パスワードの変更に失敗しました';
@@ -132,7 +138,7 @@ class UsersController extends Controller
         } else {
             $message2 = 'ログインセッションの有効期限が切れました。再入力してください';
         }
-        return view('admin.users.password.forgot', [
+        return view('admin.users.password.erroremail', [
             'message2' => $message2,
         ]);
     }

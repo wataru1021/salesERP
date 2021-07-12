@@ -6,10 +6,16 @@
           <div class="card p-4">
             <div class="card-body" v-if="messageText">
               <h1>{{ messageText }}</h1>
-              <a v-bind:href="formLogin">ログインページに戻る</a> <br />
+              <div class="col-md-12 text-center mt-4">
+                <img src="/image/changePasswordError.png" class="w-10" />
+              </div>
+              <div class="col-md-12 text-center mt-3">
+                <a v-bind:href="formLogin">ログインページに戻る</a> <br />
 
-              <a v-bind:href="formForgot">パスワードを忘れたページに戻る</a>
+                <a v-bind:href="formForgot">パスワードを忘れたページに戻る</a>
+              </div>
             </div>
+
             <div class="card-body" v-else>
               <form
                 method="POST"
