@@ -16,7 +16,7 @@
                 <h3 class="text-success text-center font-weight-bold">報告完了しました</h3>
               </div>
               <div class="col-md-9 text-center mt-3">
-                <img src="/image/dailyReportComplete.png" class="w-25" />
+                <img src="/image/changePasswordComplete.png" class="w-25" />
               </div>
               <div class="col-md-9 mt-3">
                 <p>
@@ -27,7 +27,7 @@
                 <div class="row">
                   <div class="col-8"><p>ピンポン数（訪問件数）</p></div>
                   <div class="col-4 text-right">
-                    <p>{{ data.ping_pong_num }}件</p>
+                    <p>{{ saleDailyReport.ping_pong_num }}件</p>
                   </div>
                 </div>
               </div>
@@ -35,7 +35,7 @@
                 <div class="row">
                   <div class="col-8"><p>対面数</p></div>
                   <div class="col-4 text-right">
-                    <p>{{ data.meet_num }}件</p>
+                    <p>{{ saleDailyReport.meet_num }}件</p>
                   </div>
                 </div>
               </div>
@@ -43,7 +43,7 @@
                 <div class="row">
                   <div class="col-8"><p>商談数</p></div>
                   <div class="col-4 text-right">
-                    <p>{{ data.deal_num }}件</p>
+                    <p>{{ saleDailyReport.deal_num }}件</p>
                   </div>
                 </div>
               </div>
@@ -51,7 +51,7 @@
                 <div class="row">
                   <div class="col-8"><p>獲得数</p></div>
                   <div class="col-4 text-right">
-                    <p>{{ data.acquisitions_num }}件</p>
+                    <p>{{ saleDailyReport.acquisitions_num }}件</p>
                   </div>
                 </div>
               </div>
@@ -59,7 +59,7 @@
                 <div class="row">
                   <div class="col-8"><p>稼働時間</p></div>
                   <div class="col-4 text-right">
-                    <p>{{ data.sale_time }}時間</p>
+                    <p>{{ saleDailyReport.sale_time }}時間</p>
                   </div>
                 </div>
               </div>
@@ -67,7 +67,7 @@
                 <p>今日意識した点</p>
               </div>
               <div class="col-md-9">
-                <h5>{{ data.conscious_point }}</h5>
+                <h5>{{ saleDailyReport.conscious_point }}</h5>
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@
       <div class="col-md-6">
         <div class="form-group row">
           <div class="col-md-9 text-center">
-            <a href="">営業管理に戻る</a>
+            <a v-bind:href="saleManagementUrl">営業管理に戻る</a>
           </div>
         </div>
         <div class="form-group row">
@@ -107,11 +107,12 @@ export default {
   data() {
     return {
       csrfToken: Laravel.csrfToken,
-      data: this.data,
+      saleDailyReport: {},
     };
   },
-  props: ["data", "topUrl", "date", "th"],
+  props: ["data", "topUrl", "date", "th", "saleManagementUrl"],
   mounted() {
+    this.saleDailyReport = this.data;
   },
   methods: {
     
