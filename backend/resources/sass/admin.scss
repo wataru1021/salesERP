@@ -4,37 +4,31 @@
             margin-top: -10px;
         }
     }
-
     .card-item {
         padding: 10px 10px 0;
-
         p {
-            font-size : 14px;
-            display   : block;
-            margin    : auto;
+            font-size: 14px;
+            display: block;
+            margin: auto;
             text-align: center;
         }
-
         .card-header {
             padding: 5px;
         }
-
         .card {
             height: 180px;
         }
-
         .text-center {
-            display        : flex;
+            display: flex;
             justify-content: center;
-            align-items    : center;
-            padding-top    : 10%;
+            align-items: center;
+            padding-top: 10%;
             font-weight: 400;
             span {
                 font-size: 14px;
-                padding  : 12px 0 0 8px;
+                padding: 12px 0 0 8px;
             }
         }
-
     }
     .sale-name-list {
         // white-space: nowrap;
@@ -66,14 +60,14 @@
             padding-left: 45px;
         }
     }
-    
-
 }
+
 .mx-calendar {
     &:last-child {
         display: none;
     }
 }
+
 @import "common/loader";
 .laravel-vue-datatable-th {
     font-weight: 200;
@@ -107,6 +101,9 @@
             a {
                 margin-top: 0 !important;
             }
+        }
+        .w-10 {
+            width: 67px;
         }
     }
 }
