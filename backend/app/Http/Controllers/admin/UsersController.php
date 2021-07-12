@@ -138,7 +138,7 @@ class UsersController extends Controller
         } else {
             $message2 = 'ログインセッションの有効期限が切れました。再入力してください';
         }
-        return view('admin.users.password.erroremail', [
+        return view('admin.users.password.error', [
             'message2' => $message2,
         ]);
     }
