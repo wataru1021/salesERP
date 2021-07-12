@@ -221,12 +221,12 @@ export default {
     return {
       csrfToken: Laravel.csrfToken,
       messageText: this.message,
-      saleDailyReport: this.data,
+      saleDailyReport: {},
     };
   },
   props: ["formUrl", "message", "topUrl", "date", "th", "data", "saleManagementUrl"],
   mounted() {
-    console.log(this.data);
+    this.saleDailyReport = this.data
   },
   methods: {
     register: function (e) {
