@@ -2,7 +2,7 @@
 
 @section('content')
     <sales-top
-        :sales-management-url="{{ json_encode(URL::to('/sales_management')) }}"
+        :sales-management-url="{{ json_encode(route('salesManagement')) }}"
     ></sales-top>
 @endsection
 
