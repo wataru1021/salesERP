@@ -63,7 +63,7 @@ Route::middleware([Sale::class])->prefix('/')->group(function () {
     Route::get('daily-report/create',[App\Http\Controllers\Sales\DailyReportController::class, 'create'])->name('dailyReport.create');
     Route::post('daily-report/create',[App\Http\Controllers\Sales\DailyReportController::class, 'store'])->name('dailyReport.store');
     Route::get('daily-report/complete/{id}',[App\Http\Controllers\Sales\DailyReportController::class, 'complete'])->name('dailyReport.complete');
-    Route::get('sales_management', [App\Http\Controllers\Sales\TopController::class, 'salesManagement'])->name('salesManagement');
-    Route::get('report_histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'index']);
-    Route::post('get_data_report_histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'reportHistories']);
+    Route::get('sales-management', [App\Http\Controllers\Sales\TopController::class, 'salesManagement'])->name('salesManagement');
+    Route::get('report-histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'index'])->name('sale.reportHistories');
+    Route::post('get_data_report_histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'reportHistories'])->name('sale.getDataReportHistories');
 });
