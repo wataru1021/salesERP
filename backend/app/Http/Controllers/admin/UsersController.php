@@ -88,7 +88,7 @@ class UsersController extends Controller
                     return redirect('admin/forgot-password-complete');
                 }
             } else {
-                $message = 'メールは存在しません';
+                $message = 'メールは存在しません。';
             }
 
             return view('admin.users.password.forgot', [
@@ -105,11 +105,11 @@ class UsersController extends Controller
 
         $user = User::where('email', $email)->first();
         if (!$user) {
-            $message = 'Incorrect email address';
+            $message = 'メールアドレスが正しくないです。';
         } elseif ($user->reset_password_token != $tokenUrl) {
-            $message = 'Incorrect Tokens';
+            $message = 'トークンが正しくないです。';
         } elseif (Carbon::parse($user->reset_password_token_expire)->lessThanOrEqualTo(Carbon::now())) {
-            $message = 'Expired Tokens';
+            $message = 'トークンが期限切れになったです。';
         }
         return view('admin.users.password.change', [
             'tokenUrl' => $tokenUrl,
@@ -130,7 +130,7 @@ class UsersController extends Controller
                 $message2 = 'パスワードの変更に失敗しました';
             }
         } else {
-            $message2 = 'ログインセッションの有効期限が切れました。再入力してください';
+            $message2 = 'トークンが期限切れになったです。';
         }
         return view('admin.users.password.forgot', [
             'message2' => $message2,

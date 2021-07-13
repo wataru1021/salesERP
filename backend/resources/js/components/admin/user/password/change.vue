@@ -5,7 +5,8 @@
         <div class="card-group">
           <div class="card p-4">
             <div class="card-body" v-if="messageText">
-              <h1>{{ messageText }}</h1>
+              <h2>エラー</h2>
+              <p class="text-muted">{{ messageText }}</p>
               <div class="col-md-12 text-center mt-4">
                 <img src="/image/changePasswordError.png" class="w-10" />
               </div>
