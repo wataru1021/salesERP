@@ -18,7 +18,7 @@
                                     </a>
                                 </div>
                                 <div class="border border-primary rounded text-center d-inline-block mt-2 mr-2">
-                                    <a :class="[isActive == 'yesterday' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(getFullYear, getMonth, getDate - 1), new Date()]; isActive = 'yesterday'">
+                                    <a :class="[isActive == 'yesterday' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(getFullYear, getMonth, getDate - 1), new Date(getFullYear, getMonth, getDate - 1)]; isActive = 'yesterday'">
                                         <h5 class="text-primary mb-0">
                                             昨日
                                         </h5>
