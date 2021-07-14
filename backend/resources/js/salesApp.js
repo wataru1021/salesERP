@@ -9,8 +9,8 @@ import SalesSuccessPassword from "./components/sales/user/password/success.vue"
 import SalesSuccessEmail from "./components/sales/user/password/successemail.vue"
 import DailyReportCreate from "./components/sales/dailyReport/create.vue"
 import DailyReportComplete from "./components/sales/dailyReport/complete.vue"
-import SalesTop from "./components/sales/user/top/top.vue";
-import SalesManagement from "./components/sales/user/salesmanagement.vue"
+import SalesTop from "./components/sales/top.vue";
+import SalesManagement from "./components/sales/salesmanagement.vue"
 import SalesReportHistories from './components/sales/repothistories'
 
 Vue.use(VueAxios, axios);
