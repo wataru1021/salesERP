@@ -306,6 +306,7 @@ export default {
           d = date.getDate();
         var startDate = new Date(Date.UTC(y, m, d - value + 1));
         var endDate = new Date(Date.UTC(y, m, d));
+        if (value == 2)  endDate = new Date(Date.UTC(y, m, d - value + 1));
         this.time = [startDate, endDate];
       }
     },
