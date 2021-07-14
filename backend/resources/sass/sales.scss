@@ -115,18 +115,40 @@
         padding: 0px;
     }
     .w45 {
-        width: 45%;
         button {
             width: 84px;
             height: 37px;
         }
     }
-    .w55 {
-        width: 55%;
-        a {
-            margin-top: 29px !important;
-            width: 160px !important;
+}
+
+@media (max-width: 576px) {
+    .login-password {
+        .col-xs-6.col-sm-4.w45 {
+            width: 40%;
         }
+        .col-sm-8.col-xs-6.text-right {
+            width: 60%;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .forgot-password {
+        .col-sm-6.col-xs-12.text-right {
+            display: inline-grid;
+            a {
+                text-align: end;
+            }
+        }
+    }
+}
+
+.success-password,
+.change-password,
+.success-email {
+    .col-md-9.col-lg-12.text-center {
+        margin: 32px auto 0px auto;
     }
 }
 
