@@ -7,7 +7,7 @@
             <div v-if="messageText">
               <h2>エラー</h2>
               <p class="text-muted">{{ messageText }}</p>
-              <div class="col-md-9 col-lg-12 text-center mt-4">
+              <div class="col-md-9 col-lg-12 text-center">
                 <img src="/image/changePasswordError.png" class="w-10" />
               </div>
               <div class="col-md-9 col-lg-12 text-center mt-4">

@@ -49,7 +49,7 @@
                     <button class="btn btn-primary px-4 mt-2">送信</button>
                   </div>
 
-                  <div class="col-sm-6 col-sx-12 w55 text-right">
+                  <div class="col-sm-6 col-xs-12 w55 text-right">
                     <a v-bind:href="formLogin" class="btn btn-link px-0 mt-4"
                       >ログインはこちら</a
                     >

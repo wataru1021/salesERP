@@ -63,11 +63,11 @@
                 <div class="col-12 text-center is-danger" v-if="messageText">
                   {{ messageText }}
                 </div>
-                <div class="col-xs-12 col-sm-4 w45">
+                <div class="col-xs-6 col-sm-4 w45">
                   <button class="btn btn-primary px-5 mt-3">ログイン</button>
                 </div>
 
-                <div class="col-sm-8 col-sx-12 text-right">
+                <div class="col-xs-6 col-sm-8 text-right">
                   <a
                     v-bind:href="forgotPasswordUrl"
                     class="btn btn-link px-0 mt-3"

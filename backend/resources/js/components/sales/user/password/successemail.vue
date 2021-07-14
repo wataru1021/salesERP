@@ -8,10 +8,10 @@
               <div class="col-md-9 col-lg-12">
                 <h2 class="mg-left-20">電子メールを正常に送信</h2>
               </div>
-              <div class="col-md-9 col-lg-12 text-center mt-4">
+              <div class="col-md-9 col-lg-12 text-center">
                 <img src="/image/changePasswordComplete.png" class="w-23" />
               </div>
-              <div class="col-md-9 col-lg-12 text-center mt-4">
+              <div class="col-md-9 col-lg-12 text-center">
                 <a v-bind:href="formLogin" class="btn btn-link px-0 mt-3"
                   >ログイン画面へ</a
                 >
