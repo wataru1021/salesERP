@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
+  <div class="container daily_report_create">
+    <div class="row content">
+      <div class="col-md-12">
         <div class="card">
           <div class="card-body">
             <div class="form-group row mb-0">
-              <div class="col-md-9">
+              <div class="col-md-12">
                 <h4>{{ date }}({{ th }})の日報</h4>
               </div>
             </div>
@@ -19,7 +19,7 @@
             >
               <input type="hidden" :value="csrfToken" name="_token" />
               <div class="form-group row mb-2">
-                <label class="col-md-3 col-form-label" for="ping_pong_num"
+                <label class="col-md-3 col-form-label text-nowrap" for="ping_pong_num"
                   >ピンポン数（訪問件数）</label
                 >
                 <div class="col-md-9">
@@ -151,22 +151,20 @@
                 <div class="col-md-9 text-center is-danger" v-if="messageText">
                   {{ messageText }}
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-12 text-center">
                   <button class="btn btn-success w-100">報告</button>
                 </div>
               </div>
             </form>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
         <div class="form-group row">
-          <div class="col-md-9 text-center">
+          <div class="col-md-12 text-center">
             <a v-bind:href="saleManagementUrl">営業管理に戻る</a>
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-md-9 text-center">
+          <div class="col-md-12 text-center">
             <a v-bind:href="topUrl">TOPに戻る</a>
           </div>
         </div>

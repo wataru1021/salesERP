@@ -180,7 +180,7 @@ class UsersController extends Controller
         $breadcrumbs = [
             '営業マン管理'
         ];
-        return view('admin.users.List', [
+        return view('admin.users.list', [
             'breadcrumbs' => $breadcrumbs,
         ]);
     }
