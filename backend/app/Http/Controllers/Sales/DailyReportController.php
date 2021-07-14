@@ -14,7 +14,7 @@ class DailyReportController extends Controller
     public function create()
     {
         $data = SaleDailyReport::where('user_id', Auth::guard('sales')->user()->id)->whereDate('report_date', Carbon::now()->format('Y-m-d'))->first();
-        return view('sales.DailyReports.create', [
+        return view('sales.dailyReports.create', [
             'data' => $data
         ]);
     }
@@ -39,7 +39,7 @@ class DailyReportController extends Controller
                 } else {
                     $message = '日報新規追加は失敗しました';
                 }
-                return view('sales.DailyReports.create', [
+                return view('sales.dailyReports.create', [
                     'message' => $message,
                 ]);
             } else {
@@ -58,7 +58,7 @@ class DailyReportController extends Controller
                 } else {
                     $message = '日報新規追加は失敗しました';
                 }
-                return view('sales.DailyReports.create', [
+                return view('sales.dailyReports.create', [
                     'message' => $message,
                 ]);
             }
@@ -70,7 +70,7 @@ class DailyReportController extends Controller
     public function complete($id)
     {
         $dailyReport = SaleDailyReport::find($id);
-        return view('sales.DailyReports.complete', [
+        return view('sales.dailyReports.complete', [
             'data' => $dailyReport
         ]);
     }

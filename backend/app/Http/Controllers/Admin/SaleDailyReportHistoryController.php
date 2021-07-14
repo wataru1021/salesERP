@@ -23,7 +23,7 @@ class SaleDailyReportHistoryController extends Controller
             ], '営業マン毎の営業成績'
         ];
         $users = User::where('role_id', RoleStateType::SALER)->get();
-        return view('admin.SaleDailyReportHistories.index', [
+        return view('admin.saleDailyReportHistories.index', [
             'breadcrumbs' => $breadcrumbs,
             'userResponse' => $users
         ]);
