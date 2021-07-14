@@ -1,38 +1,38 @@
 <template>
 <div class="container report-histories">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-9 col-md-12">
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="form-group row mb-0">
-                        <div class="col-md-9">
+                        <div class="col-sm-9 col-md-12">
                             <h5 class="mb-0">簡易検索</h5>
                         </div>
-                        <div class="col-md-9">
-                            <div class="list-group d-inline-block">
+                        <div class="col-sm-9 col-md-12">
+                            <div class="list-group d-inline-block col-lg-9">
                                 <div class="border border-primary rounded text-center d-inline-block mt-2 mr-2">
-                                    <a :class="[isActive == 'now' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(), new Date()]; isActive = 'now'">
+                                    <a href="javascript:;" :class="[isActive == 'now' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(), new Date()]; isActive = 'now'">
                                         <h5 class="text-primary mb-0">
                                             今日
                                         </h5>
                                     </a>
                                 </div>
                                 <div class="border border-primary rounded text-center d-inline-block mt-2 mr-2">
-                                    <a :class="[isActive == 'yesterday' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(getFullYear, getMonth, getDate - 1), new Date(getFullYear, getMonth, getDate - 1)]; isActive = 'yesterday'">
+                                    <a href="javascript:;" :class="[isActive == 'yesterday' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(getFullYear, getMonth, getDate - 1), new Date(getFullYear, getMonth, getDate - 1)]; isActive = 'yesterday'">
                                         <h5 class="text-primary mb-0">
                                             昨日
                                         </h5>
                                     </a>
                                 </div>
                                 <div class="border border-primary rounded text-center d-inline-block mt-2 mr-2">
-                                    <a :class="[isActive == 'Last7days' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(getFullYear, getMonth, getDate - 7), new Date()]; isActive = 'Last7days'">
+                                    <a href="javascript:;" :class="[isActive == 'Last7days' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(getFullYear, getMonth, getDate - 7), new Date()]; isActive = 'Last7days'">
                                         <h5 class="text-primary mb-0">
                                             直近7日間
                                         </h5>
                                     </a>
                                 </div>
                                 <div class="border border-primary rounded text-center d-inline-block mt-2 mr-2">
-                                    <a :class="[isActive == 'Last30days' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(getFullYear, getMonth -1, getDate), new Date()]; isActive = 'Last30days'">
+                                    <a href="javascript:;" :class="[isActive == 'Last30days' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(getFullYear, getMonth -1, getDate), new Date()]; isActive = 'Last30days'">
                                         <h5 class="text-primary mb-0">
                                             直近30日間
                                         </h5>
@@ -40,12 +40,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-9 mt-3">
+                        <div class="col-sm-9 col-md-12 mt-3">
                             <h5>期間で絞り込み</h5>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-sm-9 col-md-12">
                             <form v-on:submit.prevent="getData">
-                                <div class="form-group">
+                                <div class="form-group col-lg-9 col-xl-6 p-0">
                                     <div class="search-date-time">
                                         <date-picker v-model="time" :format="'YYYY年MM月DD日'"  @change="isActive = ''" range></date-picker>
                                     </div>
@@ -62,7 +62,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="form-group row mb-0">
-                        <div class="col-md-9">
+                        <div class="col-sm-9 col-md-12">
                             <table class="w-100 text-center">
                                 <tr>
                                     <td class="pr-1">
@@ -141,14 +141,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-9 col-md-12">
             <div class="form-group row mb-2">
-                <div class="col-md-9 text-center">
+                <div class="col-md-9 col-lg-12 text-center">
                     <a :href="salesManagementUrl">営業管理に戻る</a>
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-md-9 text-center">
+                <div class="col-md-9 col-lg-12 text-center">
                     <a :href="topPageUrl">TOPに戻る</a>
                 </div>
             </div>
