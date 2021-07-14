@@ -11,10 +11,10 @@
         </a>
     </li>
 
-    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown abc">
+        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle">
             <i class="cil-calculator c-sidebar-nav-icon"></i>
-            全営業マンの報告管理
+            <span class="report-managerment" data-href="{{route('admin.reportManagement')}}">全営業マンの報告管理</span>
         </a>
         <ul class="c-sidebar-nav-dropdown-items">
             <li class="c-sidebar-nav-item">
@@ -38,3 +38,12 @@
 </ul>
 <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
 </div>
+
+<script>
+    var elements = document.getElementsByClassName('report-managerment');
+    elements[0].addEventListener('click', function(){
+        var url = this.getAttribute("data-href");
+        window.location.href = url
+        return false;
+    }, false);
+</script>
