@@ -250,8 +250,8 @@ export default {
       y = date.getFullYear(),
       m = date.getMonth(),
       d = date.getDate();
-    var startDate = new Date(y, m, d);
-    var endDate = new Date(y, m, d);
+    var startDate = new Date(Date.UTC(y, m, d));
+    var endDate = new Date(Date.UTC(y, m, d));
     this.time = [startDate, endDate];
     var userIdSRHStorage = JSON.parse(localStorage.getItem('userIdSRHStorage'));
     userIdSRHStorage = userIdSRHStorage == null ? this.userResponse[0].id : userIdSRHStorage;
@@ -304,8 +304,8 @@ export default {
           y = date.getFullYear(),
           m = date.getMonth(),
           d = date.getDate();
-        var startDate = new Date(y, m, d - value + 1);
-        var endDate = new Date(y, m, d);
+        var startDate = new Date(Date.UTC(y, m, d - value + 1));
+        var endDate = new Date(Date.UTC(y, m, d));
         this.time = [startDate, endDate];
       }
     },
