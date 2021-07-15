@@ -4,9 +4,9 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
+                    <div class="card-header">新規登録</div>
                     <form class="form-horizontal" method="POST" ref="registerForm" @submit.prevent="register" autocomplete="off">
                         <div class="card-body">
-                            <h1>新規登録</h1>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
