@@ -1,8 +1,8 @@
 <template>
-<div class="container-fluid">
+<div class="container-fluid register-user">
     <div class="fade-in">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-xs-12 col-lg-8 col-xl-6 m-auto">
                 <div class="card">
                     <div class="card-header">新規登録</div>
                     <form class="form-horizontal" method="POST" ref="registerForm" @submit.prevent="register" autocomplete="off">
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="form-actions">
-                                <button class="btn btn-primary" type="submit">セーブ</button>
+                                <button class="btn btn-primary" type="submit">新規登録</button>
                                 <a :href="listUserUrl" class="btn btn-secondary" type="button">キャンセル</a>
                             </div>
                         </div>

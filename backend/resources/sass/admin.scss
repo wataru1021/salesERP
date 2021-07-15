@@ -1,5 +1,4 @@
 @import "common/loader";
-
 .sale-daily-report-histories {
     .row {
         &:last-child {
@@ -71,7 +70,7 @@
 }
 
 .laravel-vue-datatable-th {
-  font-weight: 200;
+    font-weight: 200;
 }
 
 .forgot-password,
@@ -144,57 +143,58 @@
 }
 
 .sales-chart-title {
-  font-size: 16px;
-  margin-bottom: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
-.btn-sc-type{
-  width: fit-content;
-  white-space: nowrap;
+.btn-sc-type {
+    width: fit-content;
+    white-space: nowrap;
 }
 
 .sc-type-item {
-  margin-left: 8px;
+    margin-left: 8px;
 }
 
-.ig-date{
-  width: 297px;
+.ig-date {
+    width: 297px;
 }
 
-.mx-range-wrapper > div:last-child {
-  display: none;
+.mx-range-wrapper>div:last-child {
+    display: none;
 }
 
 .icon-sales-chart {
-  background-image: url(/image/iconAdminCalendar.png);
-  background-position: center;
-  background-size: 1rem;
+    background-image: url(/image/iconAdminCalendar.png);
+    background-position: center;
+    background-size: 1rem;
 }
 
 .report-management {
-  .table th,
-  .table td {
-    padding: 0.3rem;
-  }
+    .table th,
+    .table td {
+        padding: 0.3rem;
+    }
+    a.active {
+        background: #321FDB;
+        color: #ffffff !important;
+    }
+    a.active:hover {
+        background: #321FDB;
+        color: #ffffff !important;
+    }
+    .a-btn-text {
+        color: #321fdb;
+    }
+    .c-icon:not(.c-icon-c-s):not(.c-icon-custom-size) {
+        width: 12px;
+        height: 12px;
+        margin-bottom: 4px;
+    }
+}
 
-  a.active {
-    background: #321FDB;
-    color: #ffffff !important;
-  }
-
-  a.active:hover {
-    background: #321FDB;
-    color: #ffffff !important;
-  }
-
-  .a-btn-text {
-    color: #321fdb;
-  }
-
-  .c-icon:not(.c-icon-c-s):not(.c-icon-custom-size) {
-    width: 12px;
-    height: 12px;
-    margin-bottom: 4px;
-  }
-  
+.register-user {
+    .input-group.is-danger {
+        margin-bottom: -12px;
+    }
 }
