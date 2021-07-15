@@ -21,7 +21,12 @@ Vue.filter('format_number', function(value) {
     if (value) {
         return `${value.toLocaleString('de-DE')}`
     }
-  });
+});
+Vue.filter('format_decimal', function(value) {
+    if (value) {
+        return `${value.toLocaleString()}`
+    }
+});
 
 new Vue({
     created() {

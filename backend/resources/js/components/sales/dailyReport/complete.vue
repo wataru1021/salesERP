@@ -55,7 +55,7 @@
                 <div class="row">
                   <div class="col-8"><p>稼働時間</p></div>
                   <div class="col-4 text-right">
-                    <p>{{ saleDailyReport.sale_time.toLocaleString(['ban', 'id']) }} 時間</p>
+                    <p>{{ saleDailyReport.sale_time | format_decimal }} 時間</p>
                   </div>
                 </div>
               </div>
