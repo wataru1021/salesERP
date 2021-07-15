@@ -230,8 +230,12 @@ class UsersController extends Controller
     {
         if (!Auth::guard('admin')->check()) return view('admin.users.login');
         $breadcrumbs = [
-            '新しいアカウントを作成します'
+            [
+                'name' => '営業マン管理',
+                'url' => route('admin.user.list')
+            ], '新しいアカウントを作成します'
         ];
+
         return view('admin.users.register', [
             'breadcrumbs' => $breadcrumbs,
         ]);
