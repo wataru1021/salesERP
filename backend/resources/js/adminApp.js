@@ -17,6 +17,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import { CChartBar } from '@coreui/vue-chartjs'
 import DatePicker from 'vue2-datepicker'
 import ReportManagement from './components/admin/reportManagement/reportmanagement'
+import RegisterUser from './components/admin/user/register'
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue2-datepicker/index.css';
 import Vuex from 'vuex';
@@ -40,20 +41,18 @@ const store = new Vuex.Store({
         ctype: '',
         userIdSRH: null
     },
-    getters: {
-    },
+    getters: {},
     mutations: {
-        setCType (state, ctype) {
+        setCType(state, ctype) {
             state.ctype = ctype;
             localStorage.setItem('ctypeStorage', JSON.stringify(ctype))
         },
-        setUserIdSRH (state, userId) {
+        setUserIdSRH(state, userId) {
             state.userIdSRH = userId;
             localStorage.setItem('userIdSRHStorage', JSON.stringify(userId))
         }
     },
-    actions: {
-    },
+    actions: {},
 });
 Vue.use(DataTable);
 new Vue({
@@ -75,7 +74,8 @@ new Vue({
         AdminChangePassword,
         AdminSuccessPassword,
         AdminSuccessEmail,
-        ReportManagement
+        ReportManagement,
+        RegisterUser
     },
     methods: {},
     mounted() {}

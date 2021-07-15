@@ -12,15 +12,21 @@ use App\Http\Requests\Admin\Password\ChangeRequest;
 use App\Http\Requests\Admin\Password\ForgotRequest;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class UsersController extends Controller
 {
+
+    use RegistersUsers;
+
     /**
      * Create a new controller instance.
      *
@@ -218,5 +224,38 @@ class UsersController extends Controller
             DB::rollBack();
         }
         return response()->json([], StatusCode::INTERNAL_ERR);
+    }
+
+    public function getRegister()
+    {
+        return view('admin.users.register');
+    }
+    public function postRegister(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => ['unique:users'],
+        ], [
+            'email.unique' => 'メールは既に存在します',
+        ]);
+        if ($validator->fails()) {
+            $message = array_combine($validator->errors()->keys(), $validator->errors()->all());
+            return response()->json($message, StatusCode::BAD_REQUEST);
+        }
+        try {
+            $user =  User::insert([
+                'name' => $request->name,
+                'email' => $request->email,
+                'role_id' => RoleStateType::SALER,
+                'password' => Hash::make($request->password),
+                'company_id' => 1,
+                'created_at' => Carbon::now()->toDateTimeString(),
+            ]);
+            if ($user) {
+                return response()->json(route('admin.user.list'), StatusCode::OK);
+            }
+            return response()->json('失敗したデータを追加しました', StatusCode::INTERNAL_ERR);
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), StatusCode::INTERNAL_ERR);
+        }
     }
 }

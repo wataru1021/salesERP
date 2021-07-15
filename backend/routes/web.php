@@ -35,10 +35,12 @@ Route::middleware([Admin::class])->prefix('/admin')->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\SaleDailyReportHistoryController::class, 'index'])->name('admin.saleReportHistory.index');
         Route::post('/getData', [App\Http\Controllers\Admin\SaleDailyReportHistoryController::class, 'getData'])->name('admin.saleReportHistory.getData');
     });
-    Route::get('/',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
+    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
     Route::get('/users', [\App\Http\Controllers\Admin\UsersController::class, 'list'])->name('admin.user.list');
     Route::get('/user-list', [\App\Http\Controllers\Admin\UsersController::class, 'getUserlist'])->name('admin.user.getUserlist');
     Route::get('/users/{id}/delete', [\App\Http\Controllers\Admin\UsersController::class, 'destroy'])->name('admin.user.destroy');
+    Route::get('/register-user', [\App\Http\Controllers\Admin\UsersController::class, 'getRegister'])->name('admin.user.getRegister');
+    Route::post('/post-register-user', [\App\Http\Controllers\Admin\UsersController::class, 'postRegister'])->name('admin.user.postRegister');
     Route::resource('sales-chart', 'Admin\SalesChartController', [
         'as' => 'admin'
     ]);
@@ -59,10 +61,10 @@ Route::get('/forgot-password-complete', [App\Http\Controllers\Sales\UsersControl
 
 
 Route::middleware([Sale::class])->prefix('/')->group(function () {
-    Route::get('/',[App\Http\Controllers\Sales\TopController::class, 'index'])->name('home');
-    Route::get('daily-report/create',[App\Http\Controllers\Sales\DailyReportController::class, 'create'])->name('dailyReport.create');
-    Route::post('daily-report/create',[App\Http\Controllers\Sales\DailyReportController::class, 'store'])->name('dailyReport.store');
-    Route::get('daily-report/complete/{id}',[App\Http\Controllers\Sales\DailyReportController::class, 'complete'])->name('dailyReport.complete');
+    Route::get('/', [App\Http\Controllers\Sales\TopController::class, 'index'])->name('home');
+    Route::get('daily-report/create', [App\Http\Controllers\Sales\DailyReportController::class, 'create'])->name('dailyReport.create');
+    Route::post('daily-report/create', [App\Http\Controllers\Sales\DailyReportController::class, 'store'])->name('dailyReport.store');
+    Route::get('daily-report/complete/{id}', [App\Http\Controllers\Sales\DailyReportController::class, 'complete'])->name('dailyReport.complete');
     Route::get('sales-management', [App\Http\Controllers\Sales\TopController::class, 'salesManagement'])->name('salesManagement');
     Route::get('report-histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'index'])->name('sale.reportHistories');
     Route::post('get_data_report_histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'reportHistories'])->name('sale.getDataReportHistories');
