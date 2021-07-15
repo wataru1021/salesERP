@@ -27,7 +27,7 @@
                         </data-table-cell>
                         <slot v-if="column.name == 'action'">
                           <button
-                            class="btn btn-danger"
+                            class="btn btn-danger delete-button"
                             @click="handleDelete(item.id)"
                           >
                             削除
@@ -46,9 +46,12 @@
     <loader :flag-show="flagShowLoader"></loader>
   </div>
 </template>
-<style >
+<style scoped>
 .cd-table-responsive .flex.mb-3 {
   display: none;
+}
+.delete-button {
+  min-width: 60px;
 }
 </style>
 <script>
