@@ -7,7 +7,6 @@
                     <form class="form-horizontal" method="POST" ref="registerForm" @submit.prevent="register" autocomplete="off">
                         <div class="card-body">
                             <h1>新規登録</h1>
-                            <p>新しいアカウントを作成します</p>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -43,7 +42,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input class="form-control" id="password" name="password" type="password" ref="password" v-model="password" placeholder="パスワード" @input="changeInput()" v-validate="'required'" @focus="handleType" @blur="handleType" value="" autocomplete="new-password" />
+                                <input class="form-control" id="password" name="password" type="password" ref="password" v-model="password" placeholder="パスワード" @input="changeInput()" v-validate="'required|min:8|max:15'" @focus="handleType" @blur="handleType" value="" autocomplete="new-password" />
                                 <div class="input-group is-danger" role="alert">
                                     {{ errors.first("password") }}
                                 </div>
@@ -61,9 +60,9 @@
                                     {{ errors.first("confirm_password") }}
                                 </div>
                             </div>
-                            <div class="text-center">
-                                <button class="btn btn-block btn-success" type="submit">新規登録</button>
-                                <a>すでにアカウントをお持ちの方はこちら</a>
+                            <div class="form-actions">
+                                <button class="btn btn-primary" type="submit">セーブ</button>
+                                <a :href="listUserUrl" class="btn btn-secondary" type="button">キャンセル</a>
                             </div>
                         </div>
                     </form>
@@ -76,6 +75,8 @@
 
 <script>
 import axios from 'axios';
+import Loader from "./../../common/loader";
+
 export default {
     created: function () {
         let messError = {
@@ -89,6 +90,8 @@ export default {
                 },
                 password: {
                     required: "パスワードを入力してください",
+                    min: "8文字以上のパスワードを入力してください。",
+                    max: "15文字以内のパスワードを入力してください。",
                 },
                 confirm_password: {
                     required: "パスワードを再入力してください",
@@ -98,6 +101,9 @@ export default {
         };
         this.$validator.localize("en", messError);
     },
+    components: {
+        Loader,
+    },
     data() {
         return {
             csrfToken: Laravel.csrfToken,
@@ -105,11 +111,12 @@ export default {
             email: '',
             password: '',
             confirm_password: '',
+            flagShowLoader: false,
             messageText: this.message,
             errorsData: {}
         };
     },
-    props: ["formUrl"],
+    props: ["listUserUrl"],
     mounted() {},
     methods: {
         register() {
@@ -121,6 +128,7 @@ export default {
             formData.append("confirm_password", this.confirm_password);
             this.$validator.validateAll().then((valid) => {
                 if (valid) {
+                    that.flagShowLoader = true;
                     axios
                         .post(`post-register-user`, formData, {
                             header: {
@@ -128,19 +136,26 @@ export default {
                             },
                         })
                         .then((res) => {
-                            console.log(res);
-                            alert("データが正常に追加されました");
-                            location.replace(res.data);
-                            // location.reload();
+                            this.$swal({
+                                title: "データが正常に追加されました",
+                                icon: "success",
+                                confirmButtonText: "OK",
+                            }).then(function (confirm) {
+                                that.flagShowLoader = false;
+                                location.replace(res.data);
+                            });
                         })
                         .catch((err) => {
                             switch (err.response.status) {
                                 case 400:
                                     this.errorsData = err.response.data;
-                                    console.log(this.errorsData.email);
                                     break;
                                 case 500:
-                                    alert("失敗したデータを追加しました!!");
+                                    this.$swal({
+                                        title: "失敗したデータを追加しました",
+                                        icon: "error",
+                                        confirmButtonText: "Cool",
+                                    }).then(function (confirm) {});
                                     break;
                                 default:
                                     break;
@@ -151,6 +166,7 @@ export default {
 
         },
         changeInput() {
+            this.errorsData = [];
             this.messageText = "";
         },
         handleType(event) {
@@ -172,10 +188,3 @@ export default {
     },
 }
 </script>
-
-<style>
-.form-control:disabled,
-.form-control[readonly] {
-    background-color: #ffffff;
-}
-</style>

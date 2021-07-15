@@ -228,7 +228,13 @@ class UsersController extends Controller
 
     public function getRegister()
     {
-        return view('admin.users.register');
+        if (!Auth::guard('admin')->check()) return view('admin.users.login');
+        $breadcrumbs = [
+            '新しいアカウントを作成します'
+        ];
+        return view('admin.users.register', [
+            'breadcrumbs' => $breadcrumbs,
+        ]);
     }
     public function postRegister(Request $request)
     {

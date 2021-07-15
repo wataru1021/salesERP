@@ -7,6 +7,7 @@
         'urlGetData' => route('admin.user.getUserlist'),
         'flag-show' => false
     ])}}"
+    :register-url="{{json_encode(route('admin.user.getRegister'))}}"
     ></admin-user-list>
 @endsection
 
