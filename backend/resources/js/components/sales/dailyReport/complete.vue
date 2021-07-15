@@ -12,7 +12,7 @@
                 <h3 class="text-success text-center font-weight-bold">報告完了しました</h3>
               </div>
               <div class="col-md-12 text-center mt-3">
-                <img src="/image/changePasswordComplete.png" class="w-25" />
+                <img src="/image/dailyReportComplete.png" class="w-25" />
               </div>
               <div class="col-md-12 mt-3">
                 <p>
@@ -23,7 +23,7 @@
                 <div class="row">
                   <div class="col-8"><p>ピンポン数（訪問件数）</p></div>
                   <div class="col-4 text-right">
-                    <p>{{ saleDailyReport.ping_pong_num }}件</p>
+                    <p>{{  saleDailyReport.ping_pong_num | format_number }} 件</p>
                   </div>
                 </div>
               </div>
@@ -31,7 +31,7 @@
                 <div class="row">
                   <div class="col-8"><p>対面数</p></div>
                   <div class="col-4 text-right">
-                    <p>{{ saleDailyReport.meet_num }}件</p>
+                    <p>{{ saleDailyReport.meet_num | format_number }} 件</p>
                   </div>
                 </div>
               </div>
@@ -39,7 +39,7 @@
                 <div class="row">
                   <div class="col-8"><p>商談数</p></div>
                   <div class="col-4 text-right">
-                    <p>{{ saleDailyReport.deal_num }}件</p>
+                    <p>{{ saleDailyReport.deal_num | format_number }} 件</p>
                   </div>
                 </div>
               </div>
@@ -47,7 +47,7 @@
                 <div class="row">
                   <div class="col-8"><p>獲得数</p></div>
                   <div class="col-4 text-right">
-                    <p>{{ saleDailyReport.acquisitions_num }}件</p>
+                    <p>{{ saleDailyReport.acquisitions_num | format_number }} 件</p>
                   </div>
                 </div>
               </div>
@@ -55,7 +55,7 @@
                 <div class="row">
                   <div class="col-8"><p>稼働時間</p></div>
                   <div class="col-4 text-right">
-                    <p>{{ saleDailyReport.sale_time }}時間</p>
+                    <p>{{ saleDailyReport.sale_time.toLocaleString(['ban', 'id']) }} 時間</p>
                   </div>
                 </div>
               </div>

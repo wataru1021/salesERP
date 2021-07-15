@@ -17,6 +17,11 @@ Vue.use(VueAxios, axios);
 Vue.use(VeeValidate, {
     locale: "ja"
 });
+Vue.filter('format_number', function(value) {
+    if (value) {
+        return `${value.toLocaleString('de-DE')}`
+    }
+  });
 
 new Vue({
     created() {
