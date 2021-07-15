@@ -93,6 +93,7 @@ class UsersController extends Controller
 
             return view('admin.users.password.forgot', [
                 'message' => $message,
+                'old_email' => $request->email_address
             ]);
         }
     }

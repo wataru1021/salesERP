@@ -48,9 +48,13 @@
                   </span>
                 </div>
                 <input
-                  type="password"
                   class="form-control"
                   name="password"
+                  :type="fieldTypes.password"
+                  @focus="handleType"
+                  @blur="handleType"
+                  value=""
+                  autocomplete="new-password"
                   placeholder="パスワード"
                   v-validate="'required'"
                   @input="changeInput()"
@@ -103,6 +107,9 @@ export default {
       csrfToken: Laravel.csrfToken,
       loginIdValue: this.loginId,
       messageText: this.message,
+      fieldTypes: {
+        password: "text",
+      },
     };
   },
   props: ["formUrl", "forgotPasswordUrl", "message", "loginId"],
@@ -120,6 +127,16 @@ export default {
     },
     changeInput() {
       this.messageText = "";
+    },
+    handleType(event) {
+      const { srcElement, type } = event;
+      const { name, value } = srcElement;
+
+      if (type === "blur" && !value) {
+        this.fieldTypes[name] = "text";
+      } else {
+        this.fieldTypes[name] = "password";
+      }
     },
   },
 };

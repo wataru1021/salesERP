@@ -79,9 +79,10 @@ export default {
       messageText: this.message,
       messageText2: this.message2,
       email_address: "",
+      email_address: this.oldEmail,
     };
   },
-  props: ["formUrl", "message", "message2", "formLogin"],
+  props: ["formUrl", "message", "message2", "formLogin","oldEmail"],
   mounted() {},
   methods: {
     sendMail: function (e) {

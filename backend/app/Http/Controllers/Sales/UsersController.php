@@ -84,6 +84,7 @@ class UsersController extends Controller
 
             return view('sales.users.password.forgot', [
                 'message' => $message,
+                'old_email' => $request->email_address
             ]);
         }
     }
