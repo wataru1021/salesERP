@@ -48,7 +48,7 @@
                   </div>
                   <input
                     type="password"
-                    class="form-control"
+                    class="form-control rounded-right"
                     name="password"
                     placeholder="新しいパスワード"
                     v-validate="'required|min:8|max:15'"
@@ -73,7 +73,7 @@
                   </div>
                   <input
                     type="password"
-                    class="form-control"
+                    class="form-control rounded-right"
                     name="password_confirm"
                     placeholder="確認用新しいパスワード"
                     v-validate="'required|confirmed:password'"
@@ -93,11 +93,7 @@
                    <div class="col-sm-6 col-xs-12 w55 text-right">
                     <a v-bind:href="formLogin" class="btn btn-link px-0 mt-4"
                       >ログインはこちら</a
-                    >
-
-                    <a v-bind:href="formForgot" class="btn btn-link px-0"
-                      >新規登録はこちら</a
-                    >
+                    >  
                   </div>
                 </div>
               </form>
@@ -143,8 +139,8 @@ export default {
     "tokenUrl",
     "message",
     "message2",
-    "formLogin",
     "formForgot",
+    "formLogin",
   ],
   mounted() {},
   methods: {

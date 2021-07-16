@@ -13,7 +13,7 @@
             >
               <input type="hidden" :value="csrfToken" name="_token" />
               <h1>ログイン</h1>
-              <p class="text-muted">アカウントを入力してください。</p>
+              <p class="text-muted">サインインします</p>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
@@ -26,7 +26,7 @@
                 </div>
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control rounded-right"
                   name="email"
                   placeholder="メールアドレス"
                   v-validate="'required|email_format'"
@@ -48,7 +48,7 @@
                   </span>
                 </div>
                 <input
-                  class="form-control"
+                  class="form-control rounded-right"
                   name="password"
                   type="password"
                   v-model="loginPasssword"

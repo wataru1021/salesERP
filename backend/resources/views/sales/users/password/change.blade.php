@@ -3,6 +3,7 @@
 @section('content')
     <sales-change-password :form-url="{{ json_encode(route('resetPassword')) }}"
         :form-login="{{ json_encode(route('login')) }}"
+        :form-register="{{ json_encode(route('register')) }}" 
         :form-forgot="{{ json_encode(route('forgot')) }}"
         :message="{{ json_encode(isset($message) ? $message : '') }}"
         :message2="{{ json_encode(isset($message2) ? $message2 : '') }}"
