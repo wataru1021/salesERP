@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <div class="card-group">
           <div class="card p-4">
-            <div class="card-body">
+            <div class="">
               <form
                 method="POST"
                 ref="loginForm"
