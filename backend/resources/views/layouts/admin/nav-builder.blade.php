@@ -3,9 +3,9 @@
     <img class="c-sidebar-brand-minimized" src="{{ url('assets/brand/sale_erp_logo.png') }}" width="auto" height="auto" alt="SaleERP Logo">
     <span class="brand-name">Sales ERP</span>
 </div>
-<ul class="c-sidebar-nav">
+<ul class="c-sidebar-nav nav-admin">
     <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" href="">
+        <a class="c-sidebar-nav-link" href="{{route('admin.home')}}">
             <i class="cil-speedometer c-sidebar-nav-icon"></i>
             Top
         </a>
