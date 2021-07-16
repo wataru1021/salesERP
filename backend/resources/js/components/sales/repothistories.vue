@@ -11,28 +11,28 @@
                         <div class="col-sm-9 col-md-12">
                             <div class="list-group d-inline-block col-lg-9">
                                 <div class="border border-primary rounded text-center d-inline-block mt-2 mr-2">
-                                    <a href="javascript:;" :class="[isActive == 'now' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(), new Date()]; isActive = 'now'">
+                                    <a href="javascript:;" :class="[isActive == '1' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="changeDate(1)">
                                         <h5 class="text-primary mb-0">
                                             今日
                                         </h5>
                                     </a>
                                 </div>
                                 <div class="border border-primary rounded text-center d-inline-block mt-2 mr-2">
-                                    <a href="javascript:;" :class="[isActive == 'yesterday' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(getFullYear, getMonth, getDate - 1), new Date(getFullYear, getMonth, getDate - 1)]; isActive = 'yesterday'">
+                                    <a href="javascript:;" :class="[isActive == '2' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="changeDate(2)">
                                         <h5 class="text-primary mb-0">
                                             昨日
                                         </h5>
                                     </a>
                                 </div>
                                 <div class="border border-primary rounded text-center d-inline-block mt-2 mr-2">
-                                    <a href="javascript:;" :class="[isActive == 'Last7days' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(getFullYear, getMonth, getDate - 7), new Date()]; isActive = 'Last7days'">
+                                    <a href="javascript:;" :class="[isActive == '8' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="changeDate(8)">
                                         <h5 class="text-primary mb-0">
                                             直近7日間
                                         </h5>
                                     </a>
                                 </div>
                                 <div class="border border-primary rounded text-center d-inline-block mt-2 mr-2">
-                                    <a href="javascript:;" :class="[isActive == 'Last30days' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="time = [new Date(getFullYear, getMonth -1, getDate), new Date()]; isActive = 'Last30days'">
+                                    <a href="javascript:;" :class="[isActive == '31' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="changeDate(31)">
                                         <h5 class="text-primary mb-0">
                                             直近30日間
                                         </h5>
@@ -47,7 +47,7 @@
                             <form v-on:submit.prevent="getData">
                                 <div class="form-group col-lg-9 col-xl-6 p-0">
                                     <div class="search-date-time">
-                                        <date-picker v-model="time" :format="'YYYY年MM月DD日'"  @change="isActive = ''" range></date-picker>
+                                        <date-picker v-model="time" :format="'YYYY年MM月DD日'" @change="isActive = ''" range></date-picker>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary h-45">
@@ -168,8 +168,8 @@ export default {
     },
     data() {
         return {
-            time: [new Date(), new Date()],
-            isActive: "now",
+            time: [],
+            isActive: "",
             activeClass: 'active',
             getDate: null,
             getMonth: null,
@@ -183,6 +183,9 @@ export default {
         this.getDate = date.getDate();
         this.getMonth = date.getMonth();
         this.getFullYear = date.getFullYear();
+        var startDate = new Date((this.getFullYear - 1), this.getMonth, this.getDate);
+        var endDate = new Date(this.getFullYear, this.getMonth, this.getDate);
+        this.time = [startDate, endDate];
         this.getData();
     },
     methods: {
@@ -208,6 +211,20 @@ export default {
                     that.dataReport = res.data.data[0];
                 })
                 .catch((err) => {});
+        },
+        changeDate(value) {
+            this.isActive = value;
+            this.time = []
+            if (value != 0) {
+                var date = new Date(),
+                    y = date.getFullYear(),
+                    m = date.getMonth(),
+                    d = date.getDate();
+                var startDate = new Date(Date.UTC(y, m, d - value + 1));
+                var endDate = new Date(Date.UTC(y, m, d));
+                if (value == 2) endDate = new Date(Date.UTC(y, m, d - value + 1));
+                this.time = [startDate, endDate];
+            }
         },
     }
 };

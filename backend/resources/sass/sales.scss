@@ -1,13 +1,15 @@
 @media (max-width: 480px) {
-  .sales-register-btn {
-    width: 100%;
-  }
+    .sales-register-btn {
+        width: 100%;
+    }
 }
+
 .sales-register-link {
-  text-align:  center;
-  padding: 0;
-  white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    white-space: nowrap;
 }
+
 .report-histories {
     .mx-datepicker-range {
         width: 100%;
@@ -38,6 +40,13 @@
     }
     a.active h5 {
         color: #ffffff !important;
+    }
+    h5 {
+        font-size: 16px;
+    }
+    .mx-datepicker-range .mx-input {
+        font-size: 14px;
+        height: 44px;
     }
 }
 
@@ -208,6 +217,11 @@
     }
 }
 
-.top .list-group {
-    padding-left: 15px !important;
+.top {
+    .list-group {
+        padding-left: 15px !important;
+        h1 {
+            font-size: 36px;
+        }
+    }
 }

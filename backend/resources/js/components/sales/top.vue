@@ -4,9 +4,9 @@
         <div class="list-group col-md-12 col-lg-6 m-auto">
             <div class="border border-primary rounded text-center">
                 <a class="list-group-item list-group-item-action" :href="salesManagementUrl">
-                    <h2 class="text-primary mb-0">
+                    <h1 class="text-primary mb-0">
                         営業管理
-                    </h2>
+                    </h1>
                 </a>
             </div>
         </div>
