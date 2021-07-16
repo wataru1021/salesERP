@@ -63,7 +63,7 @@ Route::get('/forgot-password-complete', [App\Http\Controllers\Sales\UsersControl
 
 
 Route::middleware([Sale::class])->prefix('/')->group(function () {
-    Route::get('/',[App\Http\Controllers\Sales\HomeController::class, 'index'])->name('home');
+    Route::get('/', [App\Http\Controllers\Sales\TopController::class, 'index'])->name('home');
     Route::get('daily-report/create', [App\Http\Controllers\Sales\DailyReportController::class, 'create'])->name('dailyReport.create');
     Route::post('daily-report/create', [App\Http\Controllers\Sales\DailyReportController::class, 'store'])->name('dailyReport.store');
     Route::get('daily-report/complete/{id}', [App\Http\Controllers\Sales\DailyReportController::class, 'complete'])->name('dailyReport.complete');

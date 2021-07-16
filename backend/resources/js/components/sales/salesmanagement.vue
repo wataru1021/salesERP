@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-    <div class="row">
+    <div class="row top">
         <div class="list-group col-md-12 col-lg-6 m-auto">
             <div class="border border-primary rounded text-center mb-4">
                 <a class="list-group-item list-group-item-action" :href="reportRegistrationUrl">

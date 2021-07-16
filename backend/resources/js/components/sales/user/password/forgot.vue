@@ -53,7 +53,7 @@
                     <a v-bind:href="formLogin" class="btn btn-link px-0 mt-4"
                       >ログインはこちら</a
                     >
-                    <a href="" class="btn btn-link px-0">新規登録はこちら</a>
+                    <a v-bind:href="formRegister" class="btn btn-link px-0">新規登録はこちら</a>
                   </div>
                 </div>
               </form>
@@ -87,7 +87,7 @@ export default {
       email_address: "",
     };
   },
-  props: ["formUrl", "message", "formLogin", "message2"],
+  props: ["formUrl", "message", "formLogin", "message2", "formRegister"],
   mounted() {},
   methods: {
     sendMail: function (e) {
