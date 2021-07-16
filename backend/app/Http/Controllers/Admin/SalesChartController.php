@@ -23,7 +23,7 @@ class SalesChartController extends Controller
         $breadcrumbs = [
             [
                 'name' => '全営業マンの報告管理',
-                'url' => route('login')
+                'url' => route('admin.reportManagement')
 
             ], '指標毎の営業マン成績'
         ];

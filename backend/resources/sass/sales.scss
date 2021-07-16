@@ -167,3 +167,33 @@
     margin-left: 20px;
     margin-top: 22px;
 }
+
+.daily_report_create {
+    @media screen and (min-width: 768px) {
+        .content {
+            width: 60%;
+            margin: auto;
+        }
+        .card-body {
+            padding: 40px;
+        }
+        button {
+            width: 200px !important;
+        }
+    }
+}
+
+.daily_report_complete {
+    @media screen and (min-width: 768px) {
+        .content {
+            width: 60%;
+            margin: auto;
+        }
+        .card-body {
+            padding: 40px;
+        }
+        img {
+            width: 15% !important;
+        }
+    }
+}

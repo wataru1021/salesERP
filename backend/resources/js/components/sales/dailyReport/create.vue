@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
+  <div class="container daily_report_create">
+    <div class="row content">
+      <div class="col-md-12">
         <div class="card">
           <div class="card-body">
             <div class="form-group row mb-0">
-              <div class="col-md-9">
+              <div class="col-md-12">
                 <h4>{{ date }}({{ th }})の日報</h4>
               </div>
             </div>
@@ -19,7 +19,7 @@
             >
               <input type="hidden" :value="csrfToken" name="_token" />
               <div class="form-group row mb-2">
-                <label class="col-md-3 col-form-label" for="ping_pong_num"
+                <label class="col-md-3 col-form-label text-nowrap" for="ping_pong_num"
                   >ピンポン数（訪問件数）</label
                 >
                 <div class="col-md-9">
@@ -27,10 +27,11 @@
                     class="form-control"
                     id="ping_pong_num"
                     name="ping_pong_num"
-                    type="number"
+                    type="text"
                     placeholder="333"
                     v-validate="'required|numeric'"
-                    v-model="data.ping_pong_num"
+                    v-model="saleDailyReport.ping_pong_num"
+                    @keypress="isNumber($event)"
                     @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
@@ -47,10 +48,11 @@
                     class="form-control"
                     id="meet_num"
                     name="meet_num"
-                    type="number"
+                    type="text"
                     placeholder="80"
                     v-validate="'required|numeric'"
-                    v-model="data.meet_num"
+                    v-model="saleDailyReport.meet_num"
+                    @keypress="isNumber($event)"
                     @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
@@ -67,10 +69,11 @@
                     class="form-control"
                     id="deal_num"
                     name="deal_num"
-                    type="number"
+                    type="text"
                     placeholder="30"
                     v-validate="'required|numeric'"
-                    v-model="data.deal_num"
+                    v-model="saleDailyReport.deal_num"
+                    @keypress="isNumber($event)"
                     @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
@@ -87,10 +90,11 @@
                     class="form-control"
                     id="acquisitions_num"
                     name="acquisitions_num"
-                    type="number"
+                    type="text"
                     placeholder="20"
                     v-validate="'required|numeric'"
-                    v-model="data.acquisitions_num"
+                    v-model="saleDailyReport.acquisitions_num"
+                    @keypress="isNumber($event)"
                     @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
@@ -109,9 +113,9 @@
                     name="sale_time"
                     type="number"
                     placeholder="10.5"
-                    v-validate="'required'"
-                    v-model="data.sale_time"
+                    v-validate="'decimal:1|required'"
                     step="0.5"
+                    v-model="saleDailyReport.sale_time"
                     @input="changeInput()"
                   />
                   <div class="input-group is-danger" role="alert">
@@ -131,7 +135,7 @@
                     name="conscious_point"
                     rows="4"
                     placeholder="商談から獲得に確実に繋がるよう、商談場所を意識した。"
-                    v-model="data.conscious_point"
+                    v-model="saleDailyReport.conscious_point"
                     v-validate="'required'"
                   ></textarea>
                   <div class="input-group is-danger" role="alert">
@@ -147,22 +151,20 @@
                 <div class="col-md-9 text-center is-danger" v-if="messageText">
                   {{ messageText }}
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-12 text-center">
                   <button class="btn btn-success w-100">報告</button>
                 </div>
               </div>
             </form>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
         <div class="form-group row">
-          <div class="col-md-9 text-center">
-            <a href="">営業管理に戻る</a>
+          <div class="col-md-12 text-center">
+            <a v-bind:href="saleManagementUrl">営業管理に戻る</a>
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-md-9 text-center">
+          <div class="col-md-12 text-center">
             <a v-bind:href="topUrl">TOPに戻る</a>
           </div>
         </div>
@@ -204,6 +206,7 @@ export default {
         },
         sale_time: {
           required: "稼働時間を入力してください",
+          decimal:"数字で入力してください。"
         },
         conscious_point: {
           required: "今日意識した点を入力してください",
@@ -216,12 +219,12 @@ export default {
     return {
       csrfToken: Laravel.csrfToken,
       messageText: this.message,
-      data: this.data,
+      saleDailyReport: {},
     };
   },
-  props: ["formUrl", "message", "topUrl", "date", "th", "data"],
+  props: ["formUrl", "message", "topUrl", "date", "th", "data", "saleManagementUrl"],
   mounted() {
-    console.log(this.data);
+    this.saleDailyReport = this.data || {}
   },
   methods: {
     register: function (e) {
@@ -236,6 +239,15 @@ export default {
     changeInput() {
       this.messageText = "";
     },
+    isNumber: function(evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+      } else {
+        return true;
+      }
+    }
   },
 };
 </script>

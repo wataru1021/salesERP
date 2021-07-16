@@ -267,10 +267,10 @@
 import axios from "axios";
 import Loader from "./../../common/loader";
 
-const pinPont = 1;
-const contractRate = 2;
-const acquisitionsNum = 3;
-const productivity = 4;
+const pinPont = 'pinPont';
+const contractRate = 'contractRate';
+const acquisitionsNum = 'acquisitionsNum';
+const productivity = 'productivity';
 
 const  handMadeTimeLine = 0;
 const today = 1;
@@ -287,7 +287,7 @@ export default {
       csrfToken: Laravel.csrfToken,
       flagShowLoader: false,
       salesChartLabels: [],
-      showDataType: pinPont,
+      showDataType: null,
       salesChartDatas: [],
       salesChartObjectDatas: [],
       pinPont,
@@ -308,6 +308,10 @@ export default {
   },
   props: ["data"],
   mounted() {
+    var ctypeStorage = JSON.parse(localStorage.getItem('ctypeStorage'));
+    ctypeStorage = ctypeStorage == null ? pinPont : ctypeStorage;
+    this.showDataType = ctypeStorage;
+    localStorage.removeItem('ctypeStorage');
     this.getChartData();
   },
   computed: {

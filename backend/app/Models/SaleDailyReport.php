@@ -24,7 +24,20 @@ class SaleDailyReport extends Model
         'conscious_point',
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
+
+    public function getContractRateAttribute()
+    {
+        return $this->acquisitions_num / $this->ping_pong_num * 100;
+    }
+
+    public function getProductivityAttribute()
+    {
+        return $this->acquisitions_num / $this->sale_time;
+    }
+
+    protected $appends = ['contract_rate', 'productivity'];
 }

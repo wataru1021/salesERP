@@ -5,6 +5,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
+              <a :href="registerUrl" class="btn btn-primary mb-3">ユーザーを追加する</a>
               <div class="cd-table-responsive">
                 <data-table
                   :columns="columns"
@@ -26,7 +27,7 @@
                         </data-table-cell>
                         <slot v-if="column.name == 'action'">
                           <button
-                            class="btn btn-danger"
+                            class="btn btn-danger delete-button"
                             @click="handleDelete(item.id)"
                           >
                             削除
@@ -45,9 +46,12 @@
     <loader :flag-show="flagShowLoader"></loader>
   </div>
 </template>
-<style >
+<style scoped>
 .cd-table-responsive .flex.mb-3 {
   display: none;
+}
+.delete-button {
+  min-width: 60px;
 }
 </style>
 <script>
@@ -92,7 +96,7 @@ export default {
       },
     };
   },
-  props: ["data"],
+  props: ["data", "registerUrl"],
   mounted() {},
   methods: {
     handleDelete(id) {

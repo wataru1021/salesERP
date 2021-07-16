@@ -222,7 +222,6 @@
 }
 </style>>
   
-</style>
 <script>
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
@@ -251,10 +250,14 @@ export default {
       y = date.getFullYear(),
       m = date.getMonth(),
       d = date.getDate();
-    var startDate = new Date(y, m, d);
-    var endDate = new Date(y, m, d);
+    var startDate = new Date(Date.UTC(y, m, d));
+    var endDate = new Date(Date.UTC(y, m, d));
     this.time = [startDate, endDate];
-    this.userId = this.userResponse[0].id;
+    var userIdSRHStorage = JSON.parse(localStorage.getItem('userIdSRHStorage'));
+    userIdSRHStorage = userIdSRHStorage == null ? this.userResponse[0].id : userIdSRHStorage;
+    this.userId = userIdSRHStorage;
+    console.log(this.userId)
+    localStorage.removeItem('userIdSRHStorage');
     this.getData();
     (this.users = this.userResponse), (this.valueSearch = 1);
   },
@@ -301,8 +304,9 @@ export default {
           y = date.getFullYear(),
           m = date.getMonth(),
           d = date.getDate();
-        var startDate = new Date(y, m, d - value + 1);
-        var endDate = new Date(y, m, d);
+        var startDate = new Date(Date.UTC(y, m, d - value + 1));
+        var endDate = new Date(Date.UTC(y, m, d));
+        if (value == 2)  endDate = new Date(Date.UTC(y, m, d - value + 1));
         this.time = [startDate, endDate];
       }
     },

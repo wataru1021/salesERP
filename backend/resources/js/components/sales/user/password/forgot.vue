@@ -30,7 +30,7 @@
                     class="form-control"
                     name="email_address"
                     placeholder="メールアドレス"
-                    v-validate="'required|email|max:255'"
+                    v-validate="'required|email_format|max:255'"
                     v-model="email_address"
                     @input="changeInput()"
                   />
@@ -73,7 +73,7 @@ export default {
         email_address: {
           required: "メールアドレスを入力してください",
           max: "メールアドレスは255文字以内で入力してください。",
-          email: "メールアドレス形式は正しくありません。",
+          email_format: "メールアドレス形式は正しくありません。"
         },
       },
     };

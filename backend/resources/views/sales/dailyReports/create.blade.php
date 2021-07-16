@@ -1,12 +1,15 @@
 @extends('layouts.sales.base')
-
 @section('content')
-    <daily-report-complete
-    :data="{{ json_encode(isset($data) ? $data : '') }}"
+    <daily-report-create
+    :form-url="{{ json_encode(route('dailyReport.store')) }}"
+    :message="{{ json_encode(isset($message) ? $message : '') }}"
     :top-url="{{ json_encode(route('home')) }}"
-    :date = "{{ json_encode(Carbon\Carbon::now()->format('Y 年 m 月 d 日')) }}"
+    :sale-management-url="{{ json_encode(route('salesManagement')) }}"
+    :date = "{{ json_encode(Carbon\Carbon::now()->format('Y年m月d日')) }}"
     :th = "{{ json_encode(App\Enums\DayOffWeek::getThJp(Carbon\Carbon::now()->format('l'))) }}"
-    ></daily-report-complete>
+    :data="{{ json_encode(isset($data) ? $data : '') }}"
+    >
+    </daily-report-create>
 @endsection
 
 @section('javascript')

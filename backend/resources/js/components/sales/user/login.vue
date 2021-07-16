@@ -88,14 +88,39 @@
 
 <script>
 export default {
-  created: function () {
-    let messError = {
-      custom: {
-        email: {
-          required: "メールアドレスを入力してください",
-        },
-        password: {
-          required: "パスワードを入力してください",
+    created: function() {
+        let messError = {
+            custom: {
+                email: {
+                    required: "メールアドレスを入力してください",
+                    email_format: "メールアドレス形式は正しくありません。"
+                },
+                password: {
+                    required: "パスワードを入力してください"
+                }
+            }
+        };
+        this.$validator.localize("en", messError);
+    },
+    data() {
+        return {
+            csrfToken: Laravel.csrfToken,
+            loginIdValue: this.loginId,
+            messageText: this.message
+        };
+    },
+    props: ["formUrl", "forgotPasswordUrl", "message", "loginId"],
+    mounted() {},
+    methods: {
+        login: function(e) {
+            e.preventDefault();
+
+            let that = this;
+            this.$validator.validateAll().then(valid => {
+                if (valid) {
+                    that.$refs.loginForm.submit();
+                }
+            });
         },
       },
     };
