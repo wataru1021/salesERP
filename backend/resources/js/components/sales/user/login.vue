@@ -88,67 +88,44 @@
 
 <script>
 export default {
-    created: function() {
-        let messError = {
-            custom: {
-                email: {
-                    required: "メールアドレスを入力してください",
-                    email_format: "メールアドレス形式は正しくありません。"
-                },
-                password: {
-                    required: "パスワードを入力してください"
-                }
-            }
-        };
-        this.$validator.localize("en", messError);
-    },
-    data() {
-        return {
-            csrfToken: Laravel.csrfToken,
-            loginIdValue: this.loginId,
-            messageText: this.message
-        };
-    },
-    props: ["formUrl", "forgotPasswordUrl", "message", "loginId"],
-    mounted() {},
-    methods: {
-        login: function(e) {
-            e.preventDefault();
-
-            let that = this;
-            this.$validator.validateAll().then(valid => {
-                if (valid) {
-                    that.$refs.loginForm.submit();
-                }
-            });
-        },
-      },
-    };
-    this.$validator.localize("en", messError);
+  created: function() {
+      let messError = {
+          custom: {
+              email: {
+                  required: "メールアドレスを入力してください",
+                  email_format: "メールアドレス形式は正しくありません。"
+              },
+              password: {
+                  required: "パスワードを入力してください"
+              }
+          }
+      };
+      this.$validator.localize("en", messError);
   },
   data() {
-    return {
-      csrfToken: Laravel.csrfToken,
-      loginIdValue: this.oldEmail,
-      messageText: this.message,
-      loginPasssword: this.oldPassword,
-    };
+      return {
+          csrfToken: Laravel.csrfToken,
+          loginIdValue: this.oldEmail,
+          messageText: this.message,
+          loginPasssword: this.oldPassword
+      };
   },
-  props: ["formUrl", "forgotPasswordUrl", "message", "oldEmail","oldPassword"],
+  props: ["formUrl", "forgotPasswordUrl", "message", "oldEmail", "oldPassword"],
   mounted() {},
   methods: {
-    login: function (e) {
-      e.preventDefault();
-      let that = this;
-      this.$validator.validateAll().then((valid) => {
-        if (valid) {
-          that.$refs.loginForm.submit();
-        }
-      });
+    login: function(e) {
+        e.preventDefault();
+
+        let that = this;
+        this.$validator.validateAll().then(valid => {
+            if (valid) {
+                that.$refs.loginForm.submit();
+            }
+        });
     },
     changeInput() {
       this.messageText = "";
     },
-  },
+  }
 };
 </script>
