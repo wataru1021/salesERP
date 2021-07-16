@@ -84,10 +84,10 @@ export default {
       csrfToken: Laravel.csrfToken,
       messageText: this.message,
       messageText2: this.message2,
-      email_address: "",
+      email_address: this.oldEmail,
     };
   },
-  props: ["formUrl", "message", "formLogin", "message2", "formRegister"],
+  props: ["formUrl", "message", "formLogin", "message2", "formRegister", "oldEmail"],
   mounted() {},
   methods: {
     sendMail: function (e) {

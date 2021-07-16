@@ -48,9 +48,10 @@
                   </span>
                 </div>
                 <input
-                  type="password"
                   class="form-control"
                   name="password"
+                  type="password"
+                  v-model="loginPasssword"
                   placeholder="パスワード"
                   v-validate="'required'"
                   @input="changeInput()"
@@ -102,11 +103,12 @@ export default {
   data() {
     return {
       csrfToken: Laravel.csrfToken,
-      loginIdValue: this.loginId,
+      loginIdValue: this.oldEmail,
       messageText: this.message,
+      loginPasssword: this.oldPassword,
     };
   },
-  props: ["formUrl", "forgotPasswordUrl", "message", "loginId"],
+  props: ["formUrl", "forgotPasswordUrl", "message","oldEmail","oldPassword"],
   mounted() {},
   methods: {
     login: function (e) {

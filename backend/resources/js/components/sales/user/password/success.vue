@@ -1,5 +1,5 @@
 <template>
-  <div class="container success-password">
+  <div class="container success-email">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card">

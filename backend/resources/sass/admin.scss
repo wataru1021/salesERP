@@ -1,4 +1,3 @@
-@import "common/loader";
 .sale-daily-report-histories {
     .row {
         &:last-child {
@@ -69,6 +68,7 @@
     }
 }
 
+@import "common/loader";
 .laravel-vue-datatable-th {
     font-weight: 200;
 }
@@ -93,6 +93,12 @@
             button {
                 width: 84px;
                 height: 37px;
+            }
+        }
+        .w55 {
+            width: 55%;
+            a {
+                margin-top: 0 !important;
             }
         }
         .w-10 {
@@ -142,6 +148,32 @@
     }
 }
 
+@media (max-width: 576px) {
+    .forgot-password,
+    .change-password {
+        .col-sm-6.col-xs-12.text-right {
+            margin-top: 10px;
+            display: inline-grid;
+            a {
+                text-align: end;
+            }
+        }
+    }
+}
+
+@media (min-width: 576px) {
+    .forgot-password,
+    .change-password {
+        .col-sm-6.col-xs-12.text-right {
+            margin-top: 10px;
+            display: inline-grid;
+            a {
+                text-align: end;
+            }
+        }
+    }
+}
+
 .sales-chart-title {
     font-size: 16px;
     margin-bottom: 10px;
@@ -168,33 +200,4 @@
     background-image: url(/image/iconAdminCalendar.png);
     background-position: center;
     background-size: 1rem;
-}
-
-.report-management {
-    .table th,
-    .table td {
-        padding: 0.3rem;
-    }
-    a.active {
-        background: #321FDB;
-        color: #ffffff !important;
-    }
-    a.active:hover {
-        background: #321FDB;
-        color: #ffffff !important;
-    }
-    .a-btn-text {
-        color: #321fdb;
-    }
-    .c-icon:not(.c-icon-c-s):not(.c-icon-custom-size) {
-        width: 12px;
-        height: 12px;
-        margin-bottom: 4px;
-    }
-}
-
-.register-user {
-    .input-group.is-danger {
-        margin-bottom: -12px;
-    }
 }

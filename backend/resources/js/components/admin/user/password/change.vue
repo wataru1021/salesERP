@@ -90,6 +90,15 @@
                   <div class="col-xs-12 col-sm-6 w45">
                     <button class="btn btn-primary mt-3">リセット</button>
                   </div>
+                   <div class="col-sm-6 col-xs-12 w55 text-right">
+                    <a v-bind:href="formLogin" class="btn btn-link px-0 mt-4"
+                      >ログインはこちら</a
+                    >
+
+                    <a v-bind:href="formForgot" class="btn btn-link px-0"
+                      >新規登録はこちら</a
+                    >
+                  </div>
                 </div>
               </form>
             </div>

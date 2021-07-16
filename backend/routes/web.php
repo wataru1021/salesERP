@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/admin')->group(function () {
     Route::get('/login', [App\Http\Controllers\Admin\UsersController::class, 'index'])->name('admin.login');
     Route::post('/login', [App\Http\Controllers\Admin\UsersController::class, 'login'])->name('admin.login');
-    Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Admin\UsersController::class, 'forgotPassword'])->name('admin.forgot');
+    Route::match(['get', 'post'], '/forgot-password', [App\Http\Controllers\Admin\UsersController::class, 'forgotPassword'])->name('admin.forgot');
     Route::get('/logout', [App\Http\Controllers\Admin\UsersController::class, 'logout'])->name('admin.logout');
 
     Route::get('/reset-password/{email}/{token}',  [App\Http\Controllers\Admin\UsersController::class, 'getToken'])->name('admin.getToken');

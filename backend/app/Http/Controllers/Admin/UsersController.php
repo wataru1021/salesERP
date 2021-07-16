@@ -56,6 +56,8 @@ class UsersController extends Controller
 
         return view('admin.users.login', [
             'message' => $message,
+            'old_email' => $request->email,
+            'old_password' => $request->password,
         ]);
     }
 
@@ -99,6 +101,7 @@ class UsersController extends Controller
 
             return view('admin.users.password.forgot', [
                 'message' => $message,
+                'old_email' => $request->email_address
             ]);
         }
     }
