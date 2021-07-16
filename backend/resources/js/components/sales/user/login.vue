@@ -1,10 +1,10 @@
 <template>
-    <div class="container">
+    <div class="container login-password">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card-group">
                     <div class="card p-4">
-                        <div class="card-body">
+                        <div>
                             <form
                                 method="POST"
                                 ref="loginForm"
@@ -17,7 +17,7 @@
                                     :value="csrfToken"
                                     name="_token"
                                 />
-                                <h1>ログイン</h1>
+                                <h2>ログイン</h2>
                                 <p class="text-muted">
                                     アカウントを入力してください。
                                 </p>
@@ -34,7 +34,7 @@
                                         class="form-control"
                                         name="email"
                                         placeholder="メールアドレス"
-                                        v-validate="'required'"
+                                        v-validate="'required|email_format'"
                                         v-model="loginIdValue"
                                         @input="changeInput()"
                                     />
@@ -75,16 +75,16 @@
                                     >
                                         {{ messageText }}
                                     </div>
-                                    <div class="col-xs-12 col-sm-6">
+                                    <div class="col-xs-6 col-sm-4 w45">
                                         <button
-                                            class="btn btn-primary px-5 mt-3"
+                                            class="btn btn-primary px-5 mt-4"
                                         >
                                             ログイン
                                         </button>
                                     </div>
-
-                                    <div class="col-sm-6 col-sx-12 text-right">
-                                        <a v-bind:href="forgotPasswordUrl" class="btn btn-link px-0 mt-3">パスワードを忘れた方へ</a>
+                                    
+                                    <div class="col-sm-8 col-xs-6 text-right">
+                                        <a v-bind:href="forgotPasswordUrl" class="btn btn-link px-0 mt-4">パスワードを忘れた方へ</a>
                                     </div>
                                 </div>
                             </form>
@@ -102,7 +102,8 @@ export default {
         let messError = {
             custom: {
                 email: {
-                    required: "メールアドレスを入力してください"
+                    required: "メールアドレスを入力してください",
+                    email_format: "メールアドレス形式は正しくありません。"
                 },
                 password: {
                     required: "パスワードを入力してください"

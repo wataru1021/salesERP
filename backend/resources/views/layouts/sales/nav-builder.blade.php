@@ -5,21 +5,9 @@
 </div>
 <ul class="c-sidebar-nav">
     <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" href="">
-            <i class="cil-speedometer c-sidebar-nav-icon"></i>
-            Top
-        </a>
-    </li>
-    <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" href="">
-            <i class="cil-calculator c-sidebar-nav-icon"></i>
-            全営業マンの報告管理
-        </a>
-    </li>
-    <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" href="">
-            <i class="cil-calculator c-sidebar-nav-icon"></i>
-            営業マン管理
+        <a class="c-sidebar-nav-link" href= "{{ route('logout') }}">
+            <i class="cil-account-logout c-sidebar-nav-icon"></i>
+            ログアウト
         </a>
     </li>
 </ul>

@@ -36,8 +36,8 @@
 	<link href="{{ asset('css/flag-icon.min.css') }}" rel="stylesheet"> <!-- icons -->
 	<!-- Main styles for this application-->
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/sales.css') }}" rel="stylesheet">
-	<script src="{{ asset('js/adminApp.js') }}" defer></script>
+	<link href="{{ asset('css/user.css') }}" rel="stylesheet">
+	<script src="{{ asset('js/salesApp.js') }}" defer></script>
 	@yield('css')
 
 	<!-- Global site tag (gtag.js) - Google Analytics-->
@@ -63,7 +63,7 @@
 		@include('layouts.sales.nav-builder')
 		@include('layouts.sales.header')
 		<div class="c-body">
-			<main class="c-main">
+			<main class="c-main" id="app">
 				@yield('content')
 			</main>
 		</div>
