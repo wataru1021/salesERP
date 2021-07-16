@@ -53,11 +53,18 @@ class UsersController extends Controller
 
     public function register(Request $request)
     {
+        if (Auth::guard('sales')->check()) {
+            return redirect(route('home'));
+        }
         return view('sales.users.register');
     }
 
     public function registerPost(Request $request)
     {
+        if (Auth::guard('sales')->check()) {
+            return redirect(route('home'));
+        }
+        
         $validator = Validator::make($request->all(), [
             'email' => ['unique:users'],
         ]);
@@ -79,21 +86,8 @@ class UsersController extends Controller
                 'company_id' => 1,
                 'created_at' => Carbon::now()->toDateTimeString(),
             ]);
+            return redirect(route('login'));
 
-            $credentials = $request->only('email', 'password');
-            $credentials['role_id'] = RoleStateType::SALER;
-
-            $message = '';
-            if (Auth::guard('sales')->attempt($credentials)) {
-                return redirect(route('home'));
-            } else {
-                return view('sales.users.register', [
-                    'message' => 'アカウント登録に失敗しました',
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => $request->password
-                ]);
-            }
         } catch (Exception $e) {
             return view('sales.users.register', [
                 'message' => 'アカウント登録に失敗しました',
