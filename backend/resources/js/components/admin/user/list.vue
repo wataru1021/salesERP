@@ -6,12 +6,13 @@
           <div class="card">
             <div class="card-body">
               <a :href="registerUrl" class="btn btn-primary mb-3">ユーザーを追加する</a>
-              <div class="cd-table-responsive">
+              <div class="cd-table-responsive admin-user-list">
                 <data-table
                   :columns="columns"
                   :url="urlGetData"
                   ref="userList"
                   :translate="translate"
+                  :classes="classes"
                 >
                   <span slot="filters"> </span>
                   <tbody slot="body" slot-scope="{ data }">
@@ -47,9 +48,6 @@
   </div>
 </template>
 <style scoped>
-.cd-table-responsive .flex.mb-3 {
-  display: none;
-}
 .delete-button {
   min-width: 60px;
 }
@@ -77,23 +75,34 @@ export default {
       filters: {},
       translate: { nextButton: ">", previousButton: "<" },
       pagination: { data: {}, hideWhenEmpty: true },
-      classes: {
+      classes : {
         "table-container": {
           "table-responsive": true,
         },
-        table: {
-          table: true,
-          "table-striped": true,
-          "table-bordered": true,
+        "table": {
+          "table": true,
           "table-borderless": true,
+          "border" : false
         },
-        "t-head": {},
-        "t-body": {},
-        "t-head-tr": {},
-        "t-body-tr": {},
-        td: {},
-        th: {},
-      },
+        "t-head": {
+
+        },
+        "t-body": {
+
+        },
+        "t-head-tr": {
+
+        },
+        "t-body-tr": {
+
+        },
+        "td": {
+
+        },
+        "th": {
+
+        },
+      }
     };
   },
   props: ["data", "registerUrl"],

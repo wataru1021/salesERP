@@ -69,7 +69,7 @@ class User extends Authenticatable
     }
     public function getCreatedAtFormatAttribute()
     {
-        return Carbon::parse($this->created_at)->format('Y-m-d H:i:s');
+        return Carbon::parse($this->created_at)->format('Y-m-d H:i');
     }
 
     protected $appends = ['created_at_format'];

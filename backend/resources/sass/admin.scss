@@ -201,3 +201,30 @@
     background-position: center;
     background-size: 1rem;
 }
+
+.admin-user-list.cd-table-responsive .flex.mb-3 {
+    display: none;
+}
+
+.report-management .cd-table-responsive .flex.mb-3 {
+    display: none;
+}
+
+.report-management {
+    .btn-outline-secondary {
+        color: #ced2d8;
+    }
+
+    .r-m-th:nth-of-type(1) {
+        font-weight: bold;
+    }
+
+    /* only the cells with no cell before (aka the first one) */
+    td {
+        font-weight: bold;
+    }
+    /* only the cells with at least one cell before (aka all except the first one) */
+    td + td {
+        font-weight: unset;
+    }
+}
