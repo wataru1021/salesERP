@@ -3,10 +3,10 @@
     <div class="animated fadeIn">
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <div class="card mb-1">
+          <div class="card mb-1 sale-name-list">
             <div class="card-body">
-              <p class="mb-2">営業マン ※報告数順</p>
-              <div class="sale-name-list">
+              <label>営業マン</label><span> ※報告数順</span>
+              <div>
                 <button
                   @click="changeUserId(user.id)"
                   v-for="(user, index) in users"

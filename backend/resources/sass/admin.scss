@@ -31,13 +31,13 @@
         }
     }
     .sale-name-list {
-        // white-space: nowrap;
-        // overflow-x: scroll;
-        // overflow-x: scroll;
-        // text-overflow: ellipsis;
-        // display: -webkit-box;
-        // -webkit-line-clamp: 1; /* number of lines to show */
-        // -webkit-box-orient: vertical;
+        label {
+            font-size: 16px;
+        }
+        span {
+            font-size: 14px;
+            color: #7F7F99;
+        }
     }
     .search-date-time {
         position: relative;
@@ -201,6 +201,6 @@
     background-position: center;
     background-size: 1rem;
 }
-.is-active{
+.is-active-header{
     color: #0000FF !important;
 }
