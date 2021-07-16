@@ -53,7 +53,7 @@ Route::get('/login',[App\Http\Controllers\Sales\UsersController::class, 'index']
 Route::post('/login',[App\Http\Controllers\Sales\UsersController::class, 'login'])->name('login');
 Route::get('/register',[App\Http\Controllers\Sales\UsersController::class, 'register'])->name('register');
 Route::post('/register',[App\Http\Controllers\Sales\UsersController::class, 'registerPost'])->name('register.post');
-Route::match(['get', 'post'], '/forgotPassword', [App\Http\Controllers\Sales\UsersController::class, 'forgotPassword'])->name('forgot');
+Route::match(['get', 'post'], '/forgot-password', [App\Http\Controllers\Sales\UsersController::class, 'forgotPassword'])->name('forgot');
 Route::get('/logout', [App\Http\Controllers\Sales\UsersController::class, 'logout'])->name('logout');
 
 Route::get('/reset-password/{email}/{token}',  [App\Http\Controllers\Sales\UsersController::class, 'getToken'])->name('getToken');

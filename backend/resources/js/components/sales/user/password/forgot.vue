@@ -27,7 +27,7 @@
                   </div>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control rounded-right"
                     name="email_address"
                     placeholder="メールアドレス"
                     v-validate="'required|email_format|max:255'"

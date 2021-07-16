@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <div class="card-group">
           <div class="card p-4">
-            <div class="card-body">
+            <div class="">
               <form
                 method="POST"
                 ref="loginForm"
@@ -27,7 +27,7 @@
                   </div>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control rounded-right"
                     name="email_address"
                     placeholder="メールアドレス"
                     v-validate="'required|email_format|max:255'"
@@ -49,11 +49,10 @@
                   <div class="col-xs-12 col-sm-6 w45">
                     <button class="btn btn-primary px-4 mt-1">送信</button>
                   </div>
-                   <div class="col-sm-6 col-xs-12 w55 text-right">
+                  <div class="col-sm-6 col-xs-12 w55 text-right">
                     <a v-bind:href="formLogin" class="btn btn-link px-0 mt-4"
                       >ログインはこちら</a
                     >
-                    <a href="" class="btn btn-link px-0">新規登録はこちら</a>
                   </div>
                 </div>
               </form>
@@ -88,7 +87,7 @@ export default {
       email_address: this.oldEmail,
     };
   },
-  props: ["formUrl", "message", "message2", "formLogin","oldEmail"],
+  props: ["formUrl", "message", "message2", "formLogin", "oldEmail"],
   mounted() {},
   methods: {
     sendMail: function (e) {
