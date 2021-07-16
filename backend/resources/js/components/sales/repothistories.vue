@@ -162,15 +162,19 @@
 import axios from 'axios';
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
+import Loader from "./../common/loader";
+
 export default {
     components: {
-        DatePicker
+        DatePicker,
+        Loader
     },
     data() {
         return {
-            time: [],
-            isActive: "",
+            time: [new Date(), new Date()],
+            isActive: 1,
             activeClass: 'active',
+            flagShowLoader: false,
             getDate: null,
             getMonth: null,
             getFullYear: null,
@@ -183,9 +187,6 @@ export default {
         this.getDate = date.getDate();
         this.getMonth = date.getMonth();
         this.getFullYear = date.getFullYear();
-        var startDate = new Date((this.getFullYear - 1), this.getMonth, this.getDate);
-        var endDate = new Date(this.getFullYear, this.getMonth, this.getDate);
-        this.time = [startDate, endDate];
         this.getData();
     },
     methods: {
@@ -201,6 +202,7 @@ export default {
             var end_date = this.time[1].getFullYear() + '-' + (this.time[1].getMonth() + 1) + '-' + this.time[1].getDate();
             formData.append("start_date", start_date);
             formData.append("end_date", end_date);
+            that.flagShowLoader = true;
             axios
                 .post(`get_data_report_histories`, formData, {
                     header: {
@@ -209,6 +211,7 @@ export default {
                 })
                 .then((res) => {
                     that.dataReport = res.data.data[0];
+                    that.flagShowLoader = false;
                 })
                 .catch((err) => {});
         },
