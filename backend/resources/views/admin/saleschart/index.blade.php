@@ -1,4 +1,4 @@
-@extends('layouts.admin.base')
+@extends('layouts.admin.base', ['activeHeader' => 'reportManager'])
 
 @section('content')
 

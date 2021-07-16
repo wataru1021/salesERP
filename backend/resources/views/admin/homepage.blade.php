@@ -1,4 +1,4 @@
-@extends('layouts.admin.base')
+@extends('layouts.admin.base', ['activeHeader' => 'top'])
 
 @section('content')
 @endsection
