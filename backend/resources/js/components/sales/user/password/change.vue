@@ -35,7 +35,7 @@
                   :value="token"
                   name="reset_password_token"
                 />
-                <h1>パスワードリマインダー</h1>
+                <h2>パスワードリマインダー</h2>
                 <p class="text-muted">パスワードをリセットリンクを発行します</p>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -93,7 +93,7 @@
                     <button class="btn btn-primary mt-2">リセット</button>
                   </div>
 
-                  <div class="col-sm-6 col-sx-12 w55 text-right">
+                  <div class="col-sm-6 col-xs-12 w55 text-right">
                     <a v-bind:href="formLogin" class="btn btn-link px-0 mt-4"
                       >ログインはこちら</a
                     >

@@ -51,6 +51,8 @@ class UsersController extends Controller
 
         return view('sales.users.login', [
             'message' => $message,
+            'old_email' => $request->email,
+            'old_password' => $request->password,
         ]);
     }
 

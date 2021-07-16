@@ -50,6 +50,8 @@ class UsersController extends Controller
 
         return view('admin.users.login', [
             'message' => $message,
+            'old_email' => $request->email,
+            'old_password' => $request->password,
         ]);
     }
 

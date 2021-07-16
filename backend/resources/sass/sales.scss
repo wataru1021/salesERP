@@ -73,7 +73,6 @@
 
 .forgot-password,
 .change-password,
-.success-password,
 .success-email {
     h1 {
         font-size: 31px;
@@ -134,7 +133,8 @@
 }
 
 @media (max-width: 576px) {
-    .forgot-password {
+    .forgot-password,
+    .change-password {
         .col-sm-6.col-xs-12.text-right {
             display: inline-grid;
             a {
@@ -144,7 +144,18 @@
     }
 }
 
-.success-password,
+@media (min-width: 576px) {
+    .forgot-password,
+    .change-password {
+        .col-sm-6.col-xs-12.text-right {
+            display: inline-grid;
+            a {
+                text-align: end;
+            }
+        }
+    }
+}
+
 .change-password,
 .success-email {
     .col-md-9.col-lg-12.text-center {
@@ -154,4 +165,5 @@
 
 .mg-left-20 {
     margin-left: 20px;
+    margin-top: 22px;
 }
