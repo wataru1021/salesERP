@@ -15,47 +15,47 @@
                 <img src="/image/dailyReportComplete.png" class="w-25" />
               </div>
               <div class="col-md-12 mt-3">
-                <p>
+                <p class="note-content">
                   以下報告内容に不備がないか再度ご確認し、変更が必要な場合は管理者までお問い合わせください。
                 </p>
               </div>
               <div class="col-md-12">
                 <div class="row">
-                  <div class="col-8"><p>ピンポン数（訪問件数）</p></div>
-                  <div class="col-4 text-right">
-                    <p>{{  saleDailyReport.ping_pong_num | format_number }} 件</p>
+                  <div class="col-7"><p>ピンポン数（訪問件数）</p></div>
+                  <div class="col-5 text-right">
+                    <label class="h5">{{  saleDailyReport.ping_pong_num | format_number }}</label><span> 件</span>
                   </div>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="row">
-                  <div class="col-8"><p>対面数</p></div>
-                  <div class="col-4 text-right">
-                    <p>{{ saleDailyReport.meet_num | format_number }} 件</p>
+                  <div class="col-7"><p>対面数</p></div>
+                  <div class="col-5 text-right">
+                    <label class="h5">{{ saleDailyReport.meet_num | format_number }}</label><span> 件</span>
                   </div>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="row">
-                  <div class="col-8"><p>商談数</p></div>
-                  <div class="col-4 text-right">
-                    <p>{{ saleDailyReport.deal_num | format_number }} 件</p>
+                  <div class="col-7"><p>商談数</p></div>
+                  <div class="col-5 text-right">
+                    <label class="h5">{{ saleDailyReport.deal_num | format_number }}</label><span> 件</span>
                   </div>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="row">
-                  <div class="col-8"><p>獲得数</p></div>
-                  <div class="col-4 text-right">
-                    <p>{{ saleDailyReport.acquisitions_num | format_number }} 件</p>
+                  <div class="col-7"><p>獲得数</p></div>
+                  <div class="col-5 text-right">
+                    <label class="h5">{{ saleDailyReport.acquisitions_num | format_number }}</label><span> 件</span>
                   </div>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="row">
-                  <div class="col-8"><p>稼働時間</p></div>
-                  <div class="col-4 text-right">
-                    <p>{{ saleDailyReport.sale_time | format_decimal }} 時間</p>
+                  <div class="col-7"><p>稼働時間</p></div>
+                  <div class="col-5 text-right">
+                    <label class="h5">{{ saleDailyReport.sale_time | format_decimal }}</label><span> 時間</span>
                   </div>
                 </div>
               </div>
@@ -84,7 +84,7 @@
   </div>
 </template>
 <style scoped>
-p {
+p,label,span {
   color: #7D8797;
 }
 h5 {
@@ -93,6 +93,12 @@ h5 {
 .header {
   color: #000000;
   font-size: 16px;
+}
+h3 {
+  font-size: 24px !important;
+}
+.note-content {
+  font-size: 12px;
 }
 </style>>
 <script>

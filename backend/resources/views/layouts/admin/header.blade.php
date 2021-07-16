@@ -6,12 +6,12 @@
 		?> 
 		<ul class="c-header-nav d-md-down-none">
 			<li class="c-header-nav-item dropdown px-3">
-				<a class="c-header-nav-link" href="#">Top</a>
+				<a class="c-header-nav-link {{ $activeHeader == 'top' ? 'is-active-header' : '' }}" href="#">Top</a>
 			</li>
 		</ul>
 		<ul class="c-header-nav d-md-down-none">
 			<li class="c-header-nav-item dropdown px-3">
-				<a class="c-header-nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">全営業マンの報告管理</a>
+				<a class="c-header-nav-link dropdown-toggle {{ $activeHeader == 'reportManager' ? 'is-active-header' : '' }}" data-toggle="dropdown" role="button" aria-expanded="false" href="#">全営業マンの報告管理</a>
 				<div class="dropdown-menu">
 					<a class="c-header-nav-link dropdown-item" href="{{route('admin.saleReportHistory.index')}}">
 						<span class="c-header-nav-icon"></span>営業マン毎の営業成績
@@ -24,7 +24,7 @@
 		</ul>
 		<ul class="c-header-nav d-md-down-none">
 			<li class="c-header-nav-item dropdown px-3">
-				<a class="c-header-nav-link" href="{{route('admin.user.list')}}">営業マン管理</a>
+				<a class="c-header-nav-link {{ $activeHeader == 'user-list' ? 'is-active-header' : '' }}" href="{{route('admin.user.list')}}">営業マン管理</a>
 			</li>
 		</ul>
 		<ul class="c-header-nav ml-auto mr-4">
@@ -49,7 +49,7 @@
 					@if ($key != count($breadcrumbs) - 1)
 						<li class="breadcrumb-item"><a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['name'] }}</a></li>
 					@else
-						<li class="breadcrumb-item">{{ $breadcrumb }}</li>
+						<li class="breadcrumb-item active">{{ $breadcrumb }}</li>
 					@endif
 				@endforeach
 			@endif
