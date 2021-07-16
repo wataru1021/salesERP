@@ -5,7 +5,7 @@
     :data="{{ json_encode(isset($data) ? $data : '') }}"
     :top-url="{{ json_encode(route('home')) }}"
     :sale-management-url="{{ json_encode(route('salesManagement')) }}"
-    :date = "{{ json_encode(Carbon\Carbon::now()->format('Y 年 m 月 d 日')) }}"
+    :date = "{{ json_encode(Carbon\Carbon::now()->format('Y年m月d日')) }}"
     :th = "{{ json_encode(App\Enums\DayOffWeek::getThJp(Carbon\Carbon::now()->format('l'))) }}"
     ></daily-report-complete>
 @endsection
