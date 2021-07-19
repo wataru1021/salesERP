@@ -23,7 +23,7 @@
                 <div class="row">
                   <div class="col-7"><p>ピンポン数（訪問件数）</p></div>
                   <div class="col-5 text-right">
-                    <label class="h5">{{  saleDailyReport.ping_pong_num | format_number }}</label><span> 件</span>
+                    <label class="h5 font-size-20">{{  saleDailyReport.ping_pong_num | format_number }}</label><span> 件</span>
                   </div>
                 </div>
               </div>
@@ -31,7 +31,7 @@
                 <div class="row">
                   <div class="col-7"><p>対面数</p></div>
                   <div class="col-5 text-right">
-                    <label class="h5">{{ saleDailyReport.meet_num | format_number }}</label><span> 件</span>
+                    <label class="h5 font-size-20">{{ saleDailyReport.meet_num | format_number }}</label><span> 件</span>
                   </div>
                 </div>
               </div>
@@ -39,7 +39,7 @@
                 <div class="row">
                   <div class="col-7"><p>商談率</p></div>
                   <div class="col-5 text-right">
-                    <label class="h5">{{ saleDailyReport.deal_num | format_number }}</label><span> 件</span>
+                    <label class="h5 font-size-20">{{ saleDailyReport.deal_num | format_number }}</label><span> 件</span>
                   </div>
                 </div>
               </div>
@@ -47,7 +47,7 @@
                 <div class="row">
                   <div class="col-7"><p>獲得数</p></div>
                   <div class="col-5 text-right">
-                    <label class="h5">{{ saleDailyReport.acquisitions_num | format_number }}</label><span> 件</span>
+                    <label class="h5 font-size-20">{{ saleDailyReport.acquisitions_num | format_number }}</label><span> 件</span>
                   </div>
                 </div>
               </div>
@@ -55,7 +55,7 @@
                 <div class="row">
                   <div class="col-7"><p>稼働時間</p></div>
                   <div class="col-5 text-right">
-                    <label class="h5">{{ saleDailyReport.sale_time | format_decimal }}</label><span> 時間</span>
+                    <label class="h5 font-size-20">{{ saleDailyReport.sale_time | format_decimal }}</label><span> 時間</span>
                   </div>
                 </div>
               </div>
@@ -63,7 +63,7 @@
                 <p>今日意識した点</p>
               </div>
               <div class="col-md-12">
-                <h5>{{ saleDailyReport.conscious_point }}</h5>
+                <h5 class="font-size-20">{{ saleDailyReport.conscious_point }}</h5>
               </div>
             </div>
           </div>
@@ -83,24 +83,7 @@
     </div>
   </div>
 </template>
-<style scoped>
-p,label,span {
-  color: #7D8797;
-}
-h5 {
-  color: #768192;
-}
-.header {
-  color: #000000;
-  font-size: 16px;
-}
-h3 {
-  font-size: 24px !important;
-}
-.note-content {
-  font-size: 12px;
-}
-</style>>
+
 <script>
 export default {
   created: function () {},
