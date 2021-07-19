@@ -14,7 +14,7 @@
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown abc">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle">
             <i class="cil-calculator c-sidebar-nav-icon"></i>
-            <span class="report-managerment" data-href="{{route('admin.reportManagement')}}">全営業マンの報告管理</span>
+            <span class="report-managerment" data-href="{{route('admin.reportManagement')}}">データ管理</span>
         </a>
         <ul class="c-sidebar-nav-dropdown-items">
             <li class="c-sidebar-nav-item">

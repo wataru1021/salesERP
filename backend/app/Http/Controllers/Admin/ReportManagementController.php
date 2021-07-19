@@ -20,7 +20,7 @@ class ReportManagementController extends Controller
     {
         if (!Auth::guard('admin')->check()) return view('admin.users.login');
         $breadcrumbs = [
-           '全営業マンの報告管理'
+           'データ管理'
         ];
         return view('admin/reportmanagement', [
             'breadcrumbs' => $breadcrumbs,

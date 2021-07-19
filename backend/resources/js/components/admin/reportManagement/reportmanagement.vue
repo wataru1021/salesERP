@@ -10,7 +10,7 @@
                     <a :class="[isActive == 'prev' ? 'btn btn-outline-primary active' : 'btn btn-outline-secondary']"
                        type="button"
                        @click="filters.date = new Date(filters.date); filters.date.setDate(filters.date.getDate() - 1); isActive = 'prev'; updateTable();">
-                        <</a> <a
+                        </a> <a
                         :class="[isActive == 'next' ? 'btn btn-outline-primary active' : 'btn btn-outline-secondary']"
                         type="button"
                         @click="filters.date = new Date(filters.date); filters.date.setDate(filters.date.getDate() + 1); isActive = 'next'; updateTable();">>
@@ -168,7 +168,7 @@
                         orderable: true
                     },
                     {
-                        label: "商談数（件）",
+                        label: "商談率（件）",
                         name: "opportunity_rate",
                         orderable: true
                     },

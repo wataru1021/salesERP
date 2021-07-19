@@ -18,7 +18,7 @@ class SaleDailyReportHistoryController extends Controller
     {
         $breadcrumbs = [
             [
-                'name' => '全営業マンの報告管理',
+                'name' => 'データ管理',
                 'url' => route('admin.reportManagement')
             ], '営業マン毎の営業成績'
         ];

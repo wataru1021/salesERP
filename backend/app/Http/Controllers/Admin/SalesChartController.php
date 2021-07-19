@@ -22,7 +22,7 @@ class SalesChartController extends Controller
         if (!Auth::guard('admin')->check()) return view('admin.users.login');
         $breadcrumbs = [
             [
-                'name' => '全営業マンの報告管理',
+                'name' => 'データ管理',
                 'url' => route('admin.reportManagement')
 
             ], '指標毎の営業マン成績'
