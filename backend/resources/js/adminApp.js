@@ -18,6 +18,7 @@ import { CChartBar } from '@coreui/vue-chartjs'
 import DatePicker from 'vue2-datepicker'
 import ReportManagement from './components/admin/reportManagement/reportmanagement'
 import RegisterUser from './components/admin/user/register'
+import EditUser from './components/admin/user/edit'
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue2-datepicker/index.css';
 import Vuex from 'vuex';
@@ -75,7 +76,8 @@ new Vue({
         AdminSuccessPassword,
         AdminSuccessEmail,
         ReportManagement,
-        RegisterUser
+        RegisterUser,
+        EditUser
     },
     methods: {},
     mounted() {}

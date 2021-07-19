@@ -27,6 +27,8 @@
                         >
                         </data-table-cell>
                         <slot v-if="column.name == 'action'">
+                          <a :href="`/admin/user/${item.id}/edit`"> <button class="btn btn-success delete-button" type="button">編集</button></a>
+
                           <button
                             class="btn btn-danger delete-button"
                             @click="handleDelete(item.id)"
