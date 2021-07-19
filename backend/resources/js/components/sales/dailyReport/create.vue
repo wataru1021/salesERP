@@ -62,7 +62,7 @@
               </div>
               <div class="form-group row mb-2">
                 <label class="col-md-3 col-form-label" for="deal_num"
-                  >商談数</label
+                  >商談率</label
                 >
                 <div class="col-md-9">
                   <input

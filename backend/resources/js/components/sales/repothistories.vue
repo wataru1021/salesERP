@@ -94,7 +94,7 @@
                                     <td class="pl-1">
                                         <table class="table table-borderless mb-2">
                                             <tr>
-                                                <td>商談数</td>
+                                                <td>商談率</td>
                                             </tr>
                                             <tr>
                                                 <td>{{dataReport.deal_num != null ? fomatNumber(dataReport.deal_num) : '---' }}</td>
