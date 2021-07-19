@@ -1,4 +1,4 @@
-@extends('layouts.sales.base')
+@extends('layouts.sales.base', ['isActiveHeader' => ''])
 
 @section('content')
     <daily-report-complete

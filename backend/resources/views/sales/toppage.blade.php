@@ -1,4 +1,4 @@
-@extends('layouts.sales.base')
+@extends('layouts.sales.base', ['isActiveHeader' => 'top'])
 
 @section('content')
     <sales-top
