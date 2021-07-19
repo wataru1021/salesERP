@@ -114,6 +114,10 @@
                             })
                             .catch((err) => {
                                 switch (err.response.status) {
+                                    case 400:
+                                        this.errorsData = err.response.data;
+                                        that.flagShowLoader = false;
+                                        break;
                                     case 404:
                                     case 500:
                                         this.errorsData = err.response.data;
