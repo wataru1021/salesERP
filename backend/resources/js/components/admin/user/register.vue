@@ -15,7 +15,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="nameUser" name="nameUser" placeholder="お名前" v-model="nameUser" @input="changeInput()" v-validate="'required'" />
+                                <input type="text" class="form-control" id="nameUser" name="nameUser" placeholder="お名前" v-model="nameUser" @input="changeInput()" v-validate="'required|max:255'" />
                                 <div class="input-group is-danger" role="alert">
                                     {{ errors.first("nameUser") }}
                                 </div>
@@ -28,7 +28,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input class="form-control" id="email" name="email" type="text" v-model="email" placeholder="メールアドレス" @input="changeInput()" v-validate="'required|email_format'" />
+                                <input class="form-control" id="email" name="email" type="text" v-model="email" placeholder="メールアドレス" @input="changeInput()" v-validate="'required|email_format|max:255'" />
                                 <div class="input-group is-danger" role="alert">
                                     {{ errors.first("email") }}
                                 </div>
@@ -83,10 +83,12 @@ export default {
             custom: {
                 nameUser: {
                     required: "名前を入力してください",
+                    max: "名前は255文字以内で入力してください。",
                 },
                 email: {
                     required: "メールアドレスを入力してください",
                     email_format: "メールアドレス形式は正しくありません。",
+                    max: "メールアドレスは255文字以内で入力してください。",
                 },
                 password: {
                     required: "パスワードを入力してください",
