@@ -370,7 +370,7 @@ export default {
           break;
         case contractRate:
           this.salesChartDatas = this.salesChartObjectDatas.map(
-                  (a) => a.contract_rate
+                  (a) => a.contract_rate.toFixed(2)
           );
           break;
         case acquisitionsNum:
@@ -380,7 +380,7 @@ export default {
           break;
         case productivity:
           this.salesChartDatas = this.salesChartObjectDatas.map(
-                  (a) => a.productivity
+                  (a) => a.productivity.toFixed(2)
           );
           break;
       }
