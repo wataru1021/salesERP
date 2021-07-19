@@ -260,7 +260,7 @@ export default {
     this.userId = userIdSRHStorage;
     localStorage.removeItem('userIdSRHStorage');
     this.getData();
-    (this.users = this.userResponse), (this.valueSearch = 1);
+    (this.users = this.userResponse), (this.changeDate(1));
     this.timeRequest = this.time
   },
   methods: {
