@@ -57,7 +57,9 @@ class SalesChartController extends Controller
         }
         else {
             $startFilterDay =  new Carbon($request->startDate);
+            $startFilterDay = $startFilterDay->addDays(1);
             $endFilterDay = new Carbon($request->endDate);
+            $endFilterDay = $endFilterDay->addDays(1);
         }
 
         try {

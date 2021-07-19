@@ -191,7 +191,8 @@
                           </div>
                         </div>
                       </div>
-                      <input id="datefilter" type="text" name="datefilter" :placeholder="[[placeHolderComputed]]" class="form-control">
+                      <input id="datefilter" v-if="this.showPlaceHolderHandMade" type="text" name="datefilter" :placeholder="[[placeHolderComputed]]" class="form-control">
+                      <input id="datefilter" v-if="!this.showPlaceHolderHandMade" type="text" name="datefilter" placeholder="" class="form-control">
                     </div>
                     <span slot="icon-calendar">
 
@@ -303,7 +304,8 @@ export default {
       timeLineText: '',
       valueDateRange: [new Date(), new Date()],
       placeholderText: '',
-      namesUserNoData: []
+      namesUserNoData: [],
+      showPlaceHolderHandMade : false
     };
   },
   props: ["data"],
@@ -333,6 +335,7 @@ export default {
   methods: {
     clearTimeLine(){
       this.showTimeLine = handMadeTimeLine;
+      this.showPlaceHolderHandMade = true;
     },
     getChartData() {
       let that = this;
@@ -393,20 +396,8 @@ export default {
     },
     switchTimeLine(type) {
       this.showTimeLine = type;
-      switch (type) {
-        case today:
-          this.valueDateRange = [new Date(), new Date()];
-          break;
-        case yesterDay:
-          this.valueDateRange = [new Date((new Date()).valueOf() - 1000*60*60*24), new Date((new Date()).valueOf() - 1000*60*60*24)];
-          break;
-        case last7Days:
-          this.valueDateRange = [ new Date((new Date()).valueOf() - 7*1000*60*60*24), new Date()];
-          break;
-          case last30Days:
-          this.valueDateRange = [ new Date((new Date()).valueOf() - 30*1000*60*60*24), new Date()];
-          break;
-      }
+      this.showPlaceHolderHandMade = false;
+      this.valueDateRange = [new Date(), new Date()];
     },
   },
   created() {},
