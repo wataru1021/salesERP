@@ -119,7 +119,7 @@
                     </div>
                     <div class="card-body">
                       <h2 class="text-center">
-                        {{ parseFloat(saleDailyHisries.contract_rate).toFixed(1) != "NaN" ? parseFloat(saleDailyHisries.contract_rate).toFixed(1)  : "---" }}<span>％</span>
+                        {{ parseFloat(saleDailyHisries.contract_rate).toFixed(2) != "NaN" ? parseFloat(saleDailyHisries.contract_rate).toFixed(2)  : "---" }}<span>％</span>
                       </h2>
                     </div>
                   </div>
@@ -131,7 +131,7 @@
                     </div>
                     <div class="card-body">
                       <h2 class="text-center">
-                        {{ parseFloat(saleDailyHisries.productivity).toFixed(1) != "NaN" ? parseFloat(saleDailyHisries.productivity).toFixed(1) : "---" }}<span>件/時間</span>
+                        {{ parseFloat(saleDailyHisries.productivity).toFixed(2) != "NaN" ? parseFloat(saleDailyHisries.productivity).toFixed(2) : "---" }}<span>件/時間</span>
                       </h2>
                     </div>
                   </div>
@@ -143,7 +143,7 @@
                     </div>
                     <div class="card-body">
                       <h2 class="text-center">
-                        {{ parseFloat(saleDailyHisries.meet_rate).toFixed(1) != "NaN" ? parseFloat(saleDailyHisries.meet_rate).toFixed(1) : "---" }}<span>％</span>
+                        {{ parseFloat(saleDailyHisries.meet_rate).toFixed(2) != "NaN" ? parseFloat(saleDailyHisries.meet_rate).toFixed(2) : "---" }}<span>％</span>
                       </h2>
                     </div>
                   </div>
@@ -157,7 +157,7 @@
                     </div>
                     <div class="card-body">
                       <h2 class="text-center">
-                        {{ parseFloat(saleDailyHisries.deal_rate).toFixed(1) != "NaN" ? parseFloat(saleDailyHisries.deal_rate).toFixed(1) : "---" }}<span>％</span>
+                        {{ parseFloat(saleDailyHisries.deal_rate).toFixed(2) != "NaN" ? parseFloat(saleDailyHisries.deal_rate).toFixed(2) : "---" }}<span>％</span>
                       </h2>
                     </div>
                   </div>
@@ -179,7 +179,7 @@
                     </div>
                     <div class="card-body">
                       <h2 class="text-center">
-                        {{ parseFloat(saleDailyHisries.ping_pong_num_one_hour).toFixed(1) != "NaN" ? parseFloat(saleDailyHisries.ping_pong_num_one_hour).toFixed(1) : "---" }}<span>件/時間</span>
+                        {{ parseFloat(saleDailyHisries.ping_pong_num_one_hour).toFixed(2) != "NaN" ? parseFloat(saleDailyHisries.ping_pong_num_one_hour).toFixed(2) : "---" }}<span>件/時間</span>
                       </h2>
                     </div>
                   </div>
@@ -201,7 +201,7 @@
                     </div>
                     <div class="card-body">
                       <h2 class="text-center">
-                        {{ parseFloat(saleDailyHisries.sale_time).toFixed(1) != "NaN" ? parseFloat(saleDailyHisries.sale_time).toFixed(1) : "---" }}<span>日</span>
+                        {{ parseFloat(saleDailyHisries.sale_time).toFixed(2) != "NaN" ? parseFloat(saleDailyHisries.sale_time).toFixed(2) : "---" }}<span>日</span>
                       </h2>
                     </div>
                   </div>
