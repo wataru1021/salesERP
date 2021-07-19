@@ -19,7 +19,7 @@ class CreateSaleDailyReportsTable extends Migration
             $table->date('report_date')->length(20)->comment('日報');
             $table->bigInteger('ping_pong_num')->length(20)->default(0)->comment('ピンポン数（訪問件数）');
             $table->integer('meet_num')->length(11)->default(0)->comment('対面数');
-            $table->integer('deal_num')->length(11)->default(0)->comment('商談数');
+            $table->integer('deal_num')->length(11)->default(0)->comment('商談率');
             $table->integer('acquisitions_num')->length(11)->default(0)->comment('獲得数');
             $table->double('sale_time', 8, 2)->default(0)->comment('稼働時間（時間）※休憩時間は含まない');
             $table->text('conscious_point')->comment('今日意識した点');

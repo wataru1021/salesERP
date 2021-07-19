@@ -197,7 +197,7 @@ export default {
           numeric: "数字で入力してください。",
         },
         deal_num: {
-          required: "商談数を入力してください",
+          required: "商談率を入力してください",
           numeric: "数字で入力してください。",
         },
         acquisitions_num: {
