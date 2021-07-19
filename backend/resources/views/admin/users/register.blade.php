@@ -1,5 +1,5 @@
 
-@extends('layouts.admin.base')
+@extends('layouts.admin.base',  ['activeHeader' => 'user-list'])
 
 @section('content')
 <register-user

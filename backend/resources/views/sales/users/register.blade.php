@@ -1,4 +1,4 @@
-@extends('layouts.sales.auth_base', ['activeHeader' => 'user-list'])
+@extends('layouts.sales.auth_base')
 
 @section('content')
     <sales-register
