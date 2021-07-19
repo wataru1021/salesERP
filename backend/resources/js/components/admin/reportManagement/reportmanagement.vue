@@ -9,7 +9,7 @@
                        @click="filters.date = new Date(); filters.date.setDate(filters.date.getDate() - 1); isActive = 'yesterday'; updateTable();">昨日</a>
                     <a :class="[isActive == 'prev' ? 'btn btn-outline-primary active' : 'btn btn-outline-secondary']"
                        type="button"
-                       @click="filters.date = new Date(filters.date); filters.date.setDate(filters.date.getDate() - 1); isActive = 'prev'; updateTable();">
+                       @click="filters.date = new Date(filters.date); filters.date.setDate(filters.date.getDate() - 1); isActive = 'prev'; updateTable();"><
                         </a> <a
                         :class="[isActive == 'next' ? 'btn btn-outline-primary active' : 'btn btn-outline-secondary']"
                         type="button"
