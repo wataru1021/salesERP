@@ -40,7 +40,7 @@ class DailyReportStoreRequest extends FormRequest
             'ping_pong_num.numeric' => '数字で入力してください。',
             'meet_num.required' => '対面数を入力してください',
             'meet_num.numeric' => '数字で入力してください。',
-            'deal_num.required' => '商談数を入力してください',
+            'deal_num.required' => '商談率を入力してください',
             'deal_num.numeric' => '数字で入力してください。',
             'acquisitions_num.required' => '獲得数を入力してください',
             'acquisitions_num.numeric' => '数字で入力してください。',
