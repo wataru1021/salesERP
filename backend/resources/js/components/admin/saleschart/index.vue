@@ -335,6 +335,7 @@ export default {
       this.showTimeLine = handMadeTimeLine;
     },
     getChartData() {
+      let that = this;
       that.flagShowLoader = true;
       axios
         .get("sales-chart/get-chart-data", {
