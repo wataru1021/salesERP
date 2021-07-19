@@ -51,9 +51,9 @@ class ReportManagementController extends Controller
          sale_daily_reports.id as reportId, 
          sale_daily_reports.*, 
          users.id as userId, 
-         deal_num / ping_pong_num * 100 as opportunity_rate,
-         acquisitions_num / ping_pong_num *100 as contract_rate, 
-         acquisitions_num / sale_time * 100 as productivity')
+         TRIM( deal_num / ping_pong_num * 100)+0 as opportunity_rate,
+         TRIM(acquisitions_num / ping_pong_num *100)+0  as contract_rate, 
+         ROUND(TRIM(acquisitions_num / sale_time * 100)+0, 2)  as productivity')
             ->orderBy($orderBy, $orderByDir);
 
         return new DataTableCollectionResource($builder->paginate(MaxPageSize::MAX_PAGE_SIZE, ['*'], 'page', $request->page));

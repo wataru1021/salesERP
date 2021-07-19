@@ -3,15 +3,15 @@
         <div class="fade-in mb-3">
             <div class="row">
                 <div class="col-lg-12">
-                    <a :class="[isActive == 'now' || filters.date.toISOString().slice(0,10) == new Date().toISOString().slice(0,10) ? 'active' : '', 'btn btn-secondary']" type="button"
+                    <a :class="[isActive == 'now' || filters.date.toISOString().slice(0,10) == new Date().toISOString().slice(0,10) ? 'btn btn-outline-primary active' : 'btn btn-outline-secondary']" type="button"
                        @click="filters.date = new Date(); isActive = 'now'; updateTable();">今日</a>
-                    <a :class="[isActive == 'yesterday' || Math.ceil(Math.abs(new Date() - filters.date)/ (1000*60*60*24)) == 2  && new Date() > filters.date ? 'active' : '', 'btn btn-secondary ml-2']" type="button"
+                    <a :class="[isActive == 'yesterday' || Math.ceil(Math.abs(new Date() - filters.date)/ (1000*60*60*24)) == 2  && new Date() > filters.date ? 'btn btn-outline-primary active' : 'btn btn-outline-secondary']" type="button"
                        @click="filters.date = new Date(); filters.date.setDate(filters.date.getDate() - 1); isActive = 'yesterday'; updateTable();">昨日</a>
-                    <a :class="[isActive == 'prev' ? 'active' : '', 'btn btn-square btn-secondary rounded-left ml-2']"
+                    <a :class="[isActive == 'prev' ? 'btn btn-outline-primary active' : 'btn btn-outline-secondary']"
                        type="button"
                        @click="filters.date = new Date(filters.date); filters.date.setDate(filters.date.getDate() - 1); isActive = 'prev'; updateTable();">
                         <</a> <a
-                        :class="[isActive == 'next' ? 'active' : '', 'btn btn-square btn-secondary rounded-right']"
+                        :class="[isActive == 'next' ? 'btn btn-outline-primary active' : 'btn btn-outline-secondary']"
                         type="button"
                         @click="filters.date = new Date(filters.date); filters.date.setDate(filters.date.getDate() + 1); isActive = 'next'; updateTable();">>
                 </a>
@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <div class="cd-table-responsive">
                             <data-table :columns="columns" :filters="filters" :url="urlGetData" ref="reportList"
-                                        :translate="translate">
+                                        :translate="translate" :classes="classes">
                                 <span slot="filters"> </span>
                                 <tbody slot="body" slot-scope="{ data }">
                                 <tr :key="item.id" v-for="item in data">
@@ -99,7 +99,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header border-0 pb-0">
-                        <div class="sales-chart-title pb-0">期間で絞り込み</div>
+                        <div class="sales-chart-title pb-0">指標毎の営業マン成績 </div>
                     </div>
                     <div class="card-body pt-0">
                         <button v-on:click="redirect(pinPont)" class="btn btn-outline-primary" type="button">ピンポン数
@@ -215,22 +215,37 @@
                     data: {},
                     hideWhenEmpty: true
                 },
-                classes: {
+                classes : {
                     "table-container": {
                         "table-responsive": true,
+                        "table": true,
                     },
-                    table: {
-                        table: true,
-                        "table-striped": true,
-                        "table-bordered": true,
+                    "table": {
                         "table-borderless": true,
+                        "border" : false,
+                        "text-nowrap" : true
                     },
-                    "t-head": {},
-                    "t-body": {},
-                    "t-head-tr": {},
-                    "t-body-tr": {},
-                    td: {},
-                    th: {},
+                    "t-head": {
+
+                    },
+                    "t-body": {
+                    },
+                    "t-head-tr": {
+
+                    },
+                    "t-body-tr": {
+                        'abc' :true
+                    },
+                    "tr" : {
+                        'abc' :true
+                    },
+                    "td": {
+                    },
+                    "th": {
+                        "text-nowrap" : true,
+                        'r-m-th' : true
+
+                    },
                 },
             };
         },
