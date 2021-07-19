@@ -47,7 +47,7 @@
                             <form v-on:submit.prevent="getData">
                                 <div class="form-group col-lg-9 col-xl-6 p-0">
                                     <div class="search-date-time">
-                                        <date-picker v-model="time" :format="'YYYY年MM月DD日'" @change="isActive = ''" range></date-picker>
+                                        <date-picker v-model="time" :format="'YYYY年MM月DD日'" @change="changeDate(null)" range></date-picker>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary h-45">
@@ -172,13 +172,14 @@ export default {
     data() {
         return {
             time: [new Date(), new Date()],
-            isActive: 1,
+            isActive: null,
             activeClass: 'active',
             flagShowLoader: false,
             getDate: null,
             getMonth: null,
             getFullYear: null,
-            dataReport: []
+            dataReport: [],
+            requestTime: []
         };
     },
     props: ["salesManagementUrl", "topPageUrl"],
@@ -187,7 +188,9 @@ export default {
         this.getDate = date.getDate();
         this.getMonth = date.getMonth();
         this.getFullYear = date.getFullYear();
+        this.requestTime = this.time
         this.getData();
+        this.changeDate(1)
     },
     methods: {
         fomatNumber(number) {
@@ -197,9 +200,10 @@ export default {
         },
         getData() {
             let that = this;
+            console.log(this.requestTime)
             let formData = new FormData();
-            var start_date = this.time[0].getFullYear() + '-' + (this.time[0].getMonth() + 1) + '-' + this.time[0].getDate();
-            var end_date = this.time[1].getFullYear() + '-' + (this.time[1].getMonth() + 1) + '-' + this.time[1].getDate();
+            var start_date = this.requestTime[0].getFullYear() + '-' + (this.requestTime[0].getMonth() + 1) + '-' + this.requestTime[0].getDate();
+            var end_date = this.requestTime[1].getFullYear() + '-' + (this.requestTime[1].getMonth() + 1) + '-' + this.requestTime[1].getDate();
             formData.append("start_date", start_date);
             formData.append("end_date", end_date);
             that.flagShowLoader = true;
@@ -216,18 +220,26 @@ export default {
                 .catch((err) => {});
         },
         changeDate(value) {
-            this.isActive = value;
-            this.time = []
-            if (value != 0) {
-                var date = new Date(),
-                    y = date.getFullYear(),
-                    m = date.getMonth(),
-                    d = date.getDate();
-                var startDate = new Date(Date.UTC(y, m, d - value + 1));
-                var endDate = new Date(Date.UTC(y, m, d));
-                if (value == 2) endDate = new Date(Date.UTC(y, m, d - value + 1));
-                this.time = [startDate, endDate];
+            if(value != null) {
+                this.isActive = value;
+                this.time = []
+                if (value != 0) {
+                    var date = new Date(),
+                        y = date.getFullYear(),
+                        m = date.getMonth(),
+                        d = date.getDate();
+                    var startDate = new Date(Date.UTC(y, m, d - value + 1));
+                    var endDate = new Date(Date.UTC(y, m, d));
+                    if (value == 2) endDate = new Date(Date.UTC(y, m, d - value + 1));
+                    this.time = [startDate, endDate];
+                    this.requestTime = this.time;
+                    this.time = []
+                }
+            } else {
+                this.isActive = value
+                this.requestTime = this.time;
             }
+            console.log(this.requestTime)
         },
     }
 };
