@@ -49,3 +49,23 @@ http://localhost
 
 - Base image
   - [mysql/mysql-server](https://hub.docker.com/r/mysql/mysql-server):8.0
+
+
+
+
+1. 実行環境の整備
+※ docker-compose.yml のあるフォルダで実行します
+docker-compose up
+make app
+2. Laravel設定
+composer install
+composer dump-autoload
+cp .env.sample .env
+-> .envの中身をお好みで変更
+php artisan key:generate
+php artisan migrate:fresh --seed
+exit
+3. 表示の設定
+※ backend/で実行します
+nmp install
+npm run dev 
