@@ -57,6 +57,7 @@
                 <date-picker
                   v-model="time"
                   :format="'YYYY年MM月DD日'"
+                  @change = "changeDate(null)"
                   range
                 ></date-picker>
                 <img
@@ -74,7 +75,7 @@
           <div class="card">
             <div class="card-header">
               <p class="mb-0">
-                {{ time[0] | formatDate }}～{{ time[1] | formatDate }}
+                {{ timeRequest[0] | formatDate }}～{{ timeRequest[1] | formatDate }}
               </p>
             </div>
             <div class="card-body pt-2">
@@ -234,6 +235,7 @@ export default {
   data() {
     return {
       time: [],
+      timeRequest: [],
       saleDailyHisries: [],
       startDate: "",
       endDate: "",
@@ -256,10 +258,10 @@ export default {
     var userIdSRHStorage = JSON.parse(localStorage.getItem('userIdSRHStorage'));
     userIdSRHStorage = userIdSRHStorage == null ? this.userResponse[0].id : userIdSRHStorage;
     this.userId = userIdSRHStorage;
-    console.log(this.userId)
     localStorage.removeItem('userIdSRHStorage');
     this.getData();
     (this.users = this.userResponse), (this.valueSearch = 1);
+    this.timeRequest = this.time
   },
   methods: {
     getData() {
@@ -267,13 +269,18 @@ export default {
       if( this.userId == null){
         this.userId = this.userResponse[0].id;
       }
+      if(this.time.length != 0) {
+        this.timeRequest = this.time
+        this.valueSearch = null 
+      }
+      console.log(this.timeRequest)
       this.saleDailyHisries=[];
       this.flagShowLoader = true
       axios
         .post(this.urlGetData, {
           _token: Laravel.csrfToken,
-          startDate: this.time[0],
-          endDate: this.time[1],
+          startDate: this.timeRequest[0],
+          endDate: this.timeRequest[1],
         })
         .then(function (response) {
           that.data = response.data;
@@ -297,18 +304,24 @@ export default {
       }
     },
     changeDate(value) {
-      this.valueSearch = value;
-      this.time = []
-      if (value != 0) {
-        var date = new Date(),
-          y = date.getFullYear(),
-          m = date.getMonth(),
-          d = date.getDate();
-        var startDate = new Date(Date.UTC(y, m, d - value + 1));
-        var endDate = new Date(Date.UTC(y, m, d));
-        if (value == 2)  endDate = new Date(Date.UTC(y, m, d - value + 1));
-        this.time = [startDate, endDate];
+      if(value != null) {
+        this.valueSearch = value;
+        this.timeRequest = []
+        if (value != 0) {
+          var date = new Date(),
+            y = date.getFullYear(),
+            m = date.getMonth(),
+            d = date.getDate();
+          var startDate = new Date(Date.UTC(y, m, d - value + 1));
+          var endDate = new Date(Date.UTC(y, m, d));
+          if (value == 2)  endDate = new Date(Date.UTC(y, m, d - value + 1));
+          this.timeRequest = [startDate, endDate];
+          this.time = [];
+        }
+      } else {
+        this.valueSearch = value;
       }
+      
     },
   },
 };
