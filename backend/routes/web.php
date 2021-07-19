@@ -41,6 +41,8 @@ Route::middleware([Admin::class])->prefix('/admin')->group(function () {
     Route::get('/users/{id}/delete', [\App\Http\Controllers\Admin\UsersController::class, 'destroy'])->name('admin.user.destroy');
     Route::get('/register-user', [\App\Http\Controllers\Admin\UsersController::class, 'getRegister'])->name('admin.user.getRegister');
     Route::post('/post-register-user', [\App\Http\Controllers\Admin\UsersController::class, 'postRegister'])->name('admin.user.postRegister');
+    Route::get('/user/{id}/edit', [\App\Http\Controllers\Admin\UsersController::class, 'edit'])->name('admin.user.edit');
+    Route::post('/user/{id}/post-edit-user', [\App\Http\Controllers\Admin\UsersController::class, 'postEdit'])->name('admin.user.postEdit');
     Route::resource('sales-chart', 'Admin\SalesChartController', [
         'as' => 'admin'
     ]);

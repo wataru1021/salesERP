@@ -22,7 +22,7 @@ class SalesChartController extends Controller
         if (!Auth::guard('admin')->check()) return view('admin.users.login');
         $breadcrumbs = [
             [
-                'name' => '全営業マンの報告管理',
+                'name' => 'データ管理',
                 'url' => route('admin.reportManagement')
 
             ], '指標毎の営業マン成績'
@@ -68,7 +68,7 @@ class SalesChartController extends Controller
                 ->whereBetween('report_date', [$startFilterDay->format('Y-m-d 00:00:00'), $endFilterDay->format('Y-m-d 23:59:59')])
                 ->join('users', 'sale_daily_reports.user_id', '=', 'users.id')
                 ->groupBy('user_id')
-                ->selectRaw('user_id, sum(acquisitions_num) as acquisitions_num, sum(ping_pong_num) as ping_pong_num, sum(sale_time) / 24 as sale_time, sum(acquisitions_num) / sum(ping_pong_num) * 100 as contract_rate, sum(acquisitions_num) / sum(sale_time)  as productivity')
+                ->selectRaw('user_id, sum(acquisitions_num) as acquisitions_num, sum(ping_pong_num) as ping_pong_num, sum(sale_time) / 24 as sale_time, FORMAT(sum(acquisitions_num) / sum(ping_pong_num) * 100, 2) as contract_rate, FORMAT(sum(acquisitions_num) / sum(sale_time), 2)  as productivity')
                 ->get();
 
             $userNamesHasNoReport = array_map(function ($obj) {

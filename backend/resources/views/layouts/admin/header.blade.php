@@ -11,7 +11,7 @@
 		</ul>
 		<ul class="c-header-nav d-md-down-none">
 			<li class="c-header-nav-item dropdown px-3">
-				<a class="c-header-nav-link dropdown-toggle {{ $activeHeader == 'reportManager' ? 'is-active-header' : '' }}" data-toggle="dropdown" role="button" aria-expanded="false" href="#">全営業マンの報告管理</a>
+				<a class="c-header-nav-link dropdown-toggle {{ $activeHeader == 'reportManager' ? 'is-active-header' : '' }}" data-toggle="dropdown" role="button" aria-expanded="false" href="#">データ管理</a>
 				<div class="dropdown-menu">
 					<a class="c-header-nav-link dropdown-item" href="{{route('admin.saleReportHistory.index')}}">
 						<span class="c-header-nav-icon"></span>営業マン毎の営業成績

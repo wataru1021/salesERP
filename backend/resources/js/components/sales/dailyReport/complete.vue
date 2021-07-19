@@ -37,7 +37,7 @@
               </div>
               <div class="col-md-12">
                 <div class="row">
-                  <div class="col-7"><p>商談数</p></div>
+                  <div class="col-7"><p>商談率</p></div>
                   <div class="col-5 text-right">
                     <label class="h5">{{ saleDailyReport.deal_num | format_number }}</label><span> 件</span>
                   </div>

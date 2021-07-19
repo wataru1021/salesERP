@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="col-sm-9 col-md-12 mt-3">
-                            <h5>期間で絞り込み</h5>
+                            <h5>指標で絞り込み</h5>
                         </div>
                         <div class="col-sm-9 col-md-12">
                             <form v-on:submit.prevent="getData">
@@ -94,7 +94,7 @@
                                     <td class="pl-1">
                                         <table class="table table-borderless mb-2">
                                             <tr>
-                                                <td>商談数</td>
+                                                <td>商談率</td>
                                             </tr>
                                             <tr>
                                                 <td>{{dataReport.deal_num != null ? fomatNumber(dataReport.deal_num) : '---' }}</td>

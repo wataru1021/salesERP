@@ -52,7 +52,7 @@
                   直近30日間
                 </button>
               </div>
-              <p class="mt-2 mb-2">期間で絞り込み</p>
+              <p class="mt-2 mb-2">指標で絞り込み</p>
               <div class="search-date-time">
                 <date-picker
                   v-model="time"

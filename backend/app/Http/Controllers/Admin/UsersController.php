@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class UsersController extends Controller
@@ -179,9 +180,60 @@ class UsersController extends Controller
         return view('dashboard.admin.userEditForm', compact('user'));
     }
 
-    public function edit()
+    public function edit($id)
     {
+        if (!Auth::guard('admin')->check()) return view('admin.users.login');
+        $user = User::where([
+            'role_id' => RoleStateType::SALER,
+            'id' => $id
+        ])->first();
+        if (!isset($user)) return redirect()->route('admin.home');
+        $breadcrumbs = [
+            [
+                'name' => '営業マン管理',
+                'url' => route('admin.user.list')
+            ], 'ユーザー編集'
+        ];
+
+        return view('admin.users.edit', [
+            'breadcrumbs' => $breadcrumbs,
+            'user' => $user
+        ]);
+
     }
+
+    public function postEdit(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => Rule::unique('users')->ignore($id),
+        ], [
+            'email.unique' => 'メールは既に存在します',
+        ]);
+        if ($validator->fails()) {
+            $message = array_combine($validator->errors()->keys(), $validator->errors()->all());
+            return response()->json($message, StatusCode::BAD_REQUEST);
+        }
+        DB::beginTransaction();
+        try {
+            $user = User::where([
+                'role_id' => RoleStateType::SALER,
+                'id' => $id
+            ])->first();
+
+            if ($user) {
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->save();
+                DB::commit();
+                return response()->json(route('admin.user.list'), StatusCode::OK);
+            }
+            return response()->json('編集は失敗しました。', StatusCode::NOT_FOUND);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return response()->json('編集は失敗しました。', StatusCode::INTERNAL_ERR);
+        }
+    }
+
 
     public function list(Request $request)
     {
