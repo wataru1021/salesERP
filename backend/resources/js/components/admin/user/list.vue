@@ -26,10 +26,9 @@
                           :classes="column.classes"
                         >
                         </data-table-cell>
-                        <slot v-if="column.name == 'action_edit'">
+                        <slot v-if="column.name == 'action'">
                           <a :href="`/admin/user/${item.id}/edit`"> <button class="btn btn-success delete-button" type="button">編集</button></a>
-                        </slot>
-                        <slot v-if="column.name == 'action_delete'">
+
                           <button
                             class="btn btn-danger delete-button"
                             @click="handleDelete(item.id)"
@@ -73,8 +72,7 @@ export default {
         { label: "アカウント名", name: "name", orderable: true },
         { label: "メールアドレス", name: "email", orderable: true },
         { label: "登録日時", name: "created_at_format", orderable: true },
-        { label: "", name: "action_edit" },
-        { label: "", name: "action_delete" },
+        { label: "", name: "action" },
       ],
       filters: {},
       translate: { nextButton: ">", previousButton: "<" },
