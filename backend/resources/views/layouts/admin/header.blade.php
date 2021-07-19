@@ -6,7 +6,7 @@
 		?> 
 		<ul class="c-header-nav d-md-down-none">
 			<li class="c-header-nav-item dropdown px-3">
-				<a class="c-header-nav-link {{ $activeHeader == 'top' ? 'is-active-header' : '' }}" href="#">Top</a>
+				<a class="c-header-nav-link {{ $activeHeader == 'top' ? 'is-active-header' : '' }}" href="{{route('admin.home')}}">Top</a>
 			</li>
 		</ul>
 		<ul class="c-header-nav d-md-down-none">
