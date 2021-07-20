@@ -228,6 +228,8 @@ import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
 import axios from "axios";
 import Loader from "./../../common/loader";
+import moment from 'moment'
+
 
 
 export default {
@@ -262,6 +264,7 @@ export default {
     this.getData();
     (this.users = this.userResponse), (this.changeDate(1));
     this.timeRequest = this.time
+
   },
   methods: {
     getData() {
@@ -273,14 +276,14 @@ export default {
         this.timeRequest = this.time
         this.valueSearch = null 
       }
-      console.log(this.timeRequest)
       this.saleDailyHisries=[];
       this.flagShowLoader = true
+      
       axios
         .post(this.urlGetData, {
           _token: Laravel.csrfToken,
-          startDate: this.timeRequest[0],
-          endDate: this.timeRequest[1],
+          startDate: this.format_date(this.timeRequest[0]),
+          endDate: this.format_date(this.timeRequest[1]),
         })
         .then(function (response) {
           that.data = response.data;
@@ -323,6 +326,11 @@ export default {
       }
       
     },
+    format_date(value){
+         if (value) {
+           return moment(String(value)).format('YYYY-MM-DD')
+          }
+      },
   },
 };
 </script>
