@@ -50,7 +50,7 @@ class SaleDailyReportHistoryController extends Controller
                                      FORMAT(SUM(acquisitions_num) / SUM(sale_time), 2)  as productivity,
                                      SUM(meet_num) / SUM(ping_pong_num) * 100  as meet_rate,
                                      SUM(deal_num) / SUM(ping_pong_num) * 100  as deal_rate,
-                                     SUM(ping_pong_num) / SUM(sale_time) * 100  as ping_pong_num_one_hour'
+                                     SUM(ping_pong_num) / SUM(sale_time)  as ping_pong_num_one_hour'
                 ))
                 ->groupBy('user_id')
                 ->get();
