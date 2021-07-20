@@ -270,10 +270,12 @@ export default {
         this.userId = this.userResponse[0].id;
       }
       if(this.time.length != 0) {
+        this.time[0] = new Date(Date.UTC(this.time[0].getFullYear(), this.time[0].getMonth(), this.time[0].getDate()));
+        this.time[1] = new Date(Date.UTC(this.time[1].getFullYear(), this.time[1].getMonth(), this.time[1].getDate()));
         this.timeRequest = this.time
         this.valueSearch = null 
       }
-      console.log(this.timeRequest)
+      
       this.saleDailyHisries=[];
       this.flagShowLoader = true
       axios
