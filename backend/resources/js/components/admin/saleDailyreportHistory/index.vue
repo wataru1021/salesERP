@@ -258,10 +258,10 @@ export default {
     var userIdSRHStorage = JSON.parse(localStorage.getItem('userIdSRHStorage'));
     userIdSRHStorage = userIdSRHStorage == null ? this.userResponse[0].id : userIdSRHStorage;
     this.userId = userIdSRHStorage;
+    this.timeRequest = this.time
     localStorage.removeItem('userIdSRHStorage');
     this.getData();
     (this.users = this.userResponse), (this.changeDate(1));
-    this.timeRequest = this.time
   },
   methods: {
     getData() {
@@ -322,6 +322,7 @@ export default {
         }
       } else {
         this.valueSearch = value;
+        this.timeRequest = this.time
       }
       
     },

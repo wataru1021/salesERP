@@ -79,9 +79,9 @@ class SalesChartController extends Controller
                 return $o['user_id'];
             }, $sdrs->toArray()))->where(['role_id' => RoleStateType::SALER])->where('company_id', Auth::guard('admin')->user()->company_id)->get()->toArray());
 
-            $timLineText = $startFilterDay->year . '年' . $startFilterDay->month . '月' . $startFilterDay->day . '日'
+            $timLineText = $startFilterDay->year . '年' . ($startFilterDay->month < 10 ? "0".$startFilterDay->month : $startFilterDay->month) . '月' . ($startFilterDay->day < 10 ? "0".$startFilterDay->day : $startFilterDay->day) . '日'
                 . '～' .
-                $endFilterDay->year . '年' . $endFilterDay->month . '月' . $endFilterDay->day . '日';
+                $endFilterDay->year . '年' . ($endFilterDay->month < 10 ? "0".$endFilterDay->month : $endFilterDay->month)  . '月' . ($endFilterDay->day < 10 ? "0".$endFilterDay->day : $endFilterDay->day)  . '日';
         }
         catch (Exception $exception) {
             return response()->json([
