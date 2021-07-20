@@ -327,9 +327,7 @@ export default {
       return this.timeLineText;
     },
     placeHolderComputed: function () {
-      var startDay = this.valueDateRange[0].toLocaleString('ja',{month:'long',day:'numeric', year:'numeric'});
-      var endDay = this.valueDateRange[1].toLocaleString('ja',{month:'long',day:'numeric', year:'numeric'});
-      return startDay + '～' + endDay;
+      return this.$options.filters.formatDate(this.valueDateRange[0]) + '～' + this.$options.filters.formatDate(this.valueDateRange[1]);
     }
   },
   methods: {
