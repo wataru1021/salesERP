@@ -69,3 +69,5 @@ exit
 ※ backend/で実行します
 nmp install
 npm run dev 
+
+docker-compose down --rmi all --volumes --remove-orphans
