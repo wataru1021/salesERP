@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -15,7 +16,7 @@ class User extends Authenticatable
     use SoftDeletes;
     use HasRoles;
     use HasFactory;
-    
+
     protected $table = 'users';
 
     /**
@@ -24,7 +25,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'role_id',
+        'company_id',
+        'email',
+        'password',
+        'tel',
+        'status',
+        'last_login_at',
+        'reset_password_token',
+        'reset_password_token_expire',
+        'remember_token',
     ];
 
     /**
@@ -33,7 +44,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 
     /**
@@ -49,7 +60,22 @@ class User extends Authenticatable
         'deleted_at'
     ];
 
-    protected $attributes = [ 
+    protected $attributes = [
         'menuroles' => 'user',
     ];
+
+    public function saleDailyReports() {
+        return $this->hasMany('App\Models\SaleDailyReport', 'user_id', 'id');
+    }
+    public function getCreatedAtFormatAttribute()
+    {
+        return Carbon::parse($this->created_at)->format('Y-m-d H:i');
+    }
+
+    protected $appends = ['created_at_format'];
+
+    public function salesDailyReports()
+    {
+        return $this->hasMany('App\Models\SaleDailyReport', 'user_id', 'id');
+    }
 }

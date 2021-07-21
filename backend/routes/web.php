@@ -11,114 +11,65 @@
 |
 */
 
-use Illuminate\Support\Facades\Auth;
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\Sale;
+use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['get.menu']], function () {
-    Route::get('/', function () {           return view('dashboard.homepage'); });
 
-    Route::group(['middleware' => ['role:user']], function () {
-        Route::get('/colors', function () {     return view('dashboard.colors'); });
-        Route::get('/typography', function () { return view('dashboard.typography'); });
-        Route::get('/charts', function () {     return view('dashboard.charts'); });
-        Route::get('/widgets', function () {    return view('dashboard.widgets'); });
-        Route::get('/404', function () {        return view('dashboard.404'); });
-        Route::get('/500', function () {        return view('dashboard.500'); });
-        Route::prefix('base')->group(function () {  
-            Route::get('/breadcrumb', function(){   return view('dashboard.base.breadcrumb'); });
-            Route::get('/cards', function(){        return view('dashboard.base.cards'); });
-            Route::get('/carousel', function(){     return view('dashboard.base.carousel'); });
-            Route::get('/collapse', function(){     return view('dashboard.base.collapse'); });
+Route::prefix('/admin')->group(function () {
+    Route::get('/login', [App\Http\Controllers\Admin\UsersController::class, 'index'])->name('admin.login');
+    Route::post('/login', [App\Http\Controllers\Admin\UsersController::class, 'login'])->name('admin.login');
+    Route::match(['get', 'post'], '/forgot-password', [App\Http\Controllers\Admin\UsersController::class, 'forgotPassword'])->name('admin.forgot');
+    Route::get('/logout', [App\Http\Controllers\Admin\UsersController::class, 'logout'])->name('admin.logout');
 
-            Route::get('/forms', function(){        return view('dashboard.base.forms'); });
-            Route::get('/jumbotron', function(){    return view('dashboard.base.jumbotron'); });
-            Route::get('/list-group', function(){   return view('dashboard.base.list-group'); });
-            Route::get('/navs', function(){         return view('dashboard.base.navs'); });
+    Route::get('/reset-password/{email}/{token}',  [App\Http\Controllers\Admin\UsersController::class, 'getToken'])->name('admin.getToken');
+    Route::post('/resetPassword', [App\Http\Controllers\Admin\UsersController::class, 'resetPassword'])->name('admin.resetPassword');
+    Route::get('/change-password-complete', [App\Http\Controllers\Admin\UsersController::class, 'change_password_complete'])->name('admin.changePasswordComplete');
+    Route::get('/forgot-password-complete', [App\Http\Controllers\Admin\UsersController::class, 'forgot_password_complete'])->name('admin.forgotPasswordComplete');
+});
 
-            Route::get('/pagination', function(){   return view('dashboard.base.pagination'); });
-            Route::get('/popovers', function(){     return view('dashboard.base.popovers'); });
-            Route::get('/progress', function(){     return view('dashboard.base.progress'); });
-            Route::get('/scrollspy', function(){    return view('dashboard.base.scrollspy'); });
-
-            Route::get('/switches', function(){     return view('dashboard.base.switches'); });
-            Route::get('/tables', function () {     return view('dashboard.base.tables'); });
-            Route::get('/tabs', function () {       return view('dashboard.base.tabs'); });
-            Route::get('/tooltips', function () {   return view('dashboard.base.tooltips'); });
-        });
-        Route::prefix('buttons')->group(function () {  
-            Route::get('/buttons', function(){          return view('dashboard.buttons.buttons'); });
-            Route::get('/button-group', function(){     return view('dashboard.buttons.button-group'); });
-            Route::get('/dropdowns', function(){        return view('dashboard.buttons.dropdowns'); });
-            Route::get('/brand-buttons', function(){    return view('dashboard.buttons.brand-buttons'); });
-        });
-        Route::prefix('icon')->group(function () {  // word: "icons" - not working as part of adress
-            Route::get('/coreui-icons', function(){         return view('dashboard.icons.coreui-icons'); });
-            Route::get('/flags', function(){                return view('dashboard.icons.flags'); });
-            Route::get('/brands', function(){               return view('dashboard.icons.brands'); });
-        });
-        Route::prefix('notifications')->group(function () {  
-            Route::get('/alerts', function(){   return view('dashboard.notifications.alerts'); });
-            Route::get('/badge', function(){    return view('dashboard.notifications.badge'); });
-            Route::get('/modals', function(){   return view('dashboard.notifications.modals'); });
-        });
-        Route::resource('notes', 'NotesController');
+Route::middleware([Admin::class])->prefix('/admin')->group(function () {
+    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
+    Route::prefix('/sale-report-histories')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\SaleDailyReportHistoryController::class, 'index'])->name('admin.saleReportHistory.index');
+        Route::post('/getData', [App\Http\Controllers\Admin\SaleDailyReportHistoryController::class, 'getData'])->name('admin.saleReportHistory.getData');
     });
-    Auth::routes();
-
-    Route::resource('resource/{table}/resource', 'ResourceController')->names([
-        'index'     => 'resource.index',
-        'create'    => 'resource.create',
-        'store'     => 'resource.store',
-        'show'      => 'resource.show',
-        'edit'      => 'resource.edit',
-        'update'    => 'resource.update',
-        'destroy'   => 'resource.destroy'
+    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
+    Route::get('/users', [\App\Http\Controllers\Admin\UsersController::class, 'list'])->name('admin.user.list');
+    Route::get('/user-list', [\App\Http\Controllers\Admin\UsersController::class, 'getUserlist'])->name('admin.user.getUserlist');
+    Route::get('/users/{id}/delete', [\App\Http\Controllers\Admin\UsersController::class, 'destroy'])->name('admin.user.destroy');
+    Route::get('/register-user', [\App\Http\Controllers\Admin\UsersController::class, 'getRegister'])->name('admin.user.getRegister');
+    Route::post('/post-register-user', [\App\Http\Controllers\Admin\UsersController::class, 'postRegister'])->name('admin.user.postRegister');
+    Route::get('/user/{id}/edit', [\App\Http\Controllers\Admin\UsersController::class, 'edit'])->name('admin.user.edit');
+    Route::post('/user/{id}/post-edit-user', [\App\Http\Controllers\Admin\UsersController::class, 'postEdit'])->name('admin.user.postEdit');
+    Route::resource('sales-chart', 'Admin\SalesChartController', [
+        'as' => 'admin'
     ]);
+    Route::get('/sales-chart/get-chart-data', [\App\Http\Controllers\Admin\UsersController::class, 'show'])->name('admin.user.getChartData');
+    Route::get('/report-management', [\App\Http\Controllers\Admin\ReportManagementController::class, 'index'])->name('admin.reportManagement');
+    Route::get('/get-data-report-management', [\App\Http\Controllers\Admin\ReportManagementController::class, 'getData'])->name('admin.user.getDataReport');
+});
 
-    Route::group(['middleware' => ['role:admin']], function () {
-        Route::resource('bread',  'BreadController');   //create BREAD (resource)
-        Route::resource('users',        'UsersController')->except( ['create', 'store'] );
-        Route::resource('roles',        'RolesController');
-        Route::resource('mail',        'MailController');
-        Route::get('prepareSend/{id}',        'MailController@prepareSend')->name('prepareSend');
-        Route::post('mailSend/{id}',        'MailController@send')->name('mailSend');
-        Route::get('/roles/move/move-up',      'RolesController@moveUp')->name('roles.up');
-        Route::get('/roles/move/move-down',    'RolesController@moveDown')->name('roles.down');
-        Route::prefix('menu/element')->group(function () { 
-            Route::get('/',             'MenuElementController@index')->name('menu.index');
-            Route::get('/move-up',      'MenuElementController@moveUp')->name('menu.up');
-            Route::get('/move-down',    'MenuElementController@moveDown')->name('menu.down');
-            Route::get('/create',       'MenuElementController@create')->name('menu.create');
-            Route::post('/store',       'MenuElementController@store')->name('menu.store');
-            Route::get('/get-parents',  'MenuElementController@getParents');
-            Route::get('/edit',         'MenuElementController@edit')->name('menu.edit');
-            Route::post('/update',      'MenuElementController@update')->name('menu.update');
-            Route::get('/show',         'MenuElementController@show')->name('menu.show');
-            Route::get('/delete',       'MenuElementController@delete')->name('menu.delete');
-        });
-        Route::prefix('menu/menu')->group(function () { 
-            Route::get('/',         'MenuController@index')->name('menu.menu.index');
-            Route::get('/create',   'MenuController@create')->name('menu.menu.create');
-            Route::post('/store',   'MenuController@store')->name('menu.menu.store');
-            Route::get('/edit',     'MenuController@edit')->name('menu.menu.edit');
-            Route::post('/update',  'MenuController@update')->name('menu.menu.update');
-            Route::get('/delete',   'MenuController@delete')->name('menu.menu.delete');
-        });
-        Route::prefix('media')->group(function () {
-            Route::get('/',                 'MediaController@index')->name('media.folder.index');
-            Route::get('/folder/store',     'MediaController@folderAdd')->name('media.folder.add');
-            Route::post('/folder/update',   'MediaController@folderUpdate')->name('media.folder.update');
-            Route::get('/folder',           'MediaController@folder')->name('media.folder');
-            Route::post('/folder/move',     'MediaController@folderMove')->name('media.folder.move');
-            Route::post('/folder/delete',   'MediaController@folderDelete')->name('media.folder.delete');;
+Route::get('/login',[App\Http\Controllers\Sales\UsersController::class, 'index'])->name('login');
+Route::post('/login',[App\Http\Controllers\Sales\UsersController::class, 'login'])->name('login');
+Route::get('/register',[App\Http\Controllers\Sales\UsersController::class, 'register'])->name('register');
+Route::post('/register',[App\Http\Controllers\Sales\UsersController::class, 'registerPost'])->name('register.post');
+Route::match(['get', 'post'], '/forgot-password', [App\Http\Controllers\Sales\UsersController::class, 'forgotPassword'])->name('forgot');
+Route::get('/logout', [App\Http\Controllers\Sales\UsersController::class, 'logout'])->name('logout');
 
-            Route::post('/file/store',      'MediaController@fileAdd')->name('media.file.add');
-            Route::get('/file',             'MediaController@file');
-            Route::post('/file/delete',     'MediaController@fileDelete')->name('media.file.delete');
-            Route::post('/file/update',     'MediaController@fileUpdate')->name('media.file.update');
-            Route::post('/file/move',       'MediaController@fileMove')->name('media.file.move');
-            Route::post('/file/cropp',      'MediaController@cropp');
-            Route::get('/file/copy',        'MediaController@fileCopy')->name('media.file.copy');
-        });
-    });
+Route::get('/reset-password/{email}/{token}',  [App\Http\Controllers\Sales\UsersController::class, 'getToken'])->name('getToken');
+Route::post('/resetPassword', [App\Http\Controllers\Sales\UsersController::class, 'resetPassword'])->name('resetPassword');
+Route::get('/change-password-complete', [App\Http\Controllers\Sales\UsersController::class, 'change_password_complete'])->name('changePasswordComplete');
+Route::get('/forgot-password-complete', [App\Http\Controllers\Sales\UsersController::class, 'forgot_password_complete'])->name('forgotPasswordComplete');
+
+
+Route::middleware([Sale::class])->prefix('/')->group(function () {
+    Route::get('/', [App\Http\Controllers\Sales\TopController::class, 'index'])->name('home');
+    Route::get('daily-report/create', [App\Http\Controllers\Sales\DailyReportController::class, 'create'])->name('dailyReport.create');
+    Route::post('daily-report/create', [App\Http\Controllers\Sales\DailyReportController::class, 'store'])->name('dailyReport.store');
+    Route::get('daily-report/complete/{id}', [App\Http\Controllers\Sales\DailyReportController::class, 'complete'])->name('dailyReport.complete');
+    Route::get('sales-management', [App\Http\Controllers\Sales\TopController::class, 'salesManagement'])->name('salesManagement');
+    Route::get('report-histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'index'])->name('sale.reportHistories');
+    Route::post('get_data_report_histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'reportHistories'])->name('sale.getDataReportHistories');
 });

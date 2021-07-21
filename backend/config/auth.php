@@ -46,6 +46,15 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+        'sales' => [
+            'driver' => 'session',
+            'provider' => 'sales',
+        ]
     ],
 
     /*
@@ -75,6 +84,17 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        'admin' => [
+            'driver' => 'custom_auth',
+            'model' => App\Models\User::class,
+            'hash' => false,
+        ],
+        'sales' => [
+            'driver' => 'custom_auth',
+            'model' => App\Models\User::class,
+            'hash' => false,
+        ]
     ],
 
     /*
