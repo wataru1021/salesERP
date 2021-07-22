@@ -45,6 +45,12 @@ class UsersController extends Controller
 
         $message = '';
         if (Auth::guard('sales')->attempt($credentials)) {
+            $account = User::where('id', Auth::guard('sales')->user()->id)->firstOrFail();
+            $account->last_login_at = Carbon::now();
+            if (!$account->save()) {
+                Auth::guard('sales')->logout();
+                return view('sales.users.login');
+            }
             return redirect(route('home'));
         } else {
             $message = '入力したメールアドレスとパスワードをご確認ください';
