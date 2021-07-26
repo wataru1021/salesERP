@@ -46,15 +46,15 @@ class SaleDailyReportHistoryController extends Controller
                 ->select('user_id', DB::raw(
                     'SUM(ping_pong_num) as ping_pong_num,
                                      SUM(acquisitions_num) as acquisitions_num, SUM(sale_time) / 24 as sale_time,
-                                     FORMAT(SUM(acquisitions_num) / SUM(ping_pong_num) * 100, 2)  as contract_rate,
+                                     FORMAT(SUM(acquisitions_num) / SUM(ping_pong_num) * 100, 2)  as contract_rate_completed,
                                      FORMAT(SUM(acquisitions_num) / SUM(sale_time), 2)  as productivity,
                                      SUM(meet_num) / SUM(ping_pong_num) * 100  as meet_rate,
                                      SUM(deal_num) / SUM(ping_pong_num) * 100  as deal_rate,
-                                     SUM(ping_pong_num) / SUM(sale_time)  as ping_pong_num_one_hour'
+                                     SUM(ping_pong_num) / SUM(sale_time)  as ping_pong_num_one_hour,
+                                     FORMAT(SUM(acquisitions_num) / SUM(deal_num) * 100, 2)  as contract_rate'
                 ))
                 ->groupBy('user_id')
                 ->get();
-
             return response()->json($saleDailyReports, StatusCode::OK);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], StatusCode::NOT_FOUND);
