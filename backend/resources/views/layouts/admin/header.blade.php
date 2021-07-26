@@ -13,6 +13,9 @@
 			<li class="c-header-nav-item dropdown px-3">
 				<a class="c-header-nav-link dropdown-toggle {{ $activeHeader == 'reportManager' ? 'is-active-header' : '' }}" data-toggle="dropdown" role="button" aria-expanded="false" href="#">データ管理</a>
 				<div class="dropdown-menu">
+					<a class="c-header-nav-link dropdown-item" href="{{route('admin.reportManagement')}}">
+						<span class="c-header-nav-icon"></span>全営業マン報告管理
+					</a>
 					<a class="c-header-nav-link dropdown-item" href="{{route('admin.saleReportHistory.index')}}">
 						<span class="c-header-nav-icon"></span>営業マン毎の営業成績
 					</a>
@@ -24,7 +27,16 @@
 		</ul>
 		<ul class="c-header-nav d-md-down-none">
 			<li class="c-header-nav-item dropdown px-3">
-				<a class="c-header-nav-link {{ $activeHeader == 'user-list' ? 'is-active-header' : '' }}" href="{{route('admin.user.list')}}">営業マン管理</a>
+				<a class="c-header-nav-link dropdown-toggle {{ $activeHeader == 'user-list' ? 'is-active-header' : '' }}" data-toggle="dropdown" role="button" aria-expanded="false" href="#">営業マン管理</a>
+				<div class="dropdown-menu">
+					<a class="c-header-nav-link dropdown-item" href="{{route('admin.user.list')}}">
+						<span class="c-header-nav-icon"></span>営業マン一覧
+					</a>
+					<a class="c-header-nav-link dropdown-item" href="{{route('admin.user.getRegister')}}">
+						<span class="c-header-nav-icon"></span>新規登録
+					</a>
+				</div>
+			
 			</li>
 		</ul>
 		<ul class="c-header-nav ml-auto mr-4">

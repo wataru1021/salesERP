@@ -20,7 +20,10 @@ class ReportManagementController extends Controller
     {
         if (!Auth::guard('admin')->check()) return view('admin.users.login');
         $breadcrumbs = [
-           'データ管理'
+            [
+                'name' => 'データ管理',
+                'url' => route('admin.reportManagement')
+            ], '全営業マン報告管理'
         ];
         return view('admin/reportmanagement', [
             'breadcrumbs' => $breadcrumbs,
