@@ -20,7 +20,7 @@
 						<span class="c-header-nav-icon"></span>営業マン毎の営業成績
 					</a>
 					<a class="c-header-nav-link dropdown-item" href="{{route('admin.sales-chart.index')}}">
-						<span class="c-header-nav-icon"></span>指標毎の営業マン成績
+						<span class="c-header-nav-icon"></span>指標ごとの営業マン成績
 					</a>
 				</div>
 			</li>

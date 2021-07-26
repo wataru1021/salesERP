@@ -29,7 +29,7 @@
             </li>
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{route('admin.sales-chart.index')}}">
-                    指標毎の営業マン成績
+                    指標ごとの営業マン成績
                 </a>
             </li>
         </ul>
