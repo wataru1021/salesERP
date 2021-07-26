@@ -25,7 +25,7 @@ class SalesChartController extends Controller
                 'name' => 'データ管理',
                 'url' => route('admin.reportManagement')
 
-            ], '指標毎の営業マン成績'
+            ], '指標ごとの営業マン成績'
         ];
         return view('admin.saleschart.index', [
             'breadcrumbs' => $breadcrumbs,
