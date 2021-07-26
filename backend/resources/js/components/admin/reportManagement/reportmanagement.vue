@@ -55,7 +55,7 @@
                         ]"
                         type="button"
                         @click="changeDate(2)"
-                        >背部
+                        ><
                     </a>
                     <a
                         :class="[
@@ -65,7 +65,7 @@
                         ]"
                         type="button"
                         @click="changeDate(3)"
-                        >下一个
+                        >>
                     </a>
                 </div>
             </div>
