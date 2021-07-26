@@ -5,7 +5,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <a :href="registerUrl" class="btn btn-primary mb-3">ユーザーを追加する</a>
+              <a :href="registerUrl" class="btn btn-primary mb-3">営業マンを追加する</a>
               <div class="cd-table-responsive admin-user-list">
                 <data-table
                   :columns="columns"
