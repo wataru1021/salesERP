@@ -11,10 +11,16 @@
             <i class="cil-account-logout c-sidebar-nav-icon"></i>
             ログアウト
         </a>
+    </li>
+    <li class="c-sidebar-nav-item">
         <a class="c-sidebar-nav-link" href="{{ route('dailyReport.create') }}">
+            <i class="cil-calculator c-sidebar-nav-icon"></i>
             本日の日報
         </a>
+    </li>
+    <li class="c-sidebar-nav-item">
         <a class="c-sidebar-nav-link" href="{{ route('sale.reportHistories') }}">
+            <i class="cil-calculator c-sidebar-nav-icon"></i>
             過去の成績
         </a>
     </li>
