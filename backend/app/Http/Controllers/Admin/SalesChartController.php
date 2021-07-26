@@ -77,7 +77,11 @@ class SalesChartController extends Controller
                 return $obj['name'];
             }, User::query()->whereNotIn('id', array_map(function ($o) {
                 return $o['user_id'];
-            }, $sdrs->toArray()))->where(['role_id' => RoleStateType::SALER])->where('company_id', Auth::guard('admin')->user()->company_id)->get()->toArray());
+            }, $sdrs->toArray()))
+                ->where(['role_id' => RoleStateType::SALER,
+                    'company_id' => Auth::guard('admin')->user()->company_id,
+                    'deleted_at' => null])
+                ->get()->toArray());
 
             $timLineText = $startFilterDay->year . '年' . ($startFilterDay->month < 10 ? "0".$startFilterDay->month : $startFilterDay->month) . '月' . ($startFilterDay->day < 10 ? "0".$startFilterDay->day : $startFilterDay->day) . '日'
                 . '～' .
