@@ -14,9 +14,14 @@
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown abc">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle">
             <i class="cil-calculator c-sidebar-nav-icon"></i>
-            <span class="report-managerment" data-href="{{route('admin.reportManagement')}}">データ管理</span>
+            <span class="report-managerment">データ管理</span>
         </a>
         <ul class="c-sidebar-nav-dropdown-items">
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{route('admin.reportManagement')}}">
+                    全営業マン報告管理
+                </a>
+            </li>
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{route('admin.saleReportHistory.index')}}">
                     営業マン毎の営業成績
@@ -29,11 +34,23 @@
             </li>
         </ul>
     </li>
-    <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" href="{{route('admin.user.list')}}">
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown abc">
+        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle">
             <i class="cil-calculator c-sidebar-nav-icon"></i>
-            営業マン管理
+            <span class="report-managerment">営業マン管理</span>
         </a>
+        <ul class="c-sidebar-nav-dropdown-items">
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{route('admin.user.list')}}">
+                    営業マン一覧
+                </a>
+            </li>
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{route('admin.user.getRegister')}}">
+                    新規登録
+                </a>
+            </li>
+        </ul>
     </li>
 </ul>
 <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>

@@ -139,7 +139,7 @@ export default {
                         })
                         .then((res) => {
                             this.$swal({
-                                title: "データが正常に追加されました",
+                                title: "営業マンが追加されました",
                                 icon: "success",
                                 confirmButtonText: "OK",
                             }).then(function (confirm) {
