@@ -33,11 +33,5 @@ class SaleDailyReport extends Model
     {
         return $this->acquisitions_num / $this->ping_pong_num * 100;
     }
-
-    public function getProductivityAttribute()
-    {
-        return $this->acquisitions_num / $this->sale_time;
-    }
-
-    protected $appends = ['contract_rate', 'productivity'];
+    protected $appends = ['contract_rate'];
 }

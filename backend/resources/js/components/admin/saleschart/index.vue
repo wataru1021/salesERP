@@ -381,7 +381,7 @@ export default {
           break;
         case productivity:
           this.salesChartDatas = this.salesChartObjectDatas.map(
-                  (a) => a.productivity.toFixed(2)
+                  (a) => a.productivity
           );
           break;
       }

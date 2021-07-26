@@ -69,6 +69,14 @@
                                             ---
                                         </slot>
 
+                                        <slot v-if="column.name == 'deal_num' && item.reportId == null ">
+                                            ---
+                                        </slot>
+
+                                        <slot v-if="column.name == 'report_created_at_format' && item.reportId == null ">
+                                            ---
+                                        </slot>
+
                                         <slot v-if="column.name == 'acquisitions_num' && item.reportId == null">
                                             ---                                        </slot>
                                         <slot v-if="column.name == 'sale_time' && item.reportId == null">
@@ -168,8 +176,8 @@
                         orderable: true
                     },
                     {
-                        label: "商談率（件）",
-                        name: "opportunity_rate",
+                        label: "商談数（件）",
+                        name: "deal_num",
                         orderable: true
                     },
                     {
@@ -199,7 +207,7 @@
                     },
                     {
                         label: "報告時間",
-                        name: "report_date",
+                        name: "report_created_at_format",
                         orderable: true
                     },
                 ],

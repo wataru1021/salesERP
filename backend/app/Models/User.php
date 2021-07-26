@@ -72,7 +72,13 @@ class User extends Authenticatable
         return Carbon::parse($this->created_at)->format('Y-m-d H:i');
     }
 
-    protected $appends = ['created_at_format'];
+    public function getReportCreatedAtFormatAttribute()
+    {
+        if ($this->reportId)
+            return Carbon::parse($this->created_at)->format('Y-m-d H:i');
+    }
+
+    protected $appends = ['created_at_format', 'report_created_at_format'];
 
     public function salesDailyReports()
     {
