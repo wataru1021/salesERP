@@ -5,7 +5,15 @@
                 <div class="col-lg-12">
                     <a
                         :class="[
-                            isActive == '0'
+                            isActive == '0' || filters.date == new Date(
+                    Date.UTC(
+                        new Date().getFullYear(),
+                        new Date().getMonth(),
+                        new Date().getDate(),
+                        new Date().getHours(),
+                        new Date().getMinutes()
+                    )
+                )
                                 ? 'btn btn-outline-primary active'
                                 : 'btn btn-outline-secondary'
                         ]"
@@ -15,7 +23,15 @@
                     >
                     <a
                         :class="[
-                            isActive == '1'
+                            isActive == '1' || filters.date == new Date(
+                    Date.UTC(
+                        new Date().getFullYear(),
+                        new Date().getMonth(),
+                        new Date().getDate() - 1,
+                        new Date().getHours(),
+                        new Date().getMinutes()
+                    )
+                )
                                 ? 'btn btn-outline-primary active'
                                 : 'btn btn-outline-secondary'
                         ]"
@@ -31,7 +47,7 @@
                         ]"
                         type="button"
                         @click="changeDate(2)"
-                        ><
+                        >背部
                     </a>
                     <a
                         :class="[
@@ -41,7 +57,7 @@
                         ]"
                         type="button"
                         @click="changeDate(3)"
-                        >>
+                        >下一个
                     </a>
                 </div>
             </div>
@@ -396,7 +412,8 @@ export default {
         };
     },
     props: ["data"],
-    mounted() {},
+    mounted() {
+    },
     methods: {
         navigateReportHistory(userId) {
             this.$store.commit("setUserIdSRH", userId);
