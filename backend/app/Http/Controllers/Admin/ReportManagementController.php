@@ -37,7 +37,7 @@ class ReportManagementController extends Controller
         $orderByDir = $request->input('dir', 'asc');
         $builder = User::query()->leftJoin('sale_daily_reports', function ($join) use ($request) {
             $join->on('users.id', '=', 'sale_daily_reports.user_id')
-                ->whereDate('report_date', Carbon::parse($request->input('date')));
+                ->whereDate('report_date', Carbon::parse($request->input('date'))->addHours(7));
         })->where([
             'role_id' => RoleStateType::SALER,
             'company_id' => Auth::guard('admin')->user()->company_id
