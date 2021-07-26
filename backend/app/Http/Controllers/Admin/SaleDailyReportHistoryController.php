@@ -45,7 +45,7 @@ class SaleDailyReportHistoryController extends Controller
                 })
                 ->select('user_id', DB::raw(
                     'SUM(ping_pong_num) as ping_pong_num,
-                                     SUM(acquisitions_num) as acquisitions_num, SUM(sale_time) / 24 as sale_time,
+                                     SUM(acquisitions_num) as acquisitions_num, COUNT(sale_time) as report_number,
                                      FORMAT(SUM(acquisitions_num) / SUM(ping_pong_num) * 100, 2)  as contract_rate_completed,
                                      FORMAT(SUM(acquisitions_num) / SUM(sale_time), 2)  as productivity,
                                      SUM(meet_num) / SUM(ping_pong_num) * 100  as meet_rate,

@@ -203,7 +203,7 @@
                     </div>
                     <div class="card-body">
                       <h2 class="text-center">
-                        {{ parseFloat(saleDailyHisries.sale_time).toFixed(2) != "NaN" ? parseFloat(saleDailyHisries.sale_time).toFixed(2) : "---" }}<span>日</span>
+                        {{ saleDailyHisries.report_number != "NaN" ? saleDailyHisries.report_number : "---" }}<span>日</span>
                       </h2>
                     </div>
                   </div>
