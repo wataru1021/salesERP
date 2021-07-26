@@ -5,15 +5,19 @@
                 <div class="col-lg-12">
                     <a
                         :class="[
-                            isActive == '0' || filters.date == new Date(
-                    Date.UTC(
-                        new Date().getFullYear(),
-                        new Date().getMonth(),
-                        new Date().getDate(),
-                        new Date().getHours(),
-                        new Date().getMinutes()
-                    )
-                )
+                            isActive == '0' ||
+                            filters.date.toISOString().slice(0, 10) ==
+                                new Date(
+                                    Date.UTC(
+                                        new Date().getFullYear(),
+                                        new Date().getMonth(),
+                                        new Date().getDate(),
+                                        new Date().getHours(),
+                                        new Date().getMinutes()
+                                    )
+                                )
+                                    .toISOString()
+                                    .slice(0, 10)
                                 ? 'btn btn-outline-primary active'
                                 : 'btn btn-outline-secondary'
                         ]"
@@ -23,15 +27,19 @@
                     >
                     <a
                         :class="[
-                            isActive == '1' || filters.date == new Date(
-                    Date.UTC(
-                        new Date().getFullYear(),
-                        new Date().getMonth(),
-                        new Date().getDate() - 1,
-                        new Date().getHours(),
-                        new Date().getMinutes()
-                    )
-                )
+                            isActive == '1' ||
+                            filters.date.toISOString().slice(0, 10) ==
+                                new Date(
+                                    Date.UTC(
+                                        new Date().getFullYear(),
+                                        new Date().getMonth(),
+                                        new Date().getDate() - 1,
+                                        new Date().getHours(),
+                                        new Date().getMinutes()
+                                    )
+                                )
+                                    .toISOString()
+                                    .slice(0, 10)
                                 ? 'btn btn-outline-primary active'
                                 : 'btn btn-outline-secondary'
                         ]"
@@ -412,8 +420,7 @@ export default {
         };
     },
     props: ["data"],
-    mounted() {
-    },
+    mounted() {},
     methods: {
         navigateReportHistory(userId) {
             this.$store.commit("setUserIdSRH", userId);
