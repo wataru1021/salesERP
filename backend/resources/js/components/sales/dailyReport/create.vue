@@ -62,7 +62,7 @@
               </div>
               <div class="form-group row mb-2">
                 <label class="col-md-3 col-form-label" for="deal_num"
-                  >商談率</label
+                  >商談数</label
                 >
                 <div class="col-md-9">
                   <input
@@ -197,7 +197,7 @@ export default {
           numeric: "数字で入力してください。",
         },
         deal_num: {
-          required: "商談率を入力してください",
+          required: "商談数を入力してください",
           numeric: "数字で入力してください。",
         },
         acquisitions_num: {
