@@ -178,7 +178,7 @@
                 </div>
               </div>
               <div class="mb-3"></div>
-              <div class="sales-chart-title">指標で絞り込み</div>
+              <div class="sales-chart-title">期間で絞込み</div>
               <div class="row align-items-center col-8">
                 <div class="pl-0 form-group col-4">
 
