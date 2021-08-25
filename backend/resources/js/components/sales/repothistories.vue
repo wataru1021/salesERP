@@ -10,30 +10,30 @@
                         </div>
                         <div class="col-sm-9 col-md-12">
                             <div class="list-group d-inline-block col-lg-9">
-                                <div class="border border-primary rounded text-center d-inline-block mt-2 mr-2">
-                                    <a href="javascript:;" :class="[isActive == '1' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="changeDate(1)">
-                                        <h5 class="text-primary mb-0">
+                                <div class=" rounded text-center d-inline-block mt-2 mr-2">
+                                    <a href="javascript:;" :class="[isActive == '1' ? 'btn-custom-active' : '', 'list-group-item', 'list-group-item-action', 'btn-custom']" @click="changeDate(1)">
+                                        <h5 class=" mb-0">
                                             今日
                                         </h5>
                                     </a>
                                 </div>
-                                <div class="border border-primary rounded text-center d-inline-block mt-2 mr-2">
-                                    <a href="javascript:;" :class="[isActive == '2' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="changeDate(2)">
-                                        <h5 class="text-primary mb-0">
+                                <div class=" rounded text-center d-inline-block mt-2 mr-2">
+                                    <a href="javascript:;" :class="[isActive == '2' ? 'btn-custom-active' : '', 'list-group-item', 'list-group-item-action', 'btn-custom']" @click="changeDate(2)">
+                                        <h5 class=" mb-0">
                                             昨日
                                         </h5>
                                     </a>
                                 </div>
-                                <div class="border border-primary rounded text-center d-inline-block mt-2 mr-2">
-                                    <a href="javascript:;" :class="[isActive == '8' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="changeDate(8)">
-                                        <h5 class="text-primary mb-0">
+                                <div class=" rounded text-center d-inline-block mt-2 mr-2">
+                                    <a href="javascript:;" :class="[isActive == '8' ? 'btn-custom-active' : '', 'list-group-item', 'list-group-item-action', 'btn-custom']" @click="changeDate(8)">
+                                        <h5 class=" mb-0">
                                             直近7日間
                                         </h5>
                                     </a>
                                 </div>
-                                <div class="border border-primary rounded text-center d-inline-block mt-2 mr-2">
-                                    <a href="javascript:;" :class="[isActive == '31' ? activeClass : '', 'list-group-item', 'list-group-item-action']" @click="changeDate(31)">
-                                        <h5 class="text-primary mb-0">
+                                <div class=" rounded text-center d-inline-block mt-2 mr-2">
+                                    <a href="javascript:;" :class="[isActive == '31' ? 'btn-custom-active' : '', 'list-group-item', 'list-group-item-action', 'btn-custom']" @click="changeDate(31)">
+                                        <h5 class=" mb-0">
                                             直近30日間
                                         </h5>
                                     </a>
@@ -50,8 +50,8 @@
                                         <date-picker v-model="time" :format="'YYYY年MM月DD日'" @change="changeDate(null)" range></date-picker>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary h-45">
-                                    <h5 class="mb-0">検索</h5>
+                                <button type="submit" class="btn btn-primary h-45 custom-bg-color">
+                                    <h5 class="mb-0 ">検索</h5>
                                 </button>
                             </form>
                         </div>
@@ -143,13 +143,13 @@
         </div>
         <div class="col-sm-9 col-md-12">
             <div class="form-group row mb-2">
-                <div class="col-md-9 col-lg-12 text-center">
-                    <a :href="salesManagementUrl">営業管理に戻る</a>
+                <div class="col-md-9 col-lg-12 text-center ">
+                    <a :href="salesManagementUrl" class="custom-color">営業管理に戻る</a>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-md-9 col-lg-12 text-center">
-                    <a :href="topPageUrl">TOPに戻る</a>
+                    <a :href="topPageUrl" class="custom-color">TOPに戻る</a>
                 </div>
             </div>
         </div>
@@ -200,7 +200,6 @@ export default {
         },
         getData() {
             let that = this;
-            console.log(this.requestTime)
             let formData = new FormData();
             var start_date = this.requestTime[0].getFullYear() + '-' + (this.requestTime[0].getMonth() + 1) + '-' + this.requestTime[0].getDate();
             var end_date = this.requestTime[1].getFullYear() + '-' + (this.requestTime[1].getMonth() + 1) + '-' + this.requestTime[1].getDate();
@@ -239,7 +238,6 @@ export default {
                 this.isActive = value
                 this.requestTime = this.time;
             }
-            console.log(this.requestTime)
         },
     }
 };

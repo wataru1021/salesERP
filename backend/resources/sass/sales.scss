@@ -1,3 +1,6 @@
+body {
+    font-family: 'Hiragino Kaku Gothic W8';
+}
 @media (max-width: 480px) {
     .sales-register-btn {
         width: 100%;
@@ -240,12 +243,46 @@
 
 .top {
     .list-group {
-        padding-left: 15px !important;
+        padding-left: 6.2vw!important;
+        padding-right: 6.2vw;
+        align-items: center;
         h1 {
-            font-size: 36px;
+            font-size: 30px;
         }
     }
 }
 .is-active-header{
     color: #0000FF !important;
 }
+
+.btn-custom {
+    a {
+        border: none;
+    }
+    color: #1F7DDB;
+    background-color: #E6F5FF;
+    border: none!important;
+    -moz-box-shadow:    inset -3px -4px 2px 0 #c2ced7;
+    -webkit-box-shadow: inset -3px -4px 2px 0 #c2ced7;
+    box-shadow:         inset -3px -4px 2px 0 #c2ced7;;
+    border-radius: 39px!important;
+}
+
+.custom-color {
+    color: #1F7DDB;
+}
+
+.custom-bg-color {
+    background-color: #1F7DDB;
+    border: none;
+}
+.btn-custom-active {
+    color: #fff!important;
+    background-color: #64B1E5!important;
+    border: none;
+    -moz-box-shadow:    inset -1px -2px 1px 0 #5394C0!important;
+    -webkit-box-shadow: inset -1px -2px 1px 0 #5394C0!important;
+    box-shadow:         inset -1px -2px 1px 0 #5394C0!important;
+    border-radius: 39px!important;
+}
+

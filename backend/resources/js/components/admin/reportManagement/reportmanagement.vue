@@ -18,7 +18,7 @@
                                 )
                                     .toISOString()
                                     .slice(0, 10)
-                                ? 'btn btn-outline-primary active'
+                                ? 'btn btn-outline-primary color-custom active'
                                 : 'btn btn-outline-secondary'
                         ]"
                         type="button"
@@ -40,7 +40,7 @@
                                 )
                                     .toISOString()
                                     .slice(0, 10)
-                                ? 'btn btn-outline-primary active'
+                                ? 'btn btn-outline-primary color-custom active'
                                 : 'btn btn-outline-secondary'
                         ]"
                         type="button"
@@ -50,7 +50,7 @@
                     <a
                         :class="[
                             isActive == '2'
-                                ? 'btn btn-outline-primary active'
+                                ? 'btn btn-outline-primary color-custom active'
                                 : 'btn btn-outline-secondary'
                         ]"
                         type="button"
@@ -58,9 +58,9 @@
                         ><
                     </a>
                     <a
-                        :class="[
+                        :class="[,
                             isActive == '3'
-                                ? 'btn btn-outline-primary active'
+                                ? 'btn btn-outline-primary color-custom active'
                                 : 'btn btn-outline-secondary'
                         ]"
                         type="button"
@@ -253,28 +253,28 @@
                     <div class="card-body pt-0">
                         <button
                             v-on:click="redirect(pinPont)"
-                            class="btn btn-outline-primary"
+                            class="btn btn-outline-primary btn-custom"
                             type="button"
                         >
                             ピンポン数
                         </button>
                         <button
                             v-on:click="redirect(contractRate)"
-                            class="btn btn-outline-primary ml-2"
+                            class="btn btn-outline-primary ml-2 btn-custom"
                             type="button"
                         >
                             成約率
                         </button>
                         <button
                             v-on:click="redirect(acquisitionsNum)"
-                            class="btn btn-outline-primary ml-2"
+                            class="btn btn-outline-primary ml-2 btn-custom"
                             type="button"
                         >
                             総獲得数
                         </button>
                         <button
                             v-on:click="redirect(productivity)"
-                            class="btn btn-outline-primary ml-2"
+                            class="btn btn-outline-primary ml-2 btn-custom"
                             type="button"
                         >
                             生産性
