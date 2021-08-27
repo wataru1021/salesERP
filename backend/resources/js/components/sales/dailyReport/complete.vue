@@ -70,12 +70,12 @@
         </div>
         <div class="form-group row">
           <div class="col-md-12 text-center">
-            <a v-bind:href="saleManagementUrl">営業管理に戻る</a>
+            <a v-bind:href="saleManagementUrl"><span class="custom-color">営業管理に戻る</span></a>
           </div>
         </div>
         <div class="form-group row">
           <div class="col-md-12 text-center">
-            <a v-bind:href="topUrl">TOPに戻る</a>
+            <a v-bind:href="topUrl"><span class="custom-color">TOPに戻る</span> </a>
           </div>
         </div>
       </div>

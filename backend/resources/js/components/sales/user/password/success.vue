@@ -12,7 +12,7 @@
                 <img src="/image/changePasswordComplete.png" class="w-23" />
               </div>
               <div class="col-md-9 col-lg-12 text-center">
-                <a v-bind:href="formLogin" class="btn btn-link px-0 mt-3"
+                <a v-bind:href="formLogin" class="btn btn-link px-0 mt-3 custom-color"
                   >ログイン画面へ</a
                 >
               </div>

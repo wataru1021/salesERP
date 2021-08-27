@@ -252,7 +252,7 @@ body {
     }
 }
 .is-active-header{
-    color: #0000FF !important;
+    color: #1F7DDB !important;
 }
 
 .btn-custom {
@@ -268,8 +268,18 @@ body {
     border-radius: 39px!important;
 }
 
+.btn-custom:hover {
+    color: #fff!important;
+    background-color: #64B1E5!important;
+    border: none;
+    -moz-box-shadow:    inset -1px -2px 1px 0 #5394C0!important;
+    -webkit-box-shadow: inset -1px -2px 1px 0 #5394C0!important;
+    box-shadow:         inset -1px -2px 1px 0 #5394C0!important;
+    border-radius: 39px!important;
+}
+
 .custom-color {
-    color: #1F7DDB;
+    color: #1F7DDB!important;
 }
 
 .custom-bg-color {

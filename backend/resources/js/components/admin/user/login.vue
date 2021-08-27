@@ -71,7 +71,7 @@
                 <div class="col-xs-6 col-sm-8 text-right">
                   <a
                     v-bind:href="forgotPasswordUrl"
-                    class="btn btn-link px-0 mt-3"
+                    class="btn btn-link px-0 mt-3 custom-color"
                     >パスワードを忘れた方へ</a
                   >
                 </div>

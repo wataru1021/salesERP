@@ -30,6 +30,9 @@
     border-radius: 39px;
 }
 
+.custom-color {
+    color: #1F7DDB!important;
+}
 .btn-custom:hover {
     color: #fff;
     background-color: #64B1E5;
@@ -260,7 +263,7 @@
 }
 
 .is-active-header{
-    color: #0000FF !important;
+    color: #1F7DDB !important;
 }
 .admin-user-list.cd-table-responsive .flex.mb-3 {
     display: none;
@@ -270,6 +273,13 @@
         .page-link{
             background-color: #64B1E5 !important;
             border-color: #c4c9d0;
+        }
+    }
+    .page-item.pagination-page-nav:not(.active),
+    .page-item.pagination-next-nav:not(.disabled),
+    .page-item.pagination-prev-nav:not(.disabled) {
+        .page-link{
+            color: #1F7DDB !important;
         }
     }
 }

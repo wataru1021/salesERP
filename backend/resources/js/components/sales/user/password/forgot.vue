@@ -50,10 +50,10 @@
                   </div>
 
                   <div class="col-sm-6 col-xs-12 w55 text-right">
-                    <a v-bind:href="formLogin" class="btn btn-link px-0 mt-4"
+                    <a v-bind:href="formLogin" class="btn btn-link px-0 mt-4 custom-color"
                       >ログインはこちら</a
                     >
-                    <a v-bind:href="formRegister" class="btn btn-link px-0">新規登録はこちら</a>
+                    <a v-bind:href="formRegister" class="btn btn-link px-0 custom-color">新規登録はこちら</a>
                   </div>
                 </div>
               </form>

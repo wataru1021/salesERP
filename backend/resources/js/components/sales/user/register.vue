@@ -79,7 +79,7 @@
                             </div>
 
                             <div class="col-sm-12 col-sx-12 text-center">
-                                <a v-bind:href="loginUrl" class="btn btn-link sales-register-link">すでにアカウントをお持ちの方はこちら</a>
+                                <a v-bind:href="loginUrl" class="btn btn-link sales-register-link"><span class="custom-color">すでにアカウントをお持ちの方はこちら</span></a>
                             </div>
                         </div>
                     </form>

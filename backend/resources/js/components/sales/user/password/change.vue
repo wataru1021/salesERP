@@ -11,11 +11,11 @@
                 <img src="/image/changePasswordError.png" class="w-10" />
               </div>
               <div class="col-md-9 col-lg-12 text-center mt-4">
-                <a v-bind:href="formLogin" class="btn btn-link px-0 mt-3"
+                <a v-bind:href="formLogin" class="btn btn-link px-0 mt-3 custom-color"
                   >ログインページに戻る</a
                 >
                 <br />
-                <a v-bind:href="formForgot" class="btn btn-link px-0"
+                <a v-bind:href="formForgot" class="btn btn-link px-0 custom-color"
                   >パスワードを忘れたページに戻る</a
                 >
               </div>

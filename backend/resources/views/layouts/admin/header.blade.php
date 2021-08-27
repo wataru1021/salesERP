@@ -55,11 +55,11 @@
 		<div class="c-subheader px-3">
 			<!-- Breadcrumb-->
 			<ol class="breadcrumb border-0 m-0">
-			<li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Top</a></li>
+			<li class="breadcrumb-item"><a href="{{ route('admin.home') }}"><span class="custom-color">Top</span></a></li>
 			@if (isset($breadcrumbs))
 				@foreach ($breadcrumbs as $key => $breadcrumb)
 					@if ($key != count($breadcrumbs) - 1)
-						<li class="breadcrumb-item"><a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['name'] }}</a></li>
+						<li class="breadcrumb-item"><a href="{{ $breadcrumb['url'] }}" ><span class="custom-color">{{ $breadcrumb['name'] }}</span></a></li>
 					@else
 						<li class="breadcrumb-item active">{{ $breadcrumb }}</li>
 					@endif
