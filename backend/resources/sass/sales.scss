@@ -250,6 +250,17 @@ body {
             font-size: 30px;
         }
     }
+
+    .list-group-item-action:hover, .list-group-item-action:focus {
+        z-index: 1;
+        text-decoration: none;
+        color: #fff;
+        background-color: inherit;
+    }
+
+    .list-group-item-action:hover h1 {
+        color: #fff!important;
+    }
 }
 .is-active-header{
     color: #1F7DDB !important;
@@ -269,6 +280,7 @@ body {
 }
 
 .btn-custom:hover {
+
     color: #fff!important;
     background-color: #64B1E5!important;
     border: none;

@@ -11,7 +11,7 @@
                   @click="changeUserId(user.id)"
                   v-for="(user, index) in users"
                   :key="index"
-                  class="btn btn-outline-primary ml-1 mt-1 btn-custom"
+                  class="btn  ml-1 mt-1 btn-custom"
                   v-bind:class="{ 'btn-custom-active': userId == user.id }"
                 >
                   {{ user.name }}
@@ -24,28 +24,28 @@
               <p class="mb-2">簡易検索</p>
               <div>
                 <button
-                  class="btn btn-outline-primary btn-custom"
+                  class="btn  btn-custom"
                   @click="changeDate(1)"
                   v-bind:class="{ 'btn-custom-active': valueSearch == 1 }"
                 >
                   今日
                 </button>
                 <button
-                  class="btn btn-outline-primary btn-custom"
+                  class="btn  btn-custom"
                   @click="changeDate(2)"
                   v-bind:class="{ 'btn-custom-active': valueSearch == 2 }"
                 >
                   昨日
                 </button>
                 <button
-                  class="btn btn-outline-primary btn-custom"
+                  class="btn  btn-custom"
                   @click="changeDate(8)"
                   v-bind:class="{ 'btn-custom-active': valueSearch == 8 }"
                 >
                   直近7日間
                 </button>
                 <button
-                  class="btn btn-outline-primary btn-custom"
+                  class="btn  btn-custom"
                   @click="changeDate(31)"
                   v-bind:class="{ 'btn-custom-active': valueSearch == 31 }"
                 >

@@ -253,28 +253,28 @@
                     <div class="card-body pt-0">
                         <button
                             v-on:click="redirect(pinPont)"
-                            class="btn btn-outline-primary btn-custom"
+                            class="btn btn-custom"
                             type="button"
                         >
                             ピンポン数
                         </button>
                         <button
                             v-on:click="redirect(contractRate)"
-                            class="btn btn-outline-primary ml-2 btn-custom"
+                            class="btn  ml-2 btn-custom"
                             type="button"
                         >
                             成約率
                         </button>
                         <button
                             v-on:click="redirect(acquisitionsNum)"
-                            class="btn btn-outline-primary ml-2 btn-custom"
+                            class="btn  ml-2 btn-custom"
                             type="button"
                         >
                             総獲得数
                         </button>
                         <button
                             v-on:click="redirect(productivity)"
-                            class="btn btn-outline-primary ml-2 btn-custom"
+                            class="btn  ml-2 btn-custom"
                             type="button"
                         >
                             生産性

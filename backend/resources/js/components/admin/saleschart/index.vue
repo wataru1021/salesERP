@@ -9,7 +9,7 @@
               <div class="row align-items-center col-8">
                 <div class="mb-3 mb-xl-0">
                   <button
-                    class="btn btn-block btn-outline-primary btn-sc-type btn-custom"
+                    class="btn btn-block  btn-sc-type btn-custom"
                     type="button"
                     v-if="showChartTypeComputed !== pinPont"
                     v-on:click="switchShowType(pinPont)"
@@ -18,7 +18,7 @@
                   </button>
                   <button
                     v-if="showChartTypeComputed === pinPont"
-                    class="btn btn-block btn-outline-primary btn-sc-type  btn-custom-active"
+                    class="btn btn-block  btn-sc-type  btn-custom-active"
                     type="button"
                   >
                     ピンポン数
@@ -26,7 +26,7 @@
                 </div>
                 <div class="sc-type-item mb-3 mb-xl-0">
                   <button
-                    class="btn btn-block btn-outline-primary btn-sc-type btn-custom"
+                    class="btn btn-block  btn-sc-type btn-custom"
                     type="button"
                     v-if="showChartTypeComputed !== contractRate"
                     v-on:click="switchShowType(contractRate)"
@@ -35,7 +35,7 @@
                   </button>
                   <button
                     v-if="showChartTypeComputed === contractRate"
-                    class="btn btn-block btn-outline-primary btn-sc-type btn-custom-active"
+                    class="btn btn-block  btn-sc-type btn-custom-active"
                     type="button"
                   >
                     成約率
@@ -43,7 +43,7 @@
                 </div>
                 <div class="sc-type-item mb-3 mb-xl-0">
                   <button
-                    class="btn btn-block btn-outline-primary btn-sc-type btn-custom"
+                    class="btn btn-block  btn-sc-type btn-custom"
                     type="button"
                     v-if="showChartTypeComputed !== acquisitionsNum"
                     v-on:click="switchShowType(acquisitionsNum)"
@@ -52,7 +52,7 @@
                   </button>
                   <button
                           v-if="showChartTypeComputed === acquisitionsNum"
-                          class="btn btn-block btn-outline-primary btn-sc-type btn-custom-active"
+                          class="btn btn-block  btn-sc-type btn-custom-active"
                           type="button"
                   >
                     総獲得数
@@ -61,7 +61,7 @@
                 <div class="sc-type-item mb-3 mb-xl-0">
 
                   <button
-                          class="btn btn-block btn-outline-primary btn-sc-type btn-custom"
+                          class="btn btn-block btn-sc-type btn-custom"
                           type="button"
                           v-if="showChartTypeComputed !== productivity"
                           v-on:click="switchShowType(productivity)"
@@ -72,7 +72,7 @@
 
                   <button
                           v-if="showChartTypeComputed === productivity"
-                          class="btn btn-block btn-outline-primary btn-sc-type btn-custom-active"
+                          class="btn btn-block  btn-sc-type btn-custom-active"
                           type="button"
                   >
                     生産性
@@ -96,7 +96,7 @@
 
 
                   <button
-                          class="btn btn-block btn-outline-primary btn-sc-type btn-custom"
+                          class="btn btn-block  btn-sc-type btn-custom"
                           type="button"
                           v-if="showTimeLineComputed !== today"
                           v-on:click="switchTimeLine(today)"
@@ -116,7 +116,7 @@
                 </div>
                 <div class="sc-type-item mb-3 mb-xl-0">
                   <button
-                          class="btn btn-block btn-outline-primary btn-sc-type btn-custom"
+                          class="btn btn-block  btn-sc-type btn-custom"
                           type="button"
                           v-if="showTimeLineComputed !== yesterDay"
                           v-on:click="switchTimeLine(yesterDay)"
@@ -137,7 +137,7 @@
                 <div class="sc-type-item mb-3 mb-xl-0">
 
                   <button
-                          class="btn btn-block btn-outline-primary btn-sc-type btn-custom"
+                          class="btn btn-block  btn-sc-type btn-custom"
                           type="button"
                           v-if="showTimeLineComputed !== last7Days"
                           v-on:click="switchTimeLine(last7Days)"
@@ -159,7 +159,7 @@
 
 
                   <button
-                          class="btn btn-block btn-outline-primary btn-sc-type btn-custom"
+                          class="btn btn-block  btn-sc-type btn-custom"
                           type="button"
                           v-if="showTimeLineComputed !== last30Days"
                           v-on:click="switchTimeLine(last30Days)"

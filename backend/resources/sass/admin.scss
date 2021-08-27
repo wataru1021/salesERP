@@ -311,4 +311,12 @@
     td + td {
         font-weight: unset;
     }
+
+    .page-item.pagination-page-nav:not(.active),
+    .page-item.pagination-next-nav:not(.disabled),
+    .page-item.pagination-prev-nav:not(.disabled) {
+        .page-link{
+            color: #1F7DDB !important;
+        }
+    }
 }
