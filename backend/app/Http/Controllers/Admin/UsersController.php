@@ -316,15 +316,19 @@ class UsersController extends Controller
             return response()->json($message, StatusCode::BAD_REQUEST);
         }
         try {
+            $tmpPass = rand(10000000, 99999999);
             $user =  User::insert([
                 'name' => $request->name,
                 'email' => $request->email,
                 'role_id' => RoleStateType::SALER,
-                'password' => Hash::make($request->password),
+                'password' => Hash::make($tmpPass),
                 'company_id' => 1,
                 'created_at' => Carbon::now()->toDateTimeString(),
             ]);
             if ($user) {
+                Mail::send('admin.mail.registerUser', ['password' => $tmpPass, 'email' => $request->email], function ($message) use ($request) {
+                    $message->to($request->email);
+                });
                 return response()->json(route('admin.user.list'), StatusCode::OK);
             }
             return response()->json('失敗したデータを追加しました', StatusCode::INTERNAL_ERR);

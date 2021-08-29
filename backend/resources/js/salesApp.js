@@ -13,6 +13,10 @@ import DailyReportComplete from "./components/sales/dailyReport/complete.vue"
 import SalesTop from "./components/sales/top.vue";
 import SalesManagement from "./components/sales/salesmanagement.vue"
 import SalesReportHistories from './components/sales/repothistories'
+import SalesLoginChangePassword from "./components/sales/changepassword/changepassword"
+import SalesLoginChangePasswordComplete from "./components/sales/changepassword/complete"
+import SalesLoginChangePasswordError from "./components/sales/changepassword/error"
+
 
 Vue.use(VueAxios, axios);
 Vue.use(VeeValidate, {
@@ -49,7 +53,10 @@ new Vue({
         DailyReportComplete,
         SalesTop,
         SalesManagement,
-        SalesReportHistories
+        SalesReportHistories,
+        SalesLoginChangePassword,
+        SalesLoginChangePasswordComplete,
+        SalesLoginChangePasswordError
     },
     methods: {},
     mounted() {}

@@ -34,32 +34,6 @@
                                 </div>
                                 <div class="input-group is-danger" role="alert" v-if="errorsData.email">{{ errorsData.email }}</div>
                             </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <svg class="c-icon">
-                                            <use xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-lock-locked"></use>
-                                        </svg>
-                                    </span>
-                                </div>
-                                <input class="form-control" id="password" name="password" type="password" ref="password" v-model="password" placeholder="パスワード" @input="changeInput()" v-validate="'required|min:8|max:15'" @focus="handleType" @blur="handleType" value="" autocomplete="new-password" />
-                                <div class="input-group is-danger" role="alert">
-                                    {{ errors.first("password") }}
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <svg class="c-icon">
-                                            <use xlink:href="/assets/icons/coreui/free-symbol-defs.svg#cui-lock-locked"></use>
-                                        </svg>
-                                    </span>
-                                </div>
-                                <input class="form-control" id="confirm_password" name="confirm_password" type="password" v-model="confirm_password" placeholder="確認用パスワード" @input="changeInput()" v-validate="'required|confirmed:password'" />
-                                <div class="input-group is-danger" role="alert">
-                                    {{ errors.first("confirm_password") }}
-                                </div>
-                            </div>
                             <div class="form-actions">
                                 <button class="btn btn-primary" type="submit">新規登録</button>
                                 <a :href="listUserUrl" class="btn btn-secondary" type="button">キャンセル</a>
@@ -90,15 +64,6 @@ export default {
                     email_format: "メールアドレス形式は正しくありません。",
                     max: "メールアドレスは255文字以内で入力してください。",
                 },
-                password: {
-                    required: "パスワードを入力してください",
-                    min: "8文字以上のパスワードを入力してください。",
-                    max: "15文字以内のパスワードを入力してください。",
-                },
-                confirm_password: {
-                    required: "パスワードを再入力してください",
-                    confirmed: "パスワード が入力されたものと異なります。",
-                },
             },
         };
         this.$validator.localize("en", messError);
@@ -126,8 +91,6 @@ export default {
             let formData = new FormData();
             formData.append("name", this.nameUser);
             formData.append("email", this.email);
-            formData.append("password", this.password);
-            formData.append("confirm_password", this.confirm_password);
             this.$validator.validateAll().then((valid) => {
                 if (valid) {
                     that.flagShowLoader = true;
