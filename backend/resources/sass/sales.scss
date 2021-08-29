@@ -323,3 +323,16 @@ label {
 .mx-datepicker {
     width: 100% !important;
 }
+
+.width-115 {
+    width: 115px !important;
+}
+
+.width-td {
+    width: calc(100% - 115px) !important;
+    &::before {
+        content: ":";
+        position: absolute;
+        left: 0;
+    }
+}

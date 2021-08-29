@@ -4,6 +4,7 @@
     <sales-top
         :sales-management-url="{{ json_encode(route('salesManagement')) }}"
         :appointments-url="{{ json_encode(route('sales.appointments.index')) }}"
+        :add-appointment-url="{{ json_encode(route('sales.appointments.getCreate')) }}"
     ></sales-top>
 @endsection
 

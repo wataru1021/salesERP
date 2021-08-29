@@ -2,8 +2,8 @@
 
 @section('content')
 <sales-appointments
-    :add-appointment-url="{{ json_encode(route('sales.appointments.getCreate')) }}"
-    :data="{{ json_encode(isset($data) ? $data : '') }}">
+    :data="{{ json_encode(isset($data) ? $data : '') }}"
+    :top-url="{{ json_encode(route('home')) }}">
 </sales-appointments>
 @endsection
 

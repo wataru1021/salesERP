@@ -23,36 +23,34 @@
             <div class="card-body pt-2">
             <div v-if="appointments.length == 0" class="text-center">データなし</div>
             <div class="col card-item p-0" v-else v-for="item in appointments" :key="item.id">
-                <div class="card" v-bind:class="{ 'disabled': item.deleted_at != null }">
-                <div class="card-body border-primary">
-                    <table>
-                    <tr>
-                        <td>&#8226;&nbsp;&nbsp;話した人の名前</td>
-                        <td>&nbsp;:&nbsp;{{ item.appointee_name }}</td>
-                    </tr>
-                    <tr>
-                        <td>&#8226;&nbsp;&nbsp;話した人の立場</td>
-                        <td>&nbsp;:&nbsp;{{ item.appointment_address }}</td>
-                    </tr>
-                    <tr>
-                        <td>&#8226;&nbsp;&nbsp;アポの日</td>
-                        <td>&nbsp;:&nbsp;{{ item.appointment_date }}</td>
-                    </tr>
-                    <tr>
-                        <td>&#8226;&nbsp;&nbsp;時間帯</td>
-                        <td>&nbsp;:&nbsp;{{ formatTime(item.appointment_time) }}</td>
-                    </tr>
-                    <tr>
-                        <td>&#8226;&nbsp;&nbsp;メモ</td>
-                        <td>&nbsp;:&nbsp;{{ item.appointment_memo }}</td>
-                    </tr>
-                    </table>
-                    <button class="btn btn-primary float-right" v-if="item.deleted_at == null" @click="deleteAppointment(item.id)">保存</button>
-                    <button class="btn btn-primary float-right" v-else disabled>キャンセル</button>
+            <div class="card h-auto" v-bind:class="{ 'disabled': item.deleted_at != null }">
+              <div class="card-body border-primary">
+                <div class="row">
+                  <div class="width-115">&#8226;&nbsp;&nbsp;話した人の名前</div>
+                  <div class="width-td mb-1 pl-2 position-relative">{{ item.appointee_name }}</div>
                 </div>
+                <div class="row">
+                  <div class="width-115">&#8226;&nbsp;&nbsp;話した人の立場</div>
+                  <div class="width-td mb-1 pl-2 position-relative">{{ item.appointment_address }}</div>
                 </div>
+                <div class="row">
+                  <div class="width-115">&#8226;&nbsp;&nbsp;アポの日</div>
+                  <div class="width-td mb-1 pl-2 position-relative">{{ item.appointment_date }}</div>
+                </div>
+                <div class="row">
+                  <div class="width-115">&#8226;&nbsp;&nbsp;時間帯</div>
+                  <div class="width-td mb-1 pl-2 position-relative">{{ formatTime(item.appointment_time) }}</div>
+                </div>
+                <div class="row">
+                  <div class="width-115">&#8226;&nbsp;&nbsp;メモ</div>
+                  <div class="width-td mb-1 pl-2 position-relative">{{ item.appointment_memo }}</div>
+                </div>
+                  <button class="btn btn-primary float-right" v-if="item.deleted_at == null" @click="deleteAppointment(item.id)">削除</button>
+                  <button class="btn btn-primary float-right" v-else disabled>削除済み</button>
+              </div>
             </div>
             </div>
+          </div>
         </div>
         </div>
       </div>

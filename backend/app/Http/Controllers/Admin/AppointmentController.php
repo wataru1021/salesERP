@@ -30,16 +30,19 @@ class AppointmentController extends Controller
     }
     public function getData()
     {
-        try{
-            $data = Appointment::withTrashed()->orderBy('id', 'DESC')->get();
+        try {
+            $data = Appointment::withTrashed()
+                ->orderBy('appointment_date', 'DESC')
+                ->orderBy('appointment_time', 'DESC')
+                ->get();
             return response()->json($data, StatusCode::OK);
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], StatusCode::INTERNAL_ERR);
         }
     }
     public function destroy($id)
     {
-        try{
+        try {
             Appointment::find($id)->delete();
             return response()->json(["status" => true], StatusCode::OK);
         } catch (Exception $e) {

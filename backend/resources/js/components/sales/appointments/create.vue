@@ -138,9 +138,24 @@
             </form>
           </div>
         </div>
+        <div class="form-group row">
+          <div class="col-md-12 text-center">
+            <a v-bind:href="appointmentsIndexUrl"
+              ><span class="custom-color">アポイント管理</span></a
+            >
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-12 text-center">
+            <a v-bind:href="topUrl"
+              ><span class="custom-color">TOPに戻る</span></a
+            >
+          </div>
+        </div>
       </div>
       <!-- /.col-->
     </div>
+    <loader :flag-show="flagShowLoader"></loader>
   </div>
 </template>
 
@@ -178,6 +193,7 @@ export default {
   data() {
     return {
       csrfToken: Laravel.csrfToken,
+      flagShowLoader: false,
       appointee_name: "",
       appointment_address: "",
       appointment_date: "",
@@ -185,61 +201,55 @@ export default {
       appointment_memo: "",
     };
   },
+  props: ["appointmentsIndexUrl", "topUrl"],
   methods: {
     register() {
       let that = this;
-      let formData = new FormData();
-      formData.append("appointee_name", this.appointee_name);
-      formData.append("appointment_address", this.appointment_address);
-      formData.append(
-        "appointment_date",
-        this.appointment_date.getFullYear() +
-          "-" +
-          this.appointment_date.getMonth() +
-          "-" +
-          this.appointment_date.getDate()
-      );
-      formData.append(
-        "appointment_time",
-        this.appointment_time.getHours() +
-          ":" +
-          this.appointment_time.getMinutes() +
-          ":" +
-          this.appointment_time.getMilliseconds()
-      );
-      formData.append("appointment_memo", this.appointment_memo);
       this.$validator.validateAll().then((valid) => {
         if (valid) {
+          let formData = new FormData();
+          formData.append("appointee_name", this.appointee_name);
+          formData.append("appointment_address", this.appointment_address);
+          formData.append("appointment_date", this.appointment_date.getFullYear() + "-" + this.appointment_date.getMonth() + "-" + this.appointment_date.getDate());
+          formData.append("appointment_time", this.appointment_time.getHours() + ":" + this.appointment_time.getMinutes() + ":" + this.appointment_time.getMilliseconds());
+          formData.append("appointment_memo", this.appointment_memo);
           that.flagShowLoader = true;
-          axios
-            .post(`/appointments`, formData, {
-              header: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((res) => {
-              this.$swal({
-                title: "予定が追加されました。",
-                icon: "success",
-                confirmButtonText: "OK",
-              }).then(function (confirm) {
-                that.flagShowLoader = false;
-                window.location.href = "/appointments";
-              });
-            })
-            .catch((err) => {
-              that.flagShowLoader = false;
-              this.$swal({
-                title: "失敗したデータを追加しました。",
-                icon: "error",
-                confirmButtonText: "Cool",
-              }).then(function (confirm) {});
-            });
+          this.$swal({
+            title: "この情報を保存したい",
+            confirmButtonText: "OK",
+            showCancelButton: true,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              axios
+                .post(`/appointments`, formData, {
+                  header: {
+                    "Content-Type": "multipart/form-data",
+                  },
+                })
+                .then((res) => {
+                  this.$swal({
+                    title: "予定が追加されました。",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                  }).then(function (confirm) {
+                    that.flagShowLoader = false;
+                    window.location.href = "/appointments";
+                  });
+                })
+                .catch((err) => {
+                  that.flagShowLoader = false;
+                  this.$swal({
+                    title: "失敗したデータを追加しました。",
+                    icon: "error",
+                    confirmButtonText: "Cool",
+                  }).then(function (confirm) {});
+                });
+            }
+          });
         }
       });
     },
-    changeInput() {
-    },
+    changeInput() {},
   },
 };
 </script>

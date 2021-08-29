@@ -3,36 +3,40 @@
     <div class="animated fadeIn">  
       <div class="card">
         <div class="card-body pt-2">
-          <a :href="addAppointmentUrl" class="btn btn-primary mb-3 text-white">予定を追加する</a>
           <div class="col card-item p-0" v-for="item in data" :key="item.id">
             <div class="card">
               <div class="card-body border-primary">
-                <table>
-                  <tr>
-                    <td>&#8226;&nbsp;&nbsp;話した人の名前</td>
-                    <td>&nbsp;:&nbsp;{{ item.appointee_name }}</td>
-                  </tr>
-                  <tr>
-                    <td>&#8226;&nbsp;&nbsp;話した人の立場</td>
-                    <td>&nbsp;:&nbsp;{{ item.appointment_address }}</td>
-                  </tr>
-                  <tr>
-                    <td>&#8226;&nbsp;&nbsp;アポの日</td>
-                    <td>&nbsp;:&nbsp;{{ item.appointment_date }}</td>
-                  </tr>
-                  <tr>
-                    <td>&#8226;&nbsp;&nbsp;時間帯</td>
-                    <td>&nbsp;:&nbsp;{{ formatTime(item.appointment_time) }}</td>
-                  </tr>
-                  <tr>
-                    <td>&#8226;&nbsp;&nbsp;メモ</td>
-                    <td>&nbsp;:&nbsp;{{ item.appointment_memo }}</td>
-                  </tr>
-                </table>
-                <button class="btn btn-primary float-right" @click="deleteAppointment(item.id)">保存</button>
+                <div class="row">
+                  <div class="width-115">&#8226;&nbsp;&nbsp;話した人の名前</div>
+                  <div class="width-td mb-1 pl-2 position-relative">{{ item.appointee_name }}</div>
+                </div>
+                <div class="row">
+                  <div class="width-115">&#8226;&nbsp;&nbsp;話した人の立場</div>
+                  <div class="width-td mb-1 pl-2 position-relative">{{ item.appointment_address }}</div>
+                </div>
+                <div class="row">
+                  <div class="width-115">&#8226;&nbsp;&nbsp;アポの日</div>
+                  <div class="width-td mb-1 pl-2 position-relative">{{ item.appointment_date }}</div>
+                </div>
+                <div class="row">
+                  <div class="width-115">&#8226;&nbsp;&nbsp;時間帯</div>
+                  <div class="width-td mb-1 pl-2 position-relative">{{ formatTime(item.appointment_time) }}</div>
+                </div>
+                <div class="row">
+                  <div class="width-115">&#8226;&nbsp;&nbsp;メモ</div>
+                  <div class="width-td mb-1 pl-2 position-relative">{{ item.appointment_memo }}</div>
+                </div>
+                <button class="btn btn-primary float-right" @click="deleteAppointment(item.id)">削除</button>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-12 text-center">
+          <a v-bind:href="topUrl"
+            ><span class="custom-color">TOPに戻る</span></a
+          >
         </div>
       </div>
     </div>
@@ -54,7 +58,7 @@ export default {
   components: {
       Loader,
   },
-  props: ["data", "addAppointmentUrl"],
+  props: ["data", "topUrl"],
   mounted() {
     this.saleDailyReport = this.data;
   },

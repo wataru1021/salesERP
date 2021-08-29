@@ -9,6 +9,13 @@
                     </h1>
                 </a>
             </div>
+            <div class="border btn border-primary rounded text-center btn-custom mb-4">
+                <a class="list-group-item list-group-item-action" :href="addAppointmentUrl">
+                    <h1 class="custom-color mb-0">
+                        予定を追加する
+                    </h1>
+                </a>
+            </div>
             <div class="border btn border-primary rounded text-center btn-custom ">
                 <a class="list-group-item list-group-item-action" :href="appointmentsUrl">
                     <h1 class="custom-color mb-0">
@@ -23,6 +30,6 @@
 
 <script>
 export default {
-    props: ["salesManagementUrl", "appointmentsUrl"],
+    props: ["salesManagementUrl", "appointmentsUrl", "addAppointmentUrl"],
 };
 </script>

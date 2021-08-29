@@ -23,7 +23,8 @@ class AppointmentController extends Controller
             $userId = Auth::guard('sales')->id();
             $data = Appointment::where('user_id', $userId)
                 ->whereNull('deleted_at')
-                ->orderBy('id', 'DESC')
+                ->orderBy('appointment_date', 'DESC')
+                ->orderBy('appointment_time', 'DESC')
                 ->get();
             return view('sales.appointments.index', [
                 'data' => $data,
