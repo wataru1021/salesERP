@@ -1,6 +1,7 @@
 body {
     font-family: 'Hiragino Kaku Gothic W8';
 }
+
 @media (max-width: 480px) {
     .sales-register-btn {
         width: 100%;
@@ -250,19 +251,19 @@ body {
             font-size: 30px;
         }
     }
-
-    .list-group-item-action:hover, .list-group-item-action:focus {
+    .list-group-item-action:hover,
+    .list-group-item-action:focus {
         z-index: 1;
         text-decoration: none;
         color: #fff;
         background-color: inherit;
     }
-
     .list-group-item-action:hover h1 {
         color: #fff!important;
     }
 }
-.is-active-header{
+
+.is-active-header {
     color: #1F7DDB !important;
 }
 
@@ -273,20 +274,20 @@ body {
     color: #1F7DDB;
     background-color: #E6F5FF;
     border: none!important;
-    -moz-box-shadow:    inset -3px -4px 2px 0 #c2ced7;
+    -moz-box-shadow: inset -3px -4px 2px 0 #c2ced7;
     -webkit-box-shadow: inset -3px -4px 2px 0 #c2ced7;
-    box-shadow:         inset -3px -4px 2px 0 #c2ced7;;
+    box-shadow: inset -3px -4px 2px 0 #c2ced7;
+    ;
     border-radius: 39px!important;
 }
 
 .btn-custom:hover {
-
     color: #fff!important;
     background-color: #64B1E5!important;
     border: none;
-    -moz-box-shadow:    inset -1px -2px 1px 0 #5394C0!important;
+    -moz-box-shadow: inset -1px -2px 1px 0 #5394C0!important;
     -webkit-box-shadow: inset -1px -2px 1px 0 #5394C0!important;
-    box-shadow:         inset -1px -2px 1px 0 #5394C0!important;
+    box-shadow: inset -1px -2px 1px 0 #5394C0!important;
     border-radius: 39px!important;
 }
 
@@ -298,13 +299,27 @@ body {
     background-color: #1F7DDB;
     border: none;
 }
+
 .btn-custom-active {
     color: #fff!important;
     background-color: #64B1E5!important;
     border: none;
-    -moz-box-shadow:    inset -1px -2px 1px 0 #5394C0!important;
+    -moz-box-shadow: inset -1px -2px 1px 0 #5394C0!important;
     -webkit-box-shadow: inset -1px -2px 1px 0 #5394C0!important;
-    box-shadow:         inset -1px -2px 1px 0 #5394C0!important;
+    box-shadow: inset -1px -2px 1px 0 #5394C0!important;
     border-radius: 39px!important;
 }
 
+h4 {
+    font-size: 24px;
+    color: #000000;
+}
+
+label {
+    color: #768192;
+    font-size: 14px;
+}
+
+.mx-datepicker {
+    width: 100% !important;
+}

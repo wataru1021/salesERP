@@ -2,6 +2,9 @@ import Vue from "vue";
 import VeeValidate from "vee-validate";
 import VueAxios from 'vue-axios';
 import axios from 'axios';
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+import DatePicker from 'vue2-datepicker'
 import SalesLogin from "./components/sales/user/login.vue"
 import SalesRegister from "./components/sales/user/register.vue"
 import SalesForgotPassword from "./components/sales/user/password/forgot.vue"
@@ -13,11 +16,15 @@ import DailyReportComplete from "./components/sales/dailyReport/complete.vue"
 import SalesTop from "./components/sales/top.vue";
 import SalesManagement from "./components/sales/salesmanagement.vue"
 import SalesReportHistories from './components/sales/repothistories'
+import SalesAppointments from './components/sales/appointments/index.vue'
+import SalesAppointmentsCreate from './components/sales/appointments/create.vue'
 
 Vue.use(VueAxios, axios);
 Vue.use(VeeValidate, {
     locale: "ja"
 });
+Vue.use(VueSweetalert2);
+Vue.use(DatePicker);
 Vue.filter('format_number', function(value) {
     if (value) {
         return `${value.toLocaleString('de-DE')}`
@@ -49,7 +56,9 @@ new Vue({
         DailyReportComplete,
         SalesTop,
         SalesManagement,
-        SalesReportHistories
+        SalesReportHistories,
+        SalesAppointments,
+        SalesAppointmentsCreate
     },
     methods: {},
     mounted() {}

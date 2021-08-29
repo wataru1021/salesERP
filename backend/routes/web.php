@@ -27,6 +27,9 @@ Route::prefix('/admin')->group(function () {
     Route::post('/resetPassword', [App\Http\Controllers\Admin\UsersController::class, 'resetPassword'])->name('admin.resetPassword');
     Route::get('/change-password-complete', [App\Http\Controllers\Admin\UsersController::class, 'change_password_complete'])->name('admin.changePasswordComplete');
     Route::get('/forgot-password-complete', [App\Http\Controllers\Admin\UsersController::class, 'forgot_password_complete'])->name('admin.forgotPasswordComplete');
+    Route::get('appointments', [App\Http\Controllers\Admin\AppointmentController::class, 'index'])->name('admin.appointments.index');
+    Route::get('getDataAppointments', [App\Http\Controllers\Admin\AppointmentController::class, 'getData'])->name('admin.appointments.getData');
+    Route::delete('appointments/{id}', [App\Http\Controllers\Admin\AppointmentController::class, 'destroy'])->name('admin.appointments.delete');
 });
 
 Route::middleware([Admin::class])->prefix('/admin')->group(function () {
@@ -72,4 +75,8 @@ Route::middleware([Sale::class])->prefix('/')->group(function () {
     Route::get('sales-management', [App\Http\Controllers\Sales\TopController::class, 'salesManagement'])->name('salesManagement');
     Route::get('report-histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'index'])->name('sale.reportHistories');
     Route::post('get_data_report_histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'reportHistories'])->name('sale.getDataReportHistories');
+    Route::get('appointments', [App\Http\Controllers\Sales\AppointmentController::class, 'index'])->name('sales.appointments.index');
+    Route::delete('appointments/{id}', [App\Http\Controllers\Sales\AppointmentController::class, 'destroy'])->name('sales.appointments.delete');
+    Route::get('appointments/create', [App\Http\Controllers\Sales\AppointmentController::class, 'create'])->name('sales.appointments.getCreate');
+    Route::post('appointments', [App\Http\Controllers\Sales\AppointmentController::class, 'store'])->name('sales.appointments.postCreate');
 });

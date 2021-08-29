@@ -32,6 +32,11 @@
                     指標ごとの営業マン成績
                 </a>
             </li>
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{route('admin.appointments.index')}}">
+                    アポイント管理
+                </a>
+            </li>
         </ul>
     </li>
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown abc">

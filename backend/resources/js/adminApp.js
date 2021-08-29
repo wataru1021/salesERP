@@ -22,6 +22,7 @@ import EditUser from './components/admin/user/edit'
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue2-datepicker/index.css';
 import Vuex from 'vuex';
+import AdminAppointments from './components/admin/appointments/index.vue'
 
 Vue.use(Vuex);
 Vue.use(VueSweetalert2);
@@ -77,7 +78,8 @@ new Vue({
         AdminSuccessEmail,
         ReportManagement,
         RegisterUser,
-        EditUser
+        EditUser,
+        AdminAppointments
     },
     methods: {},
     mounted() {}

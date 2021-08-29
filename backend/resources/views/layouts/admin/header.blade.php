@@ -22,6 +22,9 @@
 					<a class="c-header-nav-link dropdown-item" href="{{route('admin.sales-chart.index')}}">
 						<span class="c-header-nav-icon"></span>指標ごとの営業マン成績
 					</a>
+					<a class="c-header-nav-link dropdown-item" href="{{route('admin.appointments.index')}}">
+						<span class="c-header-nav-icon"></span>アポイント管理
+					</a>
 				</div>
 			</li>
 		</ul>
