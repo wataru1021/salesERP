@@ -25,7 +25,7 @@
             <div class="col card-item p-0" v-else v-for="item in appointments" :key="item.id">
             <div class="card h-auto" v-bind:class="{ 'disabled': item.deleted_at != null }">
               <div class="card-body border-primary">
-                <div class="row">
+                <div class="row mt-2">
                   <div class="width-115">&#8226;&nbsp;&nbsp;話した人の名前</div>
                   <div class="width-td mb-1 pl-2 position-relative">{{ item.appointee_name }}</div>
                 </div>
