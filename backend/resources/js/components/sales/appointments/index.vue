@@ -2,11 +2,11 @@
   <div class="container daily_report_complete">
     <div class="animated fadeIn">  
       <div class="card">
-        <div class="card-body pt-2">
-          <div class="col card-item p-0" v-for="item in data" :key="item.id">
-            <div class="card">
+        <div class="card-body pt-2 pb-2">
+          <div class="col card-item p-0" v-for="(item, index) in data" :key="item.id">
+            <div class="card" v-bind:class="{ 'mt-3': index == 0 }">
               <div class="card-body border-primary">
-                <div class="row mt-2">
+                <div class="row">
                   <div class="width-115">&#8226;&nbsp;&nbsp;話した人の名前</div>
                   <div class="width-td mb-1 pl-2 position-relative">{{ item.appointee_name }}</div>
                 </div>

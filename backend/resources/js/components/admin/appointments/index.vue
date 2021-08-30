@@ -20,12 +20,12 @@
             </div>
           </div>
            <div class="card">
-            <div class="card-body pt-2">
+            <div class="card-body pt-2 pb-2">
             <div v-if="appointments.length == 0" class="text-center">データなし</div>
-            <div class="col card-item p-0" v-else v-for="item in appointments" :key="item.id">
-            <div class="card h-auto" v-bind:class="{ 'disabled': item.deleted_at != null }">
+            <div class="col card-item p-0" v-else v-for="(item, index) in appointments" :key="item.id">
+            <div class="card h-auto" v-bind:class="{ 'disabled': item.deleted_at != null,'mt-3': index == 0 }">
               <div class="card-body border-primary">
-                <div class="row mt-2">
+                <div class="row">
                   <div class="width-115">&#8226;&nbsp;&nbsp;話した人の名前</div>
                   <div class="width-td mb-1 pl-2 position-relative">{{ item.appointee_name }}</div>
                 </div>
