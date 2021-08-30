@@ -72,8 +72,8 @@ Route::middleware([Sale::class])->prefix('/')->group(function () {
     Route::get('sales-management', [App\Http\Controllers\Sales\TopController::class, 'salesManagement'])->name('salesManagement');
     Route::get('report-histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'index'])->name('sale.reportHistories');
     Route::post('get_data_report_histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'reportHistories'])->name('sale.getDataReportHistories');
-    Route::get('changePassword', [App\Http\Controllers\Sales\ChangePasswordController::class, 'index'])->name('sales.changePassword.index');
-    Route::post('changePassword', [App\Http\Controllers\Sales\ChangePasswordController::class, 'update'])->name('sales.changePassword.update');
-    Route::get('changePassword/complete', [App\Http\Controllers\Sales\ChangePasswordController::class, 'complete'])->name('sales.changePassword.complete');
-    Route::get('changePassword/error', [App\Http\Controllers\Sales\ChangePasswordController::class, 'error'])->name('sales.changePassword.error');
+    Route::get('change-password', [App\Http\Controllers\Sales\UsersController::class, 'changePassword'])->name('sales.changePassword.index');
+    Route::post('change-password', [App\Http\Controllers\Sales\UsersController::class, 'changePasswordUpdate'])->name('sales.changePassword.update');
+    Route::get('change-password/complete', [App\Http\Controllers\Sales\UsersController::class, 'changePasswordComplete'])->name('sales.changePassword.complete');
+    Route::get('change-password/error', [App\Http\Controllers\Sales\UsersController::class, 'changePasswordError'])->name('sales.changePassword.error');
 });

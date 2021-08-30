@@ -57,10 +57,17 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label
+                                        class="col-md-3 col-form-label"
+                                        for="textarea-input"
+                                ></label>
                                 <div class="col-md-9 text-center is-danger" v-if="messageText">
                                     {{ messageText }}
                                 </div>
                                 <div class="col-md-12 text-center">
+                                    <div>
+
+                                    </div>
                                     <button class="btn btn-success change-password-submit" v-on:click="submit" >登録</button>
                                     <a :href="topUrl" class="btn btn-secondary " type="button">キャンセル</a>
 

@@ -15,11 +15,13 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\Sales\LoginChangePassword\LoginChangePasswordRequest;
 
 class UsersController extends Controller
 {
@@ -201,4 +203,59 @@ class UsersController extends Controller
             ]);
         }
     }
+
+    /**
+     * Display change password screen.
+     *
+     */
+    public function changePassword()
+    {
+        if (!Auth::guard('sales')->check()) return view('sales.users.login');
+        $breadcrumbs = [
+            'パスワード変更'
+        ];
+        return view('sales.changePassword.index', [
+            'breadcrumbs' => $breadcrumbs,
+        ]);
+    }
+
+    /**
+     * post method update new password
+     *
+     */
+    public function changePasswordUpdate(LoginChangePasswordRequest $request)
+    {
+        if (!Auth::guard('sales')->check()) return view('sales.users.login');
+        try {
+            DB::beginTransaction();
+            $you = User::where('id', Auth::guard('sales')->user()->id)->first();
+            $you->password = Hash::make($request->password);
+            $you->updated_at = Carbon::now();
+            $you->save();
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
+            Log::error($exception);
+            redirect()->route('sales.changePassword.error');
+        }
+        return redirect()->route('sales.changePassword.complete');
+    }
+    /**
+     * Show the page change pass complete
+     *
+     */
+    public function changePasswordComplete()
+    {
+        return view('sales.changePassword.complete');
+    }
+
+    /**
+     * Show the page change pass error
+     *
+     */
+    public function changePasswordError()
+    {
+        return view('sales.changePassword.error');
+    }
+
 }
