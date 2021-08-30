@@ -214,38 +214,16 @@ export default {
           formData.append("appointment_time", this.appointment_time.getHours() + ":" + this.appointment_time.getMinutes() + ":" + this.appointment_time.getMilliseconds());
           formData.append("appointment_memo", this.appointment_memo);
           that.flagShowLoader = true;
-          this.$swal({
-            title: "この情報を保存したい",
-            confirmButtonText: "OK",
-            showCancelButton: true,
-          }).then((result) => {
-            if (result.isConfirmed) {
-              axios
-                .post(`/appointments`, formData, {
-                  header: {
-                    "Content-Type": "multipart/form-data",
-                  },
-                })
-                .then((res) => {
-                  this.$swal({
-                    title: "予定が追加されました。",
-                    icon: "success",
-                    confirmButtonText: "OK",
-                  }).then(function (confirm) {
-                    that.flagShowLoader = false;
-                    window.location.href = "/appointments";
-                  });
-                })
-                .catch((err) => {
-                  that.flagShowLoader = false;
-                  this.$swal({
-                    title: "失敗したデータを追加しました。",
-                    icon: "error",
-                    confirmButtonText: "Cool",
-                  }).then(function (confirm) {});
-                });
-            }
-          });
+          axios
+            .post(`/appointments`, formData, {
+              header: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((res) => {
+                window.location.href = `/appointments/complete/${res.data.id}`;
+            })
+            .catch((err) => {});
         }
       });
     },

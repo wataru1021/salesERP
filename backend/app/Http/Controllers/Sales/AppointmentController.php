@@ -60,7 +60,7 @@ class AppointmentController extends Controller
             $appointment->appointment_time = $request->appointment_time;
             $appointment->appointment_memo = $request->appointment_memo;
             $appointment->save();
-            return response()->json(["status" => true], StatusCode::OK);
+            return response()->json(["status" => true, "id" => $appointment->id], StatusCode::OK);
         } catch (Exception $e) {
             return response()->json($e->getMessage(), StatusCode::INTERNAL_ERR);
         }
@@ -114,5 +114,12 @@ class AppointmentController extends Controller
         } catch (Exception $e) {
             return response()->json($e->getMessage(), StatusCode::INTERNAL_ERR);
         }
+    }
+    public function complete($id)
+    {
+        $appointment = Appointment::find($id);
+        return view('sales.appointments.complete', [
+            'data' => $appointment
+        ]);
     }
 }

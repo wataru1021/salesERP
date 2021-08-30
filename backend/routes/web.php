@@ -76,6 +76,7 @@ Route::middleware([Sale::class])->prefix('/')->group(function () {
     Route::get('report-histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'index'])->name('sale.reportHistories');
     Route::post('get_data_report_histories', [App\Http\Controllers\Sales\ReportHistoriesController::class, 'reportHistories'])->name('sale.getDataReportHistories');
     Route::get('appointments', [App\Http\Controllers\Sales\AppointmentController::class, 'index'])->name('sales.appointments.index');
+    Route::get('appointments/complete/{id}', [App\Http\Controllers\Sales\AppointmentController::class, 'complete'])->name('sales.appointments.complete');
     Route::delete('appointments/{id}', [App\Http\Controllers\Sales\AppointmentController::class, 'destroy'])->name('sales.appointments.delete');
     Route::get('appointments/create', [App\Http\Controllers\Sales\AppointmentController::class, 'create'])->name('sales.appointments.getCreate');
     Route::post('appointments', [App\Http\Controllers\Sales\AppointmentController::class, 'store'])->name('sales.appointments.postCreate');

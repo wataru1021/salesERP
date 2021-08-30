@@ -18,6 +18,7 @@ import SalesManagement from "./components/sales/salesmanagement.vue"
 import SalesReportHistories from './components/sales/repothistories'
 import SalesAppointments from './components/sales/appointments/index.vue'
 import SalesAppointmentsCreate from './components/sales/appointments/create.vue'
+import AppointmentsComplete from './components/sales/appointments/complete.vue'
 
 Vue.use(VueAxios, axios);
 Vue.use(VeeValidate, {
@@ -58,7 +59,8 @@ new Vue({
         SalesManagement,
         SalesReportHistories,
         SalesAppointments,
-        SalesAppointmentsCreate
+        SalesAppointmentsCreate,
+        AppointmentsComplete
     },
     methods: {},
     mounted() {}

@@ -127,7 +127,7 @@ export default {
       }
     },
     formatTime(value) {
-      return parseInt(value.split(':')[0]) + ':' + parseInt(value.split(':')[1]);
+      return value.split(':')[0] + ':' + value.split(':')[1];
     }, 
     deleteAppointment(id){
         let that = this;

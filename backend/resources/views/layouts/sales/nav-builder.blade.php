@@ -24,6 +24,18 @@
             過去の成績
         </a>
     </li>
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link" href="{{ route('sales.appointments.getCreate') }}">
+            <i class="cil-calculator c-sidebar-nav-icon"></i>
+            予定を追加する
+        </a>
+    </li>
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link" href="{{ route('sales.appointments.index') }}">
+            <i class="cil-calculator c-sidebar-nav-icon"></i>
+            アポイント管理
+        </a>
+    </li>
 </ul>
 <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent"
     data-class="c-sidebar-minimized"></button>
