@@ -19,6 +19,10 @@ import SalesReportHistories from './components/sales/repothistories'
 import SalesAppointments from './components/sales/appointments/index.vue'
 import SalesAppointmentsCreate from './components/sales/appointments/create.vue'
 import AppointmentsComplete from './components/sales/appointments/complete.vue'
+import SalesLoginChangePassword from "./components/sales/changepassword/changepassword"
+import SalesLoginChangePasswordComplete from "./components/sales/changepassword/complete"
+import SalesLoginChangePasswordError from "./components/sales/changepassword/error"
+
 
 Vue.use(VueAxios, axios);
 Vue.use(VeeValidate, {
@@ -60,7 +64,10 @@ new Vue({
         SalesReportHistories,
         SalesAppointments,
         SalesAppointmentsCreate,
-        AppointmentsComplete
+        AppointmentsComplete,
+        SalesLoginChangePassword,
+        SalesLoginChangePasswordComplete,
+        SalesLoginChangePasswordError
     },
     methods: {},
     mounted() {}

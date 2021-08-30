@@ -80,4 +80,8 @@ Route::middleware([Sale::class])->prefix('/')->group(function () {
     Route::delete('appointments/{id}', [App\Http\Controllers\Sales\AppointmentController::class, 'destroy'])->name('sales.appointments.delete');
     Route::get('appointments/create', [App\Http\Controllers\Sales\AppointmentController::class, 'create'])->name('sales.appointments.getCreate');
     Route::post('appointments', [App\Http\Controllers\Sales\AppointmentController::class, 'store'])->name('sales.appointments.postCreate');
+    Route::get('change-password', [App\Http\Controllers\Sales\UsersController::class, 'changePassword'])->name('sales.changePassword.index');
+    Route::post('change-password', [App\Http\Controllers\Sales\UsersController::class, 'changePasswordUpdate'])->name('sales.changePassword.update');
+    Route::get('change-password/complete', [App\Http\Controllers\Sales\UsersController::class, 'changePasswordComplete'])->name('sales.changePassword.complete');
+    Route::get('change-password/error', [App\Http\Controllers\Sales\UsersController::class, 'changePasswordError'])->name('sales.changePassword.error');
 });

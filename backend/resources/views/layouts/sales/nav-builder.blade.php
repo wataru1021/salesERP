@@ -34,6 +34,11 @@
         <a class="c-sidebar-nav-link" href="{{ route('sales.appointments.index') }}">
             <i class="cil-calculator c-sidebar-nav-icon"></i>
             アポイント管理
+    </li>
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link" href="{{route('sales.changePassword.index')}}">
+            <i class="cil-sync c-sidebar-nav-icon"></i>
+            パスワード変更
         </a>
     </li>
 </ul>

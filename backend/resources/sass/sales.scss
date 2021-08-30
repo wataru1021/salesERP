@@ -200,7 +200,7 @@ body {
         .card-body {
             padding: 40px;
         }
-        button {
+        button:not(.change-password-submit) {
             width: 200px !important;
         }
     }
